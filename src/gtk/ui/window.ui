@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+  <template class="ReinputWindow" parent="AdwApplicationWindow">
+    <property name="title" translatable="yes">Reinput</property>
+    <property name="default-width">800</property>
+    <property name="default-height">600</property>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <child type="end">
+              <object class="GtkMenuButton">
+                <property name="primary">True</property>
+                <property name="icon-name">open-menu-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Main Menu</property>
+                <property name="menu-model">primary_menu</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <property name="content">
+          <object class="AdwClamp">
+            <property name="maximum-size">500</property>
+            <child>
+              <object class="GtkBox" id="_box">
+                <property name="orientation">1</property>
+                <property name="margin-top">24</property>
+                <child>
+                  <object class="GtkBox">
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label">Remappies</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">1</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="icon-name">list-add-symbolic</property>
+                        <property name="valign">3</property>
+                        <property name="halign">2</property>
+                        <property name="margin-end">15</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSwitch">
+                    <property name="hexpand">false</property>
+                    <property name="halign">2</property>
+                    <property name="margin-top">5</property>
+                    <property name="margin-end">15</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBox">
+                    <property name="margin-top">24</property>
+                    <style>
+                      <class name="boxed-list"/>
+                    </style>
+                    <child>
+                      <object class="AdwSwitchRow">
+                        <property name="title">Got</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow">
+                        <property name="title">Liberty</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow">
+                        <property name="title">Black Mith</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+        <attribute name="action">app.preferences</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_About Reinput</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>
