@@ -22,11 +22,9 @@ from gi.repository import Gtk
 
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Reinput/src/gtk/ui/window.ui')
-class ReinputWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'ReinputWindow'
-
-    #label = Gtk.Template.Child()
+              'Reinput/src/gtk/ui/presetslist.ui')
+class ReinputWindow(Gtk.Box):
+    __gtype_name__ = 'PresetsList'    
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

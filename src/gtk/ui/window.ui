@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
-  <requires lib="Adw" version="1.0"/>
+  <requires lib="gtk" version="4.0" />
+  <requires lib="Adw" version="1.0" />
   <template class="ReinputWindow" parent="AdwApplicationWindow">
     <property name="title" translatable="yes">Reinput</property>
     <property name="default-width">800</property>
@@ -22,62 +22,8 @@
         </child>
         <property name="content">
           <object class="AdwClamp">
-            <property name="maximum-size">500</property>
+            <property name="maximum-size">600</property>
             <child>
-              <object class="GtkBox" id="_box">
-                <property name="orientation">1</property>
-                <property name="margin-top">24</property>
-                <child>
-                  <object class="GtkBox">
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="label">Remappies</property>
-                        <property name="hexpand">true</property>
-                        <property name="halign">1</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="icon-name">list-add-symbolic</property>
-                        <property name="valign">3</property>
-                        <property name="halign">2</property>
-                        <property name="margin-end">15</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSwitch">
-                    <property name="hexpand">false</property>
-                    <property name="halign">2</property>
-                    <property name="margin-top">5</property>
-                    <property name="margin-end">15</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox">
-                    <property name="margin-top">24</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="AdwSwitchRow">
-                        <property name="title">Got</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwSwitchRow">
-                        <property name="title">Liberty</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwSwitchRow">
-                        <property name="title">Black Mith</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
             </child>
           </object>
         </property>

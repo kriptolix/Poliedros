@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+  <template class="PresetsList" parent="GtkBox">
+    <property name="orientation">1</property>    
+    <child>
+      <object class="GtkBox" id="_header-01">
+        <property name="margin-bottom">20</property>
+        <property name="margin-top">20</property>
+        <style>
+          <class name="linked"/>
+        </style>
+        <child>
+          <object class="GtkLabel">
+            <property name="label">Presets</property>
+            <property name="hexpand">true</property>
+            <property name="halign">1</property>
+            <property name="margin-start">15</property>
+            <style>
+              <class name="title-1"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="icon-name">media-playback-start-symbolic</property>
+            <property name="hexpand">false</property>
+            <property name="vexpand">false</property>
+            <property name="valign">3</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="icon-name">media-playback-stop-symbolic</property>
+            <property name="hexpand">false</property>
+            <property name="vexpand">false</property>
+            <property name="valign">3</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="icon-name">list-add-symbolic</property>
+            <property name="hexpand">false</property>
+            <property name="vexpand">false</property>
+            <property name="valign">3</property>
+            <property name="margin-end">15</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkListBox">
+        <property name="selection-mode">0</property>
+        <style>
+          <class name="boxed-list"/>
+        </style>
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="true">Throne and Liberty</property>
+            <child type="suffix">
+              <object class="GtkBox">
+                <style>
+                  <class name="linked"/>
+                </style>
+                <child>
+                  <object class="GtkButton">
+                    <property name="halign">3</property>
+                    <property name="valign">3</property>
+                    <property name="icon-name">media-playback-start-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="halign">3</property>
+                    <property name="valign">3</property>
+                    <property name="icon-name">document-edit-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="halign">3</property>
+                    <property name="valign">3</property>
+                    <property name="icon-name">user-trash-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="true">CS Go</property>
+            <child type="suffix">
+              <object class="GtkBox">
+                <style>
+                  <class name="linked"/>
+                </style>
+                <child>
+                  <object class="GtkButton">
+                    <property name="halign">3</property>
+                    <property name="valign">3</property>
+                    <property name="icon-name">media-playback-start-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="halign">3</property>
+                    <property name="valign">3</property>
+                    <property name="icon-name">document-edit-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="halign">3</property>
+                    <property name="valign">3</property>
+                    <property name="icon-name">user-trash-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
