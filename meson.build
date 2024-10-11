@@ -17,9 +17,9 @@ gnome.post_install(
   update_desktop_database: true,
 )
 
-#pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
-#moduledir = pkgdatadir / 'reinput'
+pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
+#pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
+
 gnome = import('gnome')
 
 gnome.compile_resources('reinput',
@@ -46,11 +46,4 @@ configure_file(
   install_mode: 'r-xr-xr-x'
 )
 
-reinput_sources = [
-  '__init__.py',
-  'main.py',
-  'window.py',
-]
-
-#install_data(reinput_sources, install_dir: moduledir)
 install_subdir('src', install_dir: pkgdatadir, exclude_directories: './src/test')

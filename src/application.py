@@ -17,13 +17,14 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from .gtk.widgets.window import ReinputWindow
-from gi.repository import Gtk, Gio, Adw
 import sys
 import gi
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
+
+from .gtk.widgets.window import ReinputWindow
+from gi.repository import Gtk, Gio, Adw
 
 
 class ReinputApplication(Adw.Application):

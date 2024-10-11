@@ -24,6 +24,7 @@
           <object class="AdwClamp">
             <property name="maximum-size">600</property>
             <child>
+              <object class="PresetsList"></object>
             </child>
           </object>
         </property>
