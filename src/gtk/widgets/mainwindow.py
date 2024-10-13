@@ -20,12 +20,13 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 
-from .presetrowoutput import PresetsRowOutput
+from .remappinggroup import RemappingGroup
+
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Reinput/src/gtk/ui/presetrowoutput.ui')
-class PresetsRowOutput(Adw.ExpanderRow):
-    __gtype_name__ = 'PresetRowOutput'    
+              'Reinput/src/gtk/ui/MainWindow.ui')
+class MainWindow(Adw.ApplicationWindow):
+    __gtype_name__ = 'MainWindow'
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)

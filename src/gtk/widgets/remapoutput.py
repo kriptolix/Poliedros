@@ -20,13 +20,11 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 
-from .presetrowinput import PresetsRowInput
-
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Reinput/src/gtk/ui/presetslist.ui')
-class PresetsList(Gtk.Box):
-    __gtype_name__ = 'PresetsList'    
+              'Reinput/src/gtk/ui/RemapOutput.ui')
+class RemapOutput(Adw.ActionRow):
+    __gtype_name__ = 'RemapOutput'
 
     def __init__(self):
         super().__init__()

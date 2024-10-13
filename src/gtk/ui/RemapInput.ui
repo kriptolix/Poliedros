@@ -2,10 +2,9 @@
 <interface>
   <requires lib="gtk" version="4.0" />
   <requires lib="Adw" version="1.0" />
-  <template class="PresetRowInput" parent="Adw.ExpanderRow">
-    <property name="title" translatable="true">Throne and Liberty</property>
+  <template class="RemapInput" parent="AdwExpanderRow">
     <property name="title">Input :Dell Computer Corp. KB212-B Quiet Key Keyboard</property>
-    <property name="subtitle">Crtl+C</property>
+    <property name="subtitle">Crtl+C</property>    
     <child type="suffix">
       <object class="GtkBox">
         <child>
@@ -28,11 +27,11 @@
         </child>
       </object>
     </child>
+    <child>
+      <object class="RemapOutput"></object>
+    </child>
     <style>
       <class name="property" />
-    </style>
-    <child>
-      <object class="PresetRowOutput"></object>
-    </child>   
+    </style>    
   </template>
 </interface>

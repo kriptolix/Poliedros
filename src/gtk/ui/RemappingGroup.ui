@@ -2,8 +2,9 @@
 <interface>
   <requires lib="gtk" version="4.0" />
   <requires lib="Adw" version="1.0" />
-  <template class="PresetsList" parent="GtkBox">
+  <template class="RemappingGroup" parent="GtkBox">
     <property name="orientation">1</property>
+    <property name="margin-top">50</property>
     <child>
       <object class="GtkBox">
         <property name="hexpand">true</property>
@@ -57,7 +58,7 @@
           <object class="GtkLabel">
             <property name="label">Autostart</property>
             <property name="halign">1</property>
-            <property name="hexpand">true</property>
+            <property name="hexpand">false</property>
             <style>
               <class name="heading" />
             </style>
@@ -80,7 +81,7 @@
               <class name="boxed-list" />
             </style>
             <child>
-              <object class="PresetRowInput"></object>
+              <object class="RemapInput"></object>
             </child>
           </object>
         </child>

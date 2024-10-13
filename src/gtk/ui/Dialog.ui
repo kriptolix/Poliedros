@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0" />
+  <template class="Dialog" parent="AdwMessageDialog">
+    <property name="heading">Placeholder heading</property>
+    <property name="body">placeholder body</property>
+    <property name="default-response">confirm</property>
+    <property name="close-response">cancel</property>       
+  </template>
+</interface>

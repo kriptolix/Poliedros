@@ -23,7 +23,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
-from .gtk.widgets.window import ReinputWindow
+from .gtk.widgets.mainwindow import MainWindow
 from gi.repository import Gtk, Gio, Adw
 
 
@@ -45,7 +45,7 @@ class ReinputApplication(Adw.Application):
         """
         win = self.props.active_window
         if not win:
-            win = ReinputWindow(application=self)
+            win = MainWindow(application=self)
         win.present()
 
     def on_about_action(self, *args):

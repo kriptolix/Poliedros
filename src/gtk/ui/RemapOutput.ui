@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <requires lib="Adw" version="1.0" />
+  <template class="RemapOutput" parent="AdwActionRow">
+    <property name="title" translatable="true">Throne and Liberty</property>
+    <property name="title">Output :Dell Computer Corp. KB212-B Quiet Key Keyboard</property>
+    <property name="subtitle">1, 2, 3, wait(500), pgup</property>
+    <child type="suffix">
+      <object class="GtkBox">
+        <child>
+          <object class="GtkButton">
+            <property name="icon-name">document-edit-symbolic</property>
+            <property name="valign">3</property>
+            <style>
+              <class name="flat" />
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="icon-name">user-trash-symbolic</property>
+            <property name="valign">3</property>
+            <style>
+              <class name="flat" />
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="property"/>
+    </style>
+  </template>
+</interface>
