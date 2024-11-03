@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="SideBar" parent="GtkBox">
+    <property name="orientation">1</property>
+    <property name="margin-start">50</property>
+    <property name="margin-end">50</property>
+    <child>
+      <object class="GtkStack" id="stack">
+        <child>
+          <object class="GtkStackPage" id="page2">
+            <property name="title" translatable="true">Page 2</property>
+            <property name="child">
+              <object class="GtkListBox">
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title">2d6</property>
+                    <property name="subtitle">3 + 5 = 8</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                    <child type="suffix">
+                      <object class="GtkButton" id="reroll">
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <property name="valign">3</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStackPage" id="page1">
+            <property name="title" translatable="true">Page 1</property>
+            <property name="child">
+              <object class="AdwStatusPage">
+                <property name="title" translatable="true">History</property>
+                <property name="description" translatable="true">No rolls heare yet</property>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
