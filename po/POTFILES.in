@@ -1,8 +1,8 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/io.gitlab.kriptolix.Reinput.desktop.in
-data/io.gitlab.kriptolix.Reinput.metainfo.xml.in
-data/io.gitlab.kriptolix.Reinput.gschema.xml
+data/io.gitlab.kriptolix.Poliedros.desktop.in
+data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in
+data/io.gitlab.kriptolix.Poliedros.gschema.xml
 src/main.py
 src/window.py
 src/window.ui

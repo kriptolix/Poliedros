@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=io.gitlab.kriptolix.Reinput
-Exec=@bindir@/reinput --gapplication-service

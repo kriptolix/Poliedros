@@ -24,7 +24,7 @@ from gettext import gettext as _
 
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Reinput/src/gtk/ui/dialogs.ui')
+              'Poliedros/src/gtk/ui/dialogs.ui')
 class Dialogs(Adw.MessageDialog):
     __gtype_name__ = 'Dialogs'
 

@@ -24,7 +24,7 @@ from .remapoutput import RemapOutput
 
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Reinput/src/gtk/ui/RemapInput.ui')
+              'Poliedros/src/gtk/ui/RemapInput.ui')
 class RemapInput(Adw.ExpanderRow):
     __gtype_name__ = 'RemapInput'
 

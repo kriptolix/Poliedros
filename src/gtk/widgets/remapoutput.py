@@ -22,7 +22,7 @@ from gi.repository import Gtk
 
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Reinput/src/gtk/ui/RemapOutput.ui')
+              'Poliedros/src/gtk/ui/RemapOutput.ui')
 class RemapOutput(Adw.ActionRow):
     __gtype_name__ = 'RemapOutput'
 

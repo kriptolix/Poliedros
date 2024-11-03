@@ -24,7 +24,7 @@ from .remapinput import RemapInput
 
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Reinput/src/gtk/ui/RemappingGroup.ui')
+              'Poliedros/src/gtk/ui/RemappingGroup.ui')
 class RemappingGroup(Gtk.Box):
     __gtype_name__ = 'RemappingGroup'
 

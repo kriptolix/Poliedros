@@ -1,4 +1,4 @@
-application_id = 'io.gitlab.kriptolix.Reinput'
+application_id = 'io.gitlab.kriptolix.Poliedros'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(

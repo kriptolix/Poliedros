@@ -27,11 +27,11 @@ from .gtk.widgets.mainwindow import MainWindow
 from gi.repository import Gtk, Gio, Adw
 
 
-class ReinputApplication(Adw.Application):
+class PoliedrosApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='io.gitlab.kriptolix.Reinput',
+        super().__init__(application_id='io.gitlab.kriptolix.Poliedros',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
@@ -50,8 +50,8 @@ class ReinputApplication(Adw.Application):
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(application_name='reinput',
-                                application_icon='io.gitlab.kriptolix.Reinput',
+        about = Adw.AboutDialog(application_name='poliedros',
+                                application_icon='io.gitlab.kriptolix.Poliedros',
                                 developer_name='k',
                                 version='0.1.0',
                                 developers=['k'],
@@ -82,5 +82,5 @@ class ReinputApplication(Adw.Application):
 
 def main(version):
     """The application's entry point."""
-    app = ReinputApplication()
+    app = PoliedrosApplication()
     return app.run(sys.argv)

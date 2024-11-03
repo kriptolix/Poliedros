@@ -1,9 +1,9 @@
 {
-    "id" : "io.gitlab.kriptolix.Reinput",
+    "id" : "io.gitlab.kriptolix.Poliedros",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "47",
     "sdk" : "org.gnome.Sdk",
-    "command" : "reinput",
+    "command" : "poliedros",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -24,7 +24,7 @@
     ],
     "modules" : [
         {
-            "name" : "reinput",
+            "name" : "poliedros",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [

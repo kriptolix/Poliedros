@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/io/gitlab/kriptolix/Reinput">
+  <gresource prefix="/io/gitlab/kriptolix/Poliedros">
     <file preprocess="xml-stripblanks">src/gtk/ui/MainWindow.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/help-overlay.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/RemappingGroup.ui</file>

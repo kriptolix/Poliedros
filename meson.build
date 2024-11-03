@@ -1,4 +1,4 @@
-project('reinput',
+project('poliedros',
           version: '0.1.0',
     meson_version: '>= 1.0.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
@@ -22,8 +22,8 @@ pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.proje
 
 gnome = import('gnome')
 
-gnome.compile_resources('reinput',
-  'reinput.gresource.xml',
+gnome.compile_resources('poliedros',
+  'poliedros.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -38,8 +38,8 @@ conf.set('localedir', get_option('prefix') / get_option('localedir'))
 conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
-  input: 'reinput.in',
-  output: 'reinput',
+  input: 'poliedros.in',
+  output: 'poliedros',
   configuration: conf,
   install: true,
   install_dir: get_option('bindir'),

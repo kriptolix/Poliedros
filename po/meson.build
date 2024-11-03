@@ -1,1 +1,1 @@
-i18n.gettext('reinput', preset: 'glib')
+i18n.gettext('poliedros', preset: 'glib')

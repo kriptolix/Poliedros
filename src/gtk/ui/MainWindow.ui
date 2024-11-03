@@ -3,7 +3,7 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="Adw" version="1.0" />
   <template class="MainWindow" parent="AdwApplicationWindow">
-    <property name="title" translatable="true">Reinput</property>
+    <property name="title" translatable="true">Poliedros</property>
     <property name="default-width">800</property>
     <property name="default-height">600</property>
     <property name="content">
@@ -63,7 +63,7 @@
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="true">_About Reinput</attribute>
+        <attribute name="label" translatable="true">_About Poliedros</attribute>
         <attribute name="action">app.about</attribute>
       </item>
     </section>

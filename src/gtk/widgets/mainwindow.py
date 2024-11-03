@@ -24,7 +24,7 @@ from .remappinggroup import RemappingGroup
 
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Reinput/src/gtk/ui/MainWindow.ui')
+              'Poliedros/src/gtk/ui/MainWindow.ui')
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MainWindow'
 

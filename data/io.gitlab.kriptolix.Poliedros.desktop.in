@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=reinput
-Exec=reinput
-Icon=io.gitlab.kriptolix.Reinput
+Name=poliedros
+Exec=poliedros
+Icon=io.gitlab.kriptolix.Poliedros
 Terminal=false
 Type=Application
 Categories=Utility;

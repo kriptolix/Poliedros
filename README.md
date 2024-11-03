@@ -1,3 +1,3 @@
-# reinput
+# poliedros
 
 A description of this project.

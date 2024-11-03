@@ -1,6 +1,6 @@
 #!@PYTHON@
 
-# reinput.in
+# poliedros.in
 #
 # Copyright 2024 k
 #
@@ -31,15 +31,15 @@ localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-locale.bindtextdomain('reinput', localedir)
-locale.textdomain('reinput')
-gettext.install('reinput', localedir)
+locale.bindtextdomain('poliedros', localedir)
+locale.textdomain('poliedros')
+gettext.install('poliedros', localedir)
 
 if __name__ == '__main__':
     import gi
 
     from gi.repository import Gio
-    resource = Gio.Resource.load(os.path.join(pkgdatadir, 'reinput.gresource'))
+    resource = Gio.Resource.load(os.path.join(pkgdatadir, 'poliedros.gresource'))
     resource._register()
 
     from src import application
