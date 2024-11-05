@@ -20,12 +20,11 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 
-from .rollarea import RollArea
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Poliedros/src/gtk/ui/MainWindow.ui')
-class MainWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'MainWindow'
+              'Poliedros/src/gtk/ui/LogArea.ui')
+class LogArea(Gtk.Box):
+    __gtype_name__ = 'LogArea'
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self):
+        super().__init__()

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="SideBar" parent="GtkBox">
+  <template class="LogArea" parent="GtkBox">
     <property name="orientation">1</property>
     <property name="margin-start">50</property>
     <property name="margin-end">50</property>

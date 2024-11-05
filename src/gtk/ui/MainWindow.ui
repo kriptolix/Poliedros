@@ -1,49 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <requires lib="Adw" version="1.0" />
   <template class="MainWindow" parent="AdwApplicationWindow">
-    <property name="title" translatable="true">Poliedros</property>
-    <property name="default-width">800</property>
-    <property name="default-height">600</property>
+    <property name="title">Poliedros</property>
+    <property name="icon-name">dev.zelikos.rollit</property>
+    <property name="width-request">360</property>
+    <property name="height-request">294</property>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 400sp</condition>
+        <setter object="rollit_split_view" property="collapsed">true</setter>
+      </object>
+    </child>
     <property name="content">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar">
-            <child type="end">
-              <object class="GtkMenuButton">
-                <property name="primary">true</property>
-                <property name="icon-name">open-menu-symbolic</property>
-                <property name="tooltip-text" translatable="true">Main Menu</property>
-                <property name="menu-model">primary_menu</property>
+      <object class="AdwOverlaySplitView" id="rollit_split_view">
+        <property name="show-sidebar" bind-source="show_sidebar_button" bind-property="active" bind-flags="sync-create|bidirectional"/>
+        <property name="sidebar">
+          <object class="GtkBox">
+            <property name="orientation">1</property>
+            <property name="margin-start">6</property>
+            <property name="margin-bottom">6</property>
+            <child>
+              <object class="AdwHeaderBar">
+                <property name="show-title">false</property>
+                <property name="valign">1</property>
+                <property name="vexpand">false</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <child type="start">
+                  <object class="GtkButton">
+                    <property name="action-name">win.toggle-history</property>
+                    <property name="icon-name">go-previous-symbolic</property>
+                    <property name="visible" bind-source="rollit_split_view" bind-property="collapsed" bind-flags="sync-create"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwStatusPage">
+                <property name="title">Historico</property>
+                <property name="vexpand">true</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="action-name">win.clear-history</property>
+                <property name="icon-name">edit-clear-all-symbolic</property>
+                <property name="tooltip-text" translatable="true">Clear results</property>
+                <property name="valign">2</property>
+                <property name="halign">1</property>
+                <property name="hexpand">false</property>
+                <style>
+                  <class name="destructive-action"/>
+                </style>
               </object>
             </child>
           </object>
-        </child>
+        </property>
         <property name="content">
-          <object class="AdwClamp">
-            <property name="maximum-size">600</property>
+          <object class="GtkBox">
+            <property name="orientation">1</property>
             <child>
-              <object class="GtkBox">
-                <property name="orientation">1</property>
-                <child>
-                  <object class="GtkButton">
-                    <property name="halign">3</property>
-                    <property name="margin-top">20</property>
-                    <property name="margin-bottom">20</property>
-                    <child>
-                      <object class="AdwButtonContent">
-                        <property name="label">Add a new group</property>
-                        <property name="icon-name">list-add-symbolic</property>
-                      </object>
-                    </child>
+              <object class="AdwHeaderBar">
+                <property name="valign">1</property>
+                <property name="vexpand">false</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <child type="start">
+                  <object class="GtkToggleButton" id="show_sidebar_button">
+                    <property name="active">true</property>
+                    <property name="icon-name">sidebar-show-symbolic</property>
+                    <property name="tooltip-text" translatable="true">Toggle History List</property>
                   </object>
                 </child>
-                <child>
-                  <object class="RemappingGroup"></object>
+                <child type="end">
+                  <object class="GtkMenuButton">
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="primary">true</property>
+                    <property name="tooltip-text" translatable="true">Main Menu</property>
+                  </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwClamp">
+                <property name="maximum-size">300</property>
+                <property name="tightening-threshold">200</property>
+                <property name="margin-start">20</property>
+                <property name="margin-end">20</property>
+                <property name="margin-bottom">60</property>
+                <property name="valign">2</property>
+                <property name="halign">3</property>
+                <property name="vexpand">true</property>
                 <child>
-                  <object class="RemappingGroup"></object>
+                  <object class="RollArea">                    
+                  </object>
                 </child>
               </object>
             </child>
@@ -52,20 +105,4 @@
       </object>
     </property>
   </template>
-  <menu id="primary_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="true">_Preferences</attribute>
-        <attribute name="action">app.preferences</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="true">_Keyboard Shortcuts</attribute>
-        <attribute name="action">win.show-help-overlay</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="true">_About Poliedros</attribute>
-        <attribute name="action">app.about</attribute>
-      </item>
-    </section>
-  </menu>
 </interface>

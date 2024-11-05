@@ -2,11 +2,9 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="RollArea" parent="GtkBox">
-    <property name="orientation">1</property>
-    <property name="margin-start">50</property>
-    <property name="margin-end">50</property>
+    <property name="orientation">1</property>    
     <child>
-      <object class="GtkLabel">
+      <object class="GtkLabel" id="_result">
         <property name="label">2</property>
         <property name="margin-bottom">35</property>
         <property name="valign">3</property>
@@ -18,36 +16,35 @@
     </child>
     <child>
       <object class="GtkBox">
+        <property name="homogeneous">true</property>
+        <style>
+          <class name="linked"/>
+          <class name="round"/>
+        </style>
         <child>
-          <object class="GtkBox">
-            <style>
-              <class name="linked"/>
-              <class name="round"/>
-            </style>
-            <child>
-              <object class="GtkDropDown">
-                <property name="model">
-                  <object class="GtkStringList"></object>
-                </property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkDropDown">
-                <property name="model">
-                  <object class="GtkStringList"></object>
-                </property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkEntry"></object>
-            </child>
+          <object class="GtkDropDown" id="_amount">
+            <property name="model">
+              <object class="GtkStringList"></object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkDropDown" id="_dice">
+            <property name="model">
+              <object class="GtkStringList"></object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="_increment">          
+          <property name="placeholder-text">Ex: +3, -2</property>
           </object>
         </child>
       </object>
     </child>
     <child>
-      <object class="GtkButton">
-        <property name="label">roll</property>
+      <object class="GtkButton" id="_roll_button">
+        <property name="label" translatable="true">roll</property>
         <property name="margin-top">15</property>
         <property name="valign">3</property>
         <property name="halign">3</property>
