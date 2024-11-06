@@ -28,59 +28,102 @@ from ...roller import command_handler, parse_command
 class RollArea(Gtk.Box):
     __gtype_name__ = 'RollArea'
 
-    _amount = Gtk.Template.Child()
-    _dice = Gtk.Template.Child()
-    _increment = Gtk.Template.Child()
+    _results = Gtk.Template.Child()
+    _d4_button = Gtk.Template.Child()
+    _d6_button = Gtk.Template.Child()
+    _d8_button = Gtk.Template.Child()
+    _d10_button = Gtk.Template.Child()
+    _d12_button = Gtk.Template.Child()
+    _d20_button = Gtk.Template.Child()
+    _plus_button = Gtk.Template.Child()
+    _minus_button = Gtk.Template.Child()
+    _display = Gtk.Template.Child()
     _roll_button = Gtk.Template.Child()
-    _result = Gtk.Template.Child()
+    _clear_button = Gtk.Template.Child()
 
     def __init__(self):
         super().__init__()
 
-        self.dice_list = Gtk.StringList.new()
-        self.amount_list = Gtk.StringList.new()
-        self.buffer = self._increment.get_buffer()
+        # d20, d12, d10, d8, d6, d4, increment
+        self._command = [0, 0, 0, 0, 0, 0, 0]
+       
+        self._roll_button.connect("clicked", self._test)        
 
-        for dice in ("d4", "d6", "d8", "d10", "d12", "d20", "d100"):
-            self.dice_list.append(dice)
-
-        for amount in range(1, 13):
-            self.amount_list.append(f"{amount}")
-
-        self._dice.set_model(self.dice_list)
-        self._amount.set_model(self.amount_list)
-
-        # self._roll_button.connect("clicked", self._assemble_command)
-        self._roll_button.connect("clicked", self._test)
-        # self.buffer.connect("inserted-text", self._limit_input)
+        self._d4_button.connect("clicked", self._add_elements, 5)
+        self._d6_button.connect("clicked", self._add_elements, 4)
+        self._d8_button.connect("clicked", self._add_elements, 3)
+        self._d10_button.connect("clicked", self._add_elements, 2)
+        self._d12_button.connect("clicked", self._add_elements, 1)
+        self._d20_button.connect("clicked", self._add_elements, 0)
+        self._plus_button.connect("clicked", self._add_elements, 6)
+        self._minus_button.connect("clicked", self._add_elements, 7)
+        self._clear_button.connect("clicked", self._clear_diplay)
 
     def _update_result(self, results):
-        self._result.set_text(results)
+        self._results.set_text(results)
 
-    def _assemble_command(self, button):
+    def _clear_diplay(self, button):
+        self._command = [0, 0, 0, 0, 0, 0, 0]
+        self._display.set_text("")
 
-        dice_pos = self._dice.get_selected()
-        dice = self.dice_list.get_string(dice_pos)
+    def _assemble_command(self):
 
-        amount_pos = self._amount.get_selected()
-        amount = self.amount_list.get_string(amount_pos)
+        add_plus = False
+        display_content = ""
 
-        increment = self._increment.get_text()
+        for index, element in enumerate(self._command):
+            if element != 0:
+                if add_plus and index != 6:
+                    display_content = display_content + ' + '
 
-        command = f"{amount}{dice}{increment}"
+                add_plus = True
 
-        print(command)
+                match index:
+                    case 0:
+                        content = f"{element}d20"
 
-        results = command_handler(command)
+                    case 1:
+                        content = f"{element}d12"
 
-        self._update_result(results)
+                    case 2:
+                        content = f"{element}d10"
 
-    def _limit_input(self, buffer, position, chars, n_chars):
-        
-        print(chars)
+                    case 3:
+                        content = f"{element}d8"
+
+                    case 4:
+                        content = f"{element}d6"
+
+                    case 5:
+                        content = f"{element}d4"
+
+                    case 6:
+                        content = f" + {element}"
+
+                        if element < 0:
+                            content = f" - {abs(element)}"
+
+                display_content = display_content + content
+
+        print(display_content)
+        self._display.set_text(display_content)
+
+    def _add_elements(self, button, index):
+
+        if index == 7:
+
+            self._command[6] = self._command[6] - 1
+            # print(self._command)
+            self._assemble_command()
+            return
+
+        self._command[index] = self._command[index] + 1
+
+        # print(self._command)
+        self._assemble_command()
 
     def _test(self, button):
-        input_command = self._increment.get_text()
+        input_command = self._display.get_text()
         results = parse_command(input_command)
         # results = command_handler(input_command)
         print(results)

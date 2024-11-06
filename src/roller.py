@@ -1,6 +1,21 @@
 import random
 import re
 
+# Validation Patterns
+
+patt_d = r'^\d*d\d+$'
+patt_l = r'^\d*l\d+d\d+$'
+patt_h = r'^\d*h\d+d\d+$'
+patt_e = r'^\d*e\d+d\d+$'
+patt_i = r'^[+-]+$'
+patt_n = r'^\d+$'
+
+# Split Patterns
+
+patt_s_h = r'^(\d*h)\d+d\d+$'
+patt_s_l = r'^(\d*l)\d+d\d+$'
+patt_s_e = r'^(\d*e)\d+d\d+$'
+patt_s_d = r'(\d+)d(\d+)'
 
 def roll_dice(parameter):
 
@@ -101,9 +116,6 @@ def command_handler(input_command):
 
 def execute_operations(parameters):
 
-    patt_d = r'^\d*d\d+$'
-    patt_h = r'^\d*h\d+d\d+$'
-
     for parameter in parameters:
 
         if (re.match(patt_d, parameter)):
@@ -115,13 +127,6 @@ def execute_operations(parameters):
 
 
 def validate_parameters(parameters):
-
-    patt_d = r'^\d*d\d+$'
-    patt_l = r'^\d*l\d+d\d+$'
-    patt_h = r'^\d*h\d+d\d+$'
-    patt_e = r'^\d*e\d+d\d+$'
-    patt_i = r'^[+-]+$'
-    patt_n = r'^\d+$'
 
     if not parameters:
         print("Parâmetros vazios")
@@ -153,7 +158,7 @@ def parse_command(input_command):
 
 
 def higher_lower(element, name):
-    
+
     match name:
         case "h":
             patt = r'^(\d*h)\d+d\d+$'
@@ -171,10 +176,8 @@ def higher_lower(element, name):
 
     roll = roll_dice(dices)
 
-    results = roll[:group] # maiores
-    results = roll[-group:] # menores
-
-    
+    results = roll[:group]  # maiores
+    results = roll[-group:]  # menores
 
     return results
 

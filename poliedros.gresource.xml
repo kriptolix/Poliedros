@@ -6,4 +6,12 @@
     <file preprocess="xml-stripblanks">src/gtk/ui/RollArea.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/help-overlay.ui</file>    
   </gresource>
+  <gresource prefix="io/gitlab/kriptolix/Poliedros/icons/scalable/actions">
+    <file alias="dice-d4-hicolor.svg">data/icons/dice-d4-hicolor.svg</file>
+    <file alias="dice-d6-hicolor.svg">data/icons/dice-d6-hicolor.svg</file>
+    <file alias="dice-d8-hicolor.svg">data/icons/dice-d8-hicolor.svg</file>
+    <file alias="dice-d10-hicolor.svg">data/icons/dice-d10-hicolor.svg</file>
+    <file alias="dice-d12-hicolor.svg">data/icons/dice-d12-hicolor.svg</file>
+    <file alias="dice-d20-hicolor.svg">data/icons/dice-d20-hicolor.svg</file> 
+  </gresource>  
 </gresources>
