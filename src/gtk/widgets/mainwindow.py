@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import Adw
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 
 from .rollarea import RollArea
 
@@ -29,3 +29,11 @@ class MainWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_resource('/io/gitlab/kriptolix/'
+                                        'Poliedros/data/poliedros.css')
+        add_provider = Gtk.StyleContext.add_provider_for_display
+        add_provider(Gdk.Display.get_default(),
+                     css_provider,
+                     Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)

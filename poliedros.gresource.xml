@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/io/gitlab/kriptolix/Poliedros">
+  <file compressed="true">data/poliedros.css</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/MainWindow.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/LogArea.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/RollArea.ui</file>

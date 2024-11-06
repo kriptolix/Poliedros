@@ -29,6 +29,7 @@ class RollArea(Gtk.Box):
     __gtype_name__ = 'RollArea'
 
     _results = Gtk.Template.Child()
+    _revealer = Gtk.Template.Child()
     _d4_button = Gtk.Template.Child()
     _d6_button = Gtk.Template.Child()
     _d8_button = Gtk.Template.Child()
@@ -38,6 +39,7 @@ class RollArea(Gtk.Box):
     _plus_button = Gtk.Template.Child()
     _minus_button = Gtk.Template.Child()
     _display = Gtk.Template.Child()
+    _mode_button = Gtk.Template.Child()
     _roll_button = Gtk.Template.Child()
     _clear_button = Gtk.Template.Child()
 
@@ -46,8 +48,8 @@ class RollArea(Gtk.Box):
 
         # d20, d12, d10, d8, d6, d4, increment
         self._command = [0, 0, 0, 0, 0, 0, 0]
-       
-        self._roll_button.connect("clicked", self._test)        
+
+        self._roll_button.connect("clicked", self._test)
 
         self._d4_button.connect("clicked", self._add_elements, 5)
         self._d6_button.connect("clicked", self._add_elements, 4)
@@ -58,6 +60,9 @@ class RollArea(Gtk.Box):
         self._plus_button.connect("clicked", self._add_elements, 6)
         self._minus_button.connect("clicked", self._add_elements, 7)
         self._clear_button.connect("clicked", self._clear_diplay)
+        self._mode_button.connect("toggled", self._change_mode)
+
+        
 
     def _update_result(self, results):
         self._results.set_text(results)
@@ -65,6 +70,23 @@ class RollArea(Gtk.Box):
     def _clear_diplay(self, button):
         self._command = [0, 0, 0, 0, 0, 0, 0]
         self._display.set_text("")
+
+    def _change_mode(self, button):
+
+        placeholder = "Ex.: 2d6, 1d12+3, h2d20"
+        
+        if self._mode_button.get_active():
+            self._revealer.set_reveal_child(False)
+            self._display.set_editable(True)
+            self._display.set_can_focus(True)
+            self._display.set_placeholder_text(placeholder)
+            self._display.grab_focus()
+        
+        if not self._mode_button.get_active():
+            self._revealer.set_reveal_child(True)
+            self._display.set_editable(False)
+            self._display.set_can_focus(False)
+            self._display.set_placeholder_text('')
 
     def _assemble_command(self):
 

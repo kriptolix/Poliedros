@@ -3,128 +3,156 @@
   <requires lib="gtk" version="4.0"/>
   <template class="RollArea" parent="GtkBox">
     <property name="margin-top">18</property>
-    <property name="halign">3</property>
     <property name="valign">3</property>
     <property name="orientation">1</property>
     <child>
       <object class="GtkLabel" id="_results">
         <property name="label">23</property>
         <property name="margin-bottom">60</property>
+        <style>
+          <class name="roll_result"/>
+        </style>
       </object>
     </child>
     <child>
-      <object class="GtkBox" id="_first_dices">
-        <property name="spacing">3</property>
-        <child>
-          <object class="GtkButton" id="_d4_button">
-            <style>
-              <class name="flat"/>
-            </style>
-            <property name="child">
-              <object class="GtkImage">
-                <property name="icon-name">dice-d4-hicolor</property>
-                <property name="pixel-size">32</property>
+      <object class="GtkRevealer" id="_revealer">
+        <property name="reveal-child">true</property>
+        <property name="transition-type">1</property>
+        <property name="transition-duration">600</property>
+        <property name="child">
+          <object class="GtkBox" id="_controlls">
+            <property name="orientation">1</property>
+            <property name="halign">3</property>
+            <child>
+              <object class="GtkBox" id="_line_1">
+                <property name="spacing">3</property>
+                <child>
+                  <object class="GtkButton" id="_d4_button">
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                    <property name="child">
+                      <object class="GtkImage">
+                        <property name="icon-name">dice-d4-hicolor</property>
+                        <property name="pixel-size">36</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="_d6_button">
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                    <property name="child">
+                      <object class="GtkImage">
+                        <property name="icon-name">dice-d6-hicolor</property>
+                        <property name="pixel-size">36</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="_d8_button">
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                    <property name="child">
+                      <object class="GtkImage">
+                        <property name="icon-name">dice-d8-hicolor</property>
+                        <property name="pixel-size">36</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="_plus_button">
+                    <property name="label">+n</property>
+                    <property name="valign">3</property>
+                    <style>
+                      <class name="circular"/>
+                    </style>
+                  </object>
+                </child>
               </object>
-            </property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="_d6_button">
-            <style>
-              <class name="flat"/>
-            </style>
-            <property name="child">
-              <object class="GtkImage">
-                <property name="icon-name">dice-d6-hicolor</property>
-                <property name="pixel-size">32</property>
+            </child>
+            <child>
+              <object class="GtkBox" id="_line_2">
+                <property name="spacing">3</property>
+                <child>
+                  <object class="GtkButton" id="_d10_button">
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                    <property name="child">
+                      <object class="GtkImage">
+                        <property name="icon-name">dice-d10-hicolor</property>
+                        <property name="pixel-size">36</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="_d12_button">
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                    <property name="child">
+                      <object class="GtkImage">
+                        <property name="icon-name">dice-d12-hicolor</property>
+                        <property name="pixel-size">36</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="_d20_button">
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                    <property name="child">
+                      <object class="GtkImage">
+                        <property name="icon-name">dice-d20-hicolor</property>
+                        <property name="pixel-size">36</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="_minus_button">
+                    <property name="label">-n</property>
+                    <property name="valign">3</property>
+                    <style>
+                      <class name="circular"/>
+                    </style>
+                  </object>
+                </child>
               </object>
-            </property>
+            </child>
           </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="_d8_button">
-            <style>
-              <class name="flat"/>
-            </style>
-            <property name="child">
-              <object class="GtkImage">
-                <property name="icon-name">dice-d8-hicolor</property>
-                <property name="pixel-size">32</property>
-              </object>
-            </property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="_plus_button">
-            <property name="label">+n</property>
-            <property name="valign">3</property>
-            <style>
-              <class name="circular"/>
-            </style>
-          </object>
-        </child>
+        </property>
       </object>
     </child>
     <child>
-      <object class="GtkBox" id="_last_dices">
-        <property name="spacing">3</property>
-        <child>
-          <object class="GtkButton" id="_d10_button">
-            <style>
-              <class name="flat"/>
-            </style>
-            <property name="child">
-              <object class="GtkImage">
-                <property name="icon-name">dice-d10-hicolor</property>
-                <property name="pixel-size">32</property>
-              </object>
-            </property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="_d12_button">
-            <style>
-              <class name="flat"/>
-            </style>
-            <property name="child">
-              <object class="GtkImage">
-                <property name="icon-name">dice-d12-hicolor</property>
-                <property name="pixel-size">32</property>
-              </object>
-            </property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="_d20_button">
-            <style>
-              <class name="flat"/>
-            </style>
-            <property name="child">
-              <object class="GtkImage">
-                <property name="icon-name">dice-d20-hicolor</property>
-                <property name="pixel-size">32</property>
-              </object>
-            </property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="_minus_button">
-            <property name="label">-n</property>
-            <property name="valign">3</property>
-            <style>
-              <class name="circular"/>
-            </style>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkEntry" id="_display">
+      <object class="GtkBox">
         <property name="margin-top">25</property>
         <property name="margin-bottom">15</property>
-        <property name="editable">false</property>
-        <property name="can-focus">false</property>        
-        <property name="xalign">0.5</property>
+        <style>
+          <class name="linked"/>
+        </style>
+        <child>
+          <object class="GtkEntry" id="_display">
+            <property name="xalign">0.5</property>
+            <property name="hexpand">true</property>
+            <property name="editable">false</property>
+            <property name="can-focus">false</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="_mode_button">
+            <property name="icon-name">view-conceal-symbolic</property>
+          </object>
+        </child>
       </object>
     </child>
     <child>
@@ -144,7 +172,7 @@
         <child>
           <object class="GtkButton" id="_clear_button">
             <property name="icon-name">edit-clear-symbolic</property>
-            <property name="margin-start">40</property>
+            <property name="margin-start">70</property>
             <style>
               <class name="circular"/>
               <class name="destructive-action"/>
