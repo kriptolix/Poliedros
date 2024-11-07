@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="LogEntry" parent="AdwActionRow">
+    <property name="title">Placeholder</property>
+    <property name="subtitle">Placeholder</property>
+    <child type="suffix">
+      <object class="GtkToggleButton" id="activatable_toggle">
+        <property name="icon-name">arrow-circular-top-right-symbolic</property>
+        <property name="valign">3</property>
+      </object>
+    </child>
+  </template>
+</interface>

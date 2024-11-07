@@ -22,6 +22,9 @@ from gi.repository import Gtk
 
 from ...roller import command_handler, parse_command
 
+from .dicearea import DiceArea
+from .infoarea import InfoArea
+
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
               'Poliedros/src/gtk/ui/RollArea.ui')
@@ -29,15 +32,9 @@ class RollArea(Gtk.Box):
     __gtype_name__ = 'RollArea'
 
     _results = Gtk.Template.Child()
-    _revealer = Gtk.Template.Child()
-    _d4_button = Gtk.Template.Child()
-    _d6_button = Gtk.Template.Child()
-    _d8_button = Gtk.Template.Child()
-    _d10_button = Gtk.Template.Child()
-    _d12_button = Gtk.Template.Child()
-    _d20_button = Gtk.Template.Child()
-    _plus_button = Gtk.Template.Child()
-    _minus_button = Gtk.Template.Child()
+    _stack = Gtk.Template.Child()
+    _dice_area = Gtk.Template.Child()
+    _info_area = Gtk.Template.Child()    
     _display = Gtk.Template.Child()
     _mode_button = Gtk.Template.Child()
     _roll_button = Gtk.Template.Child()
@@ -51,18 +48,16 @@ class RollArea(Gtk.Box):
 
         self._roll_button.connect("clicked", self._test)
 
-        self._d4_button.connect("clicked", self._add_elements, 5)
-        self._d6_button.connect("clicked", self._add_elements, 4)
-        self._d8_button.connect("clicked", self._add_elements, 3)
-        self._d10_button.connect("clicked", self._add_elements, 2)
-        self._d12_button.connect("clicked", self._add_elements, 1)
-        self._d20_button.connect("clicked", self._add_elements, 0)
-        self._plus_button.connect("clicked", self._add_elements, 6)
-        self._minus_button.connect("clicked", self._add_elements, 7)
+        self._dice_area._d4_button.connect("clicked", self._add_elements, 5)
+        self._dice_area._d6_button.connect("clicked", self._add_elements, 4)
+        self._dice_area._d8_button.connect("clicked", self._add_elements, 3)
+        self._dice_area._d10_button.connect("clicked", self._add_elements, 2)
+        self._dice_area._d12_button.connect("clicked", self._add_elements, 1)
+        self._dice_area._d20_button.connect("clicked", self._add_elements, 0)
+        self._dice_area._plus_button.connect("clicked", self._add_elements, 6)
+        self._dice_area._minus_button.connect("clicked", self._add_elements, 7)
         self._clear_button.connect("clicked", self._clear_diplay)
-        self._mode_button.connect("toggled", self._change_mode)
-
-        
+        self._mode_button.connect("toggled", self._change_mode)        
 
     def _update_result(self, results):
         self._results.set_text(results)
@@ -76,14 +71,14 @@ class RollArea(Gtk.Box):
         placeholder = "Ex.: 2d6, 1d12+3, h2d20"
         
         if self._mode_button.get_active():
-            self._revealer.set_reveal_child(False)
+            self._stack.set_visible_child(self._info_area)
             self._display.set_editable(True)
             self._display.set_can_focus(True)
             self._display.set_placeholder_text(placeholder)
             self._display.grab_focus()
         
         if not self._mode_button.get_active():
-            self._revealer.set_reveal_child(True)
+            self._stack.set_visible_child(self._dice_area)
             self._display.set_editable(False)
             self._display.set_can_focus(False)
             self._display.set_placeholder_text('')

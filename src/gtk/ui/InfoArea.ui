@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="InfoArea" parent="GtkBox">
+    <property name="orientation">1</property>
+    <property name="valign">3</property>
+    <property name="halign">3</property>
+    <child>
+      <object class="GtkLabel">
+        <property name="label">Avalable commands</property>
+        <property name="margin-bottom">25</property>
+        <style>
+          <class name="heading"/>
+        </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkGrid">
+        <property name="column-homogeneous">true</property>
+        <property name="row-homogeneous">true</property>
+        <property name="row-spacing">10</property>
+        <property name="column-spacing">40</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="valign">1</property>
+            <property name="use-markup">true</property>
+            <property name="wrap">true</property>
+            <property name="xalign">0</property>
+            <property name="label">&lt;span weight="bold" size="large"&gt; Roll dices: &lt;/span&gt; 2d10, 3d6.</property>
+            <layout>
+              <property name="row">0</property>
+              <property name="column">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="valign">1</property>
+            <property name="hexpand">false</property>
+            <property name="use-markup">true</property>
+            <property name="xalign">0</property>
+            <property name="wrap">true</property>
+            <property name="label">&lt;span weight="bold" size="large"&gt; Add/subtract : &lt;/span&gt; 1d6 -1, 1d20 + 1d6.</property>
+            <layout>
+              <property name="row">0</property>
+              <property name="column">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="valign">1</property>
+            <property name="use-markup">true</property>
+            <property name="wrap">true</property>
+            <property name="xalign">0</property>
+            <property name="label">&lt;span weight="bold" size="large"&gt; Keep x hights: &lt;/span&gt; 2h3d6 = keep two hight.</property>
+            <layout>
+              <property name="row">1</property>
+              <property name="column">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="valign">1</property>
+            <property name="hexpand">false</property>
+            <property name="use-markup">true</property>
+            <property name="wrap">true</property>
+            <property name="xalign">0</property>
+            <property name="label">&lt;span weight="bold" size="large"&gt; Keep x lowers: &lt;/span&gt; 3l4d6 = keep three lower.</property>
+            <layout>
+              <property name="row">1</property>
+              <property name="column">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

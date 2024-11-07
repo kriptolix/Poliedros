@@ -15,3 +15,4 @@ se nao  - entra no final com o sinal que tiver (elemento anterior)
 se for operation/dado
 se for o elemento 1º - resolve
 se nao - resolve e entra com o sinal
+

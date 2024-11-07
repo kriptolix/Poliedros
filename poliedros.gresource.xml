@@ -3,9 +3,14 @@
   <gresource prefix="/io/gitlab/kriptolix/Poliedros">
   <file compressed="true">data/poliedros.css</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/MainWindow.ui</file>
-    <file preprocess="xml-stripblanks">src/gtk/ui/LogArea.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/SideBar.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/RollArea.ui</file>
-    <file preprocess="xml-stripblanks">src/gtk/ui/help-overlay.ui</file>    
+    <file preprocess="xml-stripblanks">src/gtk/ui/DiceArea.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/InfoArea.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/help-overlay.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/Menu.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/EmptyPage.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/LogEntry.ui</file>    
   </gresource>
   <gresource prefix="io/gitlab/kriptolix/Poliedros/icons/scalable/actions">
     <file alias="dice-d4-hicolor.svg">data/icons/dice-d4-hicolor.svg</file>
@@ -13,6 +18,7 @@
     <file alias="dice-d8-hicolor.svg">data/icons/dice-d8-hicolor.svg</file>
     <file alias="dice-d10-hicolor.svg">data/icons/dice-d10-hicolor.svg</file>
     <file alias="dice-d12-hicolor.svg">data/icons/dice-d12-hicolor.svg</file>
-    <file alias="dice-d20-hicolor.svg">data/icons/dice-d20-hicolor.svg</file> 
+    <file alias="dice-d20-hicolor.svg">data/icons/dice-d20-hicolor.svg</file>
+    <file alias="code-symbolic.svg">data/icons/code-symbolic.svg</file> 
   </gresource>  
 </gresources>

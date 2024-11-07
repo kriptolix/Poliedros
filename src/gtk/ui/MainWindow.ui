@@ -3,23 +3,21 @@
   <requires lib="gtk" version="4.0"/>
   <template class="MainWindow" parent="AdwApplicationWindow">
     <property name="title">Poliedros</property>
-    <property name="icon-name">dev.zelikos.rollit</property>
+    <property name="icon-name">Poliedros</property>
     <property name="width-request">360</property>
     <property name="height-request">294</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 400sp</condition>
-        <setter object="rollit_split_view" property="collapsed">true</setter>
+        <condition>max-width: 480sp</condition>
+        <setter object="_split_view" property="collapsed">true</setter>min-sidebar-width
       </object>
     </child>
     <property name="content">
-      <object class="AdwOverlaySplitView" id="rollit_split_view">
-        <property name="show-sidebar" bind-source="show_sidebar_button" bind-property="active" bind-flags="sync-create|bidirectional"/>
+      <object class="AdwOverlaySplitView" id="_split_view">
+        <property name="min-sidebar-width">210</property>        
         <property name="sidebar">
           <object class="GtkBox">
-            <property name="orientation">1</property>
-            <property name="margin-start">6</property>
-            <property name="margin-bottom">6</property>
+            <property name="orientation">1</property>            
             <child>
               <object class="AdwHeaderBar">
                 <property name="show-title">false</property>
@@ -29,33 +27,16 @@
                   <class name="flat"/>
                 </style>
                 <child type="start">
-                  <object class="GtkButton">
-                    <property name="action-name">win.toggle-history</property>
-                    <property name="icon-name">go-previous-symbolic</property>
-                    <property name="visible" bind-source="rollit_split_view" bind-property="collapsed" bind-flags="sync-create"/>
+                  <object class="GtkButton" id="_back_button">                    
+                    <property name="tooltip-text" translatable="yes">Go Back</property>
+                    <property name="icon-name">go-previous-symbolic</property>                    
                   </object>
                 </child>
               </object>
             </child>
             <child>
-              <object class="AdwStatusPage">
-                <property name="title">Historico</property>
-                <property name="vexpand">true</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton">
-                <property name="action-name">win.clear-history</property>
-                <property name="icon-name">edit-clear-all-symbolic</property>
-                <property name="tooltip-text" translatable="true">Clear results</property>
-                <property name="valign">2</property>
-                <property name="halign">1</property>
-                <property name="hexpand">false</property>
-                <style>
-                  <class name="destructive-action"/>
-                </style>
-              </object>
-            </child>
+              <object class="SideBar" id="_sidebar"></object>
+            </child>            
           </object>
         </property>
         <property name="content">
@@ -69,14 +50,14 @@
                   <class name="flat"/>
                 </style>
                 <child type="start">
-                  <object class="GtkToggleButton" id="show_sidebar_button">
+                  <object class="GtkToggleButton" id="_toggle_history_button">
                     <property name="active">true</property>
                     <property name="icon-name">sidebar-show-symbolic</property>
-                    <property name="tooltip-text" translatable="true">Toggle History List</property>
+                    <property name="tooltip-text" translatable="true">Toggle History</property>
                   </object>
                 </child>
                 <child type="end">
-                  <object class="GtkMenuButton">
+                  <object class="GtkMenuButton" id="_menu_button">
                     <property name="icon-name">open-menu-symbolic</property>
                     <property name="primary">true</property>
                     <property name="tooltip-text" translatable="true">Main Menu</property>

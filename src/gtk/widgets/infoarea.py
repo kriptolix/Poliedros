@@ -22,9 +22,9 @@ from gi.repository import Gtk
 
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Poliedros/src/gtk/ui/LogArea.ui')
-class LogArea(Gtk.Box):
-    __gtype_name__ = 'LogArea'
+              'Poliedros/src/gtk/ui/InfoArea.ui')
+class InfoArea(Gtk.Box):
+    __gtype_name__ = 'InfoArea'
 
     def __init__(self):
         super().__init__()

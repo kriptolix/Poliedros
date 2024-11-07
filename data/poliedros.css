@@ -2,3 +2,7 @@
     font-weight: bold;
     font-size: 6em;
   }
+
+  .log_background {
+    background-color: var(--headerbar-bg-color);    
+  }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="EmptyPage" parent="AdwBin">
+    <child>
+      <object class="AdwStatusPage">
+        <property name="title" translatable="true">Nothing Here Yet</property>
+        <property name="description" translatable="true">Roll some dices to beguin</property>
+        <property name="icon-name">help-about-symbolic</property>
+        <style>
+          <class name="compact"/>
+        </style>
+      </object>
+    </child>
+  </template>
+</interface>
