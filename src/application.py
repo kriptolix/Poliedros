@@ -17,14 +17,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+
+from .roller import execute_command
+from .util import create_action
+from gettext import gettext as _
+from .gtk.widgets.mainwindow import MainWindow
+from gi.repository import Gio, Adw
 import sys
 import gi
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
-
-from .gtk.widgets.mainwindow import MainWindow
-from gi.repository import Gtk, Gio, Adw
 
 
 class PoliedrosApplication(Adw.Application):
@@ -33,9 +36,10 @@ class PoliedrosApplication(Adw.Application):
     def __init__(self):
         super().__init__(application_id='io.gitlab.kriptolix.Poliedros',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
-        self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
+
+        create_action(self, "app", 'quit',
+                      lambda *_: self.quit(), ['<primary>q'])
+        create_action(self, "app", 'about', self.on_about, None, None)
 
     def do_activate(self):
         """Called when the application is activated.
@@ -43,12 +47,17 @@ class PoliedrosApplication(Adw.Application):
         We raise the application's main window, creating it if
         necessary.
         """
-        win = self.props.active_window
-        if not win:
-            win = MainWindow(application=self)
-        win.present()
+        self._window = self.props.active_window
+        if not self._window:
+            self._window = MainWindow(self)
 
-    def on_about_action(self, *args):
+        self._window.present()
+
+        self._display = self._window._roll_area._display
+        self._update_result = self._window._roll_area.update_result
+        self._add_register = self._window._sidebar.add_register
+
+    def on_about(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(application_name='poliedros',
                                 application_icon='io.gitlab.kriptolix.Poliedros',
@@ -56,28 +65,23 @@ class PoliedrosApplication(Adw.Application):
                                 version='0.1.0',
                                 developers=['k'],
                                 copyright='© 2024 k')
-        # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
-        about.set_translator_credits(_('translator-credits'))
+
+        about.set_translator_credits(_('k'))
         about.present(self.props.active_window)
 
-    def on_preferences_action(self, widget, _):
-        """Callback for the app.preferences action."""
-        print('app.preferences action activated')
+    def do_reroll(self, input):
 
-    def create_action(self, name, callback, shortcuts=None):
-        """Add an application action.
+        self._display.set_text(input)
+        self.do_roll()
 
-        Args:
-            name: the name of the action
-            callback: the function to be called when the action is
-              activated
-            shortcuts: an optional list of accelerators
-        """
-        action = Gio.SimpleAction.new(name, None)
-        action.connect("activate", callback)
-        self.add_action(action)
-        if shortcuts:
-            self.set_accels_for_action(f"app.{name}", shortcuts)
+    def do_roll(self):
+
+        input = self._display.get_text()
+
+        results = execute_command(input)
+
+        self._add_register(results, input)
+        self._update_result(results)
 
 
 def main(version):

@@ -7,123 +7,120 @@ patt_d = r'^\d*d\d+$'
 patt_l = r'^\d*l\d+d\d+$'
 patt_h = r'^\d*h\d+d\d+$'
 patt_e = r'^\d*e\d+d\d+$'
-patt_i = r'^[+-]+$'
+patt_o = r'^[+-]+$'
 patt_n = r'^\d+$'
 
-# Split Patterns
-
-patt_s_h = r'^(\d*h)\d+d\d+$'
-patt_s_l = r'^(\d*l)\d+d\d+$'
-patt_s_e = r'^(\d*e)\d+d\d+$'
-patt_s_d = r'(\d+)d(\d+)'
 
 def roll_dice(parameter):
 
-    match = re.match(r'(\d+)d(\d+)', parameter)
+    n_dices, n_sides = parameter.split('d', 1)
 
-    n_dices = int(match.group(1))
-    n_sides = int(match.group(2))
+    if not n_dices:
+        n_dices = '1'
 
     roll = []
 
-    if n_dices == 0:
-        n_dices = 1
-    if n_sides == 0:
-        return None
-
-    for dice in range(n_dices):
-        roll.append(random.randint(1, n_sides))
+    for dice in range(int(n_dices)):
+        roll.append(random.randint(1, int(n_sides)))
 
     roll.sort(reverse=True)
 
-    results = roll
-    return results
+    # print("brute roll : ", roll)
+
+    return roll
 
 
-def array_trim(free_dice_array, position, number):
-    if not free_dice_array:
-        return None
+def keep_subset(parameter, action):
 
-    copy_array = free_dice_array[-1][:]
+    split = parameter.split(f"{action}", 1)
 
-    if position == 'l':
-        copy_array.sort()
+    keep = int(split[0])
+    dices = split[1]
 
-    trim_array = copy_array[:number]
-    trim_array.sort(reverse=True)
+    if not keep:
+        keep = 1
 
-    results = [trim_array, sum(trim_array)]
-    return results
+    roll = roll_dice(dices)
 
+    total = f"{sum(roll)}"
+    log = f"{parameter} {roll} "
 
-def command_handler(input_command):
+    if keep < len(roll):
 
-    if not input_command or 'd' not in input_command:
-        return None
+        match action:
+            case "h":
+                subroll = roll[:keep]
+                excluded = roll[:len(subroll)]
+                excluded.insert(0, subroll)
 
-    # Separa os elementos do comando
-    parameters = re.findall(r'(\d*d\d+|[+-]|[hl]|\d+)', input_command)
+            case "l":
+                subroll = roll[-keep:]
+                excluded = roll[:-len(subroll)]
+                excluded.append(subroll)
 
-    print('Parâmetros iniciais:', parameters)
+        total = f"{sum(subroll)}"
+        log = f"{parameter} {excluded}"
 
-    free_dice_array = []
-    kept_dice_array = []
-    partial_value = 0
-    total_value = 0
-    signal = 1
-    presentation = ''
-
-    for p in range(len(parameters)):
-
-        if 'd' in parameters[p]:  # testa se é um dado
-            values = parameters[p].split('d')  # Divide os parâmetros
-
-            roll = roll_dice(int(values[0] or 1), int(
-                values[1]))  # Rola os dados e soma
-
-            partial_value += roll[1]  # Adiciona ao parcial
-            free_dice_array.append(roll[0])  # Registra para apresentação
-
-        if parameters[p] in ['l', 'h']:  # testa lower ou higher
-            trim_array = array_trim(free_dice_array, parameters[p], int(
-                parameters[p + 1]))  # Gera subarray
-
-            partial_value = trim_array[1]
-            kept_dice_array.append(trim_array[0])
-
-        if parameters[p] in ['+', '-']:
-            if 'd' in parameters[p + 1]:
-                total_value += signal * partial_value
-                partial_value = 0
-                signal = int(parameters[p] + '1')
-            else:
-                partial_value += int(parameters[p] + parameters[p + 1])
-
-    total_value += signal * partial_value
-
-    if not kept_dice_array:
-        presentation = f'Roll: {input_command}\nResults: {
-            free_dice_array}\nTotal: {total_value}'
-    else:
-        presentation = f'Roll: {input_command}\nResults: {
-            free_dice_array}, values kept: {kept_dice_array},\nTotal: {total_value}'
-
-    # print('Array de dados:', free_dice_array)
-    # print(presentation)
-
-    return presentation
+    return [total, log]
 
 
-def execute_operations(parameters):
+def explode_dice(parameter):
+    split = parameter.split(f"e", 1)
 
-    for parameter in parameters:
+    limit = int(split[0])
+    dices = split[1]
+    pos = dices.find('d')
+    faces = int(dices[pos+1:])
+
+    if not limit:
+        limit = 100
+
+    roll = roll_dice(dices)
+
+    for dice in roll:
+        if dice == faces:
+
+            reroll = roll_dice(f"1d{faces}")
+            roll.append(reroll)
+            roll.sort(reverse=True)
+
+    total = f"{sum(roll)}"
+    log = f"{parameter} {roll} "
+
+
+def execute_operations(command):
+
+    result = ""
+    track = ""
+
+    for parameter in command:
 
         if (re.match(patt_d, parameter)):
-            roll_dice(parameter)
+            roll = roll_dice(parameter)
+
+            total = f"{sum(roll)}"
+            log = f"{parameter} {roll}"
 
         if (re.match(patt_h, parameter)):
-            match = re.match(r'^(\d*h)\d+d\d+$', parameter)
-            higher_lower(match)
+            total, log = keep_subset(parameter, "h")
+
+        if (re.match(patt_l, parameter)):
+            total, log = keep_subset(parameter, "l")
+
+        if (re.match(patt_n, parameter)):
+            total = parameter
+            log = parameter
+
+        if (re.match(patt_o, parameter)):
+            total = parameter
+            log = " " + parameter + " "
+
+        result = result + total
+        track = track + log
+
+    results = [eval(result), track]
+
+    return results
 
 
 def validate_parameters(parameters):
@@ -138,7 +135,7 @@ def validate_parameters(parameters):
                 or re.match(patt_h, elemento)
                 or re.match(patt_e, elemento)
                 or re.match(patt_n, elemento)
-                or re.match(patt_i, elemento)):
+                or re.match(patt_o, elemento)):
 
             print(f"Erro de sintaxe: '{elemento}'")
             return
@@ -146,45 +143,18 @@ def validate_parameters(parameters):
     # return "elementos validos"
 
 
-def parse_command(input_command):
-    # input_command = re.sub(r'[^0-9dhle\+\-]', '', input_command)
+def execute_command(input_command):
+
     input_command = re.sub(' ', '', input_command)
     parameters = re.split(r'(\+|\-)', input_command)
-    print('Parâmetros iniciais:', parameters)
 
-    validate_parameters(parameters)
+    # print('Parâmetros iniciais:', parameters)
 
-    execute_operations(parameters)
+    response = validate_parameters(parameters)
 
+    if response:
+        return response
 
-def higher_lower(element, name):
-
-    match name:
-        case "h":
-            patt = r'^(\d*h)\d+d\d+$'
-
-        case "l":
-            patt = r'^(\d*l)\d+d\d+$'
-
-    match = re.match(patt, element)
-
-    operation = match.group(1)
-    dices = element[len(operation):]
-
-    if len(operation) > 1:
-        group = int(operation[:-1])
-
-    roll = roll_dice(dices)
-
-    results = roll[:group]  # maiores
-    results = roll[-group:]  # menores
+    results = execute_operations(parameters)
 
     return results
-
-
-def lower_among(range):
-    patt = r'^(\d*l)\d+d\d+$'
-
-
-def explode(range):
-    patt = r'^(\d*e)\d+d\d+$'

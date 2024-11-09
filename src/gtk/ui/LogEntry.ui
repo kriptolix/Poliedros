@@ -5,7 +5,7 @@
     <property name="title">Placeholder</property>
     <property name="subtitle">Placeholder</property>
     <child type="suffix">
-      <object class="GtkToggleButton" id="activatable_toggle">
+      <object class="GtkButton" id="_reroll_button">
         <property name="icon-name">arrow-circular-top-right-symbolic</property>
         <property name="valign">3</property>
       </object>

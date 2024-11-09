@@ -34,6 +34,9 @@ class SideBar(Gtk.Box):
         self._clear_history_button.connect(
             "clicked", lambda *_: self._sidebar_list.remove_all())
 
-    def _add_register(self, title, subtitle):
-        entry = LogEntry(title, subtitle)
+    def add_register(self, results, command):
+
+        title = str(results[0])
+        subtitle = results[1]
+        entry = LogEntry(title, subtitle, command)
         self._sidebar_list.insert(entry, 0)
