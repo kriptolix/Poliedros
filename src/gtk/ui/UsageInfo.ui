@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="UsageInfo" parent="AdwDialog">
+    <child>
+      <object class="AdwToolbarView">
+        <property name="vexpand">true</property>
+        <property name="hexpand">true</property>
+        <child type="top">
+          <object class="AdwHeaderBar"></object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="hscrollbar-policy">2</property>
+            <property name="propagate-natural-height">true</property>
+            <property name="vexpand">true</property>
+            <property name="hexpand">true</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">1</property>
+                <property name="margin-start">15</property>
+                <property name="margin-end">15</property>
+                <child>
+                  <object class="GtkLabel" id="_1">
+                    <property name="label">Command usage instructions</property>
+                    <property name="margin-top">15</property>
+                    <property name="margin-bottom">15</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="_2">
+                    <property name="wrap">true</property>
+                    <property name="justify">3</property>
+                    <property name="use-markup">true</property>
+                    <property name="margin-top">15</property>
+                    <property name="margin-bottom">15</property>
+                    <property name="vexpand">true</property>
+                    <property name="hexpand">true</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="_3">
+                    <property name="wrap">true</property>
+                    <property name="justify">3</property>
+                    <property name="use-markup">true</property>
+                    <property name="margin-top">15</property>
+                    <property name="margin-bottom">15</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="_4">
+                    <property name="wrap">true</property>
+                    <property name="justify">3</property>
+                    <property name="use-markup">true</property>
+                    <property name="margin-top">15</property>
+                    <property name="margin-bottom">15</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="_5">
+                    <property name="wrap">true</property>
+                    <property name="justify">3</property>
+                    <property name="use-markup">true</property>
+                    <property name="margin-top">15</property>
+                    <property name="margin-bottom">15</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

@@ -17,7 +17,7 @@
             <property name="child">
               <object class="GtkImage">
                 <property name="icon-name">dice-d4-hicolor</property>
-                <property name="pixel-size">42</property>
+                <property name="pixel-size">36</property>
               </object>
             </property>
           </object>
@@ -32,7 +32,7 @@
             <property name="child">
               <object class="GtkImage">
                 <property name="icon-name">dice-d6-hicolor</property>
-                <property name="pixel-size">42</property>
+                <property name="pixel-size">36</property>
               </object>
             </property>
           </object>
@@ -47,7 +47,7 @@
             <property name="child">
               <object class="GtkImage">
                 <property name="icon-name">dice-d8-hicolor</property>
-                <property name="pixel-size">42</property>
+                <property name="pixel-size">36</property>
               </object>
             </property>
           </object>
@@ -78,7 +78,7 @@
             <property name="child">
               <object class="GtkImage">
                 <property name="icon-name">dice-d10-hicolor</property>
-                <property name="pixel-size">42</property>
+                <property name="pixel-size">36</property>
               </object>
             </property>
           </object>
@@ -93,7 +93,7 @@
             <property name="child">
               <object class="GtkImage">
                 <property name="icon-name">dice-d12-hicolor</property>
-                <property name="pixel-size">42</property>
+                <property name="pixel-size">36</property>
               </object>
             </property>
           </object>
@@ -108,7 +108,7 @@
             <property name="child">
               <object class="GtkImage">
                 <property name="icon-name">dice-d20-hicolor</property>
-                <property name="pixel-size">42</property>
+                <property name="pixel-size">36</property>
               </object>
             </property>
           </object>

@@ -27,7 +27,7 @@ from .infoarea import InfoArea
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
               'Poliedros/src/gtk/ui/RollArea.ui')
 class RollArea(Gtk.Box):
-    __gtype_name__ = 'RollArea'    
+    __gtype_name__ = 'RollArea'
 
     _results = Gtk.Template.Child()
     _stack = Gtk.Template.Child()
@@ -57,10 +57,20 @@ class RollArea(Gtk.Box):
         self._clear_button.connect("clicked", self._clear_diplay)
         self._mode_button.connect("toggled", self._change_mode)
 
-    def update_result(self, results):
+        buffer = self._display.get_buffer()
 
-        total = str(results[0])
-        self._results.set_text(total)
+        buffer.connect("inserted-text", self._reset_error_state)
+        buffer.connect("deleted-text", self._reset_error_state)
+
+    def _reset_error_state(self, *args):
+
+        if self._display.has_css_class("error"):
+            self._display.remove_css_class("error")
+            
+
+    def update_result(self, total):
+
+        self._results.set_text(str(total))
 
     def _clear_diplay(self, button):
         self._command = [0, 0, 0, 0, 0, 0, 0]

@@ -24,7 +24,6 @@ from ...roller import execute_command
 
 from .rollarea import RollArea
 from .sidebar import SideBar
-from .menu import Menu
 
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
@@ -32,9 +31,9 @@ from .menu import Menu
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MainWindow'
 
-    _menu_button = Gtk.Template.Child()
+    _about_button = Gtk.Template.Child()
     _split_view = Gtk.Template.Child()
-    _toggle_history_button = Gtk.Template.Child()    
+    _toggle_history_button = Gtk.Template.Child()
     _back_button = Gtk.Template.Child()
     _sidebar = Gtk.Template.Child()
     _roll_area = Gtk.Template.Child()
@@ -52,8 +51,6 @@ class MainWindow(Adw.ApplicationWindow):
                      css_provider,
                      Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-        self._menu_button.set_popover(Menu())
-
         self._split_view.bind_property("show-sidebar", self._toggle_history_button, "active",
                                        GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.BIDIRECTIONAL)
 
@@ -62,3 +59,8 @@ class MainWindow(Adw.ApplicationWindow):
 
         self._back_button.connect(
             "clicked", lambda *_: self._split_view.set_show_sidebar(False))
+
+        self._about_button.set_action_name("app.about")
+
+        self._split_view.connect("notify::collapsed",
+                                 self._sidebar.css_matching)

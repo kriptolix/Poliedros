@@ -20,22 +20,29 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 
-from .usageinfo import UsageInfo
-
 
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
-              'Poliedros/src/gtk/ui/InfoArea.ui')
-class InfoArea(Adw.Bin):
-    __gtype_name__ = 'InfoArea'
+              'Poliedros/src/gtk/ui/UsageInfo.ui')
+class UsageInfo(Adw.Dialog):
+    __gtype_name__ = 'UsageInfo'
 
-    _usage_button = Gtk.Template.Child()
+    _1 = Gtk.Template.Child()
+    _2 = Gtk.Template.Child()
+    _3 = Gtk.Template.Child()
+    _4 = Gtk.Template.Child()
+    _5 = Gtk.Template.Child()
 
     def __init__(self):
         super().__init__()
 
-        self._usage_button.connect("clicked", self._show_dialog)
+        self.connect("closed", lambda *_: self.close())
 
-    def _show_dialog(self, button):
-        window = self.get_root()
-        dialog = UsageInfo()
-        dialog.present(window)
+        rd_label = "Rolando dados - O comando para rolar dados utiliza operador 'd', \
+        sendo formado pela quantidade de dados a ser rolada, o operador D, e o numero \
+        de faces dos dados a serem rolados. \n \
+        Ex.: 1d6, role um dado de seis faces \nEx.: 2d8, role dois dados de oito faces"
+
+        self._2.set_text(rd_label)
+        self._3.set_text(rd_label)
+        self._4.set_text(rd_label)
+        self._5.set_text(rd_label)

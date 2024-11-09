@@ -78,10 +78,15 @@ class PoliedrosApplication(Adw.Application):
 
         input = self._display.get_text()
 
-        results = execute_command(input)
+        result, total, track = execute_command(input)
 
-        self._add_register(results, input)
-        self._update_result(results)
+        if not result:
+            print(total, track)
+            self._display.add_css_class("error")
+            return
+
+        self._add_register(total, track, input)
+        self._update_result(total)
 
 
 def main(version):

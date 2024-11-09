@@ -34,13 +34,15 @@ def keep_subset(parameter, action):
 
     split = parameter.split(f"{action}", 1)
 
-    keep = int(split[0])
-    dices = split[1]
-
-    if not keep:
+    if split[0]:
+        keep = int(split[0])
+    else:
         keep = 1
 
+    dices = split[1]
+
     roll = roll_dice(dices)
+    print(roll)
 
     total = f"{sum(roll)}"
     log = f"{parameter} {roll} "
@@ -50,42 +52,53 @@ def keep_subset(parameter, action):
         match action:
             case "h":
                 subroll = roll[:keep]
-                excluded = roll[:len(subroll)]
+                excluded = roll[:-len(subroll)]
                 excluded.insert(0, subroll)
 
             case "l":
                 subroll = roll[-keep:]
                 excluded = roll[:-len(subroll)]
-                excluded.append(subroll)
+                print("excluded2: ", excluded)
 
         total = f"{sum(subroll)}"
         log = f"{parameter} {excluded}"
+        print(subroll)
 
     return [total, log]
 
 
 def explode_dice(parameter):
-    split = parameter.split(f"e", 1)
 
-    limit = int(split[0])
+    counter = 0
+
+    split = parameter.split("e", 1)
+
+    if split[0]:
+        limit = int(split[0])
+    else:
+        limit = 50
+
+    if limit > 50:
+        limit = 50
+
     dices = split[1]
     pos = dices.find('d')
     faces = int(dices[pos+1:])
 
-    if not limit:
-        limit = 100
-
     roll = roll_dice(dices)
 
     for dice in roll:
-        if dice == faces:
+        if dice == faces and counter < limit:
+            counter = counter + 1
 
             reroll = roll_dice(f"1d{faces}")
-            roll.append(reroll)
+            roll.append(reroll[0])
             roll.sort(reverse=True)
 
     total = f"{sum(roll)}"
     log = f"{parameter} {roll} "
+
+    return [total, log]
 
 
 def execute_operations(command):
@@ -107,6 +120,9 @@ def execute_operations(command):
         if (re.match(patt_l, parameter)):
             total, log = keep_subset(parameter, "l")
 
+        if (re.match(patt_e, parameter)):
+            total, log = explode_dice(parameter)
+
         if (re.match(patt_n, parameter)):
             total = parameter
             log = parameter
@@ -118,7 +134,7 @@ def execute_operations(command):
         result = result + total
         track = track + log
 
-    results = [eval(result), track]
+    results = [True, eval(result), track]
 
     return results
 
@@ -129,16 +145,16 @@ def validate_parameters(parameters):
         print("Parâmetros vazios")
         return
 
-    for elemento in parameters:
-        if not (re.match(patt_d, elemento)
-                or re.match(patt_l, elemento)
-                or re.match(patt_h, elemento)
-                or re.match(patt_e, elemento)
-                or re.match(patt_n, elemento)
-                or re.match(patt_o, elemento)):
+    for element in parameters:
+        if not (re.match(patt_d, element)
+                or re.match(patt_l, element)
+                or re.match(patt_h, element)
+                or re.match(patt_e, element)
+                or re.match(patt_n, element)
+                or re.match(patt_o, element)):
 
-            print(f"Erro de sintaxe: '{elemento}'")
-            return
+            result = [False, "Sintaxe Error: ", element]
+            return result
 
     # return "elementos validos"
 
@@ -150,10 +166,10 @@ def execute_command(input_command):
 
     # print('Parâmetros iniciais:', parameters)
 
-    response = validate_parameters(parameters)
+    result = validate_parameters(parameters)
 
-    if response:
-        return response
+    if result:
+        return result
 
     results = execute_operations(parameters)
 

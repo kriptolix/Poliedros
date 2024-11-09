@@ -3,6 +3,10 @@
     font-size: 6em;
   }
 
-  .log_background {
+  .log_expanded {
     background-color: var(--headerbar-bg-color);    
+  }
+
+  .log_collapsed {
+    background-color: var(--headerbar-backdrop-color);    
   }

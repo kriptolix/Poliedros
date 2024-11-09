@@ -9,7 +9,7 @@
           <class name="compact"/>
         </style>
         <child>
-          <object class="GtkButton">
+          <object class="GtkButton" id="_usage_button">
             <property name="label">Command mode usege instructions.</property>
             <style>
               <class name="flat"/>

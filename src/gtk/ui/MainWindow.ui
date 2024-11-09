@@ -8,7 +8,7 @@
     <property name="height-request">294</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 480sp</condition>
+        <condition>max-width: 535sp</condition>
         <setter object="_split_view" property="collapsed">true</setter>min-sidebar-width
       </object>
     </child>
@@ -57,10 +57,9 @@
                   </object>
                 </child>
                 <child type="end">
-                  <object class="GtkMenuButton" id="_menu_button">
-                    <property name="icon-name">open-menu-symbolic</property>
-                    <property name="primary">true</property>
-                    <property name="tooltip-text" translatable="true">Main Menu</property>
+                  <object class="GtkButton" id="_about_button">
+                    <property name="icon-name">help-about-symbolic</property>                    
+                    <property name="tooltip-text" translatable="true">About Poliedros</property>
                   </object>
                 </child>
               </object>

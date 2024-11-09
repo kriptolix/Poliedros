@@ -6,7 +6,7 @@
       <object class="AdwStatusPage">
         <property name="title" translatable="true">Nothing Here Yet</property>
         <property name="description" translatable="true">Roll some dices to beguin</property>
-        <property name="icon-name">help-about-symbolic</property>
+        <property name="icon-name">dice2-symbolic</property>
         <style>
           <class name="compact"/>
         </style>

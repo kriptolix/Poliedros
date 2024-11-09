@@ -6,9 +6,8 @@
     <file preprocess="xml-stripblanks">src/gtk/ui/SideBar.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/RollArea.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/DiceArea.ui</file>
-    <file preprocess="xml-stripblanks">src/gtk/ui/InfoArea.ui</file>
-    <file preprocess="xml-stripblanks">src/gtk/ui/help-overlay.ui</file>
-    <file preprocess="xml-stripblanks">src/gtk/ui/Menu.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/InfoArea.ui</file>    
+    <file preprocess="xml-stripblanks">src/gtk/ui/UsageInfo.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/EmptyPage.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/LogEntry.ui</file>    
   </gresource>
@@ -20,6 +19,8 @@
     <file alias="dice-d12-hicolor.svg">data/icons/dice-d12-hicolor.svg</file>
     <file alias="dice-d20-hicolor.svg">data/icons/dice-d20-hicolor.svg</file>
     <file alias="code-symbolic.svg">data/icons/code-symbolic.svg</file>
+    <file alias="dice2-symbolic.svg">data/icons/dice2-symbolic.svg</file>
+    <file alias="help-about-symbolic.svg">data/icons/help-about-symbolic.svg</file>
     <file alias="arrow-circular-top-right-symbolic.svg">data/icons/arrow-circular-top-right-symbolic.svg</file> 
   </gresource>  
 </gresources>

@@ -34,9 +34,20 @@ class SideBar(Gtk.Box):
         self._clear_history_button.connect(
             "clicked", lambda *_: self._sidebar_list.remove_all())
 
-    def add_register(self, results, command):
+    def css_matching(self, splitview, param_spec):
 
-        title = str(results[0])
-        subtitle = results[1]
-        entry = LogEntry(title, subtitle, command)
+        if splitview.get_collapsed():
+
+            self._sidebar_list.remove_css_class("log_expanded")
+            self._sidebar_list.add_css_class("log_collapsed")
+            return
+
+        self._sidebar_list.remove_css_class("log_collapsed")
+        self._sidebar_list.add_css_class("log_expanded")
+
+    def add_register(self, total, track, input):
+
+        title = str(total)
+        subtitle = track
+        entry = LogEntry(title, subtitle, input)
         self._sidebar_list.insert(entry, 0)
