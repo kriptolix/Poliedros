@@ -2,7 +2,7 @@
 
 # Poliedros
 
-Poliedros é rolador para multiplos tipos de dados. O modeo padrão permite fazer rolagens rapidas apenas usando o mouse, enquanto o modo de commando permite rolagens e combinações mais complexas.
+Polyhedrons is a multi-type dice roller. Standard mode allows you to make quick rolls using just the mouse, while command mode allows for more complex rolls and combinations.
 
 ![image](data/screenshots/dark-basic-sidebar.png)
 
@@ -18,4 +18,4 @@ To build this project just clone this repository using Gnome Builder or VScode w
 
 ### Contributions
 
-I'm an amateur programmer, this is my first real project with GTK4. I'm still learning about the technologies being used in it and many of the solutions used are suboptimal. That said, contributions are welcome.
+I'm an amateur programmer, this is my second real project with GTK4. I'm still learning about the technologies being used in it and many of the solutions used are suboptimal. That said, contributions are welcome.
