@@ -1,4 +1,4 @@
-# window.py
+# mainwindow.py
 #
 # Copyright 2024 k
 #
@@ -18,9 +18,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import Adw
-from gi.repository import Gtk, Gdk, GObject
-
-from ...roller import execute_command
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
 
 from .rollarea import RollArea
 from .sidebar import SideBar

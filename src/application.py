@@ -20,9 +20,12 @@
 
 from .roller import execute_command
 from .util import create_action
-from gettext import gettext as _
+
 from .gtk.widgets.mainwindow import MainWindow
-from gi.repository import Gio, Adw
+
+from gi.repository import Gio
+from gi.repository import Adw
+
 import sys
 import gi
 
@@ -59,14 +62,14 @@ class PoliedrosApplication(Adw.Application):
 
     def on_about(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(application_name='poliedros',
+        about = Adw.AboutDialog(application_name='Poliedros',
                                 application_icon='io.gitlab.kriptolix.Poliedros',
                                 developer_name='k',
-                                version='0.1.0',
+                                version='1.0',
                                 developers=['k'],
                                 copyright='© 2024 k')
 
-        about.set_translator_credits(_('k'))
+        about.set_translator_credits(('k'))
         about.present(self.props.active_window)
 
     def do_reroll(self, input):

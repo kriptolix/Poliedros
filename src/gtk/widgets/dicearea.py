@@ -1,4 +1,4 @@
-# window.py
+# dicearea.py
 #
 # Copyright 2024 k
 #
@@ -17,7 +17,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw
 from gi.repository import Gtk
 
 
@@ -33,7 +32,7 @@ class DiceArea(Gtk.Box):
     _d12_button = Gtk.Template.Child()
     _d20_button = Gtk.Template.Child()
     _plus_button = Gtk.Template.Child()
-    _minus_button = Gtk.Template.Child()    
-    
+    _minus_button = Gtk.Template.Child()
+
     def __init__(self):
         super().__init__()

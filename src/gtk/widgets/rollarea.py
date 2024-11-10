@@ -1,4 +1,4 @@
-# window.py
+# rollarea.py
 #
 # Copyright 2024 k
 #
@@ -66,7 +66,6 @@ class RollArea(Gtk.Box):
 
         if self._display.has_css_class("error"):
             self._display.remove_css_class("error")
-            
 
     def update_result(self, total):
 

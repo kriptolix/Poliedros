@@ -18,6 +18,8 @@
     <file alias="dice-d10-hicolor.svg">data/icons/dice-d10-hicolor.svg</file>
     <file alias="dice-d12-hicolor.svg">data/icons/dice-d12-hicolor.svg</file>
     <file alias="dice-d20-hicolor.svg">data/icons/dice-d20-hicolor.svg</file>
+    <file alias="sidebar-show-symbolic.svg">data/icons/sidebar-show-symbolic.svg</file>
+    <file alias="go-previous-symbolic.svg">data/icons/go-previous-symbolic.svg</file>
     <file alias="code-symbolic.svg">data/icons/code-symbolic.svg</file>
     <file alias="dice2-symbolic.svg">data/icons/dice2-symbolic.svg</file>
     <file alias="help-about-symbolic.svg">data/icons/help-about-symbolic.svg</file>

@@ -1,4 +1,4 @@
-# window.py
+# usageinfo.py
 #
 # Copyright 2024 k
 #
@@ -37,10 +37,11 @@ class UsageInfo(Adw.Dialog):
 
         self.connect("closed", lambda *_: self.close())
 
-        rd_label = "Rolando dados - O comando para rolar dados utiliza operador 'd', \
-        sendo formado pela quantidade de dados a ser rolada, o operador D, e o numero \
-        de faces dos dados a serem rolados. \n \
-        Ex.: 1d6, role um dado de seis faces \nEx.: 2d8, role dois dados de oito faces"
+        rd_label = "Rolando dados - O comando para rolar dados utiliza \
+        operador 'd', sendo formado pela quantidade de dados a ser rolada \
+        , o operador D, e o numero de faces dos dados a serem rolados. \n \
+        Ex.: 1d6, role um dado de seis faces \nEx.: 2d8, role dois dados \
+        de oito faces"
 
         self._2.set_text(rd_label)
         self._3.set_text(rd_label)

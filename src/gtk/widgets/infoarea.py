@@ -1,4 +1,4 @@
-# window.py
+# infoarea.py
 #
 # Copyright 2024 k
 #

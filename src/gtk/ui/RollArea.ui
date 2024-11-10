@@ -43,7 +43,7 @@
         <child>
           <object class="GtkToggleButton" id="_mode_button">
             <property name="has-tooltip">true</property>
-            <property name="tooltip-text" translatable="yes">Switch Mode</property>            
+            <property name="tooltip-text" translatable="true">Switch Mode</property>            
             <property name="icon-name">code-symbolic</property>
           </object>
         </child>
@@ -55,8 +55,8 @@
         <child>
           <object class="GtkButton" id="_roll_button">
             <property name="has-tooltip">true</property>
-            <property name="tooltip-text" translatable="yes">Roll</property>
-            <property name="label" translatable="yes">Roll</property>
+            <property name="tooltip-text" translatable="true">Roll</property>
+            <property name="label" translatable="true">Roll</property>
             <style>
               <class name="circular"/>
               <class name="suggested-action"/>
@@ -68,7 +68,7 @@
         <child>
           <object class="GtkButton" id="_clear_button">
             <property name="has-tooltip">true</property>
-            <property name="tooltip-text" translatable="yes">Clear Command</property>
+            <property name="tooltip-text" translatable="true">Clear Command</property>
             <property name="icon-name">edit-clear-symbolic</property>
             <property name="margin-start">70</property>
             <style>

@@ -22,7 +22,7 @@
                 <property name="margin-end">15</property>
                 <child>
                   <object class="GtkLabel" id="_1">
-                    <property name="label">Command usage instructions</property>
+                    <property name="label" translatable="true">Command usage instructions</property>
                     <property name="margin-top">15</property>
                     <property name="margin-bottom">15</property>
                   </object>
