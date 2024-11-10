@@ -18,6 +18,9 @@ def roll_dice(parameter):
     if not n_dices:
         n_dices = '1'
 
+    if (int(n_dices)) > 99:
+        return
+
     roll = []
 
     for dice in range(int(n_dices)):
@@ -52,13 +55,17 @@ def keep_subset(parameter, action):
         match action:
             case "h":
                 subroll = roll[:keep]
-                excluded = roll[:-len(subroll)]
+                print("subroll: ", subroll)
+                excluded = roll[len(subroll):]
+                print("excluded1: ", excluded)
                 excluded.insert(0, subroll)
+                print("excluded2: ", excluded)
 
             case "l":
                 subroll = roll[-keep:]
                 excluded = roll[:-len(subroll)]
-                print("excluded2: ", excluded)
+                excluded.append(subroll)
+                # print("excluded2: ", excluded)
 
         total = f"{sum(subroll)}"
         log = f"{parameter} {excluded}"
@@ -69,7 +76,29 @@ def keep_subset(parameter, action):
 
 def explode_dice(parameter):
 
+    sum_roll = []
+    log_roll = []
     counter = 0
+
+    def _recursive_roll(dice, exploded):  # [6, [6], 3, 2]
+
+        nonlocal counter
+
+        if counter >= limit:
+            return
+
+        roll = roll_dice(dice)
+
+        log_roll.append(roll[0])
+        sum_roll.append(roll[0])
+
+        if roll[0] == int(n_sides):
+            counter = counter + 1
+            _recursive_roll(dice, True)
+            return
+
+        counter = 0
+    ##
 
     split = parameter.split("e", 1)
 
@@ -82,21 +111,17 @@ def explode_dice(parameter):
         limit = 50
 
     dices = split[1]
-    pos = dices.find('d')
-    faces = int(dices[pos+1:])
 
-    roll = roll_dice(dices)
+    n_dices, n_sides = dices.split('d', 1)
 
-    for dice in roll:
-        if dice == faces and counter < limit:
-            counter = counter + 1
+    for _ in range(int(n_dices)):
 
-            reroll = roll_dice(f"1d{faces}")
-            roll.append(reroll[0])
-            roll.sort(reverse=True)
+        _recursive_roll(f"1d{n_sides}", False)
 
-    total = f"{sum(roll)}"
-    log = f"{parameter} {roll} "
+    log_roll.sort(reverse=True)
+
+    total = f"{sum(sum_roll)}"
+    log = f"{parameter} {log_roll}"
 
     return [total, log]
 

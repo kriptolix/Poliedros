@@ -26,24 +26,47 @@ from gi.repository import Gtk
 class UsageInfo(Adw.Dialog):
     __gtype_name__ = 'UsageInfo'
 
-    _1 = Gtk.Template.Child()
-    _2 = Gtk.Template.Child()
-    _3 = Gtk.Template.Child()
-    _4 = Gtk.Template.Child()
-    _5 = Gtk.Template.Child()
+    _rd_label = Gtk.Template.Child()
+    _as_label = Gtk.Template.Child()
+    _kh_label = Gtk.Template.Child()
+    _kl_label = Gtk.Template.Child()
+    _ed_label = Gtk.Template.Child()
+    _cb_label = Gtk.Template.Child()
 
     def __init__(self):
         super().__init__()
 
         self.connect("closed", lambda *_: self.close())
 
-        rd_label = "Rolando dados - O comando para rolar dados utiliza \
-        operador 'd', sendo formado pela quantidade de dados a ser rolada \
-        , o operador D, e o numero de faces dos dados a serem rolados. \n \
-        Ex.: 1d6, role um dado de seis faces \nEx.: 2d8, role dois dados \
-        de oito faces"
+        rd_text = ('<b>Rolling dice:</b> operator "d".\n\n<b>Ex.:</b> 1d6'
+                   ', roll 1 6-sided die.\n<b>Ex.:</b> 2d8, roll 2 8-sided'
+                   ' dice.')
 
-        self._2.set_text(rd_label)
-        self._3.set_text(rd_label)
-        self._4.set_text(rd_label)
-        self._5.set_text(rd_label)
+        as_text = ('<b>Additions/Subtractions:</b> "+" and "-" operators.'
+                   '\n\n<b>Ex.:</b> 1d6 + 3, roll 1 6-sided die and add '
+                   'the number 3.\n<b>Ex.:</b> 2d8 - 1d4, roll 2 8-sided '
+                   'dice and subtract the result of rolling 1 4-sided die.')
+
+        kh_text = ('<b>Keeping higher:</b> operator "h".\n\n<b>Ex.:</b> '
+                   '2h3d6, roll 3 6-sided dice and keep the 2 highest.'
+                   '\n<b>Ex.:</b> 1h2d20 or h2d20, roll 2 20-sided dice '
+                   'and keep the highest.')
+
+        kl_text = ('<b>Keeping lower:</b> operator "l".\n\n<b>Ex.:</b> 2l4d10'
+                   ', roll 4 10-sided dice and keep the 2 lowest.'
+                   '\n<b>Ex.:</b> 1l3d6 or l3d6, roll 3 6-sided dice and '
+                   'keep the lowest.')
+
+        ed_text = ('<b>Exploding dice:</b> operator "e". \n\n<b>Ex.:</b> e6d6'
+                   ', roll 6 6-sided dice and, if any of them result in a 6, '
+                   'roll that die again, if the new result is also a 6, roll '
+                   'that die again and so on indefinitely..\n<b>Ex.:</b> '
+                   '1e5d10, roll 5 10-sided dice and, if any of them result in'
+                   ' a 10, roll that die again, if the new result is also a 10'
+                   ' the die will not be rolled again.')
+
+        self._rd_label.set_markup(rd_text)
+        self._as_label.set_markup(as_text)
+        self._kh_label.set_markup(kh_text)
+        self._kl_label.set_markup(kl_text)
+        self._ed_label.set_markup(ed_text)

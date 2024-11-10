@@ -62,6 +62,8 @@ class RollArea(Gtk.Box):
         buffer.connect("inserted-text", self._reset_error_state)
         buffer.connect("deleted-text", self._reset_error_state)
 
+        self._display.connect("activate", self._do_roll)
+
     def _reset_error_state(self, *args):
 
         if self._display.has_css_class("error"):
