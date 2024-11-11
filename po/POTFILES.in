@@ -3,7 +3,6 @@
 data/io.gitlab.kriptolix.Poliedros.desktop.in
 data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in
 data/io.gitlab.kriptolix.Poliedros.gschema.xml
-src/gtk/widgets/usageinfo.py
 src/gtk/ui/DiceArea.ui
 src/gtk/ui/EmptyPage.ui
 src/gtk/ui/InfoArea.ui
@@ -11,4 +10,5 @@ src/gtk/ui/MainWindow.ui
 src/gtk/ui/RollArea.ui
 src/gtk/ui/SideBar.ui
 src/gtk/ui/UsageInfo.ui
+src/gtk/widgets/usageinfo.py
 

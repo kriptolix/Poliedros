@@ -2,7 +2,7 @@
 
 # Poliedros
 
-Polyhedrons is a multi-type dice roller. Standard mode allows you to make quick rolls using just the mouse, while command mode allows for more complex rolls and combinations.
+Poliedros is a multi-type dice roller. Standard mode allows you to make quick rolls using just the mouse, while command mode allows for more complex rolls and combinations.
 
 ![image](data/screenshots/dark-basic-sidebar.png)
 
