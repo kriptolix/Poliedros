@@ -33,7 +33,10 @@ sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 locale.bindtextdomain('poliedros', localedir)
 locale.textdomain('poliedros')
-gettext.install('poliedros', localedir)
+gettext.bindtextdomain('poliedros', localedir)
+gettext.textdomain('poliedros')
+
+#gettext.install('poliedros', localedir)
 
 if __name__ == '__main__':
     import gi

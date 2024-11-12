@@ -5,9 +5,9 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Poliedros</name>
-  <summary>Poliedros is a multi-type dice roller</summary>
+  <summary>Poliedros is a multi-type dice roller.</summary>
   <description>
-    <p>Poliedros is a multi-type dice roller. Standard mode allows you to make quick rolls using just the mouse, while command mode allows for more complex rolls and combinations.</p>
+    <p>Poliedros is a multi-type dice roller. Basic mode allows you to make quick rolls using just the mouse, while Command mode allows for more complex rolls and combinations.</p>
   </description>
 
   <developer id="tld.vendor">
@@ -40,11 +40,11 @@
   <screenshots>
     <screenshot type="default">
       <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-basic-sidebar.png</image>
-      <caption>Basic Mode</caption>
+      <caption>Basic Mode.</caption>
     </screenshot>
     <screenshot>
       <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-command-sidebar.png</image>
-      <caption>Command Mode</caption>
+      <caption>Command Mode.</caption>
     </screenshot>
   </screenshots>
 

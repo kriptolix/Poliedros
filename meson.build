@@ -1,5 +1,5 @@
 project('poliedros',
-          version: '0.1.0',
+          version: '1.0',
     meson_version: '>= 1.0.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
@@ -17,8 +17,8 @@ gnome.post_install(
   update_desktop_database: true,
 )
 
-pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-#pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
+#pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
+pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 
 gnome = import('gnome')
 
@@ -46,4 +46,4 @@ configure_file(
   install_mode: 'r-xr-xr-x'
 )
 
-install_subdir('src', install_dir: pkgdatadir, exclude_directories: './src/test')
+install_subdir('src', install_dir: pkgdatadir)

@@ -116,7 +116,7 @@
         <child>
           <object class="GtkButton" id="_minus_button">
             <property name="has-tooltip">true</property>
-            <property name="tooltip-text" translatable="true">Minus Number </property>
+            <property name="tooltip-text" translatable="true">Minus Number</property>
             <property name="label">-n</property>
             <property name="valign">3</property>
             <style>

@@ -62,7 +62,7 @@ class UsageInfo(Adw.Dialog):
         ed_text = _('<b>Exploding dice:</b> operator "e". \n\n<b>Ex.:</b> e6d6'
                     ', roll 6 6-sided dice and, if any of them result in a 6, '
                     'roll that die again, if the new result is also a 6, roll '
-                    'that die again and so on indefinitely..\n<b>Ex.:</b> '
+                    'that die again and so on indefinitely.\n<b>Ex.:</b> '
                     '1e5d10, roll 5 10-sided dice and, if any of them result '
                     'in a 10, roll that die again, if the new result is also'
                     ' a 10 the die will not be rolled again.')

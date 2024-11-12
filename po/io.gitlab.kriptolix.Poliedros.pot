@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version:\n"
+"Report-Msgid-Bugs-To:\n"
+"POT-Creation-Date: 2024-11-12 09:49-0300\n"
+"PO-Revision-Date:\n"
+"Last-Translator: Diego C Sampaio <kriptolix@gmail.com>\n"
+"Language-Team:\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.gitlab.kriptolix.Poliedros.desktop.in:3
+#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:7
+msgid "Poliedros"
+msgstr ""
+
+#: data/io.gitlab.kriptolix.Poliedros.desktop.in:9
+msgid "GTK;"
+msgstr ""
+
+#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:8
+msgid "Poliedros is a multi-type dice roller."
+msgstr ""
+
+#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:10
+msgid ""
+"Poliedros is a multi-type dice roller. Basic mode allows you to make quick "
+"rolls using just the mouse, while Command mode allows for more complex rolls "
+"and combinations."
+msgstr ""
+
+#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:14
+msgid "Diego C Sampaio"
+msgstr ""
+
+#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:43
+msgid "Basic Mode."
+msgstr ""
+
+#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:47
+msgid "Command Mode."
+msgstr ""
+
+#: src/gtk/ui/DiceArea.ui:58
+msgid "Plus Number"
+msgstr ""
+
+#: src/gtk/ui/DiceArea.ui:119
+msgid "Minus Number"
+msgstr ""
+
+#: src/gtk/ui/EmptyPage.ui:7
+msgid "Nothing Here Yet"
+msgstr ""
+
+#: src/gtk/ui/EmptyPage.ui:8
+msgid "Roll some dices to beguin"
+msgstr ""
+
+#: src/gtk/ui/InfoArea.ui:7
+msgid "Command Mode"
+msgstr ""
+
+#: src/gtk/ui/MainWindow.ui:31
+msgid "Go Back"
+msgstr ""
+
+#: src/gtk/ui/MainWindow.ui:56
+msgid "Toggle History"
+msgstr ""
+
+#: src/gtk/ui/MainWindow.ui:62
+msgid "About Poliedros"
+msgstr ""
+
+#: src/gtk/ui/RollArea.ui:46
+msgid "Switch Mode"
+msgstr ""
+
+#: src/gtk/ui/RollArea.ui:58 src/gtk/ui/RollArea.ui:59
+msgid "Roll"
+msgstr ""
+
+#: src/gtk/ui/RollArea.ui:71
+msgid "Clear Command"
+msgstr ""
+
+#: src/gtk/ui/SideBar.ui:32
+msgid "Clear results"
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:22
+msgid "Command usage instructions"
+msgstr ""
+
+#: src/gtk/widgets/usageinfo.py:43
+msgid ""
+"<b>Rolling dice:</b> operator \"d\".\n"
+"\n"
+"<b>Ex.:</b> 1d6, roll 1 6-sided die.\n"
+"<b>Ex.:</b> 2d8, roll 2 8-sided dice."
+msgstr ""
+
+#: src/gtk/widgets/usageinfo.py:47
+msgid ""
+"<b>Additions/Subtractions:</b> \"+\" and \"-\" operators.\n"
+"\n"
+"<b>Ex.:</b> 1d6 + 3, roll 1 6-sided die and add the number 3.\n"
+"<b>Ex.:</b> 2d8 - 1d4, roll 2 8-sided dice and subtract the result of "
+"rolling 1 4-sided die."
+msgstr ""
+
+#: src/gtk/widgets/usageinfo.py:52
+msgid ""
+"<b>Keeping higher:</b> operator \"h\".\n"
+"\n"
+"<b>Ex.:</b> 2h3d6, roll 3 6-sided dice and keep the 2 highest.\n"
+"<b>Ex.:</b> 1h2d20 or h2d20, roll 2 20-sided dice and keep the highest."
+msgstr ""
+
+#: src/gtk/widgets/usageinfo.py:57
+msgid ""
+"<b>Keeping lower:</b> operator \"l\".\n"
+"\n"
+"<b>Ex.:</b> 2l4d10, roll 4 10-sided dice and keep the 2 lowest.\n"
+"<b>Ex.:</b> 1l3d6 or l3d6, roll 3 6-sided dice and keep the lowest."
+msgstr ""
+
+#: src/gtk/widgets/usageinfo.py:62
+msgid ""
+"<b>Exploding dice:</b> operator \"e\". \n"
+"\n"
+"<b>Ex.:</b> e6d6, roll 6 6-sided dice and, if any of them result in a 6, "
+"roll that die again, if the new result is also a 6, roll that die again and "
+"so on indefinitely.\n"
+"<b>Ex.:</b> 1e5d10, roll 5 10-sided dice and, if any of them result in a 10, "
+"roll that die again, if the new result is also a 10 the die will not be "
+"rolled again."
+msgstr ""
