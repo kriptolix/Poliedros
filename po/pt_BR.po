@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST Diego C Sampaio <kriptolix@gmail.com>, 2024.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Poliedros\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-12 09:49-0300\n"
-"PO-Revision-Date: 2024-11-12 10:37-0300\n"
-"Last-Translator: Diego C Sampaio <kriptolix@gmail.com>\n"
+"POT-Creation-Date: 2024-11-13 17:18-0300\n"
+"PO-Revision-Date: 2024-11-13 17:51-0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 
 #: data/io.gitlab.kriptolix.Poliedros.desktop.in:3
 #: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:7
@@ -74,6 +73,10 @@ msgstr "Role alguns dados para começar"
 msgid "Command Mode"
 msgstr "Modo Comando"
 
+#: src/gtk/ui/InfoArea.ui:13
+msgid "Command mode usage instructions"
+msgstr "Instruções de uso do modo comando"
+
 #: src/gtk/ui/MainWindow.ui:31
 msgid "Go Back"
 msgstr "Voltar"
@@ -106,25 +109,27 @@ msgstr "Limpar Resultados"
 msgid "Command usage instructions"
 msgstr "Instruções de uso do comando"
 
-#: src/gtk/widgets/usageinfo.py:43
+#: src/gtk/ui/UsageInfo.ui:33
 msgid ""
 "<b>Rolling dice:</b> operator \"d\".\n"
 "\n"
 "<b>Ex.:</b> 1d6, roll 1 6-sided die.\n"
-"<b>Ex.:</b> 2d8, roll 2 8-sided dice."
+"<b>Ex.:</b> 2d8, roll 2 8-sided dice.\n"
+"                    "
 msgstr ""
 "<b>Rolando dados:</b> operador \"d\".\n"
 "\n"
-"<b>Ex.:</b> 1d6, rola 1 de 6 faces.\n"
+"<b>Ex.:</b> 1d6, rola 1 dado de 6 faces.\n"
 "<b>Ex.:</b> 2d8, rola 2 dados de 8 faces."
 
-#: src/gtk/widgets/usageinfo.py:47
+#: src/gtk/ui/UsageInfo.ui:47
 msgid ""
 "<b>Additions/Subtractions:</b> \"+\" and \"-\" operators.\n"
-"\n"
+"                    \n"
 "<b>Ex.:</b> 1d6 + 3, roll 1 6-sided die and add the number 3.\n"
 "<b>Ex.:</b> 2d8 - 1d4, roll 2 8-sided dice and subtract the result of "
-"rolling 1 4-sided die."
+"rolling 1 4-sided die.'\n"
+"                    "
 msgstr ""
 "<b>Adições/Subtrações :</b> operadores \"+\" e \"-\".\n"
 "\n"
@@ -132,40 +137,44 @@ msgstr ""
 "<b>Ex.:</b> 2d8 - 1d4, rola 2 dados de 8 faces e subtrai o resultado da "
 "rolagem de 1 dado de 4 faces."
 
-#: src/gtk/widgets/usageinfo.py:52
+#: src/gtk/ui/UsageInfo.ui:61
 msgid ""
 "<b>Keeping higher:</b> operator \"h\".\n"
-"\n"
+"                    \n"
 "<b>Ex.:</b> 2h3d6, roll 3 6-sided dice and keep the 2 highest.\n"
-"<b>Ex.:</b> 1h2d20 or h2d20, roll 2 20-sided dice and keep the highest."
+"<b>Ex.:</b> 1h2d20 or h2d20, roll 2 20-sided dice and keep the "
+"highest.                    \n"
+"                    "
 msgstr ""
 "<b>Mantendo os maiores:</b> operador \"h\".\n"
 "\n"
 "<b>Ex.:</b> 2h3d6, rola 3 dados de 6 faces e mantêm os 2 maiores.\n"
 "<b>Ex.:</b> 1h2d20 ou h2d20, rola 2 dados de 20 faces mantêm o maior."
 
-#: src/gtk/widgets/usageinfo.py:57
+#: src/gtk/ui/UsageInfo.ui:75
 msgid ""
 "<b>Keeping lower:</b> operator \"l\".\n"
-"\n"
+"                    \n"
 "<b>Ex.:</b> 2l4d10, roll 4 10-sided dice and keep the 2 lowest.\n"
-"<b>Ex.:</b> 1l3d6 or l3d6, roll 3 6-sided dice and keep the lowest."
+"<b>Ex.:</b> 1l3d6 or l3d6, roll 3 6-sided dice and keep the lowest.\n"
+"                    "
 msgstr ""
 "<b>Mantendo os menores:</b> operador \"l\".\n"
 "\n"
 "<b>Ex.:</b> 2l4d10, rola 4 dados de 10 faces e mantêm os 2 menores.\n"
 "<b>Ex.:</b> 1l3d6 ou l3d6, rola 3 dados de 6 faces e mantêm o menor."
 
-#: src/gtk/widgets/usageinfo.py:62
+#: src/gtk/ui/UsageInfo.ui:89
 msgid ""
-"<b>Exploding dice:</b> operator \"e\". \n"
-"\n"
+"<b>Exploding dice:</b> operator \"e\".\n"
+"                    \n"
 "<b>Ex.:</b> e6d6, roll 6 6-sided dice and, if any of them result in a 6, "
 "roll that die again, if the new result is also a 6, roll that die again and "
 "so on indefinitely.\n"
 "<b>Ex.:</b> 1e5d10, roll 5 10-sided dice and, if any of them result in a 10, "
 "roll that die again, if the new result is also a 10 the die will not be "
-"rolled again."
+"rolled again.                    \n"
+"                    "
 msgstr ""
 "<b>Explodindo dados:</b> operador \"e\". \n"
 "\n"

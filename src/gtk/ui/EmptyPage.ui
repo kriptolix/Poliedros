@@ -4,8 +4,8 @@
   <template class="EmptyPage" parent="AdwBin">
     <child>
       <object class="AdwStatusPage">
-        <property name="title" translatable="true">Nothing Here Yet</property>
-        <property name="description" translatable="true">Roll some dices to beguin</property>
+        <property name="title" translatable="yes">Nothing Here Yet</property>
+        <property name="description" translatable="yes">Roll some dices to beguin</property>
         <property name="icon-name">dice2-symbolic</property>
         <style>
           <class name="compact"/>

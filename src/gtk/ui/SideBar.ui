@@ -29,7 +29,7 @@
         <child>
           <object class="GtkButton" id="_clear_history_button">
             <property name="icon-name">edit-clear-all-symbolic</property>
-            <property name="tooltip-text" translatable="true">Clear results</property>
+            <property name="tooltip-text" translatable="yes">Clear results</property>
             <property name="valign">2</property>
             <property name="halign">1</property>
             <property name="hexpand">false</property>

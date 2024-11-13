@@ -6,12 +6,12 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version:\n"
-"Report-Msgid-Bugs-To:\n"
-"POT-Creation-Date: 2024-11-12 09:49-0300\n"
-"PO-Revision-Date:\n"
-"Last-Translator: Diego C Sampaio <kriptolix@gmail.com>\n"
-"Language-Team:\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-13 17:18-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
@@ -69,6 +69,10 @@ msgstr ""
 msgid "Command Mode"
 msgstr ""
 
+#: src/gtk/ui/InfoArea.ui:13
+msgid "Command mode usage instructions"
+msgstr ""
+
 #: src/gtk/ui/MainWindow.ui:31
 msgid "Go Back"
 msgstr ""
@@ -101,47 +105,53 @@ msgstr ""
 msgid "Command usage instructions"
 msgstr ""
 
-#: src/gtk/widgets/usageinfo.py:43
+#: src/gtk/ui/UsageInfo.ui:33
 msgid ""
 "<b>Rolling dice:</b> operator \"d\".\n"
 "\n"
 "<b>Ex.:</b> 1d6, roll 1 6-sided die.\n"
-"<b>Ex.:</b> 2d8, roll 2 8-sided dice."
+"<b>Ex.:</b> 2d8, roll 2 8-sided dice.\n"
+"                    "
 msgstr ""
 
-#: src/gtk/widgets/usageinfo.py:47
+#: src/gtk/ui/UsageInfo.ui:47
 msgid ""
 "<b>Additions/Subtractions:</b> \"+\" and \"-\" operators.\n"
-"\n"
+"                    \n"
 "<b>Ex.:</b> 1d6 + 3, roll 1 6-sided die and add the number 3.\n"
 "<b>Ex.:</b> 2d8 - 1d4, roll 2 8-sided dice and subtract the result of "
-"rolling 1 4-sided die."
+"rolling 1 4-sided die.'\n"
+"                    "
 msgstr ""
 
-#: src/gtk/widgets/usageinfo.py:52
+#: src/gtk/ui/UsageInfo.ui:61
 msgid ""
 "<b>Keeping higher:</b> operator \"h\".\n"
-"\n"
+"                    \n"
 "<b>Ex.:</b> 2h3d6, roll 3 6-sided dice and keep the 2 highest.\n"
-"<b>Ex.:</b> 1h2d20 or h2d20, roll 2 20-sided dice and keep the highest."
+"<b>Ex.:</b> 1h2d20 or h2d20, roll 2 20-sided dice and keep the "
+"highest.                    \n"
+"                    "
 msgstr ""
 
-#: src/gtk/widgets/usageinfo.py:57
+#: src/gtk/ui/UsageInfo.ui:75
 msgid ""
 "<b>Keeping lower:</b> operator \"l\".\n"
-"\n"
+"                    \n"
 "<b>Ex.:</b> 2l4d10, roll 4 10-sided dice and keep the 2 lowest.\n"
-"<b>Ex.:</b> 1l3d6 or l3d6, roll 3 6-sided dice and keep the lowest."
+"<b>Ex.:</b> 1l3d6 or l3d6, roll 3 6-sided dice and keep the lowest.\n"
+"                    "
 msgstr ""
 
-#: src/gtk/widgets/usageinfo.py:62
+#: src/gtk/ui/UsageInfo.ui:89
 msgid ""
-"<b>Exploding dice:</b> operator \"e\". \n"
-"\n"
+"<b>Exploding dice:</b> operator \"e\".\n"
+"                    \n"
 "<b>Ex.:</b> e6d6, roll 6 6-sided dice and, if any of them result in a 6, "
 "roll that die again, if the new result is also a 6, roll that die again and "
 "so on indefinitely.\n"
 "<b>Ex.:</b> 1e5d10, roll 5 10-sided dice and, if any of them result in a 10, "
 "roll that die again, if the new result is also a 10 the die will not be "
-"rolled again."
+"rolled again.                    \n"
+"                    "
 msgstr ""

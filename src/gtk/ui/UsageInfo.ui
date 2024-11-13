@@ -19,7 +19,7 @@
                 <property name="margin-end">20</property>
                 <child>
                   <object class="GtkLabel">
-                    <property name="label" translatable="true">Command usage instructions</property>
+                    <property name="label" translatable="yes">Command usage instructions</property>
                     <property name="wrap">true</property>
                     <property name="halign">3</property>
                     <property name="justify">2</property>
@@ -30,6 +30,11 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_rd_label">
+                    <property name="label" translatable="yes">&lt;b&gt;Rolling dice:&lt;/b&gt; operator "d".
+
+&lt;b&gt;Ex.:&lt;/b&gt; 1d6, roll 1 6-sided die.
+&lt;b&gt;Ex.:&lt;/b&gt; 2d8, roll 2 8-sided dice.
+                    </property>
                     <property name="wrap">true</property>
                     <property name="justify">3</property>
                     <property name="xalign">0</property>
@@ -39,6 +44,11 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_as_label">
+                    <property name="label" translatable="yes">&lt;b&gt;Additions/Subtractions:&lt;/b&gt; "+" and "-" operators.
+                    
+&lt;b&gt;Ex.:&lt;/b&gt; 1d6 + 3, roll 1 6-sided die and add the number 3.
+&lt;b&gt;Ex.:&lt;/b&gt; 2d8 - 1d4, roll 2 8-sided dice and subtract the result of rolling 1 4-sided die.'
+                    </property>
                     <property name="wrap">true</property>
                     <property name="justify">3</property>
                     <property name="xalign">0</property>
@@ -48,6 +58,11 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_kh_label">
+                    <property name="label" translatable="yes">&lt;b&gt;Keeping higher:&lt;/b&gt; operator "h".
+                    
+&lt;b&gt;Ex.:&lt;/b&gt; 2h3d6, roll 3 6-sided dice and keep the 2 highest.
+&lt;b&gt;Ex.:&lt;/b&gt; 1h2d20 or h2d20, roll 2 20-sided dice and keep the highest.                    
+                    </property>
                     <property name="wrap">true</property>
                     <property name="justify">3</property>
                     <property name="xalign">0</property>
@@ -57,6 +72,11 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_kl_label">
+                    <property name="label" translatable="yes">&lt;b&gt;Keeping lower:&lt;/b&gt; operator "l".
+                    
+&lt;b&gt;Ex.:&lt;/b&gt; 2l4d10, roll 4 10-sided dice and keep the 2 lowest.
+&lt;b&gt;Ex.:&lt;/b&gt; 1l3d6 or l3d6, roll 3 6-sided dice and keep the lowest.
+                    </property>
                     <property name="wrap">true</property>
                     <property name="justify">3</property>
                     <property name="xalign">0</property>
@@ -66,6 +86,11 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_ed_label">
+                    <property name="label" translatable="yes">&lt;b&gt;Exploding dice:&lt;/b&gt; operator "e".
+                    
+&lt;b&gt;Ex.:&lt;/b&gt; e6d6, roll 6 6-sided dice and, if any of them result in a 6, roll that die again, if the new result is also a 6, roll that die again and so on indefinitely.
+&lt;b&gt;Ex.:&lt;/b&gt; 1e5d10, roll 5 10-sided dice and, if any of them result in a 10, roll that die again, if the new result is also a 10 the die will not be rolled again.                    
+                    </property>
                     <property name="wrap">true</property>
                     <property name="justify">3</property>
                     <property name="xalign">0</property>
@@ -73,17 +98,7 @@
                     <property name="margin-top">15</property>
                     <property name="margin-bottom">15</property>
                   </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="_cb_label">
-                    <property name="wrap">true</property>
-                    <property name="justify">3</property>
-                    <property name="xalign">0</property>
-                    <property name="use-markup">true</property>
-                    <property name="margin-top">15</property>
-                    <property name="margin-bottom">15</property>
-                  </object>
-                </child>
+                </child>                
               </object>
             </child>
           </object>

@@ -25,18 +25,33 @@ import signal
 import locale
 import gettext
 
+import gi
+
+gi.require_version('Gtk', '4.0')
+gi.require_version('Adw', '1')
+
+from gi.repository import Adw, Gtk
+
 VERSION = '@VERSION@'
 pkgdatadir = '@pkgdatadir@'
 localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-locale.bindtextdomain('poliedros', localedir)
-locale.textdomain('poliedros')
-gettext.bindtextdomain('poliedros', localedir)
-gettext.textdomain('poliedros')
 
-#gettext.install('poliedros', localedir)
+app_id = 'poliedros'
+
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+
+try:
+    locale.bindtextdomain(app_id, localedir)
+    locale.textdomain(app_id)
+except AttributeError as e:
+    # Python built without gettext support does not have
+    # bindtextdomain() and textdomain().
+    gettext.bindtextdomain(app_id, localedir)
+    gettext.textdomain(app_id)
+
 
 if __name__ == '__main__':
     import gi

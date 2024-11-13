@@ -8,7 +8,6 @@ i18n = import('i18n')
 gnome = import('gnome')
 
 subdir('data')
-#subdir('src')
 subdir('po')
 
 gnome.post_install(
@@ -17,7 +16,6 @@ gnome.post_install(
   update_desktop_database: true,
 )
 
-#pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 
 gnome = import('gnome')

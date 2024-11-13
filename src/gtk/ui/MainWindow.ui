@@ -28,7 +28,7 @@
                 </style>
                 <child type="start">
                   <object class="GtkButton" id="_back_button">                    
-                    <property name="tooltip-text" translatable="true">Go Back</property>
+                    <property name="tooltip-text" translatable="yes">Go Back</property>
                     <property name="icon-name">go-previous-symbolic</property>                    
                   </object>
                 </child>
@@ -53,13 +53,13 @@
                   <object class="GtkToggleButton" id="_toggle_history_button">
                     <property name="active">true</property>
                     <property name="icon-name">sidebar-show-symbolic</property>
-                    <property name="tooltip-text" translatable="true">Toggle History</property>
+                    <property name="tooltip-text" translatable="yes">Toggle History</property>
                   </object>
                 </child>
                 <child type="end">
                   <object class="GtkButton" id="_about_button">
                     <property name="icon-name">help-about-symbolic</property>                    
-                    <property name="tooltip-text" translatable="true">About Poliedros</property>
+                    <property name="tooltip-text" translatable="yes">About Poliedros</property>
                   </object>
                 </child>
               </object>

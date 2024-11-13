@@ -23,14 +23,10 @@ from .util import create_action
 
 from .gtk.widgets.mainwindow import MainWindow
 
-from gi.repository import Gio
-from gi.repository import Adw
+from gi.repository import Adw, Gio
+
 
 import sys
-import gi
-
-gi.require_version('Gtk', '4.0')
-gi.require_version('Adw', '1')
 
 
 class PoliedrosApplication(Adw.Application):
