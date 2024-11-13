@@ -41,7 +41,7 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 app_id = 'poliedros'
 
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+# locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 try:
     locale.bindtextdomain(app_id, localedir)
