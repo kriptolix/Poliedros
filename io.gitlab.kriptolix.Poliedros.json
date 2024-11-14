@@ -30,7 +30,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "file:///var/home/k/Projects"
+                    "url" : "https://github.com/kriptolix/Poliedros.git",
+                    "tag" : "v1.0.0"
                 }
             ]
         }
