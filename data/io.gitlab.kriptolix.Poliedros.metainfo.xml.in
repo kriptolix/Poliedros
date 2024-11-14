@@ -43,19 +43,30 @@
       <caption>Basic Mode.</caption>
     </screenshot>
     <screenshot>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-basic-no-sidebar.png</image>
+      <caption>No sidebar.</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-colapsed-sidebar.png</image>
+      <caption>Colapsed sidebar.</caption>
+    </screenshot>    
+    <screenshot>
       <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-command-sidebar.png</image>
       <caption>Command Mode.</caption>
-    </screenshot>
+    </screenshot>    
   </screenshots>
 
   <releases>
-    <release version="1.0.1" date="2024-01-18">
+    <release version="1.0" date="2024-01-18">
       <url type="details">https://example.org/changelog.html#version_1.0.1</url>
       <description translate="no">
-        <p>Release description</p>
+        <p>This is the first version of this software and has the following features:</p>
         <ul>
-          <li>List of changes</li>
-          <li>List of changes</li>
+          <li>Basic mode and command mode.</li>
+          <li>Basic dice rolling.</li>
+          <li>Additions and subtractions of numbers and results of other rolls.</li>
+          <li>Roll a group of dice and keep the highest X or lowest X.</li>
+          <li>Roll a group of dice and explode (reroll) dice with maximum result.</li>
         </ul>
       </description>
     </release>
