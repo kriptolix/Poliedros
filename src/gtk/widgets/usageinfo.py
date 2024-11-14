@@ -24,13 +24,7 @@ from gi.repository import Gtk
 @Gtk.Template(resource_path='/io/gitlab/kriptolix/'
               'Poliedros/src/gtk/ui/UsageInfo.ui')
 class UsageInfo(Adw.Dialog):
-    __gtype_name__ = 'UsageInfo'
-
-    _rd_label = Gtk.Template.Child()
-    _as_label = Gtk.Template.Child()
-    _kh_label = Gtk.Template.Child()
-    _kl_label = Gtk.Template.Child()
-    _ed_label = Gtk.Template.Child()    
+    __gtype_name__ = 'UsageInfo'   
 
     def __init__(self):
         super().__init__()

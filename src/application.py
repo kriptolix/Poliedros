@@ -60,12 +60,12 @@ class PoliedrosApplication(Adw.Application):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(application_name='Poliedros',
                                 application_icon='io.gitlab.kriptolix.Poliedros',
-                                developer_name='k',
+                                developer_name='Diego C Sampaio',
                                 version='1.0',
-                                developers=['k'],
-                                copyright='© 2024 k')
+                                developers=['Diego C Sampaio'],
+                                copyright='© 2024 Diego C Sampaio')
 
-        about.set_translator_credits(('k'))
+        about.set_translator_credits(('Diego C Sampaio'))
         about.present(self.props.active_window)
 
     def do_reroll(self, input):
