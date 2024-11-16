@@ -1,5 +1,5 @@
 {
-    "id" : "io.gitlab.kriptolix.Poliedros",
+    "id" : "io.github.kriptolix.Poliedros",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "47",
     "sdk" : "org.gnome.Sdk",
