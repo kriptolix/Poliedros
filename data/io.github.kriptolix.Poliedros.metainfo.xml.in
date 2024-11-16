@@ -39,19 +39,19 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-basic-sidebar.png</image>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-basic-sidebar.png?raw=true</image>
       <caption>Basic Mode.</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-basic-no-sidebar.png</image>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-basic-no-sidebar.png?raw=true</image>
       <caption>No sidebar.</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-colapsed-sidebar.png</image>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-colapsed-sidebar.png?raw=true</image>
       <caption>Colapsed sidebar.</caption>
     </screenshot>    
     <screenshot>
-      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-command-sidebar.png</image>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-command-sidebar.png?raw=true</image>
       <caption>Command Mode.</caption>
     </screenshot>    
   </screenshots>
@@ -59,7 +59,7 @@
   <releases>
     <release version="1.0" date="2024-01-18">
       <url type="details">https://example.org/changelog.html#version_1.0.1</url>
-      <description translate="no">
+      <description>
         <p>This is the first version of this software and has the following features:</p>
         <ul>
           <li>Basic mode and command mode.</li>
