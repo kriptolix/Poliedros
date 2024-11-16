@@ -17,35 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/io.gitlab.kriptolix.Poliedros.desktop.in:3
-#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:7
+#: data/io.github.kriptolix.Poliedros.desktop.in:3
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
 msgid "Poliedros"
 msgstr ""
 
-#: data/io.gitlab.kriptolix.Poliedros.desktop.in:9
+#: data/io.github.kriptolix.Poliedros.desktop.in:9
 msgid "GTK;"
 msgstr ""
 
-#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:8
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:8
 msgid "Poliedros is a multi-type dice roller."
 msgstr ""
 
-#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:10
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:10
 msgid ""
 "Poliedros is a multi-type dice roller. Basic mode allows you to make quick "
 "rolls using just the mouse, while Command mode allows for more complex rolls "
 "and combinations."
 msgstr ""
 
-#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:14
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:14
 msgid "Diego C Sampaio"
 msgstr ""
 
-#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:43
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:43
 msgid "Basic Mode."
 msgstr ""
 
-#: data/io.gitlab.kriptolix.Poliedros.metainfo.xml.in:47
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:47
 msgid "Command Mode."
 msgstr ""
 

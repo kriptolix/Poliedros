@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Poliedros
 Exec=poliedros
-Icon=io.gitlab.kriptolix.Poliedros
+Icon=io.github.kriptolix.Poliedros
 Terminal=false
 Type=Application
 Categories=Utility;

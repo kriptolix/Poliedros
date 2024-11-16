@@ -33,7 +33,7 @@ class PoliedrosApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='io.gitlab.kriptolix.Poliedros',
+        super().__init__(application_id='io.github.kriptolix.Poliedros',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
 
         create_action(self, "app", 'quit',
@@ -59,7 +59,7 @@ class PoliedrosApplication(Adw.Application):
     def on_about(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(application_name='Poliedros',
-                                application_icon='io.gitlab.kriptolix.Poliedros',
+                                application_icon='io.github.kriptolix.Poliedros',
                                 developer_name='Diego C Sampaio',
                                 version='1.0',
                                 developers=['Diego C Sampaio'],

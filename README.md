@@ -1,4 +1,4 @@
-![Icon](data/icons/hicolor/scalable/apps/io.gitlab.kriptolix.Poliedros.svg)
+![Icon](data/icons/hicolor/scalable/apps/io.github.kriptolix.Poliedros.svg)
 
 # Poliedros
 
