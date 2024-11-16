@@ -20,7 +20,7 @@
 from gi.repository import Gtk
 
 
-@Gtk.Template(resource_path='/io/gitlab/kriptolix/'
+@Gtk.Template(resource_path='/io/github/kriptolix/'
               'Poliedros/src/gtk/ui/DiceArea.ui')
 class DiceArea(Gtk.Box):
     __gtype_name__ = 'DiceArea'

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/io/gitlab/kriptolix/Poliedros">
+  <gresource prefix="/io/github/kriptolix/Poliedros">
   <file compressed="true">data/poliedros.css</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/MainWindow.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/SideBar.ui</file>
@@ -11,7 +11,7 @@
     <file preprocess="xml-stripblanks">src/gtk/ui/EmptyPage.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/LogEntry.ui</file>    
   </gresource>
-  <gresource prefix="io/gitlab/kriptolix/Poliedros/icons/scalable/actions">
+  <gresource prefix="io/github/kriptolix/Poliedros/icons/scalable/actions">
     <file alias="dice-d4-hicolor.svg">data/icons/dice-d4-hicolor.svg</file>
     <file alias="dice-d6-hicolor.svg">data/icons/dice-d6-hicolor.svg</file>
     <file alias="dice-d8-hicolor.svg">data/icons/dice-d8-hicolor.svg</file>

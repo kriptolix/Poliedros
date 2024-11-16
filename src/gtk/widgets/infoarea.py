@@ -23,7 +23,7 @@ from gi.repository import Gtk
 from .usageinfo import UsageInfo
 
 
-@Gtk.Template(resource_path='/io/gitlab/kriptolix/'
+@Gtk.Template(resource_path='/io/github/kriptolix/'
               'Poliedros/src/gtk/ui/InfoArea.ui')
 class InfoArea(Adw.Bin):
     __gtype_name__ = 'InfoArea'

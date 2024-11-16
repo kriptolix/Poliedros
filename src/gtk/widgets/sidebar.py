@@ -23,7 +23,7 @@ from gi.repository import Gtk
 from .logentry import LogEntry
 
 
-@Gtk.Template(resource_path='/io/gitlab/kriptolix'
+@Gtk.Template(resource_path='/io/github/kriptolix'
               '/Poliedros/src/gtk/ui/EmptyPage.ui')
 class EmptyPage(Adw.Bin):
 
@@ -34,7 +34,7 @@ class EmptyPage(Adw.Bin):
         super().__init__()
 
 
-@Gtk.Template(resource_path='/io/gitlab/kriptolix'
+@Gtk.Template(resource_path='/io/github/kriptolix'
               '/Poliedros/src/gtk/ui/SideBar.ui')
 class SideBar(Gtk.Box):
 

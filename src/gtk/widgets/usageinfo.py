@@ -21,7 +21,7 @@ from gi.repository import Adw
 from gi.repository import Gtk
 
 
-@Gtk.Template(resource_path='/io/gitlab/kriptolix/'
+@Gtk.Template(resource_path='/io/github/kriptolix/'
               'Poliedros/src/gtk/ui/UsageInfo.ui')
 class UsageInfo(Adw.Dialog):
     __gtype_name__ = 'UsageInfo'   

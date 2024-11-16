@@ -22,7 +22,7 @@ from gi.repository import Gtk
 from gi.repository import GObject
 
 
-@Gtk.Template(resource_path='/io/gitlab/kriptolix'
+@Gtk.Template(resource_path='/io/github/kriptolix'
               '/Poliedros/src/gtk/ui/LogEntry.ui')
 class LogEntry(Adw.ActionRow):
 

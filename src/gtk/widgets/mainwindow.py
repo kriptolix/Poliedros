@@ -26,7 +26,7 @@ from .rollarea import RollArea
 from .sidebar import SideBar
 
 
-@Gtk.Template(resource_path='/io/gitlab/kriptolix/'
+@Gtk.Template(resource_path='/io/github/kriptolix/'
               'Poliedros/src/gtk/ui/MainWindow.ui')
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MainWindow'
@@ -44,7 +44,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.application = app
 
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_resource('/io/gitlab/kriptolix/'
+        css_provider.load_from_resource('/io/github/kriptolix/'
                                         'Poliedros/data/poliedros.css')
         add_provider = Gtk.StyleContext.add_provider_for_display
         add_provider(Gdk.Display.get_default(),

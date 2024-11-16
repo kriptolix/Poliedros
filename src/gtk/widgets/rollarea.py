@@ -24,7 +24,7 @@ from .dicearea import DiceArea
 from .infoarea import InfoArea
 
 
-@Gtk.Template(resource_path='/io/gitlab/kriptolix/'
+@Gtk.Template(resource_path='/io/github/kriptolix/'
               'Poliedros/src/gtk/ui/RollArea.ui')
 class RollArea(Gtk.Box):
     __gtype_name__ = 'RollArea'
