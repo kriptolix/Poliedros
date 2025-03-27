@@ -51,11 +51,16 @@ class MainWindow(Adw.ApplicationWindow):
                      css_provider,
                      Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-        self._split_view.bind_property("show-sidebar", self._toggle_history_button, "active",
-                                       GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.BIDIRECTIONAL)
+        # self.style_manager = Adw.StyleManager.get_default()
 
-        self._split_view.bind_property("collapsed", self._back_button, "visible",
-                                       GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.BIDIRECTIONAL)
+        flags = GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.BIDIRECTIONAL
+        self._split_view.bind_property("show-sidebar",
+                                       self._toggle_history_button,
+                                       "active", flags)
+
+        self._split_view.bind_property("collapsed",
+                                       self._back_button,
+                                       "visible", flags)
 
         self._back_button.connect(
             "clicked", lambda *_: self._split_view.set_show_sidebar(False))
