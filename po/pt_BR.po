@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-13 17:18-0300\n"
-"PO-Revision-Date: 2024-11-13 17:51-0300\n"
-"Last-Translator: Diego C Sampaio <kriptolix@gmail.co>\n"
+"POT-Creation-Date: 2025-04-22 10:13-0300\n"
+"PO-Revision-Date: 2025-04-22 10:20-0300\n"
+"Last-Translator: Diego C. Sampaio <kriptolix@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -24,8 +24,8 @@ msgid "Poliedros"
 msgstr "Poliedros"
 
 #: data/io.github.kriptolix.Poliedros.desktop.in:9
-msgid "GTK;"
-msgstr "GTK;"
+msgid "GTK;Die;Dice;Roll;Random;Number;"
+msgstr "GTK;Dado;Dados;Rolagem;Aleatório;Numero;"
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:8
 msgid "Poliedros is a multi-type dice roller."
@@ -50,14 +50,75 @@ msgid "Basic Mode."
 msgstr "Modo Básico."
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:47
+msgid "No sidebar."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:51
+msgid "Colapsed sidebar."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:55
 msgid "Command Mode."
 msgstr "Modo Comando."
 
-#: src/gtk/ui/DiceArea.ui:58
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:62
+msgid "Little corrections"
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:64
+msgid "Update to Gnome 48."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:65
+msgid "New icons by Jakub Steiner."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:66
+msgid "Update Tags."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:67
+msgid "Change banner colors."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:68
+msgid "Add tip to do \"reroll previous roll\" button."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:69
+msgid "Fix roll over 100 dices / 1000 faces error."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:75
+msgid ""
+"This is the first version of this software and has the following features:"
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:77
+msgid "Basic mode and command mode."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:78
+msgid "Basic dice rolling."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:79
+msgid "Additions and subtractions of numbers and results of other rolls."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:80
+msgid "Roll a group of dice and keep the highest X or lowest X."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:81
+msgid "Roll a group of dice and explode (reroll) dice with maximum result."
+msgstr ""
+
+#: src/gtk/ui/DiceArea.ui:59
 msgid "Plus Number"
 msgstr "Adicionar Numero"
 
-#: src/gtk/ui/DiceArea.ui:119
+#: src/gtk/ui/DiceArea.ui:120
 msgid "Minus Number"
 msgstr "Subtrair Numero"
 
@@ -76,6 +137,10 @@ msgstr "Modo Comando"
 #: src/gtk/ui/InfoArea.ui:13
 msgid "Command mode usage instructions"
 msgstr "Instruções de uso do modo comando"
+
+#: src/gtk/ui/LogEntry.ui:10
+msgid "Redo this roll"
+msgstr "Refazer essa rolagem"
 
 #: src/gtk/ui/MainWindow.ui:31
 msgid "Go Back"
@@ -184,3 +249,6 @@ msgstr ""
 "<b>Ex.:</b> 1e5d10, rola 5 dados de 10 faces e, se algum resultar num 10, "
 "rola esse dado novamente, se o novo resultado também for um 10 o dado não "
 "será rolado novamente."
+
+#~ msgid "GTK;"
+#~ msgstr "GTK;"
