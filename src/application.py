@@ -60,7 +60,7 @@ class PoliedrosApplication(Adw.Application):
             application_name='Poliedros',
             application_icon='io.github.kriptolix.Poliedros',
             developer_name='Diego C Sampaio',
-            version='1.0',
+            version='1.0.1',
             developers=['Diego C Sampaio'],
             copyright='© 2024 Diego C Sampaio'
         )
