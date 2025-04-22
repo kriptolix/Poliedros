@@ -7,6 +7,7 @@
     <child type="suffix">
       <object class="GtkButton" id="_reroll_button">
         <property name="icon-name">arrow-circular-top-right-symbolic</property>
+        <property name="tooltip-text" translatable="yes">Redo this roll</property>
         <property name="valign">3</property>
       </object>
     </child>

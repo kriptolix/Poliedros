@@ -33,8 +33,8 @@
 
   <!-- Applications should set a brand color in both light and dark variants like so -->
   <branding>
-    <color type="primary" scheme_preference="light">#ff00ff</color>
-    <color type="primary" scheme_preference="dark">#993d3d</color>
+    <color type="primary" scheme_preference="light">#57e389</color>
+    <color type="primary" scheme_preference="dark">#613583</color>
   </branding>
 
   <screenshots>
@@ -57,7 +57,20 @@
   </screenshots>
 
   <releases>
-    <release version="1.0" date="2024-01-18">      
+    <release version="1.0.1" date="2025-05-21">      
+      <description>
+        <p>Little corrections.</p>
+        <ul>
+          <li>Update to Gnome 48.</li>
+          <li>New icons by Jakub Steiner.</li>
+          <li>Update Tags.</li>
+          <li>Change banner colors.</li>
+          <li>Add tip to "do reroll previous roll" button.</li>
+          <li>Fix roll over 100 dices / 1000 faces error.</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.0" date="2024-01-18">      
       <description>
         <p>This is the first version of this software and has the following features:</p>
         <ul>

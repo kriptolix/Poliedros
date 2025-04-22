@@ -1,12 +1,14 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
 data/io.github.kriptolix.Poliedros.desktop.in
-data/io.github.kriptolix.Poliedros.metainfo.xml.in
 data/io.github.kriptolix.Poliedros.gschema.xml
+data/io.github.kriptolix.Poliedros.metainfo.xml.in
 src/gtk/ui/DiceArea.ui
 src/gtk/ui/EmptyPage.ui
 src/gtk/ui/InfoArea.ui
+src/gtk/ui/LogEntry.ui
 src/gtk/ui/MainWindow.ui
 src/gtk/ui/RollArea.ui
 src/gtk/ui/SideBar.ui
 src/gtk/ui/UsageInfo.ui
+

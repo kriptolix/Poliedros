@@ -18,15 +18,13 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
-from .roller import execute_command
-from .util import create_action
-
-from .gtk.widgets.mainwindow import MainWindow
-
 from gi.repository import Adw, Gio
 
-
 import sys
+
+from .gtk.widgets.mainwindow import MainWindow
+from .roller import execute_command
+from .util import create_action
 
 
 class PoliedrosApplication(Adw.Application):
@@ -58,12 +56,14 @@ class PoliedrosApplication(Adw.Application):
 
     def on_about(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(application_name='Poliedros',
-                                application_icon='io.github.kriptolix.Poliedros',
-                                developer_name='Diego C Sampaio',
-                                version='1.0',
-                                developers=['Diego C Sampaio'],
-                                copyright='© 2024 Diego C Sampaio')
+        about = Adw.AboutDialog(
+            application_name='Poliedros',
+            application_icon='io.github.kriptolix.Poliedros',
+            developer_name='Diego C Sampaio',
+            version='1.0',
+            developers=['Diego C Sampaio'],
+            copyright='© 2024 Diego C Sampaio'
+        )
 
         about.set_translator_credits(('Diego C Sampaio'))
         about.present(self.props.active_window)
@@ -80,7 +80,7 @@ class PoliedrosApplication(Adw.Application):
         result, total, track = execute_command(input)
 
         if not result:
-            print(total, track)
+            # print(total, track)
             self._display.add_css_class("error")
             return
 

@@ -4,6 +4,7 @@
   <template class="DiceArea" parent="GtkBox">
     <property name="orientation">1</property>
     <property name="halign">3</property>
+    <property name="spacing">20</property>
     <child>
       <object class="GtkBox" id="_line_1">
         <property name="spacing">3</property>

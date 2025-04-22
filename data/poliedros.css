@@ -1,12 +1,12 @@
 .roll_result {
     font-weight: bold;
     font-size: 6em;
-  }
+}
 
-  .log_expanded {
-    background-color: var(--headerbar-bg-color);    
-  }
+.log_expanded {
+  background-color: var(--headerbar-bg-color);    
+}
 
-  .log_collapsed {
-    background-color: var(--headerbar-backdrop-color);    
-  }
+.log_collapsed {
+  background-color: var(--headerbar-backdrop-color);    
+}

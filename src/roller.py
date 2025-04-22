@@ -18,8 +18,8 @@ def roll_dice(parameter):
     if not n_dices:
         n_dices = '1'
 
-    if (int(n_dices)) > 99:
-        return
+    if (int(n_dices)) > 100 or (int(n_sides)) > 1000:
+        return [False, "Dices or sides beyond limit"]
 
     roll = []
 
@@ -45,7 +45,12 @@ def keep_subset(parameter, action):
     dices = split[1]
 
     roll = roll_dice(dices)
-    print(roll)
+
+    if not roll[0]:
+        print("invalido")
+        return roll
+
+    # print(roll)
 
     total = f"{sum(roll)}"
     log = f"{parameter} {roll} "
@@ -136,6 +141,9 @@ def execute_operations(command):
         if (re.match(patt_d, parameter)):
             roll = roll_dice(parameter)
 
+            if not roll[0]:
+                return [False, None, roll[1]]
+
             total = f"{sum(roll)}"
             log = f"{parameter} {roll}"
 
@@ -147,6 +155,9 @@ def execute_operations(command):
 
         if (re.match(patt_e, parameter)):
             total, log = explode_dice(parameter)
+
+        if not total:
+            return [False, None, log]
 
         if (re.match(patt_n, parameter)):
             total = parameter
@@ -178,8 +189,7 @@ def validate_parameters(parameters):
                 or re.match(patt_n, element)
                 or re.match(patt_o, element)):
 
-            result = [False, "Sintaxe Error: ", element]
-            return result
+            return [False, None, f"Sintaxe Error: {element}"]
 
     # return "elementos validos"
 
@@ -191,10 +201,10 @@ def execute_command(input_command):
 
     # print('Parâmetros iniciais:', parameters)
 
-    result = validate_parameters(parameters)
+    validation = validate_parameters(parameters)
 
-    if result:
-        return result
+    if validation:
+        return validation
 
     results = execute_operations(parameters)
 
