@@ -154,14 +154,14 @@ def execute_operations(command):
             total, log = keep_subset(parameter, "l")
 
         if (re.match(patt_e, parameter)):
-            total, log = explode_dice(parameter)
-
-        if not total:
-            return [False, None, log]
+            total, log = explode_dice(parameter)        
 
         if (re.match(patt_n, parameter)):
             total = parameter
             log = parameter
+
+            if not total:
+                return [False, None, log]
 
         if (re.match(patt_o, parameter)):
             total = parameter

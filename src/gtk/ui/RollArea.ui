@@ -2,33 +2,41 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="RollArea" parent="GtkBox">
-    <property name="margin-top">18</property>
     <property name="valign">3</property>
     <property name="orientation">1</property>
+    <property name="spacing">20</property>
     <child>
-      <object class="GtkLabel" id="_results">
-        <property name="label">?</property>
-        <property name="margin-bottom">40</property>
-        <style>
-          <class name="roll_result"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkStack" id="_stack">
-      <property name="transition-type">1</property>
+      <object class="GtkBox" id="_adaptable">
+        <property name="orientation">1</property>        
+        <property name="spacing">20</property>
         <child>
-          <object class="DiceArea" id="_dice_area"></object>
+          <object class="GtkLabel" id="_results">
+            <property name="label">?</property>            
+            <property name="halign">3</property>
+            <property name="valign">3</property>
+            <property name="width-request">150</property>
+            <style>
+              <class name="roll_result"/>
+            </style>
+          </object>
         </child>
         <child>
-          <object class="InfoArea" id="_info_area"></object>
+          <object class="GtkStack" id="_stack">
+            <property name="transition-type">1</property>
+            <property name="hexpand">true</property>
+            <property name="halign">3</property>
+            <child>
+              <object class="DiceArea" id="_dice_area"></object>
+            </child>
+            <child>
+              <object class="InfoArea" id="_info_area"></object>
+            </child>
+          </object>
         </child>
       </object>
     </child>
     <child>
       <object class="GtkBox">
-        <property name="margin-top">25</property>
-        <property name="margin-bottom">15</property>
         <style>
           <class name="linked"/>
         </style>
@@ -43,7 +51,7 @@
         <child>
           <object class="GtkToggleButton" id="_mode_button">
             <property name="has-tooltip">true</property>
-            <property name="tooltip-text" translatable="yes">Switch Mode</property>            
+            <property name="tooltip-text" translatable="yes">Switch Mode</property>
             <property name="icon-name">code-symbolic</property>
           </object>
         </child>
@@ -51,18 +59,17 @@
     </child>
     <child>
       <object class="GtkBox" id="_buttons">
-        <property name="margin-top">15</property>
         <child>
           <object class="GtkButton" id="_roll_button">
             <property name="has-tooltip">true</property>
             <property name="tooltip-text" translatable="yes">Roll</property>
-            <property name="label" translatable="yes">Roll</property>
+            <property name="label" translatable="yes">Roll</property>            
+            <property name="hexpand">true</property>
+            <property name="valign">3</property>
             <style>
               <class name="circular"/>
               <class name="suggested-action"/>
             </style>
-            <property name="hexpand">true</property>
-            <property name="valign">3</property>
           </object>
         </child>
         <child>

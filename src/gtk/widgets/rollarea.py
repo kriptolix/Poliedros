@@ -37,6 +37,7 @@ class RollArea(Gtk.Box):
     _mode_button = Gtk.Template.Child()
     _roll_button = Gtk.Template.Child()
     _clear_button = Gtk.Template.Child()
+    _adaptable = Gtk.Template.Child()
 
     def __init__(self):
         super().__init__()

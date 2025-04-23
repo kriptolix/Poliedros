@@ -7,8 +7,7 @@
     <property name="hexpand">true</property>
     <child>
       <object class="GtkScrolledWindow">
-        <property name="hscrollbar-policy">2</property>
-        <property name="propagate-natural-height">true</property>
+        <property name="hscrollbar-policy">2</property>        
         <child>
           <object class="GtkListBox" id="_sidebar_list">
             <property name="show-separators">true</property>
