@@ -55,7 +55,7 @@ class RollArea(Gtk.Box):
         self._dice_area._d20_button.connect("clicked", self._add_elements, 0)
         self._dice_area._plus_button.connect("clicked", self._add_elements, 6)
         self._dice_area._minus_button.connect("clicked", self._add_elements, 7)
-        self._clear_button.connect("clicked", self._clear_diplay)
+        self._clear_button.connect("clicked", self._clear_display)
         self._mode_button.connect("toggled", self._change_mode)
 
         buffer = self._display.get_buffer()
@@ -74,7 +74,7 @@ class RollArea(Gtk.Box):
 
         self._results.set_text(str(total))
 
-    def _clear_diplay(self, button):
+    def _clear_display(self, button):
         self._command = [0, 0, 0, 0, 0, 0, 0]
         self._display.set_text("")
         self._results.set_text("?")
@@ -95,7 +95,7 @@ class RollArea(Gtk.Box):
             self._display.set_editable(False)
             self._display.set_can_focus(False)
             self._display.set_placeholder_text('')
-            self._clear_diplay(None)
+            self._clear_display(None)
 
     def _assemble_command(self):
 

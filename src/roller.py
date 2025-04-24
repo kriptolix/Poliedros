@@ -7,8 +7,12 @@ patt_d = r'^\d*d\d+$'
 patt_l = r'^\d*l\d+d\d+$'
 patt_h = r'^\d*h\d+d\d+$'
 patt_e = r'^\d*e\d+d\d+$'
+# patt_o = r'^[+\-()]+$'
 patt_o = r'^[+-]+$'
 patt_n = r'^\d+$'
+patt_c = r'^c\d+d\d+(?:,\d+)+$'
+# patt_s = r'^s\d+d\d+\|(?:\d+(?:,\d+)*)\|(?:\d+(?:,\d+)*)\|(?:\d+(?:,\d+)*)$'
+patt_p = r'^\(.+?\)+$'
 
 
 def roll_dice(parameter):
@@ -33,6 +37,40 @@ def roll_dice(parameter):
     return roll
 
 
+def stratify(parameter):  # s2d6,6,9    
+
+    "this not work without, or is pretty useless, without compose rolls"
+
+
+def count_in(parameter):  # c3d6,5,6
+    total = 0
+    log = ''
+
+    split = parameter.split(",")
+
+    # print("split: ", split)
+
+    _, dice = split[0].split("c")
+
+    split.pop(0)
+
+    numbers = []
+
+    for s in split:
+        numbers.append(int(s))
+
+    roll = roll_dice(dice)
+
+    for value in roll:
+        if value in (numbers):
+            total = total + 1
+
+    total = f"{total}"
+    log = f"{parameter} {roll} "
+
+    return [total, log]
+
+
 def keep_subset(parameter, action):
 
     split = parameter.split(f"{action}", 1)
@@ -47,7 +85,7 @@ def keep_subset(parameter, action):
     roll = roll_dice(dices)
 
     if not roll[0]:
-        print("invalido")
+        print("invalid")
         return roll
 
     # print(roll)
@@ -60,17 +98,13 @@ def keep_subset(parameter, action):
         match action:
             case "h":
                 subroll = roll[:keep]
-                print("subroll: ", subroll)
                 excluded = roll[len(subroll):]
-                print("excluded1: ", excluded)
                 excluded.insert(0, subroll)
-                print("excluded2: ", excluded)
 
             case "l":
                 subroll = roll[-keep:]
                 excluded = roll[:-len(subroll)]
                 excluded.append(subroll)
-                # print("excluded2: ", excluded)
 
         total = f"{sum(subroll)}"
         log = f"{parameter} {excluded}"
@@ -154,7 +188,10 @@ def execute_operations(command):
             total, log = keep_subset(parameter, "l")
 
         if (re.match(patt_e, parameter)):
-            total, log = explode_dice(parameter)        
+            total, log = explode_dice(parameter)
+
+        if (re.match(patt_c, parameter)):
+            total, log = count_in(parameter)
 
         if (re.match(patt_n, parameter)):
             total = parameter
@@ -186,6 +223,7 @@ def validate_parameters(parameters):
                 or re.match(patt_l, element)
                 or re.match(patt_h, element)
                 or re.match(patt_e, element)
+                or re.match(patt_c, element)
                 or re.match(patt_n, element)
                 or re.match(patt_o, element)):
 
