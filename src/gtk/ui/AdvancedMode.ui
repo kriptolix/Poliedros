@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="AdvancedMode" parent="GtkBox">
+    <child>
+      <object class="GtkBox">
+        <property name="spacing">10</property>
+        <property name="orientation">1</property>
+        <property name="homogeneous">true</property>
+        <property name="vexpand">false</property>
+        <property name="valign">3</property>
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">5</property>
+            <child>
+              <object class="GtkButton" id="_higher">
+                <property name="valign">3</property>
+                <property name="vexpand">false</property>
+                <property name="label" translatable="yes">Higher n in</property>
+                <style>
+                  <class name="pill"/>
+                  <class name="small"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="_lower">
+                <property name="valign">3</property>
+                <property name="vexpand">false</property>
+                <property name="label" translatable="yes">Lower n in</property>
+                <style>
+                  <class name="pill"/>
+                  <class name="small"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="_count">
+                <property name="valign">3</property>
+                <property name="vexpand">false</property>
+                <property name="label" translatable="yes">Count in</property>
+                <style>
+                  <class name="pill"/>
+                  <class name="small"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="_explode">
+                <property name="valign">3</property>
+                <property name="vexpand">false</property>
+                <property name="label" translatable="yes">Explode in</property>
+                <style>
+                  <class name="pill"/>
+                  <class name="small"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">5</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">+n</property>
+                <property name="vexpand">false</property>
+                <property name="valign">3</property>
+                <style>
+                  <class name="circular"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">+n</property>
+                <property name="vexpand">false</property>
+                <property name="valign">3</property>
+                <style>
+                  <class name="circular"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <style>
+                  <class name="linked"/>
+                </style>
+                <child>
+                  <object class="GtkMenuButton" id="_dice_pool">
+                    <property name="valign">3</property>
+                    <property name="vexpand">false</property>                   
+                    <property name="child">
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Dice Pool</property>
+                      </object>
+                    </property>
+                    <style>
+                      <class name="teste"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="_add_d">
+                    <property name="label" translatable="yes">+</property>
+                    <property name="sensitive">false</property>
+                    <property name="hexpand">false</property>
+                    <property name="halign">3</property>
+                    <property name="vexpand">false</property>
+                    <property name="valign">3</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="halign">2</property>
+                <style>
+                  <class name="linked"/>
+                </style>
+                <child>
+                  <object class="GtkMenuButton" id="_number_pool">
+                    <property name="valign">3</property>
+                    <property name="vexpand">false</property>
+                    <property name="can-shrink">true</property>                   
+                    <property name="child">
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Number Pool</property>
+                      </object>
+                    </property>
+                    <style>
+                      <class name="teste"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="_add_n">
+                    <property name="label" translatable="yes">+</property>
+                    <property name="vexpand">false</property>
+                    <property name="valign">3</property>
+                    <property name="sensitive">false</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

@@ -22,6 +22,7 @@ from gi.repository import Gtk
 
 from .dicearea import DiceArea
 from .infoarea import InfoArea
+from .advancedmode import AdvancedMode
 
 
 @Gtk.Template(resource_path='/io/github/kriptolix/'
@@ -157,3 +158,7 @@ class RollArea(Gtk.Box):
         application = self.get_root().application
         application.do_roll()
         self._command = [0, 0, 0, 0, 0, 0, 0]
+
+    def _auto_complete(self):
+
+        ""

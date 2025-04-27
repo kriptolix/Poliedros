@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="DicePool" parent="GtkBox">
+    <property name="orientation">1</property>
+    <property name="halign">3</property>
+    <property name="spacing">20</property>
+    <child>
+      <object class="GtkBox" id="_line_1">
+        <property name="spacing">3</property>
+        <property name="halign">3</property>
+        <child>
+          <object class="GtkButton" id="_d4_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">d4</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-d4-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="_d6_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">d6</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-d6-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="_d8_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">d8</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-d8-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="_d100_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">d100</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-d100-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox" id="_line_2">
+        <property name="spacing">3</property>
+        <child>
+          <object class="GtkButton" id="_d10_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">d10</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-d10-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="_d12_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">d12</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-d12-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="_d20_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">d20</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-d20-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="_df_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">fudge dice</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-df-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

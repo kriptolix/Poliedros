@@ -26,6 +26,9 @@
             <property name="hexpand">true</property>
             <property name="halign">3</property>
             <child>
+              <object class="AdvancedMode" id="_advanced_mode"></object>
+            </child>
+            <child>
               <object class="DiceArea" id="_dice_area"></object>
             </child>
             <child>

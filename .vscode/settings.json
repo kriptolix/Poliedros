@@ -3,6 +3,7 @@
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
         "**/.hg/store/**": true,
+        "**/.dart_tool": true,
         "**/node_modules/*/**": true,
         ".flatpak/**": true,
         "_build/**": true
