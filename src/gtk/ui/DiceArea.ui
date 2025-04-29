@@ -54,6 +54,21 @@
           </object>
         </child>
         <child>
+          <object class="GtkButton" id="_df_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">fudge dice</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-df-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
           <object class="GtkButton" id="_plus_button">
             <property name="has-tooltip">true</property>
             <property name="tooltip-text" translatable="yes">Plus Number</property>
@@ -109,6 +124,21 @@
             <property name="child">
               <object class="GtkImage">
                 <property name="icon-name">dice-d20-hicolor</property>
+                <property name="pixel-size">36</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="_d100_button">
+            <property name="has-tooltip">true</property>
+            <property name="tooltip-text">d100</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">dice-d100-hicolor</property>
                 <property name="pixel-size">36</property>
               </object>
             </property>

@@ -3,7 +3,7 @@ import re
 
 # Validation Patterns
 
-patt_d = r'^\d*d\d+$'
+patt_d = r'^\d*d([1-9]\d{0,2}|f)$'  # '^\d*d\d+$'
 patt_l = r'^\d*l\d+d\d+$'
 patt_h = r'^\d*h\d+d\d+$'
 patt_e = r'^\d*e\d+d\d+$'
@@ -20,15 +20,24 @@ def roll_dice(parameter):
     n_dices, n_sides = parameter.split('d', 1)
 
     if not n_dices:
-        n_dices = '1'
+        n_dices = 1
+    else:
+        n_dices = int(n_dices)
 
-    if (int(n_dices)) > 100 or (int(n_sides)) > 1000:
+    if n_sides == "f":
+        n_sides = 3
+        n_range = [-1, 1]
+    else:
+        n_sides = int(n_sides)
+        n_range = [1, n_sides]
+
+    if (n_dices) > 100 or (n_sides) > 1000:
         return [False, "Dices or sides beyond limit"]
 
     roll = []
 
-    for dice in range(int(n_dices)):
-        roll.append(random.randint(1, int(n_sides)))
+    for dice in range(n_dices):
+        roll.append(random.randint(n_range[0], n_range[1]))
 
     roll.sort(reverse=True)
 
@@ -37,8 +46,7 @@ def roll_dice(parameter):
     return roll
 
 
-def stratify(parameter):  # s2d6,6,9    
-
+def stratify(parameter):  # s2d6,6,9
     "this not work without, or is pretty useless, without compose rolls"
 
 
@@ -175,7 +183,7 @@ def execute_operations(command):
         if (re.match(patt_d, parameter)):
             roll = roll_dice(parameter)
 
-            if not roll[0]:
+            if not roll[0] and roll[0] != 0:
                 return [False, None, roll[1]]
 
             total = f"{sum(roll)}"

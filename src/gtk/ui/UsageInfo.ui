@@ -32,8 +32,8 @@
                   <object class="GtkLabel" id="_rd_label">
                     <property name="label" translatable="yes">&lt;b&gt;Rolling dice:&lt;/b&gt; operator "d".
 
-&lt;b&gt;Ex.:&lt;/b&gt; 1d6, roll 1 6-sided die.
-&lt;b&gt;Ex.:&lt;/b&gt; 2d8, roll 2 8-sided dice.
+&lt;b&gt;Ex.:&lt;/b&gt; 3d6, roll 3 6-sided die.
+&lt;b&gt;Ex.:&lt;/b&gt; 2df, roll 2 fudge dices (-1,0 and 1 possible results).
                     </property>
                     <property name="wrap">true</property>
                     <property name="justify">3</property>
