@@ -1,0 +1,266 @@
+# German translation for Poliedros.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Philipp Kiemle <l10n@prly.mozmail.com>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-13 17:18-0300\n"
+"PO-Revision-Date: 2025-05-04 19:41+0200\n"
+"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#: data/io.github.kriptolix.Poliedros.desktop.in:3
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
+msgid "Poliedros"
+msgstr "Poliedros"
+
+#: data/io.github.kriptolix.Poliedros.desktop.in:9
+msgid "GTK;Die;Dice;Roll;Random;Number;"
+msgstr ""
+"GTK;Die;Dice;Roll;Random;Number;Würfel;würfeln;Wurf;Zufall;zufällig;Zahl;"
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:8
+msgid "Poliedros is a multi-type dice roller."
+msgstr "Poliedros simuliert das Würfeln verschiedener Würfel."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:10
+msgid ""
+"Poliedros is a multi-type dice roller. Basic mode allows you to make quick "
+"rolls using just the mouse, while Command mode allows for more complex rolls "
+"and combinations."
+msgstr ""
+"Poliedros simuliert das Würfeln verschiedener Würfel. Der einfache Modus "
+"ermöglicht es, schnelle Würfe mit der Maus durchzuführen - der Befehlsmodus "
+"hingegen ist gut geeignet für kompliziertere Würfe und Kombinationen."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:14
+msgid "Diego C Sampaio"
+msgstr "Diego C Sampaio"
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:43
+msgid "Basic Mode."
+msgstr "Einfacher Modus."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:47
+msgid "No sidebar."
+msgstr "Keine Seitenleiste."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:51
+msgid "Colapsed sidebar."
+msgstr "Eingeklappte Seitenleiste."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:55
+msgid "Command Mode."
+msgstr "Befehlsmodus."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:62
+msgid "Little corrections"
+msgstr "Kleine Korrekturen"
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:64
+msgid "Update to Gnome 48."
+msgstr "Auf GNOME 48 aktualisiert."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:65
+msgid "New icons by Jakub Steiner."
+msgstr "Neue Icons von Jakub Steiner."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:66
+msgid "Update Tags."
+msgstr "Tags aktualisiert."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:67
+msgid "Change banner colors."
+msgstr "Bannerfarben ändern."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:68
+msgid "Add tip to do \"reroll previous roll\" button."
+msgstr "Minihilfe zum Knopf für erneutes Würfeln eines Wurfs hinzugefügt."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:69
+msgid "Fix roll over 100 dices / 1000 faces error."
+msgstr "Fehler beim Würfeln von über 100 Würfeln / 1000 Seiten behoben."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:75
+msgid ""
+"This is the first version of this software and has the following features:"
+msgstr ""
+"Dies ist die erste Version dieser Software mit den folgenden Funktionen:"
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:77
+msgid "Basic mode and command mode."
+msgstr "Einfacher Modus und Befehlsmodus."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:78
+msgid "Basic dice rolling."
+msgstr "Einfaches Würfel werfen."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:79
+msgid "Additions and subtractions of numbers and results of other rolls."
+msgstr "Addition und Subtraktion von Zahlen und anderer Würfelwürfe."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:80
+msgid "Roll a group of dice and keep the highest X or lowest X."
+msgstr ""
+"Eine Gruppe von Würfeln werfen und die höchsten/niedrigsten X behalten."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:81
+msgid "Roll a group of dice and explode (reroll) dice with maximum result."
+msgstr ""
+"Eine Gruppe von Würfeln werfen und sie bei höchster Zahl explodieren lassen "
+"(erneut würfeln)."
+
+#: src/gtk/ui/DiceArea.ui:59
+msgid "Plus Number"
+msgstr "Plus Zahl"
+
+#: src/gtk/ui/DiceArea.ui:120
+msgid "Minus Number"
+msgstr "Minus Zahl"
+
+#: src/gtk/ui/EmptyPage.ui:7
+msgid "Nothing Here Yet"
+msgstr "Hier ist noch nichts"
+
+#: src/gtk/ui/EmptyPage.ui:8
+msgid "Roll some dices to beguin"
+msgstr "Würfeln Sie einige Würfel, um zu beginnen"
+
+#: src/gtk/ui/InfoArea.ui:7
+msgid "Command Mode"
+msgstr "Befehlsmodus"
+
+#: src/gtk/ui/InfoArea.ui:13
+msgid "Command mode usage instructions"
+msgstr "Verwendung des Befehlsmodus"
+
+#: src/gtk/ui/LogEntry.ui:10
+msgid "Redo this roll"
+msgstr "Diesen Wurf wiederholen"
+
+#: src/gtk/ui/MainWindow.ui:31
+msgid "Go Back"
+msgstr "Zurückgehen"
+
+#: src/gtk/ui/MainWindow.ui:56
+msgid "Toggle History"
+msgstr "Chronik umschalten"
+
+#: src/gtk/ui/MainWindow.ui:62
+msgid "About Poliedros"
+msgstr "Info zu Poliedros"
+
+#: src/gtk/ui/RollArea.ui:46
+msgid "Switch Mode"
+msgstr "Modus wechseln"
+
+#: src/gtk/ui/RollArea.ui:58 src/gtk/ui/RollArea.ui:59
+msgid "Roll"
+msgstr "Würfeln"
+
+#: src/gtk/ui/RollArea.ui:71
+msgid "Clear Command"
+msgstr "Befehl leeren"
+
+#: src/gtk/ui/SideBar.ui:32
+msgid "Clear results"
+msgstr "Ergebnisse leeren"
+
+#: src/gtk/ui/UsageInfo.ui:22
+msgid "Command usage instructions"
+msgstr "Verwendung des Befehlsmodus"
+
+#: src/gtk/ui/UsageInfo.ui:33
+msgid ""
+"<b>Rolling dice:</b> operator \"d\".\n"
+"\n"
+"<b>Ex.:</b> 1d6, roll 1 6-sided die.\n"
+"<b>Ex.:</b> 2d8, roll 2 8-sided dice.\n"
+"                    "
+msgstr ""
+"<b>Würfel würfeln:</b> Befehl \"d\".\n"
+"\n"
+"<b>Beispiel:</b> 1d6, würfelt 1 6-seitigen Würfel.\n"
+"<b>Beispiel:</b> 2d8, würfelt 2 8-seitige Würfel.\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:47
+msgid ""
+"<b>Additions/Subtractions:</b> \"+\" and \"-\" operators.\n"
+"                    \n"
+"<b>Ex.:</b> 1d6 + 3, roll 1 6-sided die and add the number 3.\n"
+"<b>Ex.:</b> 2d8 - 1d4, roll 2 8-sided dice and subtract the result of "
+"rolling 1 4-sided die.'\n"
+"                    "
+msgstr ""
+"<b>Addition/Subtraktion:</b> Befehle \"+\" und \"-\".\n"
+"                    \n"
+"<b>Befehle:</b> 1d6 + 3, würfelt 1 6-seitigen Würfel und addiert die Zahl "
+"3.\n"
+"<b>Befehle:</b> 2d8 - 1d4, würfelt 2 8-seitige Würfel und subtrahiert das "
+"Ergebnis des Wurfs von 1 4-seitigem Würfel.\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:61
+msgid ""
+"<b>Keeping higher:</b> operator \"h\".\n"
+"                    \n"
+"<b>Ex.:</b> 2h3d6, roll 3 6-sided dice and keep the 2 highest.\n"
+"<b>Ex.:</b> 1h2d20 or h2d20, roll 2 20-sided dice and keep the "
+"highest.                    \n"
+"                    "
+msgstr ""
+"<b>Höhere behalten:</b> Befehl \"h\".\n"
+"                    \n"
+"<b>Beispiel:</b> 2h3d6, würfelt 3 6-seitige Würfel und behält die 2 höchsten "
+"Ergebnisse.\n"
+"<b>Beispiel:</b> 1h2d20 oder h2d20, würfelt 2 20-seitige Würfel und behält "
+"das höchste Ergebnis.                    \n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:75
+msgid ""
+"<b>Keeping lower:</b> operator \"l\".\n"
+"                    \n"
+"<b>Ex.:</b> 2l4d10, roll 4 10-sided dice and keep the 2 lowest.\n"
+"<b>Ex.:</b> 1l3d6 or l3d6, roll 3 6-sided dice and keep the lowest.\n"
+"                    "
+msgstr ""
+"<b>Niedrigere behalten:</b> Befehl \"l\".\n"
+"                    \n"
+"<b>Beispiel:</b> 2l4d10, würfelt 4 10-seitige Würfel und behält die 2 "
+"niedrigsten Ergebnisse.\n"
+"<b>Beispiel:</b> 1l3d6 oder l3d6, würfelt 3 6-seitige Würfel und behält den "
+"niedrigsten Ergebnisse.\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:89
+msgid ""
+"<b>Exploding dice:</b> operator \"e\".\n"
+"                    \n"
+"<b>Ex.:</b> e6d6, roll 6 6-sided dice and, if any of them result in a 6, "
+"roll that die again, if the new result is also a 6, roll that die again and "
+"so on indefinitely.\n"
+"<b>Ex.:</b> 1e5d10, roll 5 10-sided dice and, if any of them result in a 10, "
+"roll that die again, if the new result is also a 10 the die will not be "
+"rolled again.                    \n"
+"                    "
+msgstr ""
+"<b>Ecplodierende Würfel:</b> Befehl \"e\".\n"
+"                    \n"
+"<b>Beispiel:</b> e6d6, würfelt 6 6-seitige Würfel und jeden Würfel, der eine "
+"6 zeigt, erneut. Dies passiert wieder, wenn erneut eine 6 gewürfelt wird - "
+"unendlich lang.\n"
+"<b>Beispiel:</b> 1e5d10, würfelt 5 10-seitige Würfel und jeden Würfel, der "
+"eine 10 zeigt, erneut. Wenn das neue Ergebnis auch 10 ist, wird der Würfel "
+"aber nicht erneut geworfen.                    \n"
+"                    "
