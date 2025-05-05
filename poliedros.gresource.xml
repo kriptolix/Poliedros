@@ -9,9 +9,8 @@
     <file preprocess="xml-stripblanks">src/gtk/ui/InfoArea.ui</file>    
     <file preprocess="xml-stripblanks">src/gtk/ui/UsageInfo.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/EmptyPage.ui</file>
-     <file preprocess="xml-stripblanks">src/gtk/ui/LogEntry.ui</file>
-    <file preprocess="xml-stripblanks">src/gtk/ui/AdvancedMode.ui</file>
-    <file preprocess="xml-stripblanks">src/gtk/ui/NumberPopover.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/LogEntry.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/AdvancedMode.ui</file>    
         
   </gresource>
   <gresource prefix="io/github/kriptolix/Poliedros/icons/scalable/actions">

@@ -25,12 +25,14 @@ from gi.repository import Gtk
 class DiceArea(Gtk.Box):
     __gtype_name__ = 'DiceArea'
 
+    _df_button = Gtk.Template.Child()
     _d4_button = Gtk.Template.Child()
     _d6_button = Gtk.Template.Child()
     _d8_button = Gtk.Template.Child()
     _d10_button = Gtk.Template.Child()
     _d12_button = Gtk.Template.Child()
     _d20_button = Gtk.Template.Child()
+    _d100_button = Gtk.Template.Child()
     _plus_button = Gtk.Template.Child()
     _minus_button = Gtk.Template.Child()
 

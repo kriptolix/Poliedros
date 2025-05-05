@@ -43,19 +43,21 @@ class RollArea(Gtk.Box):
     def __init__(self):
         super().__init__()
 
-        # d20, d12, d10, d8, d6, d4, increment
-        self._command = [0, 0, 0, 0, 0, 0, 0]
+        # df, d4, d6, d8, d10, d12, d20, d100, increment
+        self._command = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
         self._roll_button.connect("clicked", self._do_roll)
 
-        self._dice_area._d4_button.connect("clicked", self._add_elements, 5)
-        self._dice_area._d6_button.connect("clicked", self._add_elements, 4)
+        self._dice_area._d100_button.connect("clicked", self._add_elements, 7)
+        self._dice_area._d20_button.connect("clicked", self._add_elements, 6)
+        self._dice_area._d12_button.connect("clicked", self._add_elements, 5)
+        self._dice_area._d10_button.connect("clicked", self._add_elements, 4)
         self._dice_area._d8_button.connect("clicked", self._add_elements, 3)
-        self._dice_area._d10_button.connect("clicked", self._add_elements, 2)
-        self._dice_area._d12_button.connect("clicked", self._add_elements, 1)
-        self._dice_area._d20_button.connect("clicked", self._add_elements, 0)
-        self._dice_area._plus_button.connect("clicked", self._add_elements, 6)
-        self._dice_area._minus_button.connect("clicked", self._add_elements, 7)
+        self._dice_area._d6_button.connect("clicked", self._add_elements, 2)
+        self._dice_area._d4_button.connect("clicked", self._add_elements, 1)
+        self._dice_area._df_button.connect("clicked", self._add_elements, 0)
+        self._dice_area._plus_button.connect("clicked", self._add_elements, 8)
+        self._dice_area._minus_button.connect("clicked", self._add_elements, 9)
         self._clear_button.connect("clicked", self._clear_display)
         self._mode_button.connect("toggled", self._change_mode)
 
@@ -76,7 +78,7 @@ class RollArea(Gtk.Box):
         self._results.set_text(str(total))
 
     def _clear_display(self, button):
-        self._command = [0, 0, 0, 0, 0, 0, 0]
+        self._command = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         self._display.set_text("")
         self._results.set_text("?")
 
@@ -105,31 +107,37 @@ class RollArea(Gtk.Box):
 
         for index, element in enumerate(self._command):
             if element != 0:
-                if add_plus and index != 6:
+                if add_plus and index != 8:
                     display_content = display_content + ' + '
 
                 add_plus = True
 
                 match index:
                     case 0:
-                        content = f"{element}d20"
+                        content = f"{element}df"
 
                     case 1:
-                        content = f"{element}d12"
+                        content = f"{element}d4"
 
                     case 2:
-                        content = f"{element}d10"
+                        content = f"{element}d6"
 
                     case 3:
                         content = f"{element}d8"
 
                     case 4:
-                        content = f"{element}d6"
+                        content = f"{element}d10"
 
                     case 5:
-                        content = f"{element}d4"
+                        content = f"{element}d12"
 
                     case 6:
+                        content = f"{element}d20"
+
+                    case 7:
+                        content = f"{element}d100"
+
+                    case 8:
                         content = f" + {element}"
 
                         if element < 0:
@@ -142,9 +150,9 @@ class RollArea(Gtk.Box):
 
     def _add_elements(self, button, index):
 
-        if index == 7:
+        if index == 9:
 
-            self._command[6] = self._command[6] - 1
+            self._command[8] = self._command[8] - 1
             # print(self._command)
             self._assemble_command()
             return
@@ -157,8 +165,4 @@ class RollArea(Gtk.Box):
 
         application = self.get_root().application
         application.do_roll()
-        self._command = [0, 0, 0, 0, 0, 0, 0]
-
-    def _auto_complete(self):
-
-        ""
+        self._command = [0, 0, 0, 0, 0, 0, 0, 0, 0]

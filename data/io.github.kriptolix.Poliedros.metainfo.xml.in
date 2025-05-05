@@ -57,6 +57,17 @@
   </screenshots>
 
   <releases>
+    <release version="1.1.0" date="2025-05-21">      
+      <description>
+        <p>New functions and bug fixes.</p>
+        <ul>
+          <li>"Count in" function added.</li>
+          <li>Fudge dices roll added.</li>
+          <li>d100 roll added.</li>
+          <li>Change banner colors.</li>          
+        </ul>
+      </description>
+    </release>
     <release version="1.0.1" date="2025-05-21">      
       <description>
         <p>Little corrections.</p>
