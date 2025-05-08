@@ -1,4 +1,5 @@
 from .commandparser import command_parser, run_postorder
+from .executor import address_commands
 
 tests = ["count 5,6 in (highest 2 in 5d6)"]
 
@@ -30,8 +31,16 @@ tests2 = [
 ]
 
 
-def run_tests():
+def test_parser():
     for test in tests:
         result = command_parser(test)
         print(f"{test} -> {result}")
         print(run_postorder(result))
+
+
+def run_tests():
+    expression = "count 5,6 in (highest 2 in 5d6)"
+    result = command_parser(expression)
+    print(f"{expression} -> {result}")
+    total, log = address_commands(result)
+    print(f"total: {total}, log :{log}")

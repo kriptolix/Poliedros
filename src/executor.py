@@ -22,58 +22,118 @@ def roll_dice(expression):
 
     roll.sort(reverse=True)
 
-    # print("brute roll : ", roll)
-
     return roll
 
 
-def define_group(expression, faces):
-
-    lenght = len(expression)
+def define_group(parameters, pool):
+    
+    lenght = len(parameters)
 
     match lenght:
         case 2:
-            one, two = expression
+            one, two = list(map(int, parameters))
             if one == "<":
                 group = list(range(1, two))
             if one == ">":
+                _, faces = pool  
                 group = list(range(two, faces))
 
         case 3:
-            one, two, three = expression
+            one, two, three = list(map(int, parameters))
             if three == "..":
                 group = range(one, three)
-        case _:
-            group = expression
+
+    group = list(map(int, parameters))
 
     return group
 
-def avaliate_parameters(expression):
 
-    commands = ["count", "lower"]
+def avaliate_parameters(parameters, pool):
 
-    if len(expression) == 3:
-        if expression[0] in commands:
-            "is command, send to resolution"
-            return
-    
+    if len(parameters) == 3:
+        if isinstance(parameters[0], str):
 
-def count_in(expression):  # c(2h3d6),5,6
+            _, total = address_commands(parameters)
+
+            return total
+
+    return define_group(parameters, pool)
+
+
+def avaliate_pool(pool):
+
+    if len(pool) == 3:
+        if isinstance(pool[0], str):
+            print("avaliate pool, pool: ", pool)
+
+            _, total = address_commands(pool)
+
+            print("avaliate pool, total: ", total)
+
+            return total
+
+    total = roll_dice(list(map(int, pool)))
+
+    return total
+
+
+def count_in(command, parameters, pool):
     total = 0
     log = ''
 
-    parameters, dices = expression
-    _, faces = dices
+    group = avaliate_parameters(parameters, pool)
+    print("group: ", group)
 
-    group = define_group(parameters, faces)
-
-    roll = roll_dice(dices)
+    roll = avaliate_pool(pool)
+    print("roll: ", roll)
 
     for value in roll:
         if value in (group):
             total = total + 1
 
     total = f"{total}"
-    log = f"{expression} {roll} "
+    log = f"{command} {parameters} in {pool}"
 
+    return [total, log]
+
+
+def keep_subset(command, parameters, pool):
+
+    group = avaliate_parameters(parameters, pool)
+    print("group: ", group)
+    
+    roll = avaliate_pool(pool)
+    print("roll: ", roll)
+    
+    keep = group[0]
+
+    match command:
+        case "highest" | "h":
+            subroll = roll[:keep]
+            excluded = roll[len(subroll):]
+            excluded.insert(0, subroll)
+
+        case "l":
+            subroll = roll[-keep:]
+            excluded = roll[:-len(subroll)]
+            excluded.append(subroll)
+
+    total = f"{sum(subroll)}"
+    log = f"{command} {parameters} in {pool}"
+    print(subroll)
+
+    return [total, log]
+
+
+def address_commands(expression):
+
+    command, parameters, pool = expression
+    print("command: ", command)
+    match command:
+        case "count":            
+            total, log = count_in(command, parameters, pool)
+            
+        case "highest":            
+            total, log = keep_subset(command, parameters, pool)
+            
     return [total, log]
