@@ -20,47 +20,55 @@
 
 from gi.repository import Gtk, Adw
 
-from .dicearea import DiceArea
-
 
 @Gtk.Template(resource_path='/io/github/kriptolix/'
               'Poliedros/src/gtk/ui/AdvancedMode.ui')
 class AdvancedMode(Gtk.Box):
     __gtype_name__ = 'AdvancedMode'
 
-    _display = Gtk.Template.Child()
+    _drop_function = Gtk.Template.Child()
+    _parameters = Gtk.Template.Child()
+    _add_function = Gtk.Template.Child()
+    _amount = Gtk.Template.Child()
+    _faces = Gtk.Template.Child()
+    _add_number = Gtk.Template.Child()
+    _add_dicepool = Gtk.Template.Child()
 
     def __init__(self):
         super().__init__()
 
-        self._terms = ["lowest", "highest", "count", "explode"]
+        self.display = None
 
-        buffer = self._display.get_buffer()
+        function_pool = [0, 0, 0, 0, 0]        
 
-        buffer.connect("inserted-text", self._auto_complete)
-        buffer.connect("deleted-text", self._auto_complete)
+        self._add_function.connect("clicked", self._on_add_function)
+        self._add_dicepool.connect("clicked", self._on_add_dicepool)
 
-        self._display.connect("activate", self._do_roll)
+    def _on_add_function(self, button):
 
-    def _do_roll(self, button):
+        display_content = self.display.get_text()
 
-        application = self.get_root().application
-        application.do_roll()
-        self._command = [0, 0, 0, 0, 0, 0, 0]
+        name = self._drop_function.get_selected_item().get_string()
+        parameters = self._parameters.get_text()
 
-    def _auto_complete(self, *args):
+        content = display_content + f"{name} {parameters} in "
 
-        text = self._display.get_text()
+        self.display.set_text(content)
+        
 
-        for term in self._terms:
-            if term == text:
-                self._insert_widget(term)
+    def _on_add_dicepool(self, button):        
 
-    def _insert_widget(self, term):
+        display_content = self.display.get_text()
 
-        button = Gtk.Button.new()
+        amount = self._amount.get_text()
+        faces = self._faces.get_text()
+        adds = self._add_number.get_text()
 
-        match term:
-            case "lowest":
-                button.set_label("lowest")
-                self.prepend(button)
+        content = display_content + f"{amount}d{faces}{adds}"
+
+        self.display.set_text(content)
+
+        
+    def _function_condition(self):
+        print("nada")
+

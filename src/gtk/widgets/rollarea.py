@@ -39,12 +39,15 @@ class RollArea(Gtk.Box):
     _roll_button = Gtk.Template.Child()
     _clear_button = Gtk.Template.Child()
     _adaptable = Gtk.Template.Child()
+    _advanced = Gtk.Template.Child()
 
     def __init__(self):
         super().__init__()
 
         # df, d4, d6, d8, d10, d12, d20, d100, increment
         self._command = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+        self._advanced.display = self._display
 
         self._roll_button.connect("clicked", self._do_roll)
 

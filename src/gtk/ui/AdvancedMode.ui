@@ -1,19 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="AdvancedMode" parent="GtkBox">    
-        <property name="valign">3</property>
-        <property name="halign">3</property>
+  <template class="AdvancedMode" parent="GtkBox">
+    <property name="valign">3</property>
+    <property name="halign">3</property>
+    <property name="orientation">1</property>
+    <property name="spacing">15</property>
+    <child>
+      <object class="GtkBox">
+        <property name="spacing">5</property>
         <child>
-          <object class="GtkEntry" id="_entry">
-            <property name="halign">2</property>
-            <property name="hexpand">true</property>
-            <property name="placeholder-text" translatable="yes">a number</property>
-            <property name="xalign">0.5</property>
+          <object class="GtkBox">
+            <property name="valign">3</property>
+            <property name="halign">3</property>
+            <child>
+              <object class="GtkDropDown" id="_drop_function">
+                <property name="width-request">105</property>
+                <property name="model">
+                  <object class="GtkStringList">
+                    <items>
+                      <item>Heighest</item>
+                      <item>Lowest</item>
+                      <item>Count</item>
+                      <item>Explode</item>
+                      <item>Stratify</item>
+                    </items>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="_parameters">
+                <property name="max-width-chars">3</property>
+                <property name="xalign">0.5</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">in</property>
+                <property name="sensitive">false</property>
+              </object>
+            </child>
+            <style>
+              <class name="linked"/>
+            </style>
           </object>
         </child>
-        <style>
-          <class name="linked"/>
-        </style>    
-  </template>  
+        <child>
+          <object class="GtkButton" id="_add_function">
+            <property name="label" translatable="yes">Add</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="spacing">5</property>
+        <child>
+          <object class="GtkBox">
+            <child>
+              <object class="GtkEntry" id="_amount">
+                <property name="max-width-chars">3</property>
+                <property name="xalign">1</property>
+                <property name="placeholder-text">n</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">d</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="_faces">
+                <property name="max-width-chars">3</property>
+                <property name="xalign">0</property>
+                <property name="placeholder-text">n</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes"> +/- </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="_add_number">
+                <property name="max-width-chars">4</property>
+                <property name="xalign">0</property>
+                <property name="placeholder-text">n</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="_add_dicepool">
+            <property name="label" translatable="yes">Add</property>
+            <property name="halign">2</property>
+            <property name="hexpand">true</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
 </interface>

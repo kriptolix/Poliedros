@@ -50,7 +50,7 @@ def stratify(parameter):  # s2d6,6,9
     "this not work without, or is pretty useless, without compose rolls"
 
 
-def count_in(parameter):  # c3d6,5,6
+def count_in(parameter):  # c(2h3d6),5,6
     total = 0
     log = ''
 
@@ -183,7 +183,7 @@ def execute_operations(command):
         if (re.match(patt_d, parameter)):
             roll = roll_dice(parameter)
 
-            if not roll[0] and roll[0] != 0:
+            if not roll[0] and roll[0] != 0:  # python seems 0 as false
                 return [False, None, roll[1]]
 
             total = f"{sum(roll)}"
@@ -245,7 +245,7 @@ def execute_command(input_command):
     input_command = re.sub(' ', '', input_command)
     parameters = re.split(r'(\+|\-)', input_command)
 
-    # print('Parâmetros iniciais:', parameters)
+    print('Parâmetros iniciais:', parameters)
 
     validation = validate_parameters(parameters)
 

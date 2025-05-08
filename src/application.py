@@ -21,10 +21,12 @@
 from gi.repository import Adw, Gio
 
 import sys
+from gettext import gettext as _
 
 from .gtk.widgets.mainwindow import MainWindow
 from .roller import execute_command
 from .util import create_action
+from .tests import run_tests
 
 
 class PoliedrosApplication(Adw.Application):
@@ -54,6 +56,8 @@ class PoliedrosApplication(Adw.Application):
         self._update_result = self._window._roll_area.update_result
         self._add_register = self._window._sidebar.add_register
 
+        run_tests()
+
     def on_about(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(
@@ -65,7 +69,7 @@ class PoliedrosApplication(Adw.Application):
             copyright='© 2024 Diego C Sampaio'
         )
 
-        about.set_translator_credits(('Diego C Sampaio'))
+        about.set_translator_credits(_('translator_credits'))
         about.present(self.props.active_window)
 
     def do_reroll(self, input):
