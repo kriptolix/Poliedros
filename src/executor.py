@@ -1,9 +1,17 @@
 import random
+from typing import List
 
 
-def roll_dice(expression):
+funcions_list = ["count", "highest"]
 
-    n_dices, n_sides = expression
+
+def roll_dice(expression: List[str]):
+
+    n_dices, _, n_sides = expression
+
+    # print("roll dice expression: ", expression)
+
+    n_dices = int(n_dices)
 
     if n_sides == "f":
         n_sides = 3
@@ -12,9 +20,6 @@ def roll_dice(expression):
         n_sides = int(n_sides)
         n_range = [1, n_sides]
 
-    if (n_dices) > 100 or (n_sides) > 1000:
-        return [False, "Dices or sides beyond limit"]
-
     roll = []
 
     for dice in range(n_dices):
@@ -22,59 +27,61 @@ def roll_dice(expression):
 
     roll.sort(reverse=True)
 
+    print("roll dice roll: ", roll)
+
     return roll
-
-
-def define_group(parameters, pool):
-    
-    lenght = len(parameters)
-
-    match lenght:
-        case 2:
-            one, two = list(map(int, parameters))
-            if one == "<":
-                group = list(range(1, two))
-            if one == ">":
-                _, faces = pool  
-                group = list(range(two, faces))
-
-        case 3:
-            one, two, three = list(map(int, parameters))
-            if three == "..":
-                group = range(one, three)
-
-    group = list(map(int, parameters))
-
-    return group
 
 
 def avaliate_parameters(parameters, pool):
 
-    if len(parameters) == 3:
-        if isinstance(parameters[0], str):
+    lenght = len(parameters)
 
-            _, total = address_commands(parameters)
+    match lenght:
+        case 2:  # greater/smaller
+            one, two = parameters
+            if one == "<":
+                group = range(1, int(two))
+            if one == ">":
+                _, faces = pool
+                group = range(int(two), int(faces))
 
-            return total
+        case 3:  # range or function
+            one, two, three = parameters
+            if one in funcions_list:
+                total, log = address_commands(parameters)
 
-    return define_group(parameters, pool)
+                # print("avaliate parameters, command return: ", total)
+
+                return total
+
+            if three == "..":
+                group = range(int(one), int(three))
+
+    group = [int(item) for item in parameters]
+
+    # print("avaliate parameters, group return: ", group)
+
+    return group    
 
 
 def avaliate_pool(pool):
 
+    # print("avaliate pool, pool: ", pool)
+
     if len(pool) == 3:
-        if isinstance(pool[0], str):
-            print("avaliate pool, pool: ", pool)
+        if pool[0] in funcions_list:  # checa se é função
 
-            _, total = address_commands(pool)
+            total, log = address_commands(pool)
 
-            print("avaliate pool, total: ", total)
+            # print("avaliate pool, address_commands total: ", total)
 
             return total
 
-    total = roll_dice(list(map(int, pool)))
+        total = roll_dice(pool)
+        # print("avaliate pool, roll_dice total: ", total)
+        return total
 
-    return total
+    return pool
 
 
 def count_in(command, parameters, pool):
@@ -82,16 +89,17 @@ def count_in(command, parameters, pool):
     log = ''
 
     group = avaliate_parameters(parameters, pool)
-    print("group: ", group)
+    # print("count_in group: ", group)
 
     roll = avaliate_pool(pool)
-    print("roll: ", roll)
+    # print("count_in roll: ", roll)
 
     for value in roll:
-        if value in (group):
+        # print("value: ", value, " group: ", group)
+        if value in group:
             total = total + 1
 
-    total = f"{total}"
+    total = total
     log = f"{command} {parameters} in {pool}"
 
     return [total, log]
@@ -100,11 +108,11 @@ def count_in(command, parameters, pool):
 def keep_subset(command, parameters, pool):
 
     group = avaliate_parameters(parameters, pool)
-    print("group: ", group)
-    
+    # print("keep_subset group: ", group)
+
     roll = avaliate_pool(pool)
-    print("roll: ", roll)
-    
+    # vprint("keep_subset roll: ", roll)
+
     keep = group[0]
 
     match command:
@@ -118,9 +126,9 @@ def keep_subset(command, parameters, pool):
             excluded = roll[:-len(subroll)]
             excluded.append(subroll)
 
-    total = f"{sum(subroll)}"
+    total = subroll
     log = f"{command} {parameters} in {pool}"
-    print(subroll)
+    # print(subroll)
 
     return [total, log]
 
@@ -128,12 +136,21 @@ def keep_subset(command, parameters, pool):
 def address_commands(expression):
 
     command, parameters, pool = expression
-    print("command: ", command)
+
     match command:
-        case "count":            
+        case "count":
             total, log = count_in(command, parameters, pool)
-            
-        case "highest":            
+
+        case "highest":
             total, log = keep_subset(command, parameters, pool)
-            
+
     return [total, log]
+
+
+def split_elements(expression):
+
+    for parameter in expression:
+
+        result = address_commands(parameter)
+
+    return result

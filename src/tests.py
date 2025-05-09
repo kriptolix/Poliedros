@@ -1,5 +1,5 @@
 from .commandparser import command_parser, run_postorder
-from .executor import address_commands
+from .executor import split_elements
 
 tests = ["count 5,6 in (highest 2 in 5d6)"]
 
@@ -42,5 +42,6 @@ def run_tests():
     expression = "count 5,6 in (highest 2 in 5d6)"
     result = command_parser(expression)
     print(f"{expression} -> {result}")
-    total, log = address_commands(result)
+    total = 0
+    log = split_elements(result)
     print(f"total: {total}, log :{log}")

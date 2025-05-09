@@ -1,6 +1,6 @@
 from pyparsing import (
     Word, Literal, Group, Optional, Forward, Suppress, ParserElement, nums,
-    oneOf, infixNotation, opAssoc, delimitedList
+    oneOf, ZeroOrMore, delimitedList
 )
 
 
@@ -21,58 +21,54 @@ def run_postorder(expr):
 def command_parser(command):
 
     ParserElement.enablePackrat()
-
+    
     integer = Word(nums)
-    positive = Word("123456789", nums)
+    
+    positive = Word("123456789", "0123456789", min=1, max=3)
     plus = Literal('+')
     minus = Literal('-')
-
-    # Operador de intervalo e expressão de intervalo (ex.: "3..5")
+    
     range_op = Literal("..")
     range_expr = integer("start") + range_op + integer("end")
-
-    # Prioriza a alternativa com intervalo para não confundir "1..2" com apenas "1"
+ 
     number_or_range = range_expr | integer
 
-    # Notação de dados: "XdY" (X é opcional, assume "1" se omitido)
     dice_notation = Group(
         Optional(integer, default="1")("count") +
-        Suppress("d") +
-        (integer | (Literal("f"))) ("faces") 
+        Literal("d") +
+        (positive | Literal("f"))("faces")
     )
 
-    # Declaração recursiva de expressão para permitir aninhamento
     expr = Forward()
-
-    # Expressões entre parênteses – garantindo que operações externas (como -1) sejam aplicadas após o conteúdo dos parênteses
-    parenthesized_expr = Group(Suppress("(") + expr + Suppress(")"))
-
-    # Um literal inteiro simples (por exemplo, em operações aritméticas)
+    
+    parenthesized_expr = (Suppress("(") + expr + Suppress(")"))
+    
     integer_expr = integer.copy()
-
-    roll = (
-        (Optional(Literal("roll"), default="roll"))("command") +
-        (dice_notation)("dice")
+ 
+    roll = Group(
+        Literal("roll")("command") +
+        Group(number_or_range)("amount") +
+        dice_notation("dice")
     )
 
-    highest = (
-        Literal("highest")("command") +
+    highest = Group(
+        (Literal("highest") | Literal("h"))("command") +
         Group(Optional(delimitedList(number_or_range, delim=","), default="1"))("amount") +
         Suppress("in") +
         (parenthesized_expr | dice_notation | integer_expr)("dice")
     )
 
-    lowest = (
+    lowest = Group(
         Literal("lowest")("command") +
         Group(Optional(delimitedList(number_or_range, delim=","), default="1"))("amount") +
         Suppress("in") +
         (parenthesized_expr | dice_notation | integer_expr)("dice")
     )
 
-    count = (
+    count = Group(
         Literal("count")("command") +
         (
-            Group((oneOf("< >")("comparator") + number_or_range("amount"))) |
+            Group(oneOf("< >")("comparator") + number_or_range("amount")) |
             Group(delimitedList(number_or_range, delim=",")("values")) |
             number_or_range("amount")
         ) +
@@ -80,14 +76,14 @@ def command_parser(command):
         (parenthesized_expr | dice_notation | integer_expr)("dice")
     )
 
-    explode = (
+    explode = Group(
         Literal("explode")("command") +
         Group(Optional(delimitedList(number_or_range, delim=",")))("values") +
         Suppress("in") +
         (parenthesized_expr | dice_notation | integer_expr)("dice")
     )
 
-    reroll = (
+    reroll = Group(
         Literal("reroll")("command") +
         (
             (oneOf("< >")("comparator") + number_or_range("amount")) |
@@ -96,19 +92,13 @@ def command_parser(command):
         Suppress("in") +
         (parenthesized_expr | dice_notation | integer_expr)("dice")
     )
-
-    # O operando estendido aceita expressões entre parênteses, funções ou notações simples
-    extended_operand = (parenthesized_expr | highest | lowest | count |
-                        explode | roll | reroll | dice_notation | integer_expr)
-
-    # Define expressões aritméticas com '+' e '-' via infixNotation.
-    # Assim, em "3d6+3" ou "(explode 4d10)-1", as operações são aplicadas após o fechamento dos parênteses.
-    arith_expr = infixNotation(extended_operand,
-                               [
-                                   (oneOf('+ -'), 2, opAssoc.LEFT)
-                               ])
-
-    expr <<= arith_expr
+    
+    extended_operand = (
+        parenthesized_expr | highest | lowest | count |
+        explode | reroll | roll | dice_notation | integer_expr
+    )
+    
+    expr <<= extended_operand + ZeroOrMore((plus | minus) + extended_operand)
 
     try:
         result = expr.parseString(command, parseAll=True)
