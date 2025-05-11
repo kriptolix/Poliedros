@@ -5,31 +5,24 @@ from typing import List
 funcions_list = ["count", "highest"]
 
 
-def roll_dice(expression: List[str]):
+def avaliate_pool(pool):
 
-    n_dices, _, n_sides = expression
+    # print("avaliate pool, pool: ", pool)
 
-    # print("roll dice expression: ", expression)
+    if len(pool) == 3:
+        if pool[0] in funcions_list:  # checa se é função
 
-    n_dices = int(n_dices)
+            total, log = address_commands(pool)
 
-    if n_sides == "f":
-        n_sides = 3
-        n_range = [-1, 1]
-    else:
-        n_sides = int(n_sides)
-        n_range = [1, n_sides]
+            # print("avaliate pool, address_commands total: ", total)
 
-    roll = []
+            return total
 
-    for dice in range(n_dices):
-        roll.append(random.randint(n_range[0], n_range[1]))
+        total = roll_dice(pool)
+        # print("avaliate pool, roll_dice total: ", total)
+        return total
 
-    roll.sort(reverse=True)
-
-    print("roll dice roll: ", roll)
-
-    return roll
+    return pool
 
 
 def avaliate_parameters(parameters, pool):
@@ -61,27 +54,34 @@ def avaliate_parameters(parameters, pool):
 
     # print("avaliate parameters, group return: ", group)
 
-    return group    
+    return group
 
 
-def avaliate_pool(pool):
+def roll_dice(expression):
 
-    # print("avaliate pool, pool: ", pool)
+    n_dices, _, n_sides = expression
 
-    if len(pool) == 3:
-        if pool[0] in funcions_list:  # checa se é função
+    # print("roll dice expression: ", expression)
 
-            total, log = address_commands(pool)
+    n_dices = int(n_dices)
 
-            # print("avaliate pool, address_commands total: ", total)
+    if n_sides == "f":
+        n_sides = 3
+        n_range = [-1, 1]
+    else:
+        n_sides = int(n_sides)
+        n_range = [1, n_sides]
 
-            return total
+    roll = []
 
-        total = roll_dice(pool)
-        # print("avaliate pool, roll_dice total: ", total)
-        return total
+    for dice in range(n_dices):
+        roll.append(random.randint(n_range[0], n_range[1]))
 
-    return pool
+    roll.sort(reverse=True)
+
+    # print("roll dice roll: ", roll)
+
+    return roll
 
 
 def count_in(command, parameters, pool):
@@ -133,6 +133,106 @@ def keep_subset(command, parameters, pool):
     return [total, log]
 
 
+def explode_dice(command, parameters, pool):
+
+    log_roll = []
+    counter = 0
+
+    n_dices = int(pool[0])
+
+    def _recursive_roll(dice, group, exploded):  # [6, [6], 3, 2]
+
+        nonlocal counter
+
+        if counter >= 50:
+            return
+
+        roll = roll_dice(dice)
+
+        print('explode roll: ', roll, group)
+
+        log_roll.append(roll[0])
+
+        if roll[0] in group:
+            counter = counter + 1
+            _recursive_roll(dice, group, True)
+            return
+
+        counter = 0
+    ##
+
+    group = avaliate_parameters(parameters, pool)
+
+    dice = ['1', 'd', pool[2]]
+
+    print('explode dice, ndices: ', dice, n_dices)
+
+    for _ in range(n_dices):
+
+        _recursive_roll(dice, group, False)
+
+    log_roll.sort(reverse=True)
+
+    total = log_roll
+    log = f"{command} {parameters} in {pool}"
+
+    return [total, log]
+
+
+def reroll(command, parameters, pool):  # think about the best results output
+
+    log_roll = []
+
+    group = avaliate_parameters(parameters, pool)
+    roll = avaliate_pool(pool)
+
+    log_roll.append(roll)
+
+    dice = ['1', 'd', pool[2]]
+
+    for number in roll:
+        log_roll.append(number)
+
+        if number in group:
+            single = roll_dice(dice)
+            log_roll.append(single)
+
+    total = log_roll
+    log = f"{command} {parameters} in {pool}"
+
+    return [total, log]
+
+
+def multiroll(command, parameters, pool):
+
+    log_roll = []
+
+    group = avaliate_parameters(parameters, pool)
+
+    print("grupo: ", group)
+
+    for _ in range(group[0]):
+
+        roll = avaliate_pool(pool)
+        log_roll.append(roll)
+
+    total = log_roll
+    log = f"{command} {parameters} in {pool}"
+
+    return [total, log]
+
+
+def stratify(command, parameters, pool):  # s 6,9 in 2d6
+    log_roll = []
+
+    group = avaliate_parameters(parameters, pool)
+    roll = avaliate_pool(pool)
+    
+    total = log_roll
+    log = f"{command} {parameters} in {pool}"
+
+    return [total, log]
+
 def address_commands(expression):
 
     command, parameters, pool = expression
@@ -141,13 +241,28 @@ def address_commands(expression):
         case "count":
             total, log = count_in(command, parameters, pool)
 
-        case "highest":
+        case "highest" | "lowest":
             total, log = keep_subset(command, parameters, pool)
+
+        case "explode":
+            total, log = explode_dice(command, parameters, pool)
+
+        case "stratify":
+            total, log = stratify(command, parameters, pool)
+
+        case "reroll":
+            total, log = reroll(command, parameters, pool)
+
+        case "multiroll":
+            total, log = multiroll(command, parameters, pool)
 
     return [total, log]
 
 
 def split_elements(expression):
+
+    result = ""
+    track = ""
 
     for parameter in expression:
 

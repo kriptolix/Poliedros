@@ -4,33 +4,19 @@ from pyparsing import (
 )
 
 
-def run_postorder(expr):
-    """
-    Faz uma travessia pós-ordem (postorder) da estrutura em árvore.
-    Apenas nós que são listas são retornados.
-    """
-    nos = []
-    if isinstance(expr, list):
-        for item in expr:
-            nos.extend(run_postorder(item))
-            print(item)
-        nos.append(expr)
-    return nos
-
-
 def command_parser(command):
 
     ParserElement.enablePackrat()
-    
+
     integer = Word(nums)
-    
+
     positive = Word("123456789", "0123456789", min=1, max=3)
     plus = Literal('+')
     minus = Literal('-')
-    
+
     range_op = Literal("..")
     range_expr = integer("start") + range_op + integer("end")
- 
+
     number_or_range = range_expr | integer
 
     dice_notation = Group(
@@ -40,13 +26,13 @@ def command_parser(command):
     )
 
     expr = Forward()
-    
+
     parenthesized_expr = (Suppress("(") + expr + Suppress(")"))
-    
+
     integer_expr = integer.copy()
- 
-    roll = Group(
-        Literal("roll")("command") +
+
+    multiroll = Group(
+        Literal("multiroll")("command") +
         Group(number_or_range)("amount") +
         dice_notation("dice")
     )
@@ -86,18 +72,19 @@ def command_parser(command):
     reroll = Group(
         Literal("reroll")("command") +
         (
-            (oneOf("< >")("comparator") + number_or_range("amount")) |
+            Group(oneOf("< >")("comparator") + number_or_range("amount")) |
+            Group(delimitedList(number_or_range, delim=",")("values")) |
             number_or_range("amount")
         ) +
         Suppress("in") +
         (parenthesized_expr | dice_notation | integer_expr)("dice")
     )
-    
+
     extended_operand = (
         parenthesized_expr | highest | lowest | count |
-        explode | reroll | roll | dice_notation | integer_expr
+        explode | reroll | multiroll | dice_notation | integer_expr
     )
-    
+
     expr <<= extended_operand + ZeroOrMore((plus | minus) + extended_operand)
 
     try:

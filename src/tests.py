@@ -1,4 +1,4 @@
-from .commandparser import command_parser, run_postorder
+from .commandparser import command_parser
 from .executor import split_elements
 
 tests = ["count 5,6 in (highest 2 in 5d6)"]
@@ -39,9 +39,9 @@ def test_parser():
 
 
 def run_tests():
-    expression = "count 5,6 in (highest 2 in 5d6)"
+    expression = "multiroll 3 2d4"
     result = command_parser(expression)
     print(f"{expression} -> {result}")
-    total = 0
-    log = split_elements(result)
+    # total  
+    total, log = split_elements(result)
     print(f"total: {total}, log :{log}")
