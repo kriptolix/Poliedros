@@ -4,7 +4,7 @@ from .executor import split_elements
 tests = ["count 5,6 in (highest 2 in 5d6)"]
 
 tests2 = [
-    "explode1in4d6",
+    "explode 1 in 4d6", "4d6|h:2|c:5,6"
     "explode 1 in 4d6",
     "explode 5,6 in 4d6",
     "explode 3..5 in 4d10",
@@ -30,16 +30,8 @@ tests2 = [
     "3d6+(count 6 in 3d6)"
 ]
 
-
-def test_parser():
-    for test in tests:
-        result = command_parser(test)
-        print(f"{test} -> {result}")
-        print(run_postorder(result))
-
-
-def run_tests():
-    expression = "multiroll 3 2d4"
+def run_tests():  # 5d6:h2:c5,6
+    expression = "count 5,6 in (highest 2 in 5d6)"
     result = command_parser(expression)
     print(f"{expression} -> {result}")
     # total  

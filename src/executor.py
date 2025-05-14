@@ -1,5 +1,4 @@
 import random
-from typing import List
 
 
 funcions_list = ["count", "highest"]
@@ -126,14 +125,14 @@ def keep_subset(command, parameters, pool):
             excluded = roll[:-len(subroll)]
             excluded.append(subroll)
 
-    total = subroll
-    log = f"{command} {parameters} in {pool}"
+    total = sum(subroll)
+    log = f"{command} {parameters} in {pool} {subroll}"
     # print(subroll)
 
     return [total, log]
 
 
-def explode_dice(command, parameters, pool):
+def explode(command, parameters, pool):
 
     log_roll = []
     counter = 0
@@ -227,11 +226,12 @@ def stratify(command, parameters, pool):  # s 6,9 in 2d6
 
     group = avaliate_parameters(parameters, pool)
     roll = avaliate_pool(pool)
-    
+
     total = log_roll
     log = f"{command} {parameters} in {pool}"
 
     return [total, log]
+
 
 def address_commands(expression):
 
@@ -245,7 +245,7 @@ def address_commands(expression):
             total, log = keep_subset(command, parameters, pool)
 
         case "explode":
-            total, log = explode_dice(command, parameters, pool)
+            total, log = explode(command, parameters, pool)
 
         case "stratify":
             total, log = stratify(command, parameters, pool)
@@ -261,11 +261,26 @@ def address_commands(expression):
 
 def split_elements(expression):
 
-    result = ""
+    total = 0
     track = ""
 
-    for parameter in expression:
+    for parameter in expression:        
 
-        result = address_commands(parameter)
+        if isinstance(parameter, str):
+            print("parametro")
+            partial = 0
+            log = " " + parameter + " "
 
-    return result
+        elif isinstance(parameter, int):
+            print("inteiro")
+            partial = parameter
+            log = str(parameter)
+
+        else:
+            print("função")
+            partial, log = address_commands(parameter)
+
+        total = total + partial
+        track = track + log
+
+    return [total, track]

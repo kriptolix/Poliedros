@@ -8,9 +8,10 @@ def command_parser(command):
 
     ParserElement.enablePackrat()
 
-    integer = Word(nums)
+    # integer = Word(nums)
 
-    positive = Word("123456789", "0123456789", min=1, max=3)
+    integer = Word("123456789", "0123456789", min=1, max=3).setParseAction(
+        lambda tokens: int(tokens[0]))
     plus = Literal('+')
     minus = Literal('-')
 
@@ -22,7 +23,7 @@ def command_parser(command):
     dice_notation = Group(
         Optional(integer, default="1")("count") +
         Literal("d") +
-        (positive | Literal("f"))("faces")
+        (integer | Literal("f"))("faces")
     )
 
     expr = Forward()
@@ -81,7 +82,7 @@ def command_parser(command):
     )
 
     extended_operand = (
-        parenthesized_expr | highest | lowest | count |
+        parenthesized_expr | highest | lowest | count | 
         explode | reroll | multiroll | dice_notation | integer_expr
     )
 
