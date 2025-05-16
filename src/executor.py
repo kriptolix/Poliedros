@@ -1,4 +1,5 @@
 import random
+import operator
 
 
 funcions_list = ["count", "highest"]
@@ -34,8 +35,8 @@ def avaliate_parameters(parameters, pool):
             if one == "<":
                 group = range(1, int(two))
             if one == ">":
-                _, faces = pool
-                group = range(int(two), int(faces))
+                heigher = pool[0]
+                group = range(int(two), int(heigher))
 
         case 3:  # range or function
             one, two, three = parameters
@@ -49,7 +50,7 @@ def avaliate_parameters(parameters, pool):
             if three == "..":
                 group = range(int(one), int(three))
 
-    group = [int(item) for item in parameters]
+    group = (int(item) for item in parameters)
 
     # print("avaliate parameters, group return: ", group)
 
@@ -59,8 +60,6 @@ def avaliate_parameters(parameters, pool):
 def roll_dice(expression):
 
     n_dices, _, n_sides = expression
-
-    # print("roll dice expression: ", expression)
 
     n_dices = int(n_dices)
 
@@ -90,8 +89,14 @@ def count_in(command, parameters, pool):
     group = avaliate_parameters(parameters, pool)
     # print("count_in group: ", group)
 
-    roll = avaliate_pool(pool)
-    # print("count_in roll: ", roll)
+    roll = pool
+    text = "count"
+
+    if command in ['check', 'ch']:
+        roll = [sum(pool)]
+        text = "check"
+
+    print("roll: ", roll)
 
     for value in roll:
         # print("value: ", value, " group: ", group)
@@ -99,34 +104,32 @@ def count_in(command, parameters, pool):
             total = total + 1
 
     total = total
-    log = f"{command} {parameters} in {pool}"
+    log = f"-> {text} {parameters} = {total} "
 
     return [total, log]
 
 
 def keep_subset(command, parameters, pool):
 
-    group = avaliate_parameters(parameters, pool)
-    # print("keep_subset group: ", group)
+    roll = pool
 
-    roll = avaliate_pool(pool)
-    # vprint("keep_subset roll: ", roll)
-
-    keep = group[0]
+    keep = parameters[0]
 
     match command:
-        case "highest" | "h":
+        case "highest" | "kh":
             subroll = roll[:keep]
             excluded = roll[len(subroll):]
             excluded.insert(0, subroll)
+            text = "highest"
 
-        case "l":
+        case "lowest" | "kl":
             subroll = roll[-keep:]
             excluded = roll[:-len(subroll)]
             excluded.append(subroll)
+            text = "lowest"
 
-    total = sum(subroll)
-    log = f"{command} {parameters} in {pool} {subroll}"
+    total = subroll
+    log = f"-> {text} {parameters} = {subroll} "
     # print(subroll)
 
     return [total, log]
@@ -233,54 +236,96 @@ def stratify(command, parameters, pool):  # s 6,9 in 2d6
     return [total, log]
 
 
-def address_commands(expression):
-
-    command, parameters, pool = expression
-
-    match command:
-        case "count":
-            total, log = count_in(command, parameters, pool)
-
-        case "highest" | "lowest":
-            total, log = keep_subset(command, parameters, pool)
-
-        case "explode":
-            total, log = explode(command, parameters, pool)
-
-        case "stratify":
-            total, log = stratify(command, parameters, pool)
-
-        case "reroll":
-            total, log = reroll(command, parameters, pool)
-
-        case "multiroll":
-            total, log = multiroll(command, parameters, pool)
-
-    return [total, log]
-
-
-def split_elements(expression):
+def address_commands(expression):  # 3d6 + 1d4, 1d4 + 3d6 | c:2 | h:2
 
     total = 0
-    track = ""
+    pool = []
+    plus_minus = None
+    track = ''
 
-    for parameter in expression:        
+    for elemment in expression:
 
-        if isinstance(parameter, str):
-            print("parametro")
-            partial = 0
-            log = " " + parameter + " "
+        if elemment == '+' or elemment == '-':
+            plus_minus = elemment
+            
 
-        elif isinstance(parameter, int):
-            print("inteiro")
-            partial = parameter
-            log = str(parameter)
+        if isinstance(elemment, int):
 
-        else:
-            print("função")
-            partial, log = address_commands(parameter)
+            if plus_minus:
+                if plus_minus == '+':
+                    op = operator.add
+                if plus_minus == '-':
+                    op = operator.sub
 
-        total = total + partial
-        track = track + log
+                total = op(sum(pool), elemment)
+                track = track + \
+                    f" = {sum(pool)} {plus_minus} {elemment} = {total}"
+                pool = None
+                plus_minus = None
+            else:
+                total = elemment
+
+            print("integer total: ", total)
+
+        if isinstance(elemment, list):
+
+            if len(elemment) == 3:
+                
+                result = roll_dice(elemment)
+                text = f"{elemment[0]}{elemment[1]}{elemment[2]}"
+                log = f"Roll {text} = {result} "
+                print("dice log: ", log)
+
+                if plus_minus:
+                    if plus_minus == '+':
+                        op = operator.add
+                    if plus_minus == '-':
+                        op = operator.sub
+                    
+                    total = op(sum(pool), sum(result))
+                    pool = None
+                    plus_minus = None
+                else:
+                    pool = result
+
+            print("dice, pool, total: ", pool, total)
+
+            if len(elemment) == 2:
+                command, parameters = elemment
+
+                data = [total]
+
+                if pool:
+                    data = pool
+
+                print("cmd: ", command, parameters, data)
+
+                match command:
+                    case 'count' | 'cn' | 'check' | 'ch':
+                        result, log = count_in(command, parameters, data)
+                        pool = None
+
+                    case "highest" | "lowest" | "kh" | "kl":
+                        pool, log = keep_subset(command, parameters, data)
+
+                    case "explode":
+                        pool, log = explode(command, parameters, data)
+
+                    case "stratify":
+                        total, log = stratify(command, parameters, data)
+
+                    case "reroll":
+                        pool, log = reroll(command, parameters, data)
+
+                    case "multiroll":
+                        total, log = multiroll(command, parameters, data)
+
+                total = result
+                track = track + log
+
+        if pool:
+            print("total: ", total, " pool: ", pool)
+            total = total + sum(pool)
+            track = track + f"= {total}"
 
     return [total, track]

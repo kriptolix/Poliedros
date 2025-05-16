@@ -1,43 +1,81 @@
 from pyparsing import (
-    Word, Literal, Group, Optional, Suppress, alphas,
-    oneOf, ZeroOrMore 
+    Word, Literal, Group, Optional, Suppress, alphas, CaselessLiteral,
+    oneOf, ZeroOrMore, nums, OneOrMore, Regex, delimitedList
 )
 
 
-def parse_expression(command):
+def parse_expression(sequence):
 
-    func_id = Word(alphas, min=1, max=2)
-
-    func_number = Word("123456789", "0123456789", min=1, max=3).setParseAction(
-        lambda tokens: int(tokens[0]))
-
-    dice_expr = Group(
-        Optional(func_number, default="1")("count") +
-        Literal("d") +
-        (func_number | Literal("f"))("faces")
+    number = Word("123456789", nums, min=1, max=3).setParseAction(
+        lambda t: int(t[0])
     )
 
-    plus = Literal("+")
-    minus = Literal("-")
-    pipe = Suppress("|")
+    plus = (Literal("+"))
+    minus = (Literal("-"))
+    pipe = Suppress(Literal("|"))
+    seperator = Suppress(Literal(":"))
 
-    op = plus | minus | pipe
+    range_expression = Group(number + Literal("..") + number)
 
-    comparator = oneOf("> <")
-    comp_expr = Group(comparator + func_number)
+    number_or_range = range_expression | number
 
-    range_expr = Group(func_number + Literal("..") + func_number)
+    dice_notation = Group(
+        Optional(number, default="1")("count") +
+        Literal("d") +
+        (number | Literal("f"))("faces")
+    )
 
-    func_param = range_expr | comp_expr | func_number
+    multiroll = Group(
+        (Literal("multiroll") | Literal("mr"))("command") +
+        Group(number_or_range)("amount")
+    )
 
-    func_expr = Group(func_id + Suppress(":") + func_param)
+    keep = Group(
+        (Literal("highest") | Literal("kh") | 
+         Literal("lowest") | Literal("kl"))("command") +
+        seperator("separator") +
+        Group(Optional(delimitedList(number_or_range, delim=","), default="1"))(
+            "amount")
+    )   
 
-    operand = dice_expr | func_expr | func_number
+    count = Group(
+        (Literal("count") | Literal("cn") |
+         Literal("check") | Literal("ch"))("command") +
+        seperator("separator") +
+        (
+            Group(oneOf("< >")("comparator") + number_or_range("amount")) |
+            Group(delimitedList(number_or_range, delim=",")("values")) |
+            number_or_range("amount")
+        )
+    )
 
-    expression = operand + ZeroOrMore(op + operand)
+    explode = Group(
+        (Literal("explode") | Literal("ex"))("command") +
+        Group(Optional(delimitedList(number_or_range, delim=",")))("values")
+    )
+
+    reroll = Group(
+        (Literal("reroll") | Literal("rr"))("command") +
+        (
+            Group(oneOf("< >")("comparator") + number_or_range("amount")) |
+            Group(delimitedList(number_or_range, delim=",")("values")) |
+            number_or_range("amount")
+        )
+    )
+
+    dice_operand = (
+        dice_notation + OneOrMore(oneOf("+ -") + (dice_notation | number)))
+
+    extended_operand = (
+        keep | count | dice_operand |
+        explode | reroll | multiroll | dice_notation | number
+    )
+
+    expression = extended_operand + \
+        ZeroOrMore((plus | minus | pipe) + extended_operand)
 
     try:
-        result = expression.parseString(command)
-        return result
+        result = expression.parseString(sequence, parseAll=True)
+        return result.asList()
     except Exception as e:
-        print(f"Erro ao interpretar '{command}': {e}")
+        print(f"Erro ao interpretar '{sequence}': {e}")
