@@ -25,36 +25,42 @@ def avaliate_pool(pool):
     return pool
 
 
+def do_operation(operation, value, elemment):
+
+    if operation == '+':
+        op = operator.add
+    if operation == '-':
+        op = operator.sub
+
+    total = op(value, elemment)
+    log = f"= {elemment} {operation} {value} = {total}"
+
+    return [total, log]
+
+
 def avaliate_parameters(parameters, pool):
 
-    lenght = len(parameters)
+    group = []
 
-    match lenght:
-        case 2:  # greater/smaller
-            one, two = parameters
-            if one == "<":
-                group = range(1, int(two))
-            if one == ">":
-                heigher = pool[0]
-                group = range(int(two), int(heigher))
+    if parameters[0] == "<":
+        for element in pool:
+            if element <= parameters[1]:
+                group.append(element)
+        return group
 
-        case 3:  # range or function
-            one, two, three = parameters
-            if one in funcions_list:
-                total, log = address_commands(parameters)
+    if parameters[0] == ">":
+        for element in pool:
+            if element >= parameters[1]:
+                group.append(element)
+        return group
 
-                # print("avaliate parameters, command return: ", total)
+    if parameters[1] == "..":
+        for element in pool:
+            if element >= parameters[0] and element <= parameters[2]:
+                group.append(element)
+        return group
 
-                return total
-
-            if three == "..":
-                group = range(int(one), int(three))
-
-    group = (int(item) for item in parameters)
-
-    # print("avaliate parameters, group return: ", group)
-
-    return group
+    return parameters
 
 
 def roll_dice(expression):
@@ -77,9 +83,9 @@ def roll_dice(expression):
 
     roll.sort(reverse=True)
 
-    # print("roll dice roll: ", roll)
+    log = f"Roll {n_dices}d{n_sides} = {roll} "
 
-    return roll
+    return [roll, log]
 
 
 def count_in(command, parameters, pool):
@@ -96,7 +102,7 @@ def count_in(command, parameters, pool):
         roll = [sum(pool)]
         text = "check"
 
-    print("roll: ", roll)
+    # print("roll: ", roll)
 
     for value in roll:
         # print("value: ", value, " group: ", group)
@@ -129,8 +135,7 @@ def keep_subset(command, parameters, pool):
             text = "lowest"
 
     total = subroll
-    log = f"-> {text} {parameters} = {subroll} "
-    # print(subroll)
+    log = f"-> {text} {parameters} = {subroll} "    
 
     return [total, log]
 
@@ -247,50 +252,47 @@ def address_commands(expression):  # 3d6 + 1d4, 1d4 + 3d6 | c:2 | h:2
 
         if elemment == '+' or elemment == '-':
             plus_minus = elemment
-            
 
-        if isinstance(elemment, int):
+        if isinstance(elemment, int):  # number
+
+            total = elemment
+            # log = f"{elemment}"
 
             if plus_minus:
-                if plus_minus == '+':
-                    op = operator.add
-                if plus_minus == '-':
-                    op = operator.sub
 
-                total = op(sum(pool), elemment)
-                track = track + \
-                    f" = {sum(pool)} {plus_minus} {elemment} = {total}"
+                total, log = do_operation(plus_minus, sum(pool), elemment)
                 pool = None
                 plus_minus = None
-            else:
-                total = elemment
-
-            print("integer total: ", total)
+                track = track + log
+            
+            # print("integer total, pool: ", total, pool)
 
         if isinstance(elemment, list):
 
-            if len(elemment) == 3:
-                
-                result = roll_dice(elemment)
-                text = f"{elemment[0]}{elemment[1]}{elemment[2]}"
-                log = f"Roll {text} = {result} "
-                print("dice log: ", log)
+            if len(elemment) == 3:  # dice roll
 
+                result, log = roll_dice(elemment)
+                
                 if plus_minus:
-                    if plus_minus == '+':
-                        op = operator.add
-                    if plus_minus == '-':
-                        op = operator.sub
+                    value = total
                     
-                    total = op(sum(pool), sum(result))
+                    if pool:
+                        value = sum(pool)
+                        track = track + f"= {value} {plus_minus} "
+
+                    total, op_log = do_operation(
+                        plus_minus, value, sum(result))
+
+                    log = log + op_log
                     pool = None
                     plus_minus = None
                 else:
                     pool = result
 
-            print("dice, pool, total: ", pool, total)
+                track = track + log
+                # print("dice log, total, pool: ", log, total, pool)
 
-            if len(elemment) == 2:
+            if len(elemment) == 2:  # function call
                 command, parameters = elemment
 
                 data = [total]
@@ -298,34 +300,37 @@ def address_commands(expression):  # 3d6 + 1d4, 1d4 + 3d6 | c:2 | h:2
                 if pool:
                     data = pool
 
-                print("cmd: ", command, parameters, data)
+                # print("cmd: ", command, parameters, data)
 
                 match command:
                     case 'count' | 'cn' | 'check' | 'ch':
                         result, log = count_in(command, parameters, data)
                         pool = None
+                        total = total + result
 
                     case "highest" | "lowest" | "kh" | "kl":
                         pool, log = keep_subset(command, parameters, data)
+                        total = 0
 
                     case "explode":
                         pool, log = explode(command, parameters, data)
 
                     case "stratify":
-                        total, log = stratify(command, parameters, data)
+                        pool, log = stratify(command, parameters, data)
 
                     case "reroll":
                         pool, log = reroll(command, parameters, data)
 
                     case "multiroll":
-                        total, log = multiroll(command, parameters, data)
+                        pool, log = multiroll(command, parameters, data)
 
-                total = result
                 track = track + log
 
-        if pool:
-            print("total: ", total, " pool: ", pool)
-            total = total + sum(pool)
-            track = track + f"= {total}"
+    if pool:
+        # print("total: ", total, " pool: ", pool)
+        total = total + (sum(pool))
+        track = track + f"= {total}"
+
+    # print("total, track: ", total, track)
 
     return [total, track]

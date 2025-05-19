@@ -4,6 +4,7 @@ from pyparsing import (
 )
 
 
+
 def parse_expression(sequence):
 
     number = Word("123456789", nums, min=1, max=3).setParseAction(
@@ -13,7 +14,7 @@ def parse_expression(sequence):
     plus = (Literal("+"))
     minus = (Literal("-"))
     pipe = Suppress(Literal("|"))
-    seperator = Suppress(Literal(":"))
+    seperator = Suppress(Literal(":"))    
 
     range_expression = Group(number + Literal("..") + number)
 
