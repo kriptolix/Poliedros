@@ -1,28 +1,31 @@
 import random
 import operator
+import re
 
+# Validation Patterns
 
-funcions_list = ["count", "highest"]
+pt_integer = r'^[1-9][0-9]{0,2}+$'
+pt_number = r'[1-9][0-9]{0,2}'
+pt_operator = r'^[+\-]+$'
+pt_dice = r'^[1-9][0-9]?d(f|[1-9][0-9]{0,2})+$'
+pt_dice_prefix = r'[1-9][0-9]?d(?:f|[1-9][0-9]{0,2})'
+pt_sufix = r'(?=\|[A-Za-z]{{2}}:|$)'
 
+pt_ge_le = rf"[<>]{pt_number}"
+pt_range = rf"{pt_number}\.\.{pt_number}"
 
-def avaliate_pool(pool):
+pt_ex = rf"^(?:{pt_dice_prefix}\|)ex:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
+pt_rr = rf"^(?:{pt_dice_prefix}\|)rr:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
+pt_mr = rf"^(?:{pt_dice_prefix}\|)mr:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
 
-    # print("avaliate pool, pool: ", pool)
+pt_ex_b = rf"^ex:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
+pt_rr_b = rf"^rr:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
+pt_mr_b = rf"^mr:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
 
-    if len(pool) == 3:
-        if pool[0] in funcions_list:  # checa se é função
-
-            total, log = address_commands(pool)
-
-            # print("avaliate pool, address_commands total: ", total)
-
-            return total
-
-        total = roll_dice(pool)
-        # print("avaliate pool, roll_dice total: ", total)
-        return total
-
-    return pool
+pt_cn = rf"^cn:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
+pt_st = rf"^st:(?:{pt_number})$"
+pt_kh = rf"^kh:(?:{pt_number})$"
+pt_kl = rf"^kl:(?:{pt_number})$"
 
 
 def do_operation(operation, value, elemment):
@@ -33,7 +36,7 @@ def do_operation(operation, value, elemment):
         op = operator.sub
 
     total = op(value, elemment)
-    log = f"= {elemment} {operation} {value} = {total}"
+    log = f"= {elemment} {operation} {value} = {total} "
 
     return [total, log]
 
@@ -83,7 +86,7 @@ def roll_dice(expression):
 
     roll.sort(reverse=True)
 
-    log = f"Roll {n_dices}d{n_sides} = {roll} "
+    log = f"{n_dices}d{n_sides} = {roll}"
 
     return [roll, log]
 
@@ -135,17 +138,55 @@ def keep_subset(command, parameters, pool):
             text = "lowest"
 
     total = subroll
-    log = f"-> {text} {parameters} = {subroll} "    
+    log = f"-> {text} {parameters} = {subroll} "
 
     return [total, log]
 
 
-def explode(command, parameters, pool):
+def setup_parameters(expression):
 
+    elements = re.split(r'(:|\||\.\.)', expression)
+    command = elements[2]
+    dice_string = re.split('d', elements[0])
+
+    pool, log = roll_dice(dice_string)
+
+    group = []
+
+    if elements[4] == "<":
+        for element in pool:
+            if element <= element[1]:
+                group.append(element)
+        return group
+
+    if elements[4] == ">":
+        for element in pool:
+            if element >= elements[1]:
+                group.append(element)
+        return group
+
+    if elements[5] == "..":
+        for element in pool:
+            if element >= elements[4] and element <= elements[6]:
+                group.append(element)
+        return group
+
+    parameters = [command, group, log]
+
+    return parameters
+
+
+def explode(expression):
+
+    parameters = re.split(r'(:|\||\.\.)', expression)
+    command = parameters[2]
+    pool = parameters[0]
+
+    print(parameters)
     log_roll = []
     counter = 0
 
-    n_dices = int(pool[0])
+    # n_dices = int(pool[0])
 
     def _recursive_roll(dice, group, exploded):  # [6, [6], 3, 2]
 
@@ -168,7 +209,7 @@ def explode(command, parameters, pool):
         counter = 0
     ##
 
-    group = avaliate_parameters(parameters, pool)
+    '''group = avaliate_parameters(parameters, pool)
 
     dice = ['1', 'd', pool[2]]
 
@@ -183,7 +224,7 @@ def explode(command, parameters, pool):
     total = log_roll
     log = f"{command} {parameters} in {pool}"
 
-    return [total, log]
+    return [total, log]'''
 
 
 def reroll(command, parameters, pool):  # think about the best results output
@@ -250,44 +291,37 @@ def address_commands(expression):  # 3d6 + 1d4, 1d4 + 3d6 | c:2 | h:2
 
     for elemment in expression:
 
+        if plus_minus:
+            value = total
+
+            if pool:
+                value = sum(pool)
+                track = track + f"= {value} {plus_minus} "
+
+            total, op_log = do_operation(
+                plus_minus, value, sum(result))
+
+            log = log + op_log
+            pool = None
+            plus_minus = None
+
         if elemment == '+' or elemment == '-':
             plus_minus = elemment
+            track = track + elemment
 
         if isinstance(elemment, int):  # number
 
             total = elemment
-            # log = f"{elemment}"
+            log = f" {elemment} "
 
-            if plus_minus:
-
-                total, log = do_operation(plus_minus, sum(pool), elemment)
-                pool = None
-                plus_minus = None
-                track = track + log
-            
+            track = track + log
             # print("integer total, pool: ", total, pool)
 
         if isinstance(elemment, list):
 
             if len(elemment) == 3:  # dice roll
 
-                result, log = roll_dice(elemment)
-                
-                if plus_minus:
-                    value = total
-                    
-                    if pool:
-                        value = sum(pool)
-                        track = track + f"= {value} {plus_minus} "
-
-                    total, op_log = do_operation(
-                        plus_minus, value, sum(result))
-
-                    log = log + op_log
-                    pool = None
-                    plus_minus = None
-                else:
-                    pool = result
+                pool, log = roll_dice(elemment)
 
                 track = track + log
                 # print("dice log, total, pool: ", log, total, pool)
@@ -334,3 +368,120 @@ def address_commands(expression):  # 3d6 + 1d4, 1d4 + 3d6 | c:2 | h:2
     # print("total, track: ", total, track)
 
     return [total, track]
+
+
+def execute_operations(command):  # 6 - 5d6 + 1d4 |kh:3 |cn:>4
+
+    result = ""
+    track = ""
+    pool = None
+    operation = False
+
+    for parameter in command:
+        log = ''
+        total = ''
+
+        if (re.match(pt_dice, parameter)):
+            roll, log = roll_dice(parameter)
+            pool = roll
+
+            if operation:
+                total = f" {operation} {sum(roll)}"
+                log = f" {operation} ({log} = {sum(roll)})"
+                operation = False
+                pool = None
+
+        if (re.match(pt_integer, parameter)):
+            total = parameter
+            log = parameter
+
+            if operation:
+
+                total = f" {operation} {parameter}"
+                log = f" {operation} {parameter}"
+
+                if pool:
+                    total = f"{sum(roll)} {operation} {parameter}"
+                    log = f"= {total}"
+
+                operation = None
+                pool = None
+
+        if (re.match(pt_operator, parameter)):
+            # total = parameter
+            operation = parameter
+
+        if (re.match(pt_ex, parameter)):  # in: dice, out: list
+            roll, log = explode(parameter)
+            pool = roll
+
+            if operation:
+                total = f" {operation} {sum(roll)}"
+                log = f" {operation} ({log} = {sum(roll)})"
+                operation = False
+                pool = None
+
+        if (re.match(pt_mr, parameter)):  # in: dice, out: list[list]
+            # total, log = explode(parameter)
+
+            print('mr ', parameter)
+
+        if (re.match(pt_rr, parameter)):  # in: dice, out: list
+            # total, log = explode(parameter)
+
+            print('rr ', parameter)
+
+        if (re.match(pt_kh, parameter)  # in: list, out: list
+                or re.match(pt_kl, parameter)):
+
+            '''data = total  # eval(total)?
+
+            if pool:
+                data = pool
+
+            total, log = keep_subset(parameter, data)'''
+
+            print('kp ', parameter)
+
+        if (re.match(pt_cn, parameter)):  # in: list, out: integer
+            # total, log = count_in(parameter)
+            print('cn', parameter)
+
+        # stratify, entrada deve ser lista
+
+        result = result + total
+        track = track + log
+
+    print(f"results: {result}, track: {track}")
+
+    results = [True, eval(result), track]
+
+    return results
+
+
+def execute_command(input_command):
+
+    input_command = re.sub(' ', '', input_command)
+    parameters = re.split(r'(\+|\-|\|)', input_command)
+
+    fixed_param = []
+
+    for index, param in enumerate(parameters):
+        new = param
+        if ((re.match(pt_ex_b, param))
+            or (re.match(pt_rr_b, param))
+                or (re.match(pt_mr_b, param))):
+
+            if (re.match(pt_dice, parameters[index - 2])):
+                new = f"{parameters[index - 2]}|{param}"
+                fixed_param.pop(index - 2)
+
+        fixed_param.append(new)
+
+    print(fixed_param)
+
+    result = execute_operations(fixed_param)
+
+    print(result)
+
+    return fixed_param

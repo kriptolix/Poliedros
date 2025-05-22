@@ -51,7 +51,10 @@ def parse_expression(sequence):
     )
 
     explode = Group(
-        (Literal("explode") | Literal("ex"))("command") +
+        (dice_notation)("dice") +
+        pipe("pipe") +
+        Literal("ex")("command") +
+        seperator("separator") +
         Group(Optional(delimitedList(number_or_range, delim=",")))("values")
     )
 
@@ -68,8 +71,8 @@ def parse_expression(sequence):
         dice_notation + OneOrMore(oneOf("+ -") + (dice_notation | number)))
 
     extended_operand = (
-        keep | count | dice_operand |
-        explode | reroll | multiroll | dice_notation | number
+        explode | keep | count | dice_operand |
+        reroll | multiroll | dice_notation | number
     )
 
     expression = extended_operand + \
