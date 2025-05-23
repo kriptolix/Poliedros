@@ -1,10 +1,5 @@
 from gi.repository import Gio
 
-from pyparsing import (
-    Word, Literal, Group, Optional, Forward, Suppress, ParserElement, nums,
-    oneOf, infixNotation, opAssoc, delimitedList
-)
-
 
 def create_action(action_group, prefix, name, callback,
                   shortcuts=None, parameter=None, target=None):
@@ -30,3 +25,4 @@ def create_action(action_group, prefix, name, callback,
 
     if shortcuts:
         action_group.set_accels_for_action(detailed_name, shortcuts)
+
