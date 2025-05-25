@@ -197,44 +197,36 @@ def reroll(expression):  # think about the best results output
 
     dice = ['1', 'd', dice_faces[1]]
 
-    
     log = f"{command} {parameters} in {pool}"
 
     return [total, log]
 
 
-def multiroll(command, parameters, pool):
+def multiroll(expression: str) -> list:
 
     extended_roll = []
 
-    group = avaliate_parameters(parameters, pool)
+    elements = re.split(r'(:|\||\.\.|<|>)', expression)
+    command = "Multiroll"
 
-    print("grupo: ", group)
+    group = int(elements[4])
 
-    for _ in range(group[0]):
+    print("elements: ", elements)
 
-        roll = avaliate_pool(pool)
-        extended_roll.append(roll)
+    for _ in range(group):
+
+        pool, log = roll_dice(elements[0])
+        extended_roll.append(pool)
 
     total = extended_roll
-    log = f"{command} {parameters} in {pool}"
+    log = f"{command} {group} x {elements[0]}"
+
+    print(total, log)
 
     return [total, log]
 
 
-def stratify(command, parameters, pool):  # s 6,9 in 2d6
-    extended_roll = []
-
-    group = avaliate_parameters(parameters, pool)
-    roll = avaliate_pool(pool)
-
-    total = extended_roll
-    log = f"{command} {parameters} in {pool}"
-
-    return [total, log]
-
-
-def address_commands(expression):  # 3d6 + 1d4, 1d4 + 3d6 | c:2 | h:2
+def address_commands(expression):  
 
     total = 0
     pool = []
@@ -322,7 +314,7 @@ def address_commands(expression):  # 3d6 + 1d4, 1d4 + 3d6 | c:2 | h:2
     return [total, track]
 
 
-def execute_operations(command):  # 6 - 5d6 + 1d4 |kh:3 |cn:>4
+def execute_operations(command):  
 
     result = ""
     track = ""
@@ -376,9 +368,14 @@ def execute_operations(command):  # 6 - 5d6 + 1d4 |kh:3 |cn:>4
                 pool = None
 
         if (re.match(pt_mr, parameter)):  # in: dice, out: list[list]
-            # total, log = explode(parameter)
 
-            print('mr ', parameter)
+            if operation:
+                raise ValueError('Multirools cant be added.')
+            
+            roll, log = multiroll(parameter)
+            result = f'{pool}'
+            break
+            
 
         if (re.match(pt_rr, parameter)):  # in: dice, out: list
             # total, log = explode(parameter)
@@ -413,9 +410,7 @@ def execute_operations(command):  # 6 - 5d6 + 1d4 |kh:3 |cn:>4
                 total = f" {operation} {sum(roll)}"
                 log = f" {operation} ({log} = {sum(roll)})"
                 operation = False
-
-        # stratify, entrada deve ser lista
-
+       
         result = result + total
         track = track + log
 

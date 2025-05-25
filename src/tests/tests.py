@@ -22,7 +22,7 @@ def run_tests_all():
 
 
 def run_tests_single():
-    expression = "6d6|rr:1"
+    expression = "2d6|mr:3+1"
     # result = parse_expression(expression)
     result = execute_command(expression)
     print(f"{expression} -> {result}")
