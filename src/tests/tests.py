@@ -1,5 +1,5 @@
 from ..commandparser import parse_expression
-from ..executor import address_commands, execute_command 
+from ..executor import execute_command 
 
 tests = [
     "5d6+1d4|kh:3|cn:>4",
@@ -8,21 +8,22 @@ tests = [
     "2+3d10",
     "3df",
     "5d6+1|kh:5",
-    "4d6 | kh:2 + 5d10 |cn:>4"
+    "4d6 | kl:2 + 5d10 |cn:>4",
+    "3d6|ex:5,6 | cn:6"
 ]
 
 
 def run_tests_all():
 
     for expression in tests:
-        result = parse_expression(expression)
+        result = execute_command(expression)
         print(f"{expression} -> {result}")
-        total, log = address_commands(result)
-        print(f"total: {total}, log :{log}")
+        # total, log = address_commands(result)
+        # print(f"total: {total}, log :{log}")
 
 
 def run_tests_single():
-    expression = "2d6|mr:3+1"
+    expression = "3d6|ex:5,6"
     # result = parse_expression(expression)
     result = execute_command(expression)
     print(f"{expression} -> {result}")
@@ -32,5 +33,5 @@ def run_tests_single():
 
 def run_tests():  # "4d6 + 1 | h:2 | c:5,6" 3d6|c:2
 
-    #run_tests_all()
-    run_tests_single()
+    run_tests_all()
+    # run_tests_single()
