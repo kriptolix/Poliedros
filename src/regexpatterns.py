@@ -1,5 +1,6 @@
 # Validation Patterns
 
+pt_split = r'(:|\||\.\.|<|>|,)'
 pt_integer = r'^[1-9][0-9]{0,2}+$'
 pt_number = r'[1-9][0-9]{0,2}'
 pt_operator = r'^[+\-]+$'
@@ -17,13 +18,14 @@ pt_item = rf"(?:{pt_number}|{pt_ge_le}|{pt_range})"
 pt_sep = rf"(?:,{pt_item})*"
 
 pt_functon = rf"^[a-zA-Z]{{2}}:{pt_item}{pt_sep}$"
+pt_dice_func = rf"^(?:{pt_dice_prefix}\|)[a-zA-Z]{{2}}:{pt_item}{pt_sep}$"
 
 pt_ex = rf"^(?:{pt_dice_prefix}\|)ex:{pt_item}{pt_sep}$"
 pt_rr = rf"^(?:{pt_dice_prefix}\|)rr:{pt_item}{pt_sep}$"
 pt_mr = rf"^(?:{pt_dice_prefix}\|)mr:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
 
-pt_ex_b = rf"^ex:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
-pt_rr_b = rf"^rr:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
+pt_ex_b = rf"^ex:{pt_item}{pt_sep}$"
+pt_rr_b = rf"^rr:{pt_item}{pt_sep}$"
 pt_mr_b = rf"^mr:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
 
 # pt_cn = rf"^cn:(?:{pt_number}|{pt_ge_le}|{pt_range})$"
