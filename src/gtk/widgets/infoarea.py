@@ -39,3 +39,4 @@ class InfoArea(Adw.Bin):
         window = self.get_root()
         dialog = UsageInfo()
         dialog.present(window)
+        dialog.resize_dialog(window)

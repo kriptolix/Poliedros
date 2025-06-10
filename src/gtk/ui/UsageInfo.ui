@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="UsageInfo" parent="AdwDialog">
-    <property name="width-request">360</property>       
+  <template class="UsageInfo" parent="AdwDialog">          
     <child>
       <object class="AdwToolbarView">
         <child type="top">
@@ -33,7 +32,7 @@
                     <property name="label" translatable="yes">&lt;b&gt;Rolling dice:&lt;/b&gt; operator "d".
 
 &lt;b&gt;Ex.:&lt;/b&gt; 3d6, roll 3 6-sided die.
-&lt;b&gt;Ex.:&lt;/b&gt; 2df, roll 2 fudge dices (-1,0 and 1 possible results).
+&lt;b&gt;Ex.:&lt;/b&gt; 2df, roll 2 fudge dices (-1, 0 and 1 possible results).
                     </property>
                     <property name="wrap">true</property>
                     <property name="justify">3</property>
@@ -58,10 +57,10 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_kh_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Keeping higher:&lt;/b&gt; operator "h".
+                    <property name="label" translatable="yes">&lt;b&gt;Keeping higher:&lt;/b&gt; operator "kh".
                     
-&lt;b&gt;Ex.:&lt;/b&gt; 2h3d6, roll 3 6-sided dice and keep the 2 highest.
-&lt;b&gt;Ex.:&lt;/b&gt; 1h2d20 or h2d20, roll 2 20-sided dice and keep the highest.                    
+&lt;b&gt;Ex.:&lt;/b&gt; 3d6|kh:2, roll 3 6-sided dice and keep the 2 highest.
+&lt;b&gt;Ex.:&lt;/b&gt; 2d20|kh:1, roll 2 20-sided dice and keep the highest.                    
                     </property>
                     <property name="wrap">true</property>
                     <property name="justify">3</property>
@@ -72,7 +71,7 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_kl_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Keeping lower:&lt;/b&gt; operator "l".
+                    <property name="label" translatable="yes">&lt;b&gt;Keeping lower:&lt;/b&gt; operator "kl".
                     
 &lt;b&gt;Ex.:&lt;/b&gt; 2l4d10, roll 4 10-sided dice and keep the 2 lowest.
 &lt;b&gt;Ex.:&lt;/b&gt; 1l3d6 or l3d6, roll 3 6-sided dice and keep the lowest.
@@ -86,7 +85,7 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_ci_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Count in:&lt;/b&gt; operator "c".
+                    <property name="label" translatable="yes">&lt;b&gt;Count in:&lt;/b&gt; operator "cn".
                     
 &lt;b&gt;Ex.:&lt;/b&gt; c6d10,8,9,10, roll 4 10-sided dice and count howmany 8s,9s and 10s occur.
 &lt;b&gt;Ex.:&lt;/b&gt; c4d4,4, roll 4 4-sided dice and count how many 4s occur.
@@ -100,7 +99,7 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_ed_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Exploding dice:&lt;/b&gt; operator "e".
+                    <property name="label" translatable="yes">&lt;b&gt;Exploding dice:&lt;/b&gt; operator "ex".
                     
 &lt;b&gt;Ex.:&lt;/b&gt; e6d6, roll 6 6-sided dice and, if any of them result in a 6, roll that die again, if the new result is also a 6, roll that die again and so on indefinitely.
 &lt;b&gt;Ex.:&lt;/b&gt; 1e5d10, roll 5 10-sided dice and, if any of them result in a 10, roll that die again, if the new result is also a 10 the die will not be rolled again.                    

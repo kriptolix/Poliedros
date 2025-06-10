@@ -1,28 +1,63 @@
 import random
 import re
 
-# Validation Patterns
+from .regexpatterns import (
+    pt_cn, pt_kh, pt_kl, pt_ex, pt_integer, pt_pipe,
+    pt_mr, pt_rr, pt_dice, pt_operator, pt_functon,
+    pt_kh_b, pt_kl_b, pt_ex_b, pt_rr_b, pt_dice_func
 
-patt_d = r'^\d*d([1-9]\d{0,2}|f)$'  # '^\d*d\d+$'
-patt_l = r'^\d*l\d+d\d+$'
-patt_h = r'^\d*h\d+d\d+$'
-patt_e = r'^\d*e\d+d\d+$'
-# patt_o = r'^[+\-()]+$'
-patt_o = r'^[+-]+$'
-patt_n = r'^\d+$'
-patt_c = r'^c\d+d\d+(?:,\d+)+$'
-# patt_s = r'^s\d+d\d+\|(?:\d+(?:,\d+)*)\|(?:\d+(?:,\d+)*)\|(?:\d+(?:,\d+)*)$'
-patt_p = r'^\(.+?\)+$'
+)
 
 
-def roll_dice(parameter):
+def setup_parameters(parameters: list, pool: list) -> list:
 
-    n_dices, n_sides = parameter.split('d', 1)
+    # print("elements: ", parameters)
 
-    if not n_dices:
+    log = ''
+
+    for parameter in parameters:
+        if parameter != '':
+            log = f"{log}{parameter}"
+
+    group = []
+
+    if len(parameters) == 3:
+
+        if parameters[1] == "<":
+            for element in pool:
+                if element <= int(parameters[2]):
+                    group.append(element)
+            return [group, log]
+
+        if parameters[1] == ">":
+            for element in pool:
+                if element >= int(parameters[2]):
+                    group.append(element)
+            return [group, log]
+
+        if parameters[1] == "..":
+            for element in pool:
+                if element >= int(parameters[0]) and element <= int(parameters[2]):
+                    group.append(element)
+            return [group, log]
+
+    for parameter in parameters:
+        if parameter != ',':
+            group.append(int(parameter))
+
+    # print("group: ", group)
+
+    return [group, log]
+
+
+def roll_dice(expression: str) -> list:
+
+    n_dices, n_sides = re.split('d', expression)
+
+    if n_dices == '':
         n_dices = 1
-    else:
-        n_dices = int(n_dices)
+
+    n_dices = int(n_dices)
 
     if n_sides == "f":
         n_sides = 3
@@ -31,9 +66,6 @@ def roll_dice(parameter):
         n_sides = int(n_sides)
         n_range = [1, n_sides]
 
-    if (n_dices) > 100 or (n_sides) > 1000:
-        return [False, "Dices or sides beyond limit"]
-
     roll = []
 
     for dice in range(n_dices):
@@ -41,217 +73,442 @@ def roll_dice(parameter):
 
     roll.sort(reverse=True)
 
-    # print("brute roll : ", roll)
+    log = f"{n_dices}d{n_sides} = {roll}"
 
-    return roll
-
-
-def stratify(parameter):  # s2d6,6,9
-    "this not work without, or is pretty useless, without compose rolls"
+    return [roll, log]
 
 
-def count_in(parameter):  # c(2h3d6),5,6
+def count_in(expression: str, pool: list) -> list:
     total = 0
-    log = ''
 
-    split = parameter.split(",")
+    elements = re.split(r'(:|\||\.\.|<|>|,)', expression)
+    command = elements[0]
+    parameters = elements[2:]
 
-    # print("split: ", split)
+    group, parameter_log = setup_parameters(parameters, pool)
+    # print("count_in group: ", group)
 
-    _, dice = split[0].split("c")
+    roll = pool
+    text = "Count"
 
-    split.pop(0)
+    if command in ['check', 'ch']:
+        roll = [sum(pool)]
+        text = "Check"
 
-    numbers = []
-
-    for s in split:
-        numbers.append(int(s))
-
-    roll = roll_dice(dice)
+    # print("roll: ", roll)
 
     for value in roll:
-        if value in (numbers):
+        # print("value: ", value, " group: ", group)
+        if value in group:
             total = total + 1
 
     total = f"{total}"
-    log = f"{parameter} {roll} "
+    log = f" {text}{parameter_log} = {total} "
 
     return [total, log]
 
 
-def keep_subset(parameter, action):
+def keep_subset(command: str, keep: int, pool: list, dice: str | None) -> list:
 
-    split = parameter.split(f"{action}", 1)
+    dice_log = f"{pool}"
 
-    if split[0]:
-        keep = int(split[0])
-    else:
-        keep = 1
+    if dice:
+        dice_log = f"{dice} = {pool}"
 
-    dices = split[1]
+    match command:
+        case "highest" | "kh":
+            subroll = pool[:keep]
+            excluded = pool[len(subroll):]
+            excluded.insert(0, subroll)
+            text = "Highest"
 
-    roll = roll_dice(dices)
+        case "lowest" | "kl":
+            subroll = pool[-keep:]
+            excluded = pool[:-len(subroll)]
+            excluded.append(subroll)
+            text = "Lowest"
 
-    if not roll[0]:
-        print("invalid")
-        return roll
-
-    # print(roll)
-
-    total = f"{sum(roll)}"
-    log = f"{parameter} {roll} "
-
-    if keep < len(roll):
-
-        match action:
-            case "h":
-                subroll = roll[:keep]
-                excluded = roll[len(subroll):]
-                excluded.insert(0, subroll)
-
-            case "l":
-                subroll = roll[-keep:]
-                excluded = roll[:-len(subroll)]
-                excluded.append(subroll)
-
-        total = f"{sum(subroll)}"
-        log = f"{parameter} {excluded}"
-        print(subroll)
+    total = subroll
+    log = f"{text} {keep} in {dice_log} = {subroll}"
 
     return [total, log]
 
 
-def explode_dice(parameter):
+def explode(pool: list, faces: str, parameters: list, log: str) -> list:
 
-    sum_roll = []
-    log_roll = []
-    counter = 0
-
-    def _recursive_roll(dice, exploded):  # [6, [6], 3, 2]
+    def _recursive_roll(dice, group):
 
         nonlocal counter
+        nonlocal log
 
-        if counter >= limit:
+        if counter >= 50:
             return
 
-        roll = roll_dice(dice)
+        extended_roll, extended_log = roll_dice(dice)
 
-        log_roll.append(roll[0])
-        sum_roll.append(roll[0])
+        pool.append(extended_roll[0])
+        log = f"{log}, extra {extended_log}"
 
-        if roll[0] == int(n_sides):
+        if extended_roll[0] in group:
             counter = counter + 1
-            _recursive_roll(dice, True)
+            _recursive_roll(dice, group)
             return
 
         counter = 0
     ##
 
-    split = parameter.split("e", 1)
+    command = "Explode"
 
-    if split[0]:
-        limit = int(split[0])
-    else:
-        limit = 50
+    group, parameter_log = setup_parameters(parameters, pool)
 
-    if limit > 50:
-        limit = 50
+    counter = 0
 
-    dices = split[1]
+    dice = f"1d{faces}"
 
-    n_dices, n_sides = dices.split('d', 1)
+    initial_pool = pool
 
-    for _ in range(int(n_dices)):
+    for element in initial_pool:
+        if element in group:
 
-        _recursive_roll(f"1d{n_sides}", False)
+            _recursive_roll(dice, group)
 
-    log_roll.sort(reverse=True)
+    pool.sort(reverse=True)
 
-    total = f"{sum(sum_roll)}"
-    log = f"{parameter} {log_roll}"
+    total = pool
+    log = f"{command} {parameter_log} in {log} = {pool}"
 
     return [total, log]
 
 
-def execute_operations(command):
+def reroll(pool: list, parameters: list, faces: str, log: str) -> list:
+
+    command = "Reroll"
+
+    group, parameter_log = setup_parameters(parameters, pool)
+
+    dice = f"1d{faces}"
+
+    extended_pool = []
+
+    for element in pool:
+        if element in group:
+            extended_roll, extended_log = roll_dice(dice)
+
+            extended_pool.append(extended_roll[0])
+            log = f"{log}, reroll {element} = {extended_roll}"
+            continue
+
+        extended_pool.append(element)
+
+    total = extended_pool
+    log = f"{command} {parameter_log} in {log} = {total} "
+
+    # print("total, log reroll:", total, log)
+
+    return [total, log]
+
+
+def multiroll(expression: str) -> list:
+
+    extended_roll = []
+
+    elements = re.split(r'(:|\||\.\.|<|>)', expression)
+    command = "Multiroll"
+
+    group = int(elements[4])
+
+    # print("elements: ", elements)
+
+    for _ in range(group):
+
+        pool, log = roll_dice(elements[0])
+        extended_roll.append(pool)
+
+    total = extended_roll
+    log = f"{command} {group} x {elements[0]}"
+
+    # print(total, log)
+
+    return [total, log]
+
+
+def next_is_function(commands: list, actual: int) -> bool:
+
+    if ((actual + 2 < len(commands)) and
+            re.match(pt_functon, commands[actual + 2])):
+        return True
+
+    return False
+
+
+def address_commands(commands: list) -> list:
 
     result = ""
     track = ""
+    pool = None
+    operation = False
+    working_dice = None
 
-    for parameter in command:
+    for index, parameter in enumerate(commands):
+        log = ''
+        total = ''
 
-        if (re.match(patt_d, parameter)):
-            roll = roll_dice(parameter)
+        if (re.match(pt_dice, parameter)):
+            roll, log = roll_dice(parameter)
 
-            if not roll[0] and roll[0] != 0:  # python seems 0 as false
-                return [False, None, roll[1]]
+            if operation:
+                total = f"{operation} {sum(roll)}"
+                log = f" {operation} {log} = {sum(roll)}"
 
-            total = f"{sum(roll)}"
-            log = f"{parameter} {roll}"
+                if pool:
+                    total = f"{sum(pool)} {operation} {sum(roll)}"
+                    log = f" = {sum(pool)}{log}"
+                    pool = None
 
-        if (re.match(patt_h, parameter)):
-            total, log = keep_subset(parameter, "h")
+                operation = False
+            else:
+                pool = roll
 
-        if (re.match(patt_l, parameter)):
-            total, log = keep_subset(parameter, "l")
+            # print(f"dice log {log}, pool {pool}, total {total}")
 
-        if (re.match(patt_e, parameter)):
-            total, log = explode_dice(parameter)
-
-        if (re.match(patt_c, parameter)):
-            total, log = count_in(parameter)
-
-        if (re.match(patt_n, parameter)):
+        if (re.match(pt_integer, parameter)):
             total = parameter
-            log = parameter
+            log = f"{parameter} "  # dont remove the final space
 
-            if not total:
-                return [False, None, log]
+            if operation:
+                total = f" {operation} {parameter}"
+                log = f" {operation} {parameter}"
 
-        if (re.match(patt_o, parameter)):
-            total = parameter
-            log = " " + parameter + " "
+                if pool:
+                    total = f"{sum(pool)} {operation} {parameter}"
+                    log = f"= {total}"
+
+                operation = None
+                pool = None
+
+        if (re.match(pt_operator, parameter)):
+            operation = parameter
+
+            if pool:
+                total = f"{sum(pool)}"
+                log = f" = {sum(roll)}"
+                pool = None
+
+        if (re.match(pt_ex, parameter)):
+
+            elements = re.split(r'(:|\||\.\.|<|>|,)', parameter)
+            parameters = elements[4:]
+            _, faces = re.split('d', elements[0])
+
+            dice_pool, dice_log = roll_dice(elements[0])
+            working_dice = elements[0]
+
+            roll, log = explode(dice_pool, faces, parameters, dice_log)
+            pool = roll
+
+            if operation:
+                if not next_is_function(commands, index):
+                    total = f" {operation} {sum(roll)}"
+                    log = f" {operation} {log} = {sum(roll)}"
+                    operation = False
+                    pool = None
+
+        if (re.match(pt_ex_b, parameter)):
+
+            elements = re.split(r'(:|\||\.\.|<|>|,)', parameter)
+            parameters = elements[3:]
+            _, faces = re.split('d', working_dice)
+
+            roll, log = explode(pool, faces, parameters, f"{pool}")
+            pool = roll
+
+            if operation:
+                if not next_is_function(commands, index):
+                    total = f" {operation} {sum(roll)}"
+                    log = f" {operation} {log} = {sum(roll)}"
+                    operation = False
+                    pool = None
+
+        if (re.match(pt_mr, parameter)):
+
+            if operation:
+                raise ValueError('Multirools cant be added.')
+
+            roll, log = multiroll(parameter)
+            result = f'{pool}'
+            break
+
+        if (re.match(pt_rr, parameter)):
+
+            elements = re.split(r'(:|\||\.\.|<|>|,)', parameter)
+            parameters = elements[4:]
+            _, faces = re.split('d', elements[0])
+
+            dice_pool, dice_log = roll_dice(elements[0])
+
+            roll, log = reroll(dice_pool, parameters, faces, dice_log)
+            pool = roll
+
+            # print("explode roll, log", roll, log)
+
+            if operation:
+                if not next_is_function(commands, index):
+                    total = f" {operation} {sum(roll)}"
+                    log = f" {operation} ({log} = {sum(roll)})"
+                    operation = False
+                    pool = None
+
+        if (re.match(pt_rr_b, parameter)):
+
+            roll, log = reroll(parameter)
+            pool = roll
+
+            if operation:
+                if not next_is_function(commands, index):
+                    total = f" {operation} {sum(roll)}"
+                    log = f" {operation} ({log} = {sum(roll)})"
+                    operation = False
+                    pool = None
+
+        if (re.match(pt_kh, parameter)
+                or re.match(pt_kl, parameter)):
+
+            elements = re.split(r'(:|\||\.\.|<|>)', parameter)
+
+            dice_pool, _ = roll_dice(elements[0])
+            working_dice = elements[0]
+
+            roll, log = keep_subset(elements[2],
+                                    int(elements[4]),
+                                    dice_pool,
+                                    elements[0])
+
+            if operation:
+
+                if not (commands[index + 1] and
+                        re.match(pt_functon, commands[index + 1])):
+                    total = f"{operation} {sum(roll)}"
+                    log = f" {operation} {log} = {sum(roll)}"
+
+                    if pool:
+                        total = f"{sum(pool)} {operation} {sum(roll)}"
+                        log = f" = {sum(pool)} {log}"
+                        pool = None
+
+                    operation = False
+                    pool = None
+            else:
+                pool = roll
+
+        if (re.match(pt_kh_b, parameter)
+                or re.match(pt_kl_b, parameter)):
+
+            elements = re.split(r'(:|\||\.\.|<|>)', parameter)
+
+            print(pool)
+
+            roll, log = keep_subset(elements[0],
+                                    int(elements[2]),
+                                    pool,
+                                    None)
+
+            if operation:
+
+                if not next_is_function(commands, index):
+
+                    total = f"{operation} {sum(roll)}"
+                    log = f"{operation} {log} = {sum(roll)}"
+
+                    operation = False
+                    pool = None
+            else:
+                pool = roll
+
+        if (re.match(pt_cn, parameter)):
+
+            # print(f"total {total}, pool {pool}, result {result}")
+
+            if pool:
+                values = pool
+            else:
+                values = [eval(result)]
+
+            total, log = count_in(parameter, values)
+            # print("count log: ", log)
+            pool = None
+            result = ''
 
         result = result + total
         track = track + log
+
+    # print(f"results: {result}, track: {track}, pool: {pool}")
+
+    if pool:
+        result = f"{result} {sum(pool)}"
 
     results = [True, eval(result), track]
 
     return results
 
 
-def validate_parameters(parameters):
+def validate_elements(commands: list) -> list | None:
 
-    if not parameters:
-        print("Parâmetros vazios")
-        return
+    if not commands:
+        [False, None, "Empty Command"]
 
-    for element in parameters:
-        if not (re.match(patt_d, element)
-                or re.match(patt_l, element)
-                or re.match(patt_h, element)
-                or re.match(patt_e, element)
-                or re.match(patt_c, element)
-                or re.match(patt_n, element)
-                or re.match(patt_o, element)):
+    for index, element in enumerate(commands):
+
+        if not (re.match(pt_dice, element)
+                or re.match(pt_integer, element)
+                or re.match(pt_operator, element)
+                or re.match(pt_ex, element)
+                or re.match(pt_rr, element)
+                or re.match(pt_kh, element)
+                or re.match(pt_kl, element)
+                or re.match(pt_ex_b, element)
+                or re.match(pt_rr_b, element)
+                or re.match(pt_kh_b, element)
+                or re.match(pt_kl_b, element)
+                or re.match(pt_pipe, element)
+                or re.match(pt_cn, element)):
 
             return [False, None, f"Sintaxe Error: {element}"]
 
-    # return "elementos validos"
+        if (re.match(pt_ex_b, element)
+                or re.match(pt_rr_b, element)
+                or re.match(pt_kh_b, element)
+                or re.match(pt_kl_b, element)):
+
+            if not (re.match(pt_dice_func, commands[index - 2])):
+                # print(commands[index - 2])
+                return [False, None, f"Sintaxe Error: {element} not precided"]
 
 
-def execute_command(input_command):
+def execute_command(commands: str) -> list:
 
-    input_command = re.sub(' ', '', input_command)
-    parameters = re.split(r'(\+|\-)', input_command)
+    commands = re.sub(' ', '', commands)
+    parameters = re.split(r'(\+|\-|\|)', commands)
 
-    print('Parâmetros iniciais:', parameters)
+    fixed_param = []
 
-    validation = validate_parameters(parameters)
+    for index, param in enumerate(parameters):  # 5d6 + 1d4 | kh:3 | cn:>4,
+        new = param
+        if (re.match(pt_functon, param) and
+                not re.match(pt_cn, param)):
+
+            if (re.match(pt_dice, parameters[index - 2])):
+                new = f"{parameters[index - 2]}|{param}"
+                fixed_param.pop(index - 2)
+
+        fixed_param.append(new)
+
+    # print(f"Fixede param: {fixed_param}")
+
+    validation = validate_elements(fixed_param)
 
     if validation:
         return validation
 
-    results = execute_operations(parameters)
+    result = address_commands(fixed_param)
 
-    return results
+    return result

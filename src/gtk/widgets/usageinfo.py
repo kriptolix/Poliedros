@@ -24,9 +24,14 @@ from gi.repository import Gtk
 @Gtk.Template(resource_path='/io/github/kriptolix/'
               'Poliedros/src/gtk/ui/UsageInfo.ui')
 class UsageInfo(Adw.Dialog):
-    __gtype_name__ = 'UsageInfo'   
+    __gtype_name__ = 'UsageInfo'
 
     def __init__(self):
         super().__init__()
 
         self.connect("closed", lambda *_: self.close())
+
+    def resize_dialog(self, window):
+
+        width = window.get_width() * 0.9
+        self.set_content_width(width)
