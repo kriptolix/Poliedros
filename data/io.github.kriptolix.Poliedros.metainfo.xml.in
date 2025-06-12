@@ -5,7 +5,7 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Poliedros</name>
-  <summary>Poliedros is a multi-type dice roller.</summary>
+  <summary>Roll multi-type dice.</summary>
   <description>
     <p>Poliedros is a multi-type dice roller. Basic mode allows you to make quick rolls using just the mouse, while Command mode allows for more complex rolls and combinations.</p>
   </description>
@@ -67,7 +67,8 @@
           <li>d100 roll added.</li>
           <li>Nested functions added.</li>
           <li>Some spelling errors fixed.</li>
-          <li>German translation added.</li>          
+          <li>German translation added.</li>
+          <li>Small changes to make the mobile user experience possible.</li>          
         </ul>
       </description>
     </release>

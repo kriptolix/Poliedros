@@ -3,7 +3,7 @@ import re
 
 from .regexpatterns import (
     pt_cn, pt_kh, pt_kl, pt_ex, pt_integer, pt_pipe,
-    pt_mr, pt_rr, pt_dice, pt_operator, pt_functon,
+    pt_mr, pt_rr, pt_dice, pt_operator, pt_function,
     pt_kh_b, pt_kl_b, pt_ex_b, pt_rr_b, pt_dice_func
 
 )
@@ -11,7 +11,7 @@ from .regexpatterns import (
 
 def setup_parameters(parameters: list, pool: list) -> list:
 
-    # print("elements: ", parameters)
+    print("setup parameters: ", parameters)
 
     log = ''
 
@@ -235,13 +235,13 @@ def multiroll(expression: str) -> list:
 def next_is_function(commands: list, actual: int) -> bool:
 
     if ((actual + 2 < len(commands)) and
-            re.match(pt_functon, commands[actual + 2])):
+            re.match(pt_function, commands[actual + 2])):
         return True
 
     return False
 
 
-def address_commands(commands: list) -> list:
+def address_commands(commands: list, testing: bool = None) -> list:
 
     result = ""
     track = ""
@@ -249,12 +249,18 @@ def address_commands(commands: list) -> list:
     operation = False
     working_dice = None
 
+    if testing:
+        pool = commands[0]
+
     for index, parameter in enumerate(commands):
         log = ''
         total = ''
 
+        # print("parameter: ", parameter)
+
         if (re.match(pt_dice, parameter)):
             roll, log = roll_dice(parameter)
+            working_dice = parameter
 
             if operation:
                 total = f"{operation} {sum(roll)}"
@@ -269,7 +275,7 @@ def address_commands(commands: list) -> list:
             else:
                 pool = roll
 
-            # print(f"dice log {log}, pool {pool}, total {total}")
+            print(f"dice log {log}, pool {pool}, total {total}")
 
         if (re.match(pt_integer, parameter)):
             total = parameter
@@ -313,10 +319,13 @@ def address_commands(commands: list) -> list:
                     operation = False
                     pool = None
 
-        if (re.match(pt_ex_b, parameter)):
+        if (re.match(pt_ex_b, parameter)):  # ex:>5
 
-            elements = re.split(r'(:|\||\.\.|<|>|,)', parameter)
-            parameters = elements[3:]
+            elements = re.split(r'(:|\||\.\.|<|>)', parameter)
+            parameters = elements[2:]
+
+            print("splited elements: ", elements)
+
             _, faces = re.split('d', working_dice)
 
             roll, log = explode(pool, faces, parameters, f"{pool}")
@@ -345,6 +354,7 @@ def address_commands(commands: list) -> list:
             _, faces = re.split('d', elements[0])
 
             dice_pool, dice_log = roll_dice(elements[0])
+            working_dice = elements[0]
 
             roll, log = reroll(dice_pool, parameters, faces, dice_log)
             pool = roll
@@ -354,7 +364,7 @@ def address_commands(commands: list) -> list:
             if operation:
                 if not next_is_function(commands, index):
                     total = f" {operation} {sum(roll)}"
-                    log = f" {operation} ({log} = {sum(roll)})"
+                    log = f" {operation} {log} = {sum(roll)}"
                     operation = False
                     pool = None
 
@@ -385,8 +395,8 @@ def address_commands(commands: list) -> list:
 
             if operation:
 
-                if not (commands[index + 1] and
-                        re.match(pt_functon, commands[index + 1])):
+                if not next_is_function(commands, index):
+
                     total = f"{operation} {sum(roll)}"
                     log = f" {operation} {log} = {sum(roll)}"
 
@@ -405,24 +415,24 @@ def address_commands(commands: list) -> list:
 
             elements = re.split(r'(:|\||\.\.|<|>)', parameter)
 
-            print(pool)
+            if pool:                
 
-            roll, log = keep_subset(elements[0],
-                                    int(elements[2]),
-                                    pool,
-                                    None)
+                roll, log = keep_subset(elements[0],
+                                        int(elements[2]),
+                                        pool,
+                                        None)
 
-            if operation:
+                if operation:
 
-                if not next_is_function(commands, index):
+                    if not next_is_function(commands, index):
 
-                    total = f"{operation} {sum(roll)}"
-                    log = f"{operation} {log} = {sum(roll)}"
+                        total = f"{operation} {sum(roll)}"
+                        log = f"{operation} {log} = {sum(roll)}"
 
-                    operation = False
-                    pool = None
-            else:
-                pool = roll
+                        operation = False
+                        pool = None
+                else:
+                    pool = roll
 
         if (re.match(pt_cn, parameter)):
 
@@ -441,7 +451,7 @@ def address_commands(commands: list) -> list:
         result = result + total
         track = track + log
 
-    # print(f"results: {result}, track: {track}, pool: {pool}")
+    print(f"results: {result}, track: {track}, pool: {pool}")
 
     if pool:
         result = f"{result} {sum(pool)}"
@@ -474,14 +484,14 @@ def validate_elements(commands: list) -> list | None:
 
             return [False, None, f"Sintaxe Error: {element}"]
 
-        if (re.match(pt_ex_b, element)
+        '''if (re.match(pt_ex_b, element)
                 or re.match(pt_rr_b, element)
                 or re.match(pt_kh_b, element)
                 or re.match(pt_kl_b, element)):
 
             if not (re.match(pt_dice_func, commands[index - 2])):
-                # print(commands[index - 2])
-                return [False, None, f"Sintaxe Error: {element} not precided"]
+                print("commando anterior: ", commands[index - 2])
+                return [False, None, f"Sintaxe Error: {element} not preceded"]'''
 
 
 def execute_command(commands: str) -> list:
@@ -493,15 +503,24 @@ def execute_command(commands: str) -> list:
 
     for index, param in enumerate(parameters):  # 5d6 + 1d4 | kh:3 | cn:>4,
         new = param
-        if (re.match(pt_functon, param) and
-                not re.match(pt_cn, param)):
 
-            if (re.match(pt_dice, parameters[index - 2])):
-                new = f"{parameters[index - 2]}|{param}"
-                fixed_param.pop(index - 2)
+        if (re.match(pt_pipe, param)):
+            continue
+
+        if (index < (len(parameters) - 1) and
+            re.match(pt_dice, param) and
+                re.match(pt_function, parameters[index + 2]) and
+                not re.match(pt_cn, parameters[index + 2])):
+
+            new = f"{param}|{parameters[index + 2]}"
+
+        if (index >= 2 and
+            re.match(pt_function, param) and
+                re.match(pt_dice, parameters[index - 2]) and
+                not re.match(pt_cn, param)):
+            continue
 
         fixed_param.append(new)
-
     # print(f"Fixede param: {fixed_param}")
 
     validation = validate_elements(fixed_param)

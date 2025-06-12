@@ -17,7 +17,7 @@ pt_range = rf"{pt_number}\.\.{pt_number}"
 pt_item = rf"(?:{pt_number}|{pt_ge_le}|{pt_range})"
 pt_sep = rf"(?:,{pt_item})*"
 
-pt_functon = rf"^[a-zA-Z]{{2}}:{pt_item}{pt_sep}$"
+pt_function = rf"^[a-zA-Z]{{2}}:{pt_item}{pt_sep}$"
 pt_dice_func = rf"^(?:{pt_dice_prefix}\|)[a-zA-Z]{{2}}:{pt_item}{pt_sep}$"
 
 pt_ex = rf"^(?:{pt_dice_prefix}\|)ex:{pt_item}{pt_sep}$"

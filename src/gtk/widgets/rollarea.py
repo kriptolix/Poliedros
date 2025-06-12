@@ -87,7 +87,7 @@ class RollArea(Gtk.Box):
 
     def _change_mode(self, button):
 
-        placeholder = "Ex.: 2d6, 1d12+3, h2d20"
+        placeholder = "Ex.: 2d6, 1d12+3, 2d20|kh:1"
 
         if self._mode_button.get_active():
             self._stack.set_visible_child(self._info_area)
