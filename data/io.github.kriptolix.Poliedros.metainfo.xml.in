@@ -56,9 +56,9 @@
     </screenshot>    
   </screenshots>
 
-  <releases>
+  <releases translate="no">
     <release version="1.5.0" date="2025-05-21">      
-      <description>
+      <description translate="no">
         <p>New functions and bug fixes.</p>
         <ul>
           <li>Count function added.</li>
@@ -73,7 +73,7 @@
       </description>
     </release>
     <release version="1.0.1" date="2025-05-21">      
-      <description>
+      <description translate="no">
         <p>Little corrections.</p>
         <ul>
           <li>Update to Gnome 48.</li>
@@ -86,7 +86,7 @@
       </description>
     </release>
     <release version="1.0.0" date="2024-01-18">      
-      <description>
+      <description translate="no">
         <p>This is the first version of this software and has the following features:</p>
         <ul>
           <li>Basic mode and command mode.</li>

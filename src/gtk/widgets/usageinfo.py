@@ -26,6 +26,8 @@ from gi.repository import Gtk
 class UsageInfo(Adw.Dialog):
     __gtype_name__ = 'UsageInfo'
 
+    _textview = Gtk.Template.Child()
+
     def __init__(self):
         super().__init__()
 
@@ -34,4 +36,19 @@ class UsageInfo(Adw.Dialog):
     def resize_dialog(self, window):
 
         width = window.get_width() * 0.9
+        height = window.get_height() * 0.9
         self.set_content_width(width)
+        self.set_content_height(height)
+
+        text = ("<b>Ex.:</b> value:<>15: greater than number(inclusive)."
+                "<b>Ex.:</b> 6,8,10; relation of arbiterary numbers."
+                "<b>Ex.:</b> 4; a singles number."
+                "<b>Ex.:</b> 10: lower than number (inclusive)."
+                "<b>Ex.:</b> 80..90; Interval between numbers (inclusive)."
+                "from markup due to error parsing markup: Error on line 3 char"
+                "21: “>” is not a valid character following a “<” character; "
+                "it may not begin an element name"
+                )
+
+        buffer = self._textview.get_buffer()
+        buffer.set_text(text)

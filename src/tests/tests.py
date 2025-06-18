@@ -37,7 +37,7 @@ def test_validate_elements(commands):
         # print(f"new: {new}, list: {fixed_param}")
         fixed_param.append(new)
 
-    print(f"Fixede param: {fixed_param}")
+    # print(f"Fixede param: {fixed_param}")
 
     validation = validate_elements(fixed_param)
 
@@ -46,9 +46,7 @@ def test_validate_elements(commands):
               f"Sintaxe test of {commands} fail with {validation[2]}")
         return
 
-    # print(f"\x1b[0;32;40m Ok \x1b[0m: Sintaxe test of {commands} pass")
-
-    print(f"{commands} -> {fixed_param}")
+    print(f"\x1b[0;32;40m Ok \x1b[0m: {commands} -> {fixed_param}")   
 
 
 def run_tests_all():
@@ -56,9 +54,10 @@ def run_tests_all():
     all_pass = True
 
     for expression in tests:
-        test_validate_elements(expression)
+        # test_validate_elements(expression)
 
         result, total, track = execute_command(expression)
+        print(f"{track}, total: {total}")
 
         if not result:
             all_pass = False

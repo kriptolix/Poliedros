@@ -36,8 +36,11 @@ class LogEntry(Adw.ActionRow):
 
         super().__init__()
 
+        self.set_use_markup(False)
+
         self.set_title(title)
         self.set_subtitle(subtitle)
+
         self.input = input
 
         self._reroll_button.connect("clicked", self._do_reroll)

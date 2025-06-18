@@ -11,7 +11,7 @@ from .regexpatterns import (
 
 def setup_parameters(parameters: list, pool: list) -> list:
 
-    print("setup parameters: ", parameters)
+    # print("setup parameters: ", parameters)
 
     log = ''
 
@@ -103,7 +103,7 @@ def count_in(expression: str, pool: list) -> list:
             total = total + 1
 
     total = f"{total}"
-    log = f" {text}{parameter_log} = {total} "
+    log = f"{text} {parameter_log} = {total}"
 
     return [total, log]
 
@@ -201,7 +201,7 @@ def reroll(pool: list, parameters: list, faces: str, log: str) -> list:
         extended_pool.append(element)
 
     total = extended_pool
-    log = f"{command} {parameter_log} in {log} = {total} "
+    log = f"{command} {parameter_log} in {log} = {total}"
 
     # print("total, log reroll:", total, log)
 
@@ -264,26 +264,26 @@ def address_commands(commands: list, testing: bool = None) -> list:
 
             if operation:
                 total = f"{operation} {sum(roll)}"
-                log = f" {operation} {log} = {sum(roll)}"
+                log = f"{operation} {log} = {sum(roll)}"
 
                 if pool:
                     total = f"{sum(pool)} {operation} {sum(roll)}"
-                    log = f" = {sum(pool)}{log}"
+                    log = f"= {sum(pool)}{log}"
                     pool = None
 
                 operation = False
             else:
                 pool = roll
 
-            print(f"dice log {log}, pool {pool}, total {total}")
+            # print(f"dice log {log}, pool {pool}, total {total}")
 
         if (re.match(pt_integer, parameter)):
             total = parameter
-            log = f"{parameter} "  # dont remove the final space
+            log = parameter
 
             if operation:
-                total = f" {operation} {parameter}"
-                log = f" {operation} {parameter}"
+                total = f"{operation} {parameter}"
+                log = f"{operation} {parameter}"
 
                 if pool:
                     total = f"{sum(pool)} {operation} {parameter}"
@@ -297,7 +297,7 @@ def address_commands(commands: list, testing: bool = None) -> list:
 
             if pool:
                 total = f"{sum(pool)}"
-                log = f" = {sum(roll)}"
+                log = f"= {sum(roll)}"
                 pool = None
 
         if (re.match(pt_ex, parameter)):
@@ -314,8 +314,8 @@ def address_commands(commands: list, testing: bool = None) -> list:
 
             if operation:
                 if not next_is_function(commands, index):
-                    total = f" {operation} {sum(roll)}"
-                    log = f" {operation} {log} = {sum(roll)}"
+                    total = f"{operation} {sum(roll)}"
+                    log = f"{operation} {log} = {sum(roll)}"
                     operation = False
                     pool = None
 
@@ -324,7 +324,7 @@ def address_commands(commands: list, testing: bool = None) -> list:
             elements = re.split(r'(:|\||\.\.|<|>)', parameter)
             parameters = elements[2:]
 
-            print("splited elements: ", elements)
+            # print("splited elements: ", elements)
 
             _, faces = re.split('d', working_dice)
 
@@ -333,8 +333,8 @@ def address_commands(commands: list, testing: bool = None) -> list:
 
             if operation:
                 if not next_is_function(commands, index):
-                    total = f" {operation} {sum(roll)}"
-                    log = f" {operation} {log} = {sum(roll)}"
+                    total = f"{operation} {sum(roll)}"
+                    log = f"{operation} {log} = {sum(roll)}"
                     operation = False
                     pool = None
 
@@ -363,20 +363,23 @@ def address_commands(commands: list, testing: bool = None) -> list:
 
             if operation:
                 if not next_is_function(commands, index):
-                    total = f" {operation} {sum(roll)}"
-                    log = f" {operation} {log} = {sum(roll)}"
+                    total = f"{operation} {sum(roll)}"
+                    log = f"{operation} {log} = {sum(roll)}"
                     operation = False
                     pool = None
 
         if (re.match(pt_rr_b, parameter)):
 
-            roll, log = reroll(parameter)
-            pool = roll
+            elements = re.split(r'(:|\||\.\.|<|>)', parameter)
+            _, faces = re.split('d', working_dice)
+            parameters = elements[2:]
+
+            roll, log = reroll(pool, parameters, faces, f"{pool}")
 
             if operation:
                 if not next_is_function(commands, index):
-                    total = f" {operation} {sum(roll)}"
-                    log = f" {operation} ({log} = {sum(roll)})"
+                    total = f"{operation} {sum(roll)}"
+                    log = f"{operation} {log} = {sum(roll)})"
                     operation = False
                     pool = None
 
@@ -398,11 +401,11 @@ def address_commands(commands: list, testing: bool = None) -> list:
                 if not next_is_function(commands, index):
 
                     total = f"{operation} {sum(roll)}"
-                    log = f" {operation} {log} = {sum(roll)}"
+                    log = f"{operation} {log} = {sum(roll)}"
 
                     if pool:
                         total = f"{sum(pool)} {operation} {sum(roll)}"
-                        log = f" = {sum(pool)} {log}"
+                        log = f"= {sum(pool)} {log}"
                         pool = None
 
                     operation = False
@@ -415,7 +418,7 @@ def address_commands(commands: list, testing: bool = None) -> list:
 
             elements = re.split(r'(:|\||\.\.|<|>)', parameter)
 
-            if pool:                
+            if pool:
 
                 roll, log = keep_subset(elements[0],
                                         int(elements[2]),
@@ -449,9 +452,9 @@ def address_commands(commands: list, testing: bool = None) -> list:
             result = ''
 
         result = result + total
-        track = track + log
+        track = track + " " + log
 
-    print(f"results: {result}, track: {track}, pool: {pool}")
+    # print(f"results: {result}, track: {track}, pool: {pool}")
 
     if pool:
         result = f"{result} {sum(pool)}"
@@ -479,19 +482,19 @@ def validate_elements(commands: list) -> list | None:
                 or re.match(pt_rr_b, element)
                 or re.match(pt_kh_b, element)
                 or re.match(pt_kl_b, element)
-                or re.match(pt_pipe, element)
                 or re.match(pt_cn, element)):
 
             return [False, None, f"Sintaxe Error: {element}"]
 
-        '''if (re.match(pt_ex_b, element)
+        if (re.match(pt_ex_b, element)
                 or re.match(pt_rr_b, element)
                 or re.match(pt_kh_b, element)
                 or re.match(pt_kl_b, element)):
 
-            if not (re.match(pt_dice_func, commands[index - 2])):
-                print("commando anterior: ", commands[index - 2])
-                return [False, None, f"Sintaxe Error: {element} not preceded"]'''
+            if (re.match(pt_integer, commands[index - 1])
+                    or re.match(pt_operator, commands[index - 1])):
+
+                return [False, None, f"Sintaxe Error: {element} not preceded"]
 
 
 def execute_command(commands: str) -> list:

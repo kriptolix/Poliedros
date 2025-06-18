@@ -8,14 +8,10 @@
           <object class="AdwHeaderBar"></object>
         </child>
         <child>
-          <object class="GtkScrolledWindow">
-            <property name="hscrollbar-policy">2</property>
-            <property name="propagate-natural-height">true</property>
+          <object class="GtkScrolledWindow">                        
             <child>
               <object class="GtkBox">
                 <property name="orientation">1</property>
-                <property name="margin-start">20</property>
-                <property name="margin-end">20</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="label" translatable="yes">Command usage instructions</property>
@@ -28,120 +24,10 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="_rd_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Rolling dice:&lt;/b&gt; operator "d".
-
-&lt;b&gt;Ex.:&lt;/b&gt; 3d6, roll 3 6-sided die.
-&lt;b&gt;Ex.:&lt;/b&gt; 2df, roll 2 fudge dices (-1, 0 and 1 possible results).
-                    </property>
-                    <property name="wrap">true</property>
-                    <property name="justify">3</property>
-                    <property name="xalign">0</property>
-                    <property name="use-markup">true</property>
-                    <property name="margin-top">25</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="_as_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Additions/Subtractions:&lt;/b&gt; "+" and "-" operators.
-                    
-&lt;b&gt;Ex.:&lt;/b&gt; 1d6 + 3, roll 1 6-sided die and add the number 3.
-&lt;b&gt;Ex.:&lt;/b&gt; 2d8 - 1d4, roll 2 8-sided dice and subtract the result of rolling 1 4-sided die.
-                    </property>
-                    <property name="wrap">true</property>
-                    <property name="justify">3</property>
-                    <property name="xalign">0</property>
-                    <property name="use-markup">true</property>
-                    <property name="margin-top">15</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="_kh_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Keeping higher:&lt;/b&gt; operator "|kh:parameter".
-                    
-&lt;b&gt;Ex.:&lt;/b&gt; 3d6|kh:2, roll 3 6-sided dice and keep the 2 highest.
-&lt;b&gt;Ex.:&lt;/b&gt; 2d20|kh:1, roll 2 20-sided dice and keep the highest.                    
-                    </property>
-                    <property name="wrap">true</property>
-                    <property name="justify">3</property>
-                    <property name="xalign">0</property>
-                    <property name="use-markup">true</property>
-                    <property name="margin-top">15</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="_kl_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Keeping lower:&lt;/b&gt; operator "|kl:parameter".
-                    
-&lt;b&gt;Ex.:&lt;/b&gt; 4d10|kl:2, roll 4 10-sided dice and keep the 2 lowest.
-&lt;b&gt;Ex.:&lt;/b&gt; 3d6|kl:1, roll 3 6-sided dice and keep the lowest.
-                    </property>
-                    <property name="wrap">true</property>
-                    <property name="justify">3</property>
-                    <property name="xalign">0</property>
-                    <property name="use-markup">true</property>
-                    <property name="margin-top">15</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="_cn_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Count in:&lt;/b&gt; operator "|cn:parameters".
-                    
-&lt;b&gt;Ex.:&lt;/b&gt; 6d10|cn:6,8,10; roll 4 10-sided dice and count how many 6s,8s and 10s occur.
-&lt;b&gt;Ex.:&lt;/b&gt; 4d4|cn:4; roll 4 4-sided dice and count how many 4s occur.
-&lt;b&gt;Ex.:&lt;/b&gt; 6d20|cn:&gt;15; roll 6 20-sided dice and count how many results greater than 15 occur.
-&lt;b&gt;Ex.:&lt;/b&gt; 3d100|cn:80..90; roll 3 100-sided dice and count how many results between 80 and 90 occur occur.
-                    </property>
-                    <property name="wrap">true</property>
-                    <property name="justify">3</property>
-                    <property name="xalign">0</property>
-                    <property name="use-markup">true</property>
-                    <property name="margin-top">15</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="_ex_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Exploding dice:&lt;/b&gt; operator "|ex:parameters".
-                    
-&lt;b&gt;Ex.:&lt;/b&gt; 6d6|ex:6, roll 6 6-sided dice and, if any of them result in a 6, roll that die again, die again and add to the result and so on.
-&lt;b&gt;Ex.:&lt;/b&gt; 5d10|ex:&gt;8, roll 5 10-sided dice and, if any of the results is greater than 8, roll that die again and add to the result.                    
-                    </property>
-                    <property name="wrap">true</property>
-                    <property name="justify">3</property>
-                    <property name="xalign">0</property>
-                    <property name="use-markup">true</property>
-                    <property name="margin-top">15</property>
-                    <property name="margin-bottom">15</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="_rr_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Reroll dice:&lt;/b&gt; operator "|rr:parameters".
-                    
-&lt;b&gt;Ex.:&lt;/b&gt; 6d6|rr:6, roll 6 6-sided dice and, if any of them result in a 6, reroll that die and keep the new result.
-&lt;b&gt;Ex.:&lt;/b&gt; 5d10|rr:&gt;8, roll 5 10-sided dice and, if any of the results is greater than 8, reroll that die and keep the new result.                    
-                    </property>
-                    <property name="wrap">true</property>
-                    <property name="justify">3</property>
-                    <property name="xalign">0</property>
-                    <property name="use-markup">true</property>
-                    <property name="margin-top">15</property>
-                    <property name="margin-bottom">15</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="_nf_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Nested functions:&lt;/b&gt; You can use the result of one function as an input for another function.
-                    
-&lt;b&gt;Ex.:&lt;/b&gt; 6d6|ex:6|cn:6, roll 6 6-sided dice and, if any of them result in a 6, roll that die again and so on.Then, count how many 6s occur.
-&lt;b&gt;Ex.:&lt;/b&gt; 5d10|kh:1|cn:&gt;8, roll 5 10-sided dice and keep the highest, then, check if the results is greater than 8.                    
-                    </property>
-                    <property name="wrap">true</property>
-                    <property name="justify">3</property>
-                    <property name="xalign">0</property>
-                    <property name="use-markup">true</property>
-                    <property name="margin-top">15</property>
-                    <property name="margin-bottom">15</property>
+                  <object class="GtkTextView" id="_textview">                                        
+                    <property name="editable">false</property>                    
+                    <property name="wrap-mode">2</property>
+                    <property name="vexpand">true</property>
                   </object>
                 </child>
               </object>
