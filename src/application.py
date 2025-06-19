@@ -56,7 +56,7 @@ class PoliedrosApplication(Adw.Application):
         self._update_result = self._window._roll_area.update_result
         self._add_register = self._window._sidebar.add_register
 
-        run_tests()
+        # run_tests()
 
     def on_about(self, *args):
         """Callback for the app.about action."""
@@ -64,7 +64,7 @@ class PoliedrosApplication(Adw.Application):
             application_name='Poliedros',
             application_icon='io.github.kriptolix.Poliedros',
             developer_name='Diego C Sampaio',
-            version='1.0.1',
+            version='1.5.0',
             developers=['Diego C Sampaio'],
             copyright='© 2024 Diego C Sampaio'
         )
