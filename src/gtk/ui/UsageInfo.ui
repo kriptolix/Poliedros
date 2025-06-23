@@ -31,8 +31,8 @@
                   <object class="GtkLabel" id="_rd_label">
                     <property name="label" translatable="yes">&lt;b&gt;Rolling dice:&lt;/b&gt; operator "d".
 
-&lt;b&gt;Ex.:&lt;/b&gt; 3d6, roll 3 6-sided die.
-&lt;b&gt;Ex.:&lt;/b&gt; 2df, roll 2 fudge dices (-1, 0 and 1 possible results).
+&lt;b&gt;Ex.:&lt;/b&gt; 3d6, roll 3 6-sided dice.
+&lt;b&gt;Ex.:&lt;/b&gt; 2df, roll 2 fudge dice (-1, 0 and 1 possible results).
 &lt;b&gt;Ex.:&lt;/b&gt; It is possible to roll arbitrary dice like 1d7 or, 3d19.
                     </property>
                     <property name="wrap">true</property>
@@ -86,11 +86,11 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="_pr_label">
-                    <property name="label" translatable="yes">&lt;b&gt;Functions parameters:&lt;/b&gt;.
+                    <property name="label" translatable="yes">&lt;b&gt;Functions parameters:&lt;/b&gt;
 
 &lt;b&gt;Ex.:&lt;/b&gt; &gt;15: greater than number(inclusive).
 &lt;b&gt;Ex.:&lt;/b&gt; 6,8,10: relation of arbitrary numbers.
-&lt;b&gt;Ex.:&lt;/b&gt; 4: a singles number.
+&lt;b&gt;Ex.:&lt;/b&gt; 4: a single number.
 &lt;b&gt;Ex.:&lt;/b&gt; &amp;lt;10: lower than number (inclusive).
 &lt;b&gt;Ex.:&lt;/b&gt; 80..90: interval between numbers (inclusive).
                     </property>
@@ -150,7 +150,7 @@
                     <property name="label" translatable="yes">&lt;b&gt;Nested functions:&lt;/b&gt; You can use the result of one function as an input for another function.
                     
 &lt;b&gt;Ex.:&lt;/b&gt; 6d6|ex:6|cn:6, roll 6 6-sided dice and, if any of them result in a 6, roll that die again, add to the result and so on.Then, count how many 6s occur.
-&lt;b&gt;Ex.:&lt;/b&gt; 5d10|kh:1|cn:&gt;8, roll 5 10-sided dice and keep the highest, then, check if the results is greater than 8.                    
+&lt;b&gt;Ex.:&lt;/b&gt; 5d10|kh:1|cn:&gt;8, roll 5 10-sided dice and keep the highest, then, check if the result is greater than 8.                    
                     </property>
                     <property name="wrap">true</property>
                     <property name="justify">3</property>
