@@ -11,5 +11,6 @@ src/gtk/ui/LogEntry.ui
 src/gtk/ui/MainWindow.ui
 src/gtk/ui/RollArea.ui
 src/gtk/ui/SideBar.ui
+src/gtk/ui/UsageInfo.ui
 
 

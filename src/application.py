@@ -60,13 +60,10 @@ class PoliedrosApplication(Adw.Application):
 
     def on_about(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(
-            application_name='Poliedros',
-            application_icon='io.github.kriptolix.Poliedros',
-            developer_name='Diego C Sampaio',
-            version='1.5.0',
-            developers=['Diego C Sampaio'],
-            copyright='© 2024 Diego C Sampaio'
+        about = Adw.AboutDialog.new_from_appdata(
+            '/io/github/kriptolix/Poliedros'
+            '/data/io.github.kriptolix.Poliedros.metainfo.xml.in',
+            '1.5.0'
         )
 
         about.set_translator_credits(_('translator_credits'))

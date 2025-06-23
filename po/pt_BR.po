@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-22 10:13-0300\n"
-"PO-Revision-Date: 2025-04-22 10:20-0300\n"
+"POT-Creation-Date: 2025-06-23 10:13-0300\n"
+"PO-Revision-Date: 2025-06-23 10:18-0300\n"
 "Last-Translator: Diego C. Sampaio <kriptolix@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #: data/io.github.kriptolix.Poliedros.desktop.in:3
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
@@ -28,7 +28,7 @@ msgid "GTK;Die;Dice;Roll;Random;Number;"
 msgstr "GTK;Dado;Dados;Rolagem;Aleatório;Numero;"
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:8
-msgid "Poliedros is a multi-type dice roller."
+msgid "Roll multi-type dice."
 msgstr "Poliedros é um rolador de múltiplos tipos de dados."
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:10
@@ -51,74 +51,25 @@ msgstr "Modo Básico."
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:47
 msgid "No sidebar."
-msgstr ""
+msgstr "Sem a barra lateral."
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:51
-msgid "Colapsed sidebar."
-msgstr ""
+msgid "Collapsed sidebar."
+msgstr "Barra leteral colapsada."
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:55
 msgid "Command Mode."
 msgstr "Modo Comando."
 
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:62
-msgid "Little corrections"
-msgstr ""
+#: src/application.py:72
+msgid "translator_credits"
+msgstr "Diego C. Sampaio"
 
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:64
-msgid "Update to Gnome 48."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:65
-msgid "New icons by Jakub Steiner."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:66
-msgid "Update Tags."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:67
-msgid "Change banner colors."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:68
-msgid "Add tip to do \"reroll previous roll\" button."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:69
-msgid "Fix roll over 100 dices / 1000 faces error."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:75
-msgid ""
-"This is the first version of this software and has the following features:"
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:77
-msgid "Basic mode and command mode."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:78
-msgid "Basic dice rolling."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:79
-msgid "Additions and subtractions of numbers and results of other rolls."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:80
-msgid "Roll a group of dice and keep the highest X or lowest X."
-msgstr ""
-
-#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:81
-msgid "Roll a group of dice and explode (reroll) dice with maximum result."
-msgstr ""
-
-#: src/gtk/ui/DiceArea.ui:59
+#: src/gtk/ui/DiceArea.ui:74
 msgid "Plus Number"
 msgstr "Adicionar Numero"
 
-#: src/gtk/ui/DiceArea.ui:120
+#: src/gtk/ui/DiceArea.ui:150
 msgid "Minus Number"
 msgstr "Subtrair Numero"
 
@@ -127,7 +78,7 @@ msgid "Nothing Here Yet"
 msgstr "Nada Aqui Ainda"
 
 #: src/gtk/ui/EmptyPage.ui:8
-msgid "Roll some dices to beguin"
+msgid "Roll some dice to begin"
 msgstr "Role alguns dados para começar"
 
 #: src/gtk/ui/InfoArea.ui:7
@@ -142,50 +93,53 @@ msgstr "Instruções de uso do modo comando"
 msgid "Redo this roll"
 msgstr "Refazer essa rolagem"
 
-#: src/gtk/ui/MainWindow.ui:31
+#: src/gtk/ui/MainWindow.ui:25
 msgid "Go Back"
 msgstr "Voltar"
 
-#: src/gtk/ui/MainWindow.ui:56
+#: src/gtk/ui/MainWindow.ui:50
 msgid "Toggle History"
 msgstr "Exibir/Ocultar Histórico"
 
-#: src/gtk/ui/MainWindow.ui:62
+#: src/gtk/ui/MainWindow.ui:56
 msgid "About Poliedros"
 msgstr "Sobre o Poliedros"
 
-#: src/gtk/ui/RollArea.ui:46
+#: src/gtk/ui/RollArea.ui:54
 msgid "Switch Mode"
 msgstr "Alternar Modo"
 
-#: src/gtk/ui/RollArea.ui:58 src/gtk/ui/RollArea.ui:59
+#: src/gtk/ui/RollArea.ui:65 src/gtk/ui/RollArea.ui:66
 msgid "Roll"
 msgstr "Rolar"
 
-#: src/gtk/ui/RollArea.ui:71
+#: src/gtk/ui/RollArea.ui:78
 msgid "Clear Command"
 msgstr "Limpar Comando"
 
-#: src/gtk/ui/SideBar.ui:32
+#: src/gtk/ui/SideBar.ui:31
 msgid "Clear results"
 msgstr "Limpar Resultados"
 
-#: src/gtk/ui/UsageInfo.ui:22
+#: src/gtk/ui/UsageInfo.ui:21
 msgid "Command usage instructions"
 msgstr "Instruções de uso do comando"
 
-#: src/gtk/ui/UsageInfo.ui:33
+#: src/gtk/ui/UsageInfo.ui:32
 msgid ""
 "<b>Rolling dice:</b> operator \"d\".\n"
 "\n"
-"<b>Ex.:</b> 1d6, roll 1 6-sided die.\n"
-"<b>Ex.:</b> 2d8, roll 2 8-sided dice.\n"
+"<b>Ex.:</b> 3d6, roll 3 6-sided die.\n"
+"<b>Ex.:</b> 2df, roll 2 fudge dices (-1, 0 and 1 possible results).\n"
+"<b>Ex.:</b> It is possible to roll arbitrary dice like 1d7 or, 3d19.\n"
 "                    "
 msgstr ""
 "<b>Rolando dados:</b> operador \"d\".\n"
 "\n"
-"<b>Ex.:</b> 1d6, rola 1 dado de 6 faces.\n"
-"<b>Ex.:</b> 2d8, rola 2 dados de 8 faces."
+"<b>Ex.:</b> 3d6, rola 3 dados de 6 lados.\n"
+"<b>Ex.:</b> 2df, rola 2 dados fudge (-1, 0 e 1 como possíveis resultados).\n"
+"<b>Ex.:</b> É possível rolar dados arbitrários como 1d7 ou, 3d19.\n"
+"                    "
 
 #: src/gtk/ui/UsageInfo.ui:47
 msgid ""
@@ -193,62 +147,151 @@ msgid ""
 "                    \n"
 "<b>Ex.:</b> 1d6 + 3, roll 1 6-sided die and add the number 3.\n"
 "<b>Ex.:</b> 2d8 - 1d4, roll 2 8-sided dice and subtract the result of "
-"rolling 1 4-sided die.'\n"
+"rolling 1 4-sided die.\n"
 "                    "
 msgstr ""
 "<b>Adições/Subtrações :</b> operadores \"+\" e \"-\".\n"
-"\n"
+"                    \n"
 "<b>Ex.:</b> 1d6 + 3, rola 1 dado de 6 faces e adiciona 3.\n"
 "<b>Ex.:</b> 2d8 - 1d4, rola 2 dados de 8 faces e subtrai o resultado da "
-"rolagem de 1 dado de 4 faces."
+"rolagem de 1 dado de 4 faces.\n"
+"                    "
 
 #: src/gtk/ui/UsageInfo.ui:61
 msgid ""
-"<b>Keeping higher:</b> operator \"h\".\n"
+"<b>Keeping higher:</b> operator \"|kh:number\".\n"
 "                    \n"
-"<b>Ex.:</b> 2h3d6, roll 3 6-sided dice and keep the 2 highest.\n"
-"<b>Ex.:</b> 1h2d20 or h2d20, roll 2 20-sided dice and keep the "
+"<b>Ex.:</b> 3d6|kh:2, roll 3 6-sided dice and keep the 2 highest.\n"
+"<b>Ex.:</b> 2d20|kh:1, roll 2 20-sided dice and keep the "
 "highest.                    \n"
 "                    "
 msgstr ""
-"<b>Mantendo os maiores:</b> operador \"h\".\n"
-"\n"
-"<b>Ex.:</b> 2h3d6, rola 3 dados de 6 faces e mantêm os 2 maiores.\n"
-"<b>Ex.:</b> 1h2d20 ou h2d20, rola 2 dados de 20 faces mantêm o maior."
+"<b>Mantendo os maiores:</b> operador \"|kh:number\".\n"
+"                    \n"
+"<b>Ex.:</b> 3d6|kh:2, rola 3 dados de 6 faces e mantêm os 2 maiores.\n"
+"<b>Ex.:</b> 2d20|kh:1, rola 2 dados de 20 faces mantêm o "
+"maior.                    \n"
+"                    "
 
 #: src/gtk/ui/UsageInfo.ui:75
 msgid ""
-"<b>Keeping lower:</b> operator \"l\".\n"
+"<b>Keeping lower:</b> operator \"|kl:number\".\n"
 "                    \n"
-"<b>Ex.:</b> 2l4d10, roll 4 10-sided dice and keep the 2 lowest.\n"
-"<b>Ex.:</b> 1l3d6 or l3d6, roll 3 6-sided dice and keep the lowest.\n"
+"<b>Ex.:</b> 4d10|kl:2, roll 4 10-sided dice and keep the 2 lowest.\n"
+"<b>Ex.:</b> 3d6|kl:1, roll 3 6-sided dice and keep the lowest.\n"
 "                    "
 msgstr ""
-"<b>Mantendo os menores:</b> operador \"l\".\n"
-"\n"
-"<b>Ex.:</b> 2l4d10, rola 4 dados de 10 faces e mantêm os 2 menores.\n"
-"<b>Ex.:</b> 1l3d6 ou l3d6, rola 3 dados de 6 faces e mantêm o menor."
+"<b>Mantendo os menores:</b> operador \"|kl:number\".\n"
+"                    \n"
+"<b>Ex.:</b> 4d10|kl:2, rola 4 dados de 10 faces e mantêm os 2 menores.\n"
+"<b>Ex.:</b> 3d6|kl:1, rola 3 dados de 6 faces e mantêm o menor.\n"
+"                    "
 
 #: src/gtk/ui/UsageInfo.ui:89
 msgid ""
-"<b>Exploding dice:</b> operator \"e\".\n"
-"                    \n"
-"<b>Ex.:</b> e6d6, roll 6 6-sided dice and, if any of them result in a 6, "
-"roll that die again, if the new result is also a 6, roll that die again and "
-"so on indefinitely.\n"
-"<b>Ex.:</b> 1e5d10, roll 5 10-sided dice and, if any of them result in a 10, "
-"roll that die again, if the new result is also a 10 the die will not be "
-"rolled again.                    \n"
+"<b>Functions parameters:</b>.\n"
+"\n"
+"<b>Ex.:</b> >15: greater than number(inclusive).\n"
+"<b>Ex.:</b> 6,8,10: relation of arbitrary numbers.\n"
+"<b>Ex.:</b> 4: a singles number.\n"
+"<b>Ex.:</b> &lt;10: lower than number (inclusive).\n"
+"<b>Ex.:</b> 80..90: interval between numbers (inclusive).\n"
 "                    "
 msgstr ""
-"<b>Explodindo dados:</b> operador \"e\". \n"
+"<b>Parâmetros de função:</b>.\n"
 "\n"
-"<b>Ex.:</b> e6d6, rola 6 dados de 6 faces e, se algum resultar num 6, rola "
-"esse dado novamente, se o novo resultado também for um 6, rola esse dado "
-"novamente e assim por diante indefinidamente.\n"
-"<b>Ex.:</b> 1e5d10, rola 5 dados de 10 faces e, se algum resultar num 10, "
-"rola esse dado novamente, se o novo resultado também for um 10 o dado não "
-"será rolado novamente."
+"<b>Ex.:</b> >15: maior que um numero (inclusivo).\n"
+"<b>Ex.:</b> 6,8,10: relação arbitraria de números.\n"
+"<b>Ex.:</b> 4: um numero único.\n"
+"<b>Ex.:</b> &lt;10: menor que um numero (inclusivo).\n"
+"<b>Ex.:</b> 80..90: intervalo entre números (inclusive).\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:106
+msgid ""
+"<b>Count in:</b> operator \"|cn:parameters\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d10|cn:6,8,10; roll 4 10-sided dice and count how many 6s,8s "
+"and 10s occur.\n"
+"<b>Ex.:</b> 4d4|cn:4; roll 4 4-sided dice and count how many 4s occur.\n"
+"<b>Ex.:</b> 6d20|cn:>15; roll 6 20-sided dice and count how many results "
+"greater than 15 occur.\n"
+"<b>Ex.:</b> 3d100|cn:80..90; roll 3 100-sided dice and count how many "
+"results between 80 and 90 occur occur.\n"
+"                    "
+msgstr ""
+"<b>Contar:</b> operador \"|cn:parâmetros\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d10|cn:6,8,10; rola 4 dados de 10 lados e conte quantos 6,8 e "
+"10 saem.\n"
+"<b>Ex.:</b> 4d4|cn:4; rola 4 dados de 4 faces e conte quantos 4 saem.\n"
+"<b>Ex.:</b> 6d20|cn:>15; rola 6 dados de 20 faces e conte quantos resultados "
+"maiores que 15 saíram.\n"
+"<b>Ex.:</b> 3d100|cn:80..90; rola 3 dados de 100 lados e conte quantos "
+"resultados entre 80 e 90 saíram.\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:122
+msgid ""
+"<b>Exploding dice:</b> operator \"|ex:parameters\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d6|ex:6, roll 6 6-sided dice and, if any of them result in a 6, "
+"roll that die again, add to the result and so on.\n"
+"<b>Ex.:</b> 5d10|ex:>8, roll 5 10-sided dice and, if any of the results is "
+"greater than 8, roll that die again, add to the result and so "
+"on.                    \n"
+"                    "
+msgstr ""
+"<b>Explodindo dados:</b> operador \"|ex:parâmetros\". \n"
+"                   \n"
+"<b>Ex.:</b> 6d6|ex:6, rola 6 dados de 6 faces e, se algum resultar num 6, "
+"rola esse dado novamente, adiciona o resultado e assim por diante.\n"
+"<b>Ex.:</b> 5d10|ex:>8, rola 5 dados de 10 faces e, se algum dos resultados "
+"for maior que 8, rola esse dado novamente, adiciona o resultado e assim por "
+"diante.                    \n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:136
+msgid ""
+"<b>Reroll dice:</b> operator \"|rr:parameters\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d6|rr:6, roll 6 6-sided dice and, if any of them result in a 6, "
+"reroll that die and keep the new result.\n"
+"<b>Ex.:</b> 5d10|rr:>8, roll 5 10-sided dice and, if any of the results is "
+"greater than 8, reroll that die and keep the new "
+"result.                    \n"
+"                    "
+msgstr ""
+"<b>Rerolar dados:</b> operador \"e\". \n"
+"                    \n"
+"<b>Ex.:</b> 6d6|rr:6, rola 6 dados de 6 faces e, se algum resultar num 6, "
+"rola esse dado novamente e fica com o novo resultado.\n"
+"<b>Ex.:</b> 5d10|rr:>8, rola 5 dados de 10 faces e, se algum dos resultados "
+"for maior que 8, rola esse dado novamente e fica com o novo "
+"resultado.                    \n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:150
+msgid ""
+"<b>Nested functions:</b> You can use the result of one function as an input "
+"for another function.\n"
+"                    \n"
+"<b>Ex.:</b> 6d6|ex:6|cn:6, roll 6 6-sided dice and, if any of them result in "
+"a 6, roll that die again, add to the result and so on.Then, count how many "
+"6s occur.\n"
+"<b>Ex.:</b> 5d10|kh:1|cn:>8, roll 5 10-sided dice and keep the highest, "
+"then, check if the results is greater than 8.                    \n"
+"                    "
+msgstr ""
+"<b>Funções aninhadas:</b> Você pode usar o resultado de uma função como "
+"entrada para outra função. \n"
+"                    \n"
+"<b>Ex.:</b> 6d6|ex:6|cn:6, rola 6 dados de 6 faces e, se algum deles "
+"resultar num 6, role esse dado novamente e assim por diante.Então, conte "
+"quantos 6 saíram.\n"
+"<b>Ex.:</b> 5d10|kh:1|cn:>8, rola 5 dados de 10 faces e mantenha o maior, "
+"então, verifica se o resultado é maior que 8.                   \n"
+"                    "
 
 #~ msgid "GTK;"
 #~ msgstr "GTK;"
