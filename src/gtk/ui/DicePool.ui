@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="DicePool" parent="GtkBox">
+    <property name="valign">3</property>
+    <property name="halign">3</property>
+    <child>
+      <object class="GtkEntry" id="_amount">
+        <property name="max-width-chars">3</property>
+        <property name="xalign">0.5</property>
+        <property name="placeholder-text">3</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <property name="label" translatable="yes">d</property>
+        <property name="sensitive">false</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkEntry" id="_faces">
+        <property name="max-width-chars">3</property>
+        <property name="xalign">0.5</property>
+        <property name="placeholder-text">6</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <property name="label" translatable="yes">+</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkEntry" id="_adds">
+        <property name="max-width-chars">4</property>
+        <property name="xalign">0.5</property>
+        <property name="text">0</property>
+      </object>
+    </child>
+    <style>
+      <class name="linked"/>
+    </style>
+  </template>
+</interface>

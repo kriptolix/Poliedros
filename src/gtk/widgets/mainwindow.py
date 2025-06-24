@@ -69,3 +69,43 @@ class MainWindow(Adw.ApplicationWindow):
 
         self._split_view.connect("notify::collapsed",
                                  self._sidebar.css_matching)
+
+        width_condition = Adw.BreakpointCondition.parse("max-width: 535sp")
+
+        width_breakpoint = Adw.Breakpoint.new(width_condition)
+        width_breakpoint.connect("apply", self._breakpoint_apply, 0)
+        width_breakpoint.connect("unapply", self._breakpoint_unapply, 0)
+
+        self.add_breakpoint(width_breakpoint)
+
+        ratio_condition = Adw.BreakpointCondition.parse(
+            "min-aspect-ratio: 3/2 and max-width: 725sp")
+        ratio_breakpoint = Adw.Breakpoint.new(ratio_condition)
+        ratio_breakpoint.connect("apply", self._breakpoint_apply, 1)
+        ratio_breakpoint.connect("unapply", self._breakpoint_unapply, 1)
+
+        self.add_breakpoint(ratio_breakpoint)
+
+    def _breakpoint_apply(self, breakpoint, data):
+
+        if data == 0:
+            self._split_view.set_collapsed(True)
+            return
+
+        self._roll_area._adaptable.set_orientation(0)
+        self._roll_area._results.set_halign(1)
+        self._roll_area._stack.set_halign(2)
+        self._roll_area._dice_area.set_halign(2)
+        self._roll_area._adaptable.set_spacing(5)
+
+    def _breakpoint_unapply(self, breakpoint, data):
+
+        if data == 0:
+            self._split_view.set_collapsed(False)
+            return
+
+        self._roll_area._adaptable.set_orientation(1)
+        self._roll_area._results.set_halign(3)
+        self._roll_area._stack.set_halign(3)
+        self._roll_area._dice_area.set_halign(3)
+        self._roll_area._adaptable.set_spacing(20)

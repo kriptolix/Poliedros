@@ -9,7 +9,12 @@
     <file preprocess="xml-stripblanks">src/gtk/ui/InfoArea.ui</file>    
     <file preprocess="xml-stripblanks">src/gtk/ui/UsageInfo.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/EmptyPage.ui</file>
-    <file preprocess="xml-stripblanks">src/gtk/ui/LogEntry.ui</file>    
+    <file preprocess="xml-stripblanks">src/gtk/ui/LogEntry.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/AdvancedMode.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/FunctionBody.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/DicePool.ui</file>
+    <file preprocess="xml-stripblanks">data/io.github.kriptolix.Poliedros.metainfo.xml.in</file>       
+        
   </gresource>
   <gresource prefix="io/github/kriptolix/Poliedros/icons/scalable/actions">
     <file alias="dice-d4-hicolor.svg">data/icons/dice-d4-hicolor.svg</file>
@@ -18,6 +23,8 @@
     <file alias="dice-d10-hicolor.svg">data/icons/dice-d10-hicolor.svg</file>
     <file alias="dice-d12-hicolor.svg">data/icons/dice-d12-hicolor.svg</file>
     <file alias="dice-d20-hicolor.svg">data/icons/dice-d20-hicolor.svg</file>
+    <file alias="dice-d100-hicolor.svg">data/icons/dice-d100-hicolor.svg</file>
+    <file alias="dice-df-hicolor.svg">data/icons/dice-df-hicolor.svg</file>
     <file alias="sidebar-show-symbolic.svg">data/icons/sidebar-show-symbolic.svg</file>
     <file alias="go-previous-symbolic.svg">data/icons/go-previous-symbolic.svg</file>
     <file alias="code-symbolic.svg">data/icons/code-symbolic.svg</file>

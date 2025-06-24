@@ -5,7 +5,7 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Poliedros</name>
-  <summary>Poliedros is a multi-type dice roller.</summary>
+  <summary>Roll multi-type dice.</summary>
   <description>
     <p>Poliedros is a multi-type dice roller. Basic mode allows you to make quick rolls using just the mouse, while Command mode allows for more complex rolls and combinations.</p>
   </description>
@@ -47,8 +47,8 @@
       <caption>No sidebar.</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-colapsed-sidebar.png?raw=true</image>
-      <caption>Colapsed sidebar.</caption>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-collapsed-sidebar.png?raw=true</image>
+      <caption>Collapsed sidebar.</caption>
     </screenshot>    
     <screenshot>
       <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-command-sidebar.png?raw=true</image>
@@ -57,8 +57,23 @@
   </screenshots>
 
   <releases>
+    <release version="1.5.0" date="2025-06-24">      
+      <description translate="no">
+        <p>New functions and bug fixes.</p>
+        <ul>
+          <li>Count function added.</li>
+          <li>Reroll function added.</li>
+          <li>Fudge dices roll added.</li>
+          <li>d100 roll added.</li>
+          <li>Nested functions added.</li>
+          <li>Some spelling errors fixed.</li>
+          <li>German translation added.</li>
+          <li>Small changes to make the mobile user experience possible.</li>          
+        </ul>
+      </description>
+    </release>
     <release version="1.0.1" date="2025-05-21">      
-      <description>
+      <description translate="no">
         <p>Little corrections.</p>
         <ul>
           <li>Update to Gnome 48.</li>
@@ -71,7 +86,7 @@
       </description>
     </release>
     <release version="1.0.0" date="2024-01-18">      
-      <description>
+      <description translate="no">
         <p>This is the first version of this software and has the following features:</p>
         <ul>
           <li>Basic mode and command mode.</li>

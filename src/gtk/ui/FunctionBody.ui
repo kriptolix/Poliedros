@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="FunctionBody" parent="GtkBox">
+    <property name="valign">3</property>
+    <property name="halign">3</property>
+    <child>
+      <object class="GtkButton" id="_name">
+        <property name="label" translatable="yes">Name</property>
+        <property name="sensitive">false</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkEntry" id="_numbers">
+        <property name="max-width-chars">3</property>
+        <property name="xalign">0.5</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <property name="label" translatable="yes">in</property>
+        <property name="sensitive">false</property>
+      </object>
+    </child>
+    <style>
+      <class name="linked"/>
+    </style>
+  </template>
+</interface>

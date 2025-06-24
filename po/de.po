@@ -1,0 +1,296 @@
+# German translation for Poliedros.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Philipp Kiemle <l10n@prly.mozmail.com>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-23 16:59-0300\n"
+"PO-Revision-Date: 2025-06-23 22:18+0200\n"
+"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#: data/io.github.kriptolix.Poliedros.desktop.in:3
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
+msgid "Poliedros"
+msgstr "Poliedros"
+
+#: data/io.github.kriptolix.Poliedros.desktop.in:9
+msgid "GTK;Die;Dice;Roll;Random;Number;"
+msgstr "GTK;Die;Dice;Roll;Random;Number;Würfel;würfeln;Wurf;Zufall;zufällig;Zahl;"
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:8
+msgid "Roll multi-type dice."
+msgstr "Würfeln Sie verschiedene Würfel."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:10
+msgid "Poliedros is a multi-type dice roller. Basic mode allows you to make quick rolls using just the mouse, while Command mode allows for more complex rolls and combinations."
+msgstr "Poliedros simuliert das Würfeln verschiedener Würfel. Der einfache Modus ermöglicht es, schnelle Würfe mit der Maus durchzuführen - der Befehlsmodus hingegen ist gut geeignet für kompliziertere Würfe und Kombinationen."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:14
+msgid "Diego C Sampaio"
+msgstr "Diego C Sampaio"
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:43
+msgid "Basic Mode."
+msgstr "Einfacher Modus."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:47
+msgid "No sidebar."
+msgstr "Keine Seitenleiste."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:51
+msgid "Collapsed sidebar."
+msgstr "Eingeklappte Seitenleiste."
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:55
+msgid "Command Mode."
+msgstr "Befehlsmodus."
+
+#: src/application.py:69
+msgid "translator_credits"
+msgstr "Philipp Kiemle <l10n@prly.mozmail.com>"
+
+#: src/gtk/ui/DiceArea.ui:74
+msgid "Plus Number"
+msgstr "Plus Zahl"
+
+#: src/gtk/ui/DiceArea.ui:150
+msgid "Minus Number"
+msgstr "Minus Zahl"
+
+#: src/gtk/ui/EmptyPage.ui:7
+msgid "Nothing Here Yet"
+msgstr "Hier ist noch nichts"
+
+#: src/gtk/ui/EmptyPage.ui:8
+msgid "Roll some dice to begin"
+msgstr "Würfeln Sie einige Würfel, um zu beginnen"
+
+#: src/gtk/ui/InfoArea.ui:7
+msgid "Command Mode"
+msgstr "Befehlsmodus"
+
+#: src/gtk/ui/InfoArea.ui:13
+msgid "Command mode usage instructions"
+msgstr "Verwendung des Befehlsmodus"
+
+#: src/gtk/ui/LogEntry.ui:10
+msgid "Redo this roll"
+msgstr "Diesen Wurf wiederholen"
+
+#: src/gtk/ui/MainWindow.ui:25
+msgid "Go Back"
+msgstr "Zurückgehen"
+
+#: src/gtk/ui/MainWindow.ui:50
+msgid "Toggle History"
+msgstr "Chronik umschalten"
+
+#: src/gtk/ui/MainWindow.ui:56
+msgid "About Poliedros"
+msgstr "Info zu Poliedros"
+
+#: src/gtk/ui/RollArea.ui:54
+msgid "Switch Mode"
+msgstr "Modus wechseln"
+
+#: src/gtk/ui/RollArea.ui:65 src/gtk/ui/RollArea.ui:66
+msgid "Roll"
+msgstr "Würfeln"
+
+#: src/gtk/ui/RollArea.ui:78
+msgid "Clear Command"
+msgstr "Befehl leeren"
+
+#: src/gtk/ui/SideBar.ui:31
+msgid "Clear results"
+msgstr "Ergebnisse leeren"
+
+#: src/gtk/ui/UsageInfo.ui:21
+msgid "Command usage instructions"
+msgstr "Verwendung des Befehlsmodus"
+
+#: src/gtk/ui/UsageInfo.ui:32
+msgid ""
+"<b>Rolling dice:</b> operator \"d\".\n"
+"\n"
+"<b>Ex.:</b> 3d6, roll 3 6-sided dice.\n"
+"<b>Ex.:</b> 2df, roll 2 fudge dice (-1, 0 and 1 possible results).\n"
+"<b>Ex.:</b> It is possible to roll arbitrary dice like 1d7 or, 3d19.\n"
+"                    "
+msgstr ""
+"<b>Würfel würfeln:</b> Befehl »d«.\n"
+"\n"
+"<b>Beispiel:</b> 3d6, würfelt 3 6-seitige Würfel.\n"
+"<b>Beispiel:</b> 2df, würfelt 2 Fudge-Würfel (-1, 0 und +1 sind mögliche Ergebnisse).\n"
+"<b>Beispiel:</b> Es ist möglich, unkonventionelle Würfel zu würfeln, z. B. 1d7 oder 3d19.\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:47
+msgid ""
+"<b>Additions/Subtractions:</b> \"+\" and \"-\" operators.\n"
+"                    \n"
+"<b>Ex.:</b> 1d6 + 3, roll 1 6-sided die and add the number 3.\n"
+"<b>Ex.:</b> 2d8 - 1d4, roll 2 8-sided dice and subtract the result of rolling 1 4-sided die.\n"
+"                    "
+msgstr ""
+"<b>Addition/Subtraktion:</b> Befehle »+« und »-«.\n"
+"                    \n"
+"<b>Befehle:</b> 1d6 + 3, würfelt 1 6-seitigen Würfel und addiert die Zahl 3.\n"
+"<b>Befehle:</b> 2d8 - 1d4, würfelt 2 8-seitige Würfel und subtrahiert das Ergebnis des Wurfs von 1 4-seitigem Würfel.\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:61
+msgid ""
+"<b>Keeping higher:</b> operator \"|kh:number\".\n"
+"                    \n"
+"<b>Ex.:</b> 3d6|kh:2, roll 3 6-sided dice and keep the 2 highest.\n"
+"<b>Ex.:</b> 2d20|kh:1, roll 2 20-sided dice and keep the highest.                    \n"
+"                    "
+msgstr ""
+"<b>Höhere behalten:</b> Befehl »|kh:zahl«.\n"
+"                    \n"
+"<b>Beispiel:</b> 3d6|kh:2, würfelt 3 6-seitige Würfel und behält die 2 höchsten Ergebnisse.\n"
+"<b>Beispiel:</b> 2d20|kh:1, würfelt 2 20-seitige Würfel und behält das höchste Ergebnis.                    \n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:75
+msgid ""
+"<b>Keeping lower:</b> operator \"|kl:number\".\n"
+"                    \n"
+"<b>Ex.:</b> 4d10|kl:2, roll 4 10-sided dice and keep the 2 lowest.\n"
+"<b>Ex.:</b> 3d6|kl:1, roll 3 6-sided dice and keep the lowest.\n"
+"                    "
+msgstr ""
+"<b>Niedrigere behalten:</b> Befehl »|kl:zahl«.\n"
+"                    \n"
+"<b>Beispiel:</b> 4d10|kl:2, würfelt 4 10-seitige Würfel und behält die 2 niedrigsten Ergebnisse.\n"
+"<b>Beispiel:</b> 3d6|kl:1, würfelt 3 6-seitige Würfel und behält das niedrigste Ergebnis.\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:89
+msgid ""
+"<b>Functions parameters:</b>\n"
+"\n"
+"<b>Ex.:</b> >15: greater than number(inclusive).\n"
+"<b>Ex.:</b> 6,8,10: relation of arbitrary numbers.\n"
+"<b>Ex.:</b> 4: a single number.\n"
+"<b>Ex.:</b> &lt;10: lower than number (inclusive).\n"
+"<b>Ex.:</b> 80..90: interval between numbers (inclusive).\n"
+"                    "
+msgstr ""
+"<b>Funktionsparameter:</b>\n"
+"<b>Beispiel:</b> >15: Größer als Zahl (inklusiv).\n"
+"<b>Beispiel:</b> 6,8,10: Eine Reihe an Zahlen.\n"
+"<b>Beispiel:</b> 4: Eine einfache Zahl.\n"
+"<b>Beispiel:</b> &lt;10: Niedriger als Zahl (inklusiv).\n"
+"<b>Beispiel:</b> 80..90: Zahlenintervall (inklusiv).\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:106
+msgid ""
+"<b>Count in:</b> operator \"|cn:parameters\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d10|cn:6,8,10; roll 4 10-sided dice and count how many 6s,8s and 10s occur.\n"
+"<b>Ex.:</b> 4d4|cn:4; roll 4 4-sided dice and count how many 4s occur.\n"
+"<b>Ex.:</b> 6d20|cn:>15; roll 6 20-sided dice and count how many results greater than 15 occur.\n"
+"<b>Ex.:</b> 3d100|cn:80..90; roll 3 100-sided dice and count how many results between 80 and 90 occur occur.\n"
+"                    "
+msgstr ""
+"<b>Würfel zählen:</b> Befehl »|cn:parameter«.\n"
+"                    \n"
+"<b>Beispiel:</b> 6d10|cn:6,8,10, würfelt 4 10-seitige Würfel und zählt alle 6er, 8er und 10er vorkommen.\n"
+"<b>Beispiel:</b> 4d4|cn:4, würfelt 4 4-seitige Würfel und zählt alle 4er.\n"
+"<b>Beispiel:</b> 6d20|cn:>15, würfelt 6 20-seitige Würfel und zählt alle Würfel über 15.\n"
+"<b>Beispiel:</b> 3d100|cn:80..90, würfelt 3 100-seitige Würfel und zählt alle Ergebnisse zwischen 80 und 90.\n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:122
+msgid ""
+"<b>Exploding dice:</b> operator \"|ex:parameters\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d6|ex:6, roll 6 6-sided dice and, if any of them result in a 6, roll that die again, add to the result and so on.\n"
+"<b>Ex.:</b> 5d10|ex:>8, roll 5 10-sided dice and, if any of the results is greater than 8, roll that die again, add to the result and so on.                    \n"
+"                    "
+msgstr ""
+"<b>Explodierende Würfel:</b> Befehl »|ex:parameter«.\n"
+"                    \n"
+"<b>Beispiel:</b> 6d6|ex:6, würfelt 6 6-seitige Würfel und jeden Würfel, der eine 6 zeigt, erneut. Dies passiert wieder, wenn erneut eine 6 gewürfelt wird – unendlich lang.\n"
+"<b>Beispiel:</b> 5d10|ex:>8, würfelt 5 10-seitige Würfel und jeden Würfel, der eine 10 zeigt, erneut. Wenn das neue Ergebnis auch 10 ist, wird der Würfel aber nicht erneut geworfen.                    \n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:136
+msgid ""
+"<b>Reroll dice:</b> operator \"|rr:parameters\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d6|rr:6, roll 6 6-sided dice and, if any of them result in a 6, reroll that die and keep the new result.\n"
+"<b>Ex.:</b> 5d10|rr:>8, roll 5 10-sided dice and, if any of the results is greater than 8, reroll that die and keep the new result.                    \n"
+"                    "
+msgstr ""
+"<b>Erneut würfeln:</b> Befehl »|rr:parameter«.\n"
+"                    \n"
+"<b>Beispiel:</b> 6d6|rr:6, würfelt 6 6-seitige Würfel. Jeder Würfel, der eine 6 zeigt, wird erneut gewürfelt und das neue Ergebnis wird behalten.\n"
+"<b>Beispiel:</b> 5d10|rr:>8, würfelt 5 10-seitige Würfel. Jeder Würfel, der eine 8 oder höher zeigt, wird erneut gewürfelt und das neue Ergebnis wird behalten.                    \n"
+"                    "
+
+#: src/gtk/ui/UsageInfo.ui:150
+msgid ""
+"<b>Nested functions:</b> You can use the result of one function as an input for another function.\n"
+"                    \n"
+"<b>Ex.:</b> 6d6|ex:6|cn:6, roll 6 6-sided dice and, if any of them result in a 6, roll that die again, add to the result and so on.Then, count how many 6s occur.\n"
+"<b>Ex.:</b> 5d10|kh:1|cn:>8, roll 5 10-sided dice and keep the highest, then, check if the result is greater than 8.                    \n"
+"                    "
+msgstr ""
+"<b>Verschachtelte Funktionen:</b> Sie können das Ergebnis einer Funktion als Eingabe für eine andere Funktion verwenden.\n"
+"                    \n"
+"<b>Beispiel:</b> 6d6|ex:6|cn:6, würfelt 6 6-seitige Würfel und jeden Würfel, der eine 6 zeigt, erneut - so lange, bis keine 6 mehr gewürfelt wird. Dann wird die Anzahl 6er gezählt.\n"
+"<b>Beispiel:</b> 5d10|kh:1|cn:>8, würfelt 5 10-seitige Würfel und behält den höchsten. Dann wird überprüft, ob dieser Wurf höher als 8 ist.                    \n"
+"                    "
+
+#~ msgid "Little corrections"
+#~ msgstr "Kleine Korrekturen"
+
+#~ msgid "Update to Gnome 48."
+#~ msgstr "Auf GNOME 48 aktualisiert."
+
+#~ msgid "New icons by Jakub Steiner."
+#~ msgstr "Neue Icons von Jakub Steiner."
+
+#~ msgid "Update Tags."
+#~ msgstr "Tags aktualisiert."
+
+#~ msgid "Change banner colors."
+#~ msgstr "Bannerfarben ändern."
+
+#~ msgid "Add tip to do \"reroll previous roll\" button."
+#~ msgstr "Minihilfe zum Knopf für erneutes Würfeln eines Wurfs hinzugefügt."
+
+#~ msgid "Fix roll over 100 dices / 1000 faces error."
+#~ msgstr "Fehler beim Würfeln von über 100 Würfeln / 1000 Seiten behoben."
+
+#~ msgid "This is the first version of this software and has the following features:"
+#~ msgstr "Dies ist die erste Version dieser Software mit den folgenden Funktionen:"
+
+#~ msgid "Basic mode and command mode."
+#~ msgstr "Einfacher Modus und Befehlsmodus."
+
+#~ msgid "Basic dice rolling."
+#~ msgstr "Einfaches Würfel werfen."
+
+#~ msgid "Additions and subtractions of numbers and results of other rolls."
+#~ msgstr "Addition und Subtraktion von Zahlen und anderer Würfelwürfe."
+
+#~ msgid "Roll a group of dice and keep the highest X or lowest X."
+#~ msgstr "Eine Gruppe von Würfeln werfen und die höchsten/niedrigsten X behalten."
+
+#~ msgid "Roll a group of dice and explode (reroll) dice with maximum result."
+#~ msgstr "Eine Gruppe von Würfeln werfen und sie bei höchster Zahl explodieren lassen (erneut würfeln)."
