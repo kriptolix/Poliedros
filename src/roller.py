@@ -1,10 +1,29 @@
+# roller.py
+#
+# Copyright 2024 k
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 import random
 import re
 
 from .regexpatterns import (
     pt_cn, pt_kh, pt_kl, pt_ex, pt_integer, pt_pipe,
     pt_mr, pt_rr, pt_dice, pt_operator, pt_function,
-    pt_kh_b, pt_kl_b, pt_ex_b, pt_rr_b, pt_dice_func
+    pt_kh_b, pt_kl_b, pt_ex_b, pt_rr_b
 
 )
 
@@ -37,7 +56,8 @@ def setup_parameters(parameters: list, pool: list) -> list:
 
         if parameters[1] == "..":
             for element in pool:
-                if element >= int(parameters[0]) and element <= int(parameters[2]):
+                if (element >= int(parameters[0])
+                        and element <= int(parameters[2])):
                     group.append(element)
             return [group, log]
 

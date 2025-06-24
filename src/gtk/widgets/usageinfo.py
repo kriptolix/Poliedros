@@ -26,7 +26,7 @@ from gi.repository import Gtk
 class UsageInfo(Adw.Dialog):
     __gtype_name__ = 'UsageInfo'
 
-    #_textview = Gtk.Template.Child()
+    # _textview = Gtk.Template.Child()
 
     def __init__(self):
         super().__init__()
@@ -38,4 +38,3 @@ class UsageInfo(Adw.Dialog):
         width = window.get_width() * 0.9
         # height = window.get_height() * 0.9
         self.set_content_width(width)
-        

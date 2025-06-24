@@ -1,4 +1,4 @@
-# main.py
+# application.py
 #
 # Copyright 2024 k
 #
@@ -26,7 +26,7 @@ from gettext import gettext as _
 from .gtk.widgets.mainwindow import MainWindow
 from .roller import execute_command
 from .util import create_action
-from .tests.tests import run_tests
+# from .tests.tests import run_tests
 
 
 class PoliedrosApplication(Adw.Application):
