@@ -31,7 +31,7 @@ from .sidebar import SideBar
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MainWindow'
 
-    _about_button = Gtk.Template.Child()
+    _menu_button = Gtk.Template.Child()
     _split_view = Gtk.Template.Child()
     _toggle_history_button = Gtk.Template.Child()
     _back_button = Gtk.Template.Child()
@@ -63,9 +63,7 @@ class MainWindow(Adw.ApplicationWindow):
                                        "visible", flags)
 
         self._back_button.connect(
-            "clicked", lambda *_: self._split_view.set_show_sidebar(False))
-
-        self._about_button.set_action_name("app.about")
+            "clicked", lambda *_: self._split_view.set_show_sidebar(False))        
 
         self._split_view.connect("notify::collapsed",
                                  self._sidebar.css_matching)

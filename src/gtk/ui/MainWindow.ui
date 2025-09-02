@@ -51,9 +51,10 @@
                   </object>
                 </child>
                 <child type="end">
-                  <object class="GtkButton" id="_about_button">
-                    <property name="icon-name">help-about-symbolic</property>                    
-                    <property name="tooltip-text" translatable="yes">About Poliedros</property>
+                  <object class="GtkMenuButton" id="_menu_button">
+                      <property name="menu-model">menu_app</property>
+                      <property name="icon-name">open-menu-symbolic</property>
+                      <property name="primary">true</property>
                   </object>
                 </child>
               </object>
@@ -79,4 +80,16 @@
       </object>
     </property>
   </template>
+  <menu id="menu_app">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+        <attribute name="action">app.shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">About Poliedros</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

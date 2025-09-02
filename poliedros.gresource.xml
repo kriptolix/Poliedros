@@ -13,6 +13,7 @@
     <file preprocess="xml-stripblanks">src/gtk/ui/AdvancedMode.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/FunctionBody.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/DicePool.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/Shortcuts.ui</file>
     <file preprocess="xml-stripblanks">data/io.github.kriptolix.Poliedros.metainfo.xml.in</file>       
         
   </gresource>

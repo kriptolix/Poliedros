@@ -51,8 +51,7 @@ class SideBar(Gtk.Box):
 
         self._sidebar_list.set_placeholder(EmptyPage())
 
-        self._clear_history_button.connect(
-            "clicked", lambda *_: self._sidebar_list.remove_all())
+        self._clear_history_button.connect("clicked", self.clear_registers)
 
     def css_matching(self, splitview, param_spec):
 
@@ -71,3 +70,6 @@ class SideBar(Gtk.Box):
         subtitle = track
         entry = LogEntry(title, subtitle, input)
         self._sidebar_list.insert(entry, 0)
+
+    def clear_registers(self):
+        self._sidebar_list.remove_all()
