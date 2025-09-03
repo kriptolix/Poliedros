@@ -36,7 +36,7 @@ class MainWindow(Adw.ApplicationWindow):
     _toggle_history_button = Gtk.Template.Child()
     _back_button = Gtk.Template.Child()
     _sidebar = Gtk.Template.Child()
-    _roll_area = Gtk.Template.Child()
+    _roll_area = Gtk.Template.Child()    
 
     def __init__(self, app):
         super().__init__(application=app)
@@ -82,7 +82,10 @@ class MainWindow(Adw.ApplicationWindow):
         ratio_breakpoint.connect("apply", self._breakpoint_apply, 1)
         ratio_breakpoint.connect("unapply", self._breakpoint_unapply, 1)
 
-        self.add_breakpoint(ratio_breakpoint)
+        self.add_breakpoint(ratio_breakpoint)      
+        popover = self._menu_button.get_popover()
+        popover.set_offset(-30, 0)
+        
 
     def _breakpoint_apply(self, breakpoint, data):
 

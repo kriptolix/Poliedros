@@ -117,7 +117,7 @@
         <child>
           <object class="GtkButton" id="_d20_button">
             <property name="has-tooltip">true</property>
-            <property name="tooltip-text">d10</property>
+            <property name="tooltip-text">d20</property>
             <style>
               <class name="flat"/>
             </style>

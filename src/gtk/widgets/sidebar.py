@@ -71,5 +71,5 @@ class SideBar(Gtk.Box):
         entry = LogEntry(title, subtitle, input)
         self._sidebar_list.insert(entry, 0)
 
-    def clear_registers(self):
+    def clear_registers(self, button):
         self._sidebar_list.remove_all()

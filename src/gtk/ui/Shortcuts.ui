@@ -18,44 +18,54 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;alt&gt;C</property>                
-                <property name="title" translatable="yes">Clear dice display</property>
+                <property name="title" translatable="yes">Clear the dice display</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;E</property>                
-                <property name="title" translatable="yes">Clear rolls log</property>
+                <property name="title" translatable="yes">Clear the roll logs</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;P</property>                
-                <property name="title" translatable="yes">Toogle panel visibility</property>
+                <property name="title" translatable="yes">Toggle panel visibility</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;M</property>                
+                <property name="title" translatable="yes">Toogle command mode</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;R</property>
+                <property name="title" translatable="yes">Perform dice roll</property>
               </object>
             </child>            
           </object>
         </child>
         <child>
-          <object class="GtkShortcutsGroup">
-            <property name="view">rolls</property>
-            <property name="title" translatable="yes">Roll values</property>
+          <object class="GtkShortcutsGroup">            
+            <property name="title" translatable="yes">Additions and subtractions</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;R</property>
-                <property name="title" translatable="yes">Roll</property>
+                <property name="accelerator">&lt;ctrl&gt;8</property>
+                <property name="title" translatable="yes">add increment (+1)</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;L</property>
-                <property name="title" translatable="yes">Reroll last roll</property>
+                <property name="accelerator">&lt;ctrl&gt;9</property>
+                <property name="title" translatable="yes">add decrement (-1)</property>
               </object>
             </child>
           </object>
-        </child> 
+        </child>         
         <child>
-          <object class="GtkShortcutsGroup">
-            <property name="view">dice</property>
+          <object class="GtkShortcutsGroup">            
             <property name="title" translatable="yes">Dice</property>
             <child>
               <object class="GtkShortcutsShortcut">
@@ -106,25 +116,7 @@
               </object>
             </child>
           </object>
-        </child>
-        <child>
-          <object class="GtkShortcutsGroup">
-            <property name="view">values</property>
-            <property name="title" translatable="yes">Add and subtraction</property>
-            <child>
-              <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;8</property>
-                <property name="title" translatable="yes">Add or incremente positive value</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;9</property>
-                <property name="title" translatable="yes">Add or incremente negative value</property>
-              </object>
-            </child>
-          </object>
-        </child>        
+        </child>               
       </object>
     </child>
   </object>
