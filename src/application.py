@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
-from gi.repository import Adw, Gio
+from gi.repository import Adw, Gio, GLib, Gtk
 
 import sys
 from gettext import gettext as _
@@ -39,6 +39,21 @@ class PoliedrosApplication(Adw.Application):
         create_action(self, "app", 'quit',
                       lambda *_: self.quit(), ['<primary>q'])
         create_action(self, "app", 'about', self.on_about, None, None)
+        create_action(self, "app", 'shortcuts', self.on_shortcuts, None, None)
+        create_action(self, 'app', "roll", self.by_shortcut, ["<primary>r"])
+        create_action(self, 'app', "toggle_mode",
+                      self.by_shortcut, ["<primary>m"])
+        create_action(self, 'app', "toggle_panel",
+                      self.by_shortcut, ["<primary>p"])
+        create_action(self, 'app', "clear_display",
+                      self.by_shortcut, ["<primary>c"])
+        create_action(self, 'app', "clear_registers",
+                      self.by_shortcut, ["<primary>e"])
+
+        for value in range(0, 10):
+
+            create_action(self, 'app', f"{value}", self.by_shortcut,
+                          [f"<primary>{value}", f"<primary>KP_{value}"])
 
     def do_activate(self):
         """Called when the application is activated.
@@ -54,6 +69,8 @@ class PoliedrosApplication(Adw.Application):
 
         self._display = self._window._roll_area._display
         self._update_result = self._window._roll_area.update_result
+        self._add_elements = self._window._roll_area._add_elements
+
         self._add_register = self._window._sidebar.add_register
 
         # run_tests()
@@ -68,6 +85,16 @@ class PoliedrosApplication(Adw.Application):
 
         about.set_translator_credits(_('translator_credits'))
         about.present(self.props.active_window)
+
+    def on_shortcuts(self, *args):
+
+        builder = Gtk.Builder.new_from_resource(
+            '/io/github/kriptolix/Poliedros/src/gtk/ui/Shortcuts.ui'
+        )
+
+        shortcuts = builder.get_object("shortcuts")
+        shortcuts.set_transient_for(self._window)
+        shortcuts.present()
 
     def do_reroll(self, input):
 
@@ -87,6 +114,42 @@ class PoliedrosApplication(Adw.Application):
 
         self._add_register(total, track, input)
         self._update_result(total)
+
+    def by_shortcut(self, action: Gio.SimpleAction,
+                    parameter: GLib.VariantType) -> None:
+
+        name = action.get_name()
+
+        match name:
+            case 'roll':
+                self.do_roll()
+                return
+            case "clear_display":
+                self._window._roll_area._clear_display(None)
+                return
+            case "clear_registers":
+                self._window._sidebar.clear_registers(None)
+                return
+            case "toggle_mode":
+                state = self._window._roll_area._mode_button.get_active()
+
+                if state:
+                    self._window._roll_area._mode_button.set_active(False)
+                else:
+                    self._window._roll_area._mode_button.set_active(True)
+                return
+            case "toggle_panel":
+                state = self._window._toggle_history_button.get_active()
+
+                if state:
+                    self._window._toggle_history_button.set_active(False)
+                else:
+                    self._window._toggle_history_button.set_active(True)
+                return
+
+        index = int(name)
+
+        self._add_elements(None, index)
 
 
 def main(version):

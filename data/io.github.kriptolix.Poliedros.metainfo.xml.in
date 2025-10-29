@@ -57,6 +57,18 @@
   </screenshots>
 
   <releases>
+    <release version="1.5.2" date="2025-10-29">      
+      <description translate="no">
+        <p>New functions and bug fixes.</p>
+        <ul>
+          <li>Correction of the d20 label, thanks to Alvaro Berenguer Cobo.</li>
+          <li>Added full coverage of keyboard shortcuts.</li>
+          <li>Fudge dices roll added.</li>
+          <li>d100 roll added.</li>
+          <li>Update to Gnome 49.</li>                    
+        </ul>
+      </description>
+    </release>
     <release version="1.5.0" date="2025-06-24">      
       <description translate="no">
         <p>New functions and bug fixes.</p>

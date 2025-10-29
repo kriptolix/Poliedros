@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkShortcutsWindow" id="shortcuts">
+    <property name="modal">1</property>
+    <child>
+      <object class="GtkShortcutsSection">
+        <property name="section-name">shortcuts</property>
+        <property name="max-height">10</property>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title" translatable="yes">General</property>            
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;alt&gt;Q</property>
+                <property name="title" translatable="yes">Quit</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;alt&gt;C</property>                
+                <property name="title" translatable="yes">Clear the dice display</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;E</property>                
+                <property name="title" translatable="yes">Clear the roll logs</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;P</property>                
+                <property name="title" translatable="yes">Toggle panel visibility</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;M</property>                
+                <property name="title" translatable="yes">Toggle command mode</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;R</property>
+                <property name="title" translatable="yes">Perform dice roll</property>
+              </object>
+            </child>            
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup">            
+            <property name="title" translatable="yes">Additions and subtractions</property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;8</property>
+                <property name="title" translatable="yes">Add increment (+1)</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;9</property>
+                <property name="title" translatable="yes">Add decrement (-1)</property>
+              </object>
+            </child>
+          </object>
+        </child>         
+        <child>
+          <object class="GtkShortcutsGroup">            
+            <property name="title" translatable="yes">Dice</property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;0</property>
+                <property name="title" translatable="yes">Add a Fudge Die</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;1</property>
+                <property name="title" translatable="yes">Add a d4</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;2</property>
+                <property name="title" translatable="yes">Add a d6</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;3</property>
+                <property name="title" translatable="yes">Add a d8</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;4</property>
+                <property name="title" translatable="yes">Add a d10</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;5</property>
+                <property name="title" translatable="yes">Add a d12</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;6</property>
+                <property name="title" translatable="yes">Add a d20</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;7</property>
+                <property name="title" translatable="yes">Add a d100</property>
+              </object>
+            </child>
+          </object>
+        </child>               
+      </object>
+    </child>
+  </object>
+</interface>

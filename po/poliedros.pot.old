@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/io.github.kriptolix.Poliedros.desktop.in:2
+#: data/io.github.kriptolix.Poliedros.desktop.in:3
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
 msgid "Poliedros"
 msgstr ""
 
-#: data/io.github.kriptolix.Poliedros.desktop.in:8
+#: data/io.github.kriptolix.Poliedros.desktop.in:9
 msgid "GTK;Die;Dice;Roll;Random;Number;"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Command Mode."
 msgstr ""
 
-#: src/application.py:86
+#: src/application.py:69
 msgid "translator_credits"
 msgstr ""
 
@@ -97,11 +97,7 @@ msgstr ""
 msgid "Toggle History"
 msgstr ""
 
-#: src/gtk/ui/MainWindow.ui:86
-msgid "Keyboard Shortcuts"
-msgstr ""
-
-#: src/gtk/ui/MainWindow.ui:90
+#: src/gtk/ui/MainWindow.ui:56
 msgid "About Poliedros"
 msgstr ""
 
@@ -119,82 +115,6 @@ msgstr ""
 
 #: src/gtk/ui/SideBar.ui:31
 msgid "Clear results"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:11
-msgid "General"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:15
-msgid "Quit"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:21
-msgid "Clear the dice display"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:27
-msgid "Clear the roll logs"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:33
-msgid "Toggle panel visibility"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:39
-msgid "Toggle command mode"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:45
-msgid "Perform dice roll"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:52
-msgid "Additions and subtractions"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:56
-msgid "Add increment (+1)"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:62
-msgid "Add decrement (-1)"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:69
-msgid "Dice"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:73
-msgid "Add a Fudge Die"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:79
-msgid "Add a d4"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:85
-msgid "Add a d6"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:91
-msgid "Add a d8"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:97
-msgid "Add a d10"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:103
-msgid "Add a d12"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:109
-msgid "Add a d20"
-msgstr ""
-
-#: src/gtk/ui/Shortcuts.ui:115
-msgid "Add a d100"
 msgstr ""
 
 #: src/gtk/ui/UsageInfo.ui:21

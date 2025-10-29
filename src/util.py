@@ -32,7 +32,7 @@ def create_action(action_group, prefix, name, callback,
         callback(function): the function to be called when the action is
             activated
         shortcuts(list): an optional list of accelerators
-        data(GLib.VariantType): possibles parameters for the action
+        parameter(GLib.VariantType): possibles parameters for the action
     """
     action = Gio.SimpleAction.new(name, parameter)
     action.connect("activate", callback)

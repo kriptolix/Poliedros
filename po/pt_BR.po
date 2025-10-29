@@ -9,21 +9,21 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-23 16:59-0300\n"
-"PO-Revision-Date: 2025-06-23 17:02-0300\n"
+"PO-Revision-Date: 2025-10-29 10:14-0300\n"
 "Last-Translator: Diego C. Sampaio <kriptolix@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
-#: data/io.github.kriptolix.Poliedros.desktop.in:3
+#: data/io.github.kriptolix.Poliedros.desktop.in:2
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
 msgid "Poliedros"
 msgstr "Poliedros"
 
-#: data/io.github.kriptolix.Poliedros.desktop.in:9
+#: data/io.github.kriptolix.Poliedros.desktop.in:8
 msgid "GTK;Die;Dice;Roll;Random;Number;"
 msgstr "GTK;Dado;Dados;Rolagem;Aleatório;Numero;"
 
@@ -61,7 +61,7 @@ msgstr "Barra leteral colapsada."
 msgid "Command Mode."
 msgstr "Modo Comando."
 
-#: src/application.py:69
+#: src/application.py:86
 msgid "translator_credits"
 msgstr "Diego C. Sampaio"
 
@@ -101,7 +101,11 @@ msgstr "Voltar"
 msgid "Toggle History"
 msgstr "Exibir/Ocultar Histórico"
 
-#: src/gtk/ui/MainWindow.ui:56
+#: src/gtk/ui/MainWindow.ui:86
+msgid "Keyboard Shortcuts"
+msgstr "Atalhos de teclado"
+
+#: src/gtk/ui/MainWindow.ui:90
 msgid "About Poliedros"
 msgstr "Sobre o Poliedros"
 
@@ -120,6 +124,82 @@ msgstr "Limpar Comando"
 #: src/gtk/ui/SideBar.ui:31
 msgid "Clear results"
 msgstr "Limpar Resultados"
+
+#: src/gtk/ui/Shortcuts.ui:11
+msgid "General"
+msgstr "Geral"
+
+#: src/gtk/ui/Shortcuts.ui:15
+msgid "Quit"
+msgstr "Fechar"
+
+#: src/gtk/ui/Shortcuts.ui:21
+msgid "Clear the dice display"
+msgstr "Limpar Comando"
+
+#: src/gtk/ui/Shortcuts.ui:27
+msgid "Clear the roll logs"
+msgstr "Limpar Resultados"
+
+#: src/gtk/ui/Shortcuts.ui:33
+msgid "Toggle panel visibility"
+msgstr "Ativar/Desativar visibilidade do painel"
+
+#: src/gtk/ui/Shortcuts.ui:39
+msgid "Toggle command mode"
+msgstr "Ativar/Desativar Modo Comando"
+
+#: src/gtk/ui/Shortcuts.ui:45
+msgid "Perform dice roll"
+msgstr "Executar uma rolagem"
+
+#: src/gtk/ui/Shortcuts.ui:52
+msgid "Additions and subtractions"
+msgstr "Adições e subtrações"
+
+#: src/gtk/ui/Shortcuts.ui:56
+msgid "Add increment (+1)"
+msgstr "Adicionar incremento (+1)"
+
+#: src/gtk/ui/Shortcuts.ui:62
+msgid "Add decrement (-1)"
+msgstr "Adicionar decremento (-1)"
+
+#: src/gtk/ui/Shortcuts.ui:69
+msgid "Dice"
+msgstr "Dados"
+
+#: src/gtk/ui/Shortcuts.ui:73
+msgid "Add a Fudge Die"
+msgstr "Adicionar um dado Fudge"
+
+#: src/gtk/ui/Shortcuts.ui:79
+msgid "Add a d4"
+msgstr "Adicionar um d4"
+
+#: src/gtk/ui/Shortcuts.ui:85
+msgid "Add a d6"
+msgstr "Adicionar um d6"
+
+#: src/gtk/ui/Shortcuts.ui:91
+msgid "Add a d8"
+msgstr "Adicionar um d8"
+
+#: src/gtk/ui/Shortcuts.ui:97
+msgid "Add a d10"
+msgstr "Adicionar um d10"
+
+#: src/gtk/ui/Shortcuts.ui:103
+msgid "Add a d12"
+msgstr "Adicionar um d12"
+
+#: src/gtk/ui/Shortcuts.ui:109
+msgid "Add a d20"
+msgstr "Adicionar um d20"
+
+#: src/gtk/ui/Shortcuts.ui:115
+msgid "Add a d100"
+msgstr "Adicionar um d100"
 
 #: src/gtk/ui/UsageInfo.ui:21
 msgid "Command usage instructions"
