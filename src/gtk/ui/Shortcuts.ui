@@ -36,7 +36,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;M</property>                
-                <property name="title" translatable="yes">Toogle command mode</property>
+                <property name="title" translatable="yes">Toggle command mode</property>
               </object>
             </child>
             <child>
@@ -53,13 +53,13 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;8</property>
-                <property name="title" translatable="yes">add increment (+1)</property>
+                <property name="title" translatable="yes">Add increment (+1)</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;9</property>
-                <property name="title" translatable="yes">add decrement (-1)</property>
+                <property name="title" translatable="yes">Add decrement (-1)</property>
               </object>
             </child>
           </object>
