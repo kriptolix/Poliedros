@@ -5,7 +5,7 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Poliedros</name>
-  <summary>Roll multi-type dice.</summary>
+  <summary>Roll multi-type dice</summary>
   <description>
     <p>Poliedros is a multi-type dice roller. Basic mode allows you to make quick rolls using just the mouse, while Command mode allows for more complex rolls and combinations.</p>
   </description>
@@ -59,7 +59,7 @@
   <releases>
     <release version="1.5.2" date="2025-10-29">      
       <description translate="no">
-        <p>New functions and bug fixes.</p>
+        <p>New functions and corrections.</p>
         <ul>
           <li>Correction of the d20 label, thanks to Alvaro Berenguer Cobo.</li>
           <li>Added full coverage of keyboard shortcuts.</li>

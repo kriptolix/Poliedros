@@ -1,7 +1,7 @@
 # German translation for Poliedros.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Philipp Kiemle <l10n@prly.mozmail.com>, 2025.
+# Philipp Kiemle <l10n.daphipz@fastmail.de>, 2025.
 #
 #, fuzzy
 msgid ""
@@ -9,21 +9,21 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-23 16:59-0300\n"
-"PO-Revision-Date: 2025-06-23 22:18+0200\n"
-"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
+"PO-Revision-Date: 2025-10-30 18:16+0100\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
-#: data/io.github.kriptolix.Poliedros.desktop.in:3
+#: data/io.github.kriptolix.Poliedros.desktop.in:2
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
 msgid "Poliedros"
 msgstr "Poliedros"
 
-#: data/io.github.kriptolix.Poliedros.desktop.in:9
+#: data/io.github.kriptolix.Poliedros.desktop.in:8
 msgid "GTK;Die;Dice;Roll;Random;Number;"
 msgstr "GTK;Die;Dice;Roll;Random;Number;Würfel;würfeln;Wurf;Zufall;zufällig;Zahl;"
 
@@ -55,9 +55,9 @@ msgstr "Eingeklappte Seitenleiste."
 msgid "Command Mode."
 msgstr "Befehlsmodus."
 
-#: src/application.py:69
+#: src/application.py:86
 msgid "translator_credits"
-msgstr "Philipp Kiemle <l10n@prly.mozmail.com>"
+msgstr "Philipp Kiemle <l10n.daphipz@fastmail.de>"
 
 #: src/gtk/ui/DiceArea.ui:74
 msgid "Plus Number"
@@ -95,7 +95,11 @@ msgstr "Zurückgehen"
 msgid "Toggle History"
 msgstr "Chronik umschalten"
 
-#: src/gtk/ui/MainWindow.ui:56
+#: src/gtk/ui/MainWindow.ui:86
+msgid "Keyboard Shortcuts"
+msgstr "Tastenkürzel"
+
+#: src/gtk/ui/MainWindow.ui:90
 msgid "About Poliedros"
 msgstr "Info zu Poliedros"
 
@@ -114,6 +118,82 @@ msgstr "Befehl leeren"
 #: src/gtk/ui/SideBar.ui:31
 msgid "Clear results"
 msgstr "Ergebnisse leeren"
+
+#: src/gtk/ui/Shortcuts.ui:11
+msgid "General"
+msgstr "Allgemein"
+
+#: src/gtk/ui/Shortcuts.ui:15
+msgid "Quit"
+msgstr "Beenden"
+
+#: src/gtk/ui/Shortcuts.ui:21
+msgid "Clear the dice display"
+msgstr "Die Würfelanzeige leeren"
+
+#: src/gtk/ui/Shortcuts.ui:27
+msgid "Clear the roll logs"
+msgstr "Den Wurfverlauf leeren"
+
+#: src/gtk/ui/Shortcuts.ui:33
+msgid "Toggle panel visibility"
+msgstr "Sichtbarkeit der Seitenleiste umschalten"
+
+#: src/gtk/ui/Shortcuts.ui:39
+msgid "Toggle command mode"
+msgstr "Befehlsmodus umschalten"
+
+#: src/gtk/ui/Shortcuts.ui:45
+msgid "Perform dice roll"
+msgstr "Würfel werfen"
+
+#: src/gtk/ui/Shortcuts.ui:52
+msgid "Additions and subtractions"
+msgstr "Additionen und Subtraktionen"
+
+#: src/gtk/ui/Shortcuts.ui:56
+msgid "Add increment (+1)"
+msgstr "Inkrement hinzufügen (+1)"
+
+#: src/gtk/ui/Shortcuts.ui:62
+msgid "Add decrement (-1)"
+msgstr "Dekrement hinzufügen (-1)"
+
+#: src/gtk/ui/Shortcuts.ui:69
+msgid "Dice"
+msgstr "Würfel"
+
+#: src/gtk/ui/Shortcuts.ui:73
+msgid "Add a Fudge Die"
+msgstr "Einen Fudge-Würfel hinzufügen"
+
+#: src/gtk/ui/Shortcuts.ui:79
+msgid "Add a d4"
+msgstr "Einen d4 hinzufügen"
+
+#: src/gtk/ui/Shortcuts.ui:85
+msgid "Add a d6"
+msgstr "Einen d6 hinzufügen"
+
+#: src/gtk/ui/Shortcuts.ui:91
+msgid "Add a d8"
+msgstr "Einen d8 hinzufügen"
+
+#: src/gtk/ui/Shortcuts.ui:97
+msgid "Add a d10"
+msgstr "Einen d10 hinzufügen"
+
+#: src/gtk/ui/Shortcuts.ui:103
+msgid "Add a d12"
+msgstr "Einen d12 hinzufügen"
+
+#: src/gtk/ui/Shortcuts.ui:109
+msgid "Add a d20"
+msgstr "Einen d20 hinzufügen"
+
+#: src/gtk/ui/Shortcuts.ui:115
+msgid "Add a d100"
+msgstr "Einen d100 hinzufügen"
 
 #: src/gtk/ui/UsageInfo.ui:21
 msgid "Command usage instructions"
