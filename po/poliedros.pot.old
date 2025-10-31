@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-23 16:59-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.github.kriptolix.Poliedros.desktop.in:3
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
+msgid "Poliedros"
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.desktop.in:9
+msgid "GTK;Die;Dice;Roll;Random;Number;"
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:8
+msgid "Roll multi-type dice."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:10
+msgid ""
+"Poliedros is a multi-type dice roller. Basic mode allows you to make quick "
+"rolls using just the mouse, while Command mode allows for more complex rolls "
+"and combinations."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:14
+msgid "Diego C Sampaio"
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:43
+msgid "Basic Mode."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:47
+msgid "No sidebar."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:51
+msgid "Collapsed sidebar."
+msgstr ""
+
+#: data/io.github.kriptolix.Poliedros.metainfo.xml.in:55
+msgid "Command Mode."
+msgstr ""
+
+#: src/application.py:69
+msgid "translator_credits"
+msgstr ""
+
+#: src/gtk/ui/DiceArea.ui:74
+msgid "Plus Number"
+msgstr ""
+
+#: src/gtk/ui/DiceArea.ui:150
+msgid "Minus Number"
+msgstr ""
+
+#: src/gtk/ui/EmptyPage.ui:7
+msgid "Nothing Here Yet"
+msgstr ""
+
+#: src/gtk/ui/EmptyPage.ui:8
+msgid "Roll some dice to begin"
+msgstr ""
+
+#: src/gtk/ui/InfoArea.ui:7
+msgid "Command Mode"
+msgstr ""
+
+#: src/gtk/ui/InfoArea.ui:13
+msgid "Command mode usage instructions"
+msgstr ""
+
+#: src/gtk/ui/LogEntry.ui:10
+msgid "Redo this roll"
+msgstr ""
+
+#: src/gtk/ui/MainWindow.ui:25
+msgid "Go Back"
+msgstr ""
+
+#: src/gtk/ui/MainWindow.ui:50
+msgid "Toggle History"
+msgstr ""
+
+#: src/gtk/ui/MainWindow.ui:56
+msgid "About Poliedros"
+msgstr ""
+
+#: src/gtk/ui/RollArea.ui:54
+msgid "Switch Mode"
+msgstr ""
+
+#: src/gtk/ui/RollArea.ui:65 src/gtk/ui/RollArea.ui:66
+msgid "Roll"
+msgstr ""
+
+#: src/gtk/ui/RollArea.ui:78
+msgid "Clear Command"
+msgstr ""
+
+#: src/gtk/ui/SideBar.ui:31
+msgid "Clear results"
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:21
+msgid "Command usage instructions"
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:32
+msgid ""
+"<b>Rolling dice:</b> operator \"d\".\n"
+"\n"
+"<b>Ex.:</b> 3d6, roll 3 6-sided dice.\n"
+"<b>Ex.:</b> 2df, roll 2 fudge dice (-1, 0 and 1 possible results).\n"
+"<b>Ex.:</b> It is possible to roll arbitrary dice like 1d7 or, 3d19.\n"
+"                    "
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:47
+msgid ""
+"<b>Additions/Subtractions:</b> \"+\" and \"-\" operators.\n"
+"                    \n"
+"<b>Ex.:</b> 1d6 + 3, roll 1 6-sided die and add the number 3.\n"
+"<b>Ex.:</b> 2d8 - 1d4, roll 2 8-sided dice and subtract the result of "
+"rolling 1 4-sided die.\n"
+"                    "
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:61
+msgid ""
+"<b>Keeping higher:</b> operator \"|kh:number\".\n"
+"                    \n"
+"<b>Ex.:</b> 3d6|kh:2, roll 3 6-sided dice and keep the 2 highest.\n"
+"<b>Ex.:</b> 2d20|kh:1, roll 2 20-sided dice and keep the "
+"highest.                    \n"
+"                    "
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:75
+msgid ""
+"<b>Keeping lower:</b> operator \"|kl:number\".\n"
+"                    \n"
+"<b>Ex.:</b> 4d10|kl:2, roll 4 10-sided dice and keep the 2 lowest.\n"
+"<b>Ex.:</b> 3d6|kl:1, roll 3 6-sided dice and keep the lowest.\n"
+"                    "
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:89
+msgid ""
+"<b>Functions parameters:</b>\n"
+"\n"
+"<b>Ex.:</b> >15: greater than number(inclusive).\n"
+"<b>Ex.:</b> 6,8,10: relation of arbitrary numbers.\n"
+"<b>Ex.:</b> 4: a single number.\n"
+"<b>Ex.:</b> &lt;10: lower than number (inclusive).\n"
+"<b>Ex.:</b> 80..90: interval between numbers (inclusive).\n"
+"                    "
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:106
+msgid ""
+"<b>Count in:</b> operator \"|cn:parameters\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d10|cn:6,8,10; roll 4 10-sided dice and count how many 6s,8s "
+"and 10s occur.\n"
+"<b>Ex.:</b> 4d4|cn:4; roll 4 4-sided dice and count how many 4s occur.\n"
+"<b>Ex.:</b> 6d20|cn:>15; roll 6 20-sided dice and count how many results "
+"greater than 15 occur.\n"
+"<b>Ex.:</b> 3d100|cn:80..90; roll 3 100-sided dice and count how many "
+"results between 80 and 90 occur occur.\n"
+"                    "
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:122
+msgid ""
+"<b>Exploding dice:</b> operator \"|ex:parameters\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d6|ex:6, roll 6 6-sided dice and, if any of them result in a 6, "
+"roll that die again, add to the result and so on.\n"
+"<b>Ex.:</b> 5d10|ex:>8, roll 5 10-sided dice and, if any of the results is "
+"greater than 8, roll that die again, add to the result and so "
+"on.                    \n"
+"                    "
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:136
+msgid ""
+"<b>Reroll dice:</b> operator \"|rr:parameters\".\n"
+"                    \n"
+"<b>Ex.:</b> 6d6|rr:6, roll 6 6-sided dice and, if any of them result in a 6, "
+"reroll that die and keep the new result.\n"
+"<b>Ex.:</b> 5d10|rr:>8, roll 5 10-sided dice and, if any of the results is "
+"greater than 8, reroll that die and keep the new "
+"result.                    \n"
+"                    "
+msgstr ""
+
+#: src/gtk/ui/UsageInfo.ui:150
+msgid ""
+"<b>Nested functions:</b> You can use the result of one function as an input "
+"for another function.\n"
+"                    \n"
+"<b>Ex.:</b> 6d6|ex:6|cn:6, roll 6 6-sided dice and, if any of them result in "
+"a 6, roll that die again, add to the result and so on.Then, count how many "
+"6s occur.\n"
+"<b>Ex.:</b> 5d10|kh:1|cn:>8, roll 5 10-sided dice and keep the highest, "
+"then, check if the result is greater than 8.                    \n"
+"                    "
+msgstr ""
