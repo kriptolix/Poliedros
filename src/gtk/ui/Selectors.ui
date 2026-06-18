@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="Selectors" parent="GtkBox">
+    <property name="orientation">1</property>
+    <property name="spacing">10</property>
+    <child>
+      <object class="GtkBox">
+        <property name="homogeneous">true</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">3d View</property>
+            <property name="margin-end">15</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="_render">
+            <property name="active">true</property>
+            <property name="halign">3</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="homogeneous">true</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">Sound</property>
+            <property name="margin-end">15</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="_audio">
+            <property name="active">true</property>
+            <property name="halign">3</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

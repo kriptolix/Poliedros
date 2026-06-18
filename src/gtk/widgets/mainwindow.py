@@ -24,6 +24,7 @@ from gi.repository import GObject
 
 from .rollarea import RollArea
 from .sidebar import SideBar
+from .appmenu import AppMenu
 
 
 @Gtk.Template(resource_path='/io/github/kriptolix/'
@@ -31,7 +32,7 @@ from .sidebar import SideBar
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MainWindow'
 
-    _menu_button = Gtk.Template.Child()
+    _menu_button = Gtk.Template.Child()   
     _split_view = Gtk.Template.Child()
     _toggle_history_button = Gtk.Template.Child()
     _back_button = Gtk.Template.Child()
@@ -88,8 +89,10 @@ class MainWindow(Adw.ApplicationWindow):
         ratio_breakpoint.connect("unapply", self._breakpoint_unapply, 1)
 
         self.add_breakpoint(ratio_breakpoint)      
-        popover = self._menu_button.get_popover()
-        popover.set_offset(-30, 0)
+        popover = AppMenu()
+        # popover.set_offset(-30, 0)             
+        self._menu_button.props.popover = popover
+        
         
 
     def _breakpoint_apply(self, breakpoint, data):
@@ -118,6 +121,9 @@ class MainWindow(Adw.ApplicationWindow):
 
     def on_theme_changed(self, param, value):                
         self._sidebar.css_matching(self._split_view, None)
+
+
+
         
         
 

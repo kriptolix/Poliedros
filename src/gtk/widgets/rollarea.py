@@ -24,7 +24,6 @@ from .dicearea import DiceArea
 from .infoarea import InfoArea
 from .advancedmode import AdvancedMode
 
-
 @Gtk.Template(resource_path='/io/github/kriptolix/'
               'Poliedros/src/gtk/ui/RollArea.ui')
 class RollArea(Gtk.Box):
@@ -44,25 +43,28 @@ class RollArea(Gtk.Box):
     def __init__(self):
         super().__init__()
 
-        # df, d4, d6, d8, d10, d12, d20, d100, increment
-        self._command = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
+        # df, d4, d6, d8, d10, d12, d20, d100
+        self._command = {"df":0, "d4":0, "d6":0, "d8":0, "d10":0, "d12":0, "d20":0, "d100":0}
+        
+        self._modifier = 0
         # self._advanced.display = self._display
 
         self._roll_button.connect("clicked", self._do_roll)
 
-        self._dice_area._d100_button.connect("clicked", self._add_elements, 7)
-        self._dice_area._d20_button.connect("clicked", self._add_elements, 6)
-        self._dice_area._d12_button.connect("clicked", self._add_elements, 5)
-        self._dice_area._d10_button.connect("clicked", self._add_elements, 4)
-        self._dice_area._d8_button.connect("clicked", self._add_elements, 3)
-        self._dice_area._d6_button.connect("clicked", self._add_elements, 2)
-        self._dice_area._d4_button.connect("clicked", self._add_elements, 1)
-        self._dice_area._df_button.connect("clicked", self._add_elements, 0)
-        self._dice_area._plus_button.connect("clicked", self._add_elements, 8)
-        self._dice_area._minus_button.connect("clicked", self._add_elements, 9)
-        self._clear_button.connect("clicked", self._clear_display)
-        self._mode_button.connect("toggled", self._change_mode)
+        self._dice_area._d100_button.connect("clicked", self.add_die)
+        self._dice_area._d20_button.connect("clicked", self.add_die)
+        self._dice_area._d12_button.connect("clicked", self.add_die)
+        self._dice_area._d10_button.connect("clicked", self.add_die)
+        self._dice_area._d8_button.connect("clicked", self.add_die)
+        self._dice_area._d6_button.connect("clicked", self.add_die)
+        self._dice_area._d4_button.connect("clicked", self.add_die)
+        self._dice_area._df_button.connect("clicked", self.add_die)
+
+        self._dice_area._plus_button.connect("clicked", self.add_modifier, +1)
+        self._dice_area._minus_button.connect("clicked", self.add_modifier, -1)
+
+        self._clear_button.connect("clicked", self.clear_display)
+        self._mode_button.connect("toggled", self.change_mode)
 
         buffer = self._display.get_buffer()
 
@@ -85,12 +87,13 @@ class RollArea(Gtk.Box):
 
         self._results.set_text(str(total))
 
-    def _clear_display(self, button):
-        self._command = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    def clear_display(self, button):
+        self._command = {"df":0, "d4":0, "d6":0, "d8":0, "d10":0, "d12":0, "d20":0, "d100":0}
+        self._modifier = 0
         self._display.set_text("")
         self._results.set_text("?")
 
-    def _change_mode(self, button):
+    def change_mode(self, button):
 
         placeholder = "Ex.: 2d6, 1d12+3, 2d20|kh:1"
 
@@ -100,80 +103,56 @@ class RollArea(Gtk.Box):
             self._display.set_can_focus(True)
             self._display.set_placeholder_text(placeholder)
             self._display.grab_focus()
-
-        if not self._mode_button.get_active():
-            self._stack.set_visible_child(self._dice_area)
-            self._display.set_editable(False)
-            self._display.set_can_focus(False)
-            self._display.set_placeholder_text('')
-            self._clear_display(None)
+            return
+       
+        self._stack.set_visible_child(self._dice_area)
+        self._display.set_editable(False)
+        self._display.set_can_focus(False)
+        self._display.set_placeholder_text('')
+        self.clear_display(None)
 
     def _assemble_command(self):
-
-        add_plus = False
+        
         display_content = ""
+        content = ""
 
-        for index, element in enumerate(self._command):
-            if element != 0:
-                if add_plus and index != 8:
-                    display_content = display_content + ' + '
+        parts = []
 
-                add_plus = True
+        for dice, quantity in self._command.items():
+            if quantity > 0:
+                parts.append(f"{quantity}{dice}")         
+        
+        if self._modifier > 0:
+            content = (f" + {self._modifier}")
+       
+        if self._modifier < 0:
+            content =(f" - {abs(self._modifier)}")
 
-                match index:
-                    case 0:
-                        content = f"{element}df"
-
-                    case 1:
-                        content = f"{element}d4"
-
-                    case 2:
-                        content = f"{element}d6"
-
-                    case 3:
-                        content = f"{element}d8"
-
-                    case 4:
-                        content = f"{element}d10"
-
-                    case 5:
-                        content = f"{element}d12"
-
-                    case 6:
-                        content = f"{element}d20"
-
-                    case 7:
-                        content = f"{element}d100"
-
-                    case 8:
-                        content = f" + {element}"
-
-                        if element < 0:
-                            content = f" - {abs(element)}"
-
-                display_content = display_content + content
+        display_content = " + ".join(parts)
+        display_content = display_content + content
 
         # print(display_content)
         self._display.set_text(display_content)
 
-    def _add_elements(self, button, index):
+    def add_die(self, button):
 
-        if index == 9:
+        die_key = button
 
-            self._command[8] = self._command[8] - 1
-            # print(self._command)
-            self._assemble_command()
-            return
+        if not isinstance(button, str):
+            die_key = button.get_tooltip_text()        
 
-        self._command[index] = self._command[index] + 1
+        self._command[die_key] += 1
+        self._assemble_command()
 
+    def add_modifier(self, button, modifier):
+        self._modifier += modifier
         self._assemble_command()
 
     def _do_roll(self, button):
 
         application = self.get_root().application
         application.do_roll()
-        self._command = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self._command = {"df":0, "d4":0, "d6":0, "d8":0, "d10":0, "d12":0, "d20":0, "d100":0}
 
     def _button_activation(self, display):
         

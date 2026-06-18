@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
-from gi.repository import Adw, Gio, GLib, Gtk
+from gi.repository import Adw, Gio, GLib, Gtk, Gdk
 
 import sys
 from gettext import gettext as _
@@ -40,20 +40,26 @@ class PoliedrosApplication(Adw.Application):
                       lambda *_: self.quit(), ['<primary>q'])
         create_action(self, "app", 'about', self.on_about, None, None)
         create_action(self, "app", 'shortcuts', self.on_shortcuts, None, None)
-        create_action(self, 'app', "roll", self.by_shortcut, ["<primary>r"])
+        create_action(self, 'app', "roll", self.by_shortcut, ["r"])
         create_action(self, 'app', "toggle_mode",
-                      self.by_shortcut, ["<primary>m"])
+                      self.by_shortcut, ["m"])
         create_action(self, 'app', "toggle_panel",
-                      self.by_shortcut, ["<primary>p"])
+                      self.by_shortcut, ["p"])
         create_action(self, 'app', "clear_display",
-                      self.by_shortcut, ["<primary>c"])
+                      self.by_shortcut, ["c"])
         create_action(self, 'app', "clear_registers",
-                      self.by_shortcut, ["<primary>e"])
+                      self.by_shortcut, ["e"])
+        create_action(self, 'app', "increment",
+                      self.by_shortcut, ["equal", "KP_Add"])
+        create_action(self, 'app', "decrement",
+                      self.by_shortcut, ["minus", "KP_Subtract"])
+        
+        dice = {"df":0, "d4":1, "d6":2, "d8":3, "d10":4, "d12":5, "d20":6, "d100":7}
 
-        for value in range(0, 10):
+        for dice, key in dice.items():
 
-            create_action(self, 'app', f"{value}", self.by_shortcut,
-                          [f"<primary>{value}", f"<primary>KP_{value}"])
+            create_action(self, 'app', f"{dice}", self.by_shortcut,
+                          [f"{key}", f"KP_{key}"])
 
     def do_activate(self):
         """Called when the application is activated.
@@ -69,9 +75,15 @@ class PoliedrosApplication(Adw.Application):
 
         self._display = self._window._roll_area._display
         self._update_result = self._window._roll_area.update_result
-        self._add_elements = self._window._roll_area._add_elements
-
+        self._add_die = self._window._roll_area.add_die
+        self._add_modifier = self._window._roll_area.add_modifier
         self._add_register = self._window._sidebar.add_register
+
+        '''
+        controller = Gtk.EventControllerKey()
+        controller.connect("key-pressed", self.on_key_pressed)
+        self._window.add_controller(controller)
+        '''
 
         # run_tests()
 
@@ -93,8 +105,8 @@ class PoliedrosApplication(Adw.Application):
         )
 
         shortcuts = builder.get_object("shortcuts")
-        shortcuts.set_transient_for(self._window)
-        shortcuts.present()
+        #shortcuts.set_transient_for(self._window)
+        shortcuts.present(self._window)
 
     def do_reroll(self, input):
 
@@ -125,7 +137,7 @@ class PoliedrosApplication(Adw.Application):
                 self.do_roll()
                 return
             case "clear_display":
-                self._window._roll_area._clear_display(None)
+                self._window._roll_area.clear_display(None)
                 return
             case "clear_registers":
                 self._window._sidebar.clear_registers(None)
@@ -146,10 +158,25 @@ class PoliedrosApplication(Adw.Application):
                 else:
                     self._window._toggle_history_button.set_active(True)
                 return
+            case "increment":                
+                self._add_modifier(None, +1)
+                return
+            case "decrement":                
+                self._add_modifier(None, -1)
+                return
 
-        index = int(name)
+        
+        self._add_die(name)
 
-        self._add_elements(None, index)
+    def on_key_pressed(self, controller, keyval, keycode, state):
+        print(
+            "keyval =", keyval,
+            "name =", Gdk.keyval_name(keyval),
+            "state =", state
+        )
+        return False
+
+    
 
 
 def main(version):

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="AppMenu" parent="GtkPopoverMenu">
+    <property name="autohide">True</property>
+    <property name="visible">False</property>    
+    <property name="menu-model">_app_menu</property>
+  </template>
+  <menu id="_app_menu">
+    <section>
+      <item>
+        <attribute name="custom">selectors</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+        <attribute name="action">app.shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">About Poliedros</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>

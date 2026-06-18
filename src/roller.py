@@ -261,7 +261,7 @@ def next_is_function(commands: list, actual: int) -> bool:
     return False
 
 
-def address_commands(commands: list, testing: bool = None) -> list:
+def address_commands(commands: list, testing: bool = False) -> list:
 
     result = ""
     track = ""
@@ -483,38 +483,31 @@ def address_commands(commands: list, testing: bool = None) -> list:
 
     return results
 
+_ALL_PATTERNS = (
+    pt_dice, pt_integer, pt_operator,
+    pt_ex, pt_rr, pt_kh, pt_kl,
+    pt_ex_b, pt_rr_b, pt_kh_b, pt_kl_b,
+    pt_cn,
+)
+
+_BOUND_PATTERNS = (pt_ex_b, pt_rr_b, pt_kh_b, pt_kl_b)
 
 def validate_elements(commands: list) -> list | None:
-
+    """Retorna [False, None, mensagem] se inválido, None se válido."""
     if not commands:
-        [False, None, "Empty Command"]
+        return [False, None, "Empty Command"]
 
     for index, element in enumerate(commands):
-
-        if not (re.match(pt_dice, element)
-                or re.match(pt_integer, element)
-                or re.match(pt_operator, element)
-                or re.match(pt_ex, element)
-                or re.match(pt_rr, element)
-                or re.match(pt_kh, element)
-                or re.match(pt_kl, element)
-                or re.match(pt_ex_b, element)
-                or re.match(pt_rr_b, element)
-                or re.match(pt_kh_b, element)
-                or re.match(pt_kl_b, element)
-                or re.match(pt_cn, element)):
-
+        if not any(re.match(pattern, element) for pattern in _ALL_PATTERNS):
             return [False, None, f"Sintaxe Error: {element}"]
 
-        if (re.match(pt_ex_b, element)
-                or re.match(pt_rr_b, element)
-                or re.match(pt_kh_b, element)
-                or re.match(pt_kl_b, element)):
+        if any(re.match(pattern, element) for pattern in _BOUND_PATTERNS):
+            prev = commands[index - 1]
 
-            if (re.match(pt_integer, commands[index - 1])
-                    or re.match(pt_operator, commands[index - 1])):
-
+            if re.match(pt_integer, prev) or re.match(pt_operator, prev):
                 return [False, None, f"Sintaxe Error: {element} not preceded"]
+
+    return None
 
 
 def execute_command(commands: str) -> list:
@@ -524,7 +517,7 @@ def execute_command(commands: str) -> list:
 
     fixed_param = []
 
-    for index, param in enumerate(parameters):  # 5d6 + 1d4 | kh:3 | cn:>4,
+    for index, param in enumerate(parameters):  #ex: 1d4 + 5d6 | kh:3 | cn:>4
         new = param
 
         if (re.match(pt_pipe, param)):
