@@ -1,0 +1,15 @@
+{                                                                                                                                  
+  "name": "python3-bullet",                                                                                                        
+  "buildsystem": "simple",                                                                                                         
+  "build-commands": [                                                                                                              
+    "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"bullet\" --no-build-isolation"                                                                                                              
+  ],                                                                                                                               
+  "sources": [                                                                                                                     
+    {                                                                                                                              
+      "type": "file",                                                                                                              
+      "url":                                                                                                                       
+"https://files.pythonhosted.org/packages/c2/7e/7b8dc139e2c46b66d007b1c09d94142f3ff65618498cab68916f825c2c91/bullet-2.2.0-py3-none-any.whl",                                                                                                                           
+      "sha256": "d22528deb914ce3ff20a4a000fa5ba37179697f384a0748f90691de8a74cf006"                                                 
+    }                                                                                                                              
+  ]                                                                                                                                
+}

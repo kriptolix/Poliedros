@@ -1,0 +1,15 @@
+{                                                                                                                                  
+  "name": "python3-numpy",                                                                                                         
+  "buildsystem": "simple",                                                                                                         
+  "build-commands": [                                                                                                              
+    "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"numpy\" --no-build-isolation"                                                                                                              
+  ],                                                                                                                               
+  "sources": [                                                                                                                     
+    {                                                                                                                              
+      "type": "file",                                                                                                              
+      "url":                                                                                                                       
+"https://files.pythonhosted.org/packages/e7/05/3d27272d30698dc0ecb7fdfaa41ad70303b444f81722bb99bce1d818638a/numpy-2.5.0.tar.gz",   
+      "sha256": "5a129578019311b6e56bdd714250f19b518f7dceeeb8d1af5490f4942d3f891c"                                                 
+    }                                                                                                                              
+  ]                                                                                                                                
+}

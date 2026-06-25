@@ -1,0 +1,27 @@
+{                                                                                                                                  
+  "name": "python3-sounddevice",                                                                                                   
+  "buildsystem": "simple",                                                                                                         
+  "build-commands": [                                                                                                              
+    "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"sounddevice\" --no-build-isolation"                                                                                                              
+  ],                                                                                                                               
+  "sources": [                                                                                                                     
+    {                                                                                                                              
+      "type": "file",                                                                                                              
+      "url":                                                                                                                       
+"https://files.pythonhosted.org/packages/1e/0a/478e441fd049002cf308520c0d62dd8333e7c6cc8d997f0dda07b9fbcc46/sounddevice-0.5.5-py3-none-any.whl",                                                                                                                      
+      "sha256": "30ff99f6c107f49d25ad16a45cacd8d91c25a1bcdd3e81a206b921a3a6405b1f"                                                 
+    },                                                                                                                             
+    {                                                                                                                              
+      "type": "file",                                                                                                              
+      "url":                                                                                                                       
+"https://files.pythonhosted.org/packages/eb/56/b1ba7935a17738ae8453301356628e8147c79dbb825bcbc73dc7401f9846/cffi-2.0.0.tar.gz",    
+      "sha256": "44d1b5909021139fe36001ae048dbdde8214afa20200eda0f64c068cac5d5529"                                                 
+    },                                                                                                                             
+    {                                                                                                                              
+      "type": "file",                                                                                                              
+      "url":                                                                                                                       
+"https://files.pythonhosted.org/packages/0c/c3/44f3fbbfa403ea2a7c779186dc20772604442dde72947e7d01069cbe98e3/pycparser-3.0-py3-none-any.whl",                                                                                                                          
+      "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"                                                 
+    }                                                                                                                              
+  ]                                                                                                                                
+}

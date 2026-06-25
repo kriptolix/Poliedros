@@ -1,0 +1,21 @@
+{                                                                                                                                  
+  "name": "python3-meson-python",                                                                                                  
+  "buildsystem": "simple",                                                                                                         
+  "build-commands": [                                                                                                              
+    "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"meson-python\" --no-build-isolation"                                                                                                              
+  ],                                                                                                                               
+  "sources": [                                                                                                                     
+    {                                                                                                                              
+      "type": "file",                                                                                                              
+      "url":                                                                                                                       
+"https://files.pythonhosted.org/packages/90/ad/77f9483e180cabab2772ac222aedd3dfab858e60d992f40414a3f08e7494/meson_python-0.20.0-py3-none-any.whl",                                                                                                                    
+      "sha256": "6a744cf0c09e76ecbdc58cfa374b48c8902dac1b74479628238634efbf36aec9"                                                 
+    },                                                                                                                             
+    {                                                                                                                              
+      "type": "file",                                                                                                              
+      "url":                                                                                                                       
+"https://files.pythonhosted.org/packages/1d/0b/da4851b1e2d9c40c9bd74c0abd94510a7d797da9ccde0a90e8953751ed4a/pyproject_metadata-0.11.0-py3-none-any.whl",                                                                                                              
+      "sha256": "85bbecca8694e2c00f63b492c96921d6c228454057c88e7c352b2077fcaa4096"                                                 
+    }                                                                                                                              
+  ]                                                                                                                                
+}

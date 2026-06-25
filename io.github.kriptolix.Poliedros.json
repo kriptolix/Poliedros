@@ -21,7 +21,13 @@
         "*.la",
         "*.a"
     ],
-    "modules" : [        
+    "modules" : [
+        "requirements/meson-python.json",
+        "requirements/pyopengl.json",
+        "requirements/pyopengl-accelerate.json",
+        "requirements/sounddevice.json",
+        "requirements/numpy.json",
+        "requirements/pybullet.json",                      
         {
             "name" : "poliedros",
             "builddir" : true,
@@ -30,7 +36,8 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/kriptolix/Poliedros.git",
-                    "tag" : "v1.5.3"
+                    "tag" : "v1.5.3",
+                    "commit": "5f9c7f4"
                 }
             ]
         }

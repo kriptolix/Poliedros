@@ -19,113 +19,90 @@
 
 import random
 import re
+import operator
 
-from .regexpatterns import (
-    pt_cn, pt_kh, pt_kl, pt_ex, pt_integer, pt_pipe,
-    pt_mr, pt_rr, pt_dice, pt_operator, pt_function,
-    pt_kh_b, pt_kl_b, pt_ex_b, pt_rr_b
+from .parser import parse_command
 
-)
+def roll_dice(amount: int, sides: int | str) -> dict:    
 
+    if sides == "f":
+        sides = 3
+        scope = [-1, 1]
+    else:        
+        scope = [1, sides]
 
-def setup_parameters(parameters: list, pool: list) -> list:
+    rolls = []
 
-    # print("setup parameters: ", parameters)
+    for _ in range(amount):
+        rolls.append(random.randint(scope[0], scope[1]))
 
-    log = ''
+    rolls.sort(reverse=True)
 
-    for parameter in parameters:
-        if parameter != '':
-            log = f"{log}{parameter}"
+    log = {
+        "type": "dice",        
+        "amount": amount,
+        "sides": sides,
+        "rolls": rolls,
+        "result": sum(rolls)
+    }
 
-    group = []
-
-    if len(parameters) == 3:
-
-        if parameters[1] == "<":
-            for element in pool:
-                if element <= int(parameters[2]):
-                    group.append(element)
-            return [group, log]
-
-        if parameters[1] == ">":
-            for element in pool:
-                if element >= int(parameters[2]):
-                    group.append(element)
-            return [group, log]
-
-        if parameters[1] == "..":
-            for element in pool:
-                if (element >= int(parameters[0])
-                        and element <= int(parameters[2])):
-                    group.append(element)
-            return [group, log]
-
-    for parameter in parameters:
-        if parameter != ',':
-            group.append(int(parameter))
-
-    # print("group: ", group)
-
-    return [group, log]
+    print("roll dice log: ", log) 
+    return log
 
 
-def roll_dice(expression: str) -> list:
+def count_in(pool: list, selector: dict) -> dict:
+    """
+    returns the number of elements that meet the criterion        
+    """
+    def _compare(op):
 
-    n_dices, n_sides = re.split('d', expression)
+        value = selector["value"]
+        return sum(1 for x in pool if op(x, value))
+    ##
 
-    if n_dices == '':
-        n_dices = 1
+    sorted_pool = sorted(pool, reverse=True)
 
-    n_dices = int(n_dices)
+    rule_type = selector["type"]    
+       
+    if rule_type == "number":
+        value = selector["value"]
+        result = sorted_pool.count(value)        
+    
+    if rule_type == "gt":
+        result = _compare(operator.gt)        
 
-    if n_sides == "f":
-        n_sides = 3
-        n_range = [-1, 1]
-    else:
-        n_sides = int(n_sides)
-        n_range = [1, n_sides]
+    if rule_type == "lt":
+        result = _compare(operator.lt)
 
-    roll = []
+    if rule_type == "ge":
+        result = _compare(operator.ge)        
 
-    for dice in range(n_dices):
-        roll.append(random.randint(n_range[0], n_range[1]))
+    if rule_type == "le":
+        result = _compare(operator.le)              
+    
+    if rule_type == "range":
 
-    roll.sort(reverse=True)
+        a = selector["from"]
+        b = selector["to"]
+        value = f"{a} to {b}"
 
-    log = f"{n_dices}d{n_sides} = {roll}"
+        result = sum(1 for x in pool if a <= x <= b)        
+    
+    log = {
+            "type": "cn",
+            "condition": "range",
+            "value": value,
+            "input": sorted_pool,
+            "result": result
+        }
 
-    return [roll, log]
+    return log
 
+    
 
-def count_in(expression: str, pool: list) -> list:
-    total = 0
+       
 
-    elements = re.split(r'(:|\||\.\.|<|>|,)', expression)
-    command = elements[0]
-    parameters = elements[2:]
-
-    group, parameter_log = setup_parameters(parameters, pool)
-    # print("count_in group: ", group)
-
-    roll = pool
-    text = "Count"
-
-    if command in ['check', 'ch']:
-        roll = [sum(pool)]
-        text = "Check"
-
-    # print("roll: ", roll)
-
-    for value in roll:
-        # print("value: ", value, " group: ", group)
-        if value in group:
-            total = total + 1
-
-    total = f"{total}"
-    log = f"{text} {parameter_log} = {total}"
-
-    return [total, log]
+    
 
 
 def keep_subset(command: str, keep: int, pool: list, dice: str | None) -> list:
@@ -252,298 +229,261 @@ def multiroll(expression: str) -> list:
     return [total, log]
 
 
-def next_is_function(commands: list, actual: int) -> bool:
+def extract_dice(node, out=None):
+    if out is None:
+        out = {}
 
-    if ((actual + 2 < len(commands)) and
-            re.match(pt_function, commands[actual + 2])):
-        return True
+    if isinstance(node, dict):
+        if node.get("type") == "dice":
+            key = f"d{node['sides']}"
+            out.setdefault(key, []).extend(node.get("rolls", []))
 
-    return False
+        for v in node.values():
+            extract_dice(v, out)
 
+    elif isinstance(node, list):
+        for item in node:
+            extract_dice(item, out)
 
-def address_commands(commands: list, testing: bool = False) -> list:
+    return out
 
-    result = ""
-    track = ""
-    pool = None
-    operation = False
-    working_dice = None
 
-    if testing:
-        pool = commands[0]
+FUNCTIONS = {
+    "kh": keep_subset,
+    "kl": keep_subset,
+    "cn": count_in,
+    "ex": explode,
+    "rr": reroll,
+    "mr": multiroll,
+}
 
-    for index, parameter in enumerate(commands):
-        log = ''
-        total = ''
+def _eval(node: dict) -> dict:
+    
+    if node.get("type") == "dice":
 
-        # print("parameter: ", parameter)
+        result = roll_dice(
+            amount=node["amount"],
+            sides=node["sides"]
+        )
+        # print("dice results: ", result )
+        return result        
 
-        if (re.match(pt_dice, parameter)):
-            roll, log = roll_dice(parameter)
-            working_dice = parameter
+    if node.get("type") == "integer":
 
-            if operation:
-                total = f"{operation} {sum(roll)}"
-                log = f"{operation} {log} = {sum(roll)}"
+        return {
+            "type": "integer",
+            "value": node["value"]
+        }
+   
+    if node["name"] in {"+", "-", "*", "/"}:
 
-                if pool:
-                    total = f"{sum(pool)} {operation} {sum(roll)}"
-                    log = f"= {sum(pool)}{log}"
-                    pool = None
+        values = []
+        logs = []
 
-                operation = False
-            else:
-                pool = roll
+        for arg in node["arguments"]:
 
-            # print(f"dice log {log}, pool {pool}, total {total}")
+            # print("args", arg)
 
-        if (re.match(pt_integer, parameter)):
-            total = parameter
-            log = parameter
+            v = _eval(arg)
+            values.append(v["result"])
+            logs.append(v)
 
-            if operation:
-                total = f"{operation} {parameter}"
-                log = f"{operation} {parameter}"
+        if node["name"] == "+":
 
-                if pool:
-                    total = f"{sum(pool)} {operation} {parameter}"
-                    log = f"= {total}"
+            result = sum(values)
 
-                operation = None
-                pool = None
+        elif node["name"] == "-":
 
-        if (re.match(pt_operator, parameter)):
-            operation = parameter
+            result = values[0]
+            for v in values[1:]:
+                result -= v
 
-            if pool:
-                total = f"{sum(pool)}"
-                log = f"= {sum(roll)}"
-                pool = None
+        '''
+        elif node["name"] == "*":
 
-        if (re.match(pt_ex, parameter)):
+            result = values[0]
+            for v in values[1:]:
+                result *= v
 
-            elements = re.split(r'(:|\||\.\.|<|>|,)', parameter)
-            parameters = elements[4:]
-            _, faces = re.split('d', elements[0])
+        elif node["name"] == "/":
 
-            dice_pool, dice_log = roll_dice(elements[0])
-            working_dice = elements[0]
+            result = values[0]
+            for v in values[1:]:
+                result /= v
+        '''
 
-            roll, log = explode(dice_pool, faces, parameters, dice_log)
-            pool = roll
+        return {
+            "type": "operator",
+            "op": node["name"],
+            "children": logs,
+            "result": result
+        }
 
-            if operation:
-                if not next_is_function(commands, index):
-                    total = f"{operation} {sum(roll)}"
-                    log = f"{operation} {log} = {sum(roll)}"
-                    operation = False
-                    pool = None
+    arg_result, arg_log = _eval(node["arguments"][0])    
 
-        if (re.match(pt_ex_b, parameter)):  # ex:>5
+    if node["name"] == "cn":
 
-            elements = re.split(r'(:|\||\.\.|<|>)', parameter)
-            parameters = elements[2:]
+        log = count_in(
+            arg_result,
+            node["condition"],
+            node["value"]
+        )
 
-            # print("splited elements: ", elements)
+    else:
+        raise ValueError(node)
 
-            _, faces = re.split('d', working_dice)
+    return {
+        "type": "function",
+        "name": node["name"],
+        "value": node.get("value"),
+        "condition": node.get("condition"),
+        "child": arg_log,
+        "result": result,
+        "log": log
+    }
 
-            roll, log = explode(pool, faces, parameters, f"{pool}")
-            pool = roll
 
-            if operation:
-                if not next_is_function(commands, index):
-                    total = f"{operation} {sum(roll)}"
-                    log = f"{operation} {log} = {sum(roll)}"
-                    operation = False
-                    pool = None
+def _flatten_log(node: dict) -> str:
 
-        if (re.match(pt_mr, parameter)):
+    if node["type"] == "dice":
+        
+        return f'{node["amount"]}d{node["sides"]} = {node["rolls"]} = {node["result"]}'
 
-            if operation:
-                raise ValueError('Multirools cant be added.')
+    if node["type"] == "integer":
+        return str(node["value"])
 
-            roll, log = multiroll(parameter)
-            result = f'{pool}'
-            break
+    if node["type"] == "operator":
 
-        if (re.match(pt_rr, parameter)):
+        parts = [
+            _flatten_log(child)
+            for child in node["children"]
+        ]
 
-            elements = re.split(r'(:|\||\.\.|<|>|,)', parameter)
-            parameters = elements[4:]
-            _, faces = re.split('d', elements[0])
+        return f" {node['op']} ".join(parts)
 
-            dice_pool, dice_log = roll_dice(elements[0])
-            working_dice = elements[0]
+    if node["type"] == "function":
 
-            roll, log = reroll(dice_pool, parameters, faces, dice_log)
-            pool = roll
+        child = _flatten_log(node["child"])
 
-            # print("explode roll, log", roll, log)
+        if node["name"] in {"kh", "kl"}:
+            return f"{node['name']}({child}, {node['value']})"
 
-            if operation:
-                if not next_is_function(commands, index):
-                    total = f"{operation} {sum(roll)}"
-                    log = f"{operation} {log} = {sum(roll)}"
-                    operation = False
-                    pool = None
+        if node["name"] == "cn":
+            return f"cn({child} {node['condition']} {node['value']})"
 
-        if (re.match(pt_rr_b, parameter)):
+        return f"{node['name']}({child})"
 
-            elements = re.split(r'(:|\||\.\.|<|>)', parameter)
-            _, faces = re.split('d', working_dice)
-            parameters = elements[2:]
 
-            roll, log = reroll(pool, parameters, faces, f"{pool}")
+def address_commands(node: dict) -> dict:
+    log_tree = _eval(node) 
 
-            if operation:
-                if not next_is_function(commands, index):
-                    total = f"{operation} {sum(roll)}"
-                    log = f"{operation} {log} = {sum(roll)})"
-                    operation = False
-                    pool = None
+    print("log tree: ", log_tree)   
 
-        if (re.match(pt_kh, parameter)
-                or re.match(pt_kl, parameter)):
+    return {
+        "result": log_tree.get("result"),
+        "log": _flatten_log(log_tree)
+    }
 
-            elements = re.split(r'(:|\||\.\.|<|>)', parameter)
 
-            dice_pool, _ = roll_dice(elements[0])
-            working_dice = elements[0]
+def validate_node(node: dict) -> list | None:
+    """
+    Retorna:
+        [False, None, message] se inválido
+        None se válido
+    """
 
-            roll, log = keep_subset(elements[2],
-                                    int(elements[4]),
-                                    dice_pool,
-                                    elements[0])
-
-            if operation:
-
-                if not next_is_function(commands, index):
-
-                    total = f"{operation} {sum(roll)}"
-                    log = f"{operation} {log} = {sum(roll)}"
-
-                    if pool:
-                        total = f"{sum(pool)} {operation} {sum(roll)}"
-                        log = f"= {sum(pool)} {log}"
-                        pool = None
-
-                    operation = False
-                    pool = None
-            else:
-                pool = roll
-
-        if (re.match(pt_kh_b, parameter)
-                or re.match(pt_kl_b, parameter)):
-
-            elements = re.split(r'(:|\||\.\.|<|>)', parameter)
-
-            if pool:
-
-                roll, log = keep_subset(elements[0],
-                                        int(elements[2]),
-                                        pool,
-                                        None)
-
-                if operation:
-
-                    if not next_is_function(commands, index):
-
-                        total = f"{operation} {sum(roll)}"
-                        log = f"{operation} {log} = {sum(roll)}"
-
-                        operation = False
-                        pool = None
-                else:
-                    pool = roll
-
-        if (re.match(pt_cn, parameter)):
-
-            # print(f"total {total}, pool {pool}, result {result}")
-
-            if pool:
-                values = pool
-            else:
-                values = [eval(result)]
-
-            total, log = count_in(parameter, values)
-            # print("count log: ", log)
-            pool = None
-            result = ''
-
-        result = result + total
-        track = track + " " + log
-
-    # print(f"results: {result}, track: {track}, pool: {pool}")
-
-    if pool:
-        result = f"{result} {sum(pool)}"
-
-    results = [True, eval(result), track]
-
-    return results
-
-_ALL_PATTERNS = (
-    pt_dice, pt_integer, pt_operator,
-    pt_ex, pt_rr, pt_kh, pt_kl,
-    pt_ex_b, pt_rr_b, pt_kh_b, pt_kl_b,
-    pt_cn,
-)
-
-_BOUND_PATTERNS = (pt_ex_b, pt_rr_b, pt_kh_b, pt_kl_b)
-
-def validate_elements(commands: list) -> list | None:
-    """Retorna [False, None, mensagem] se inválido, None se válido."""
-    if not commands:
+    if not node:
         return [False, None, "Empty Command"]
 
-    for index, element in enumerate(commands):
-        if not any(re.match(pattern, element) for pattern in _ALL_PATTERNS):
-            return [False, None, f"Sintaxe Error: {element}"]
+    
+    if node.get("type") == "dice":
 
-        if any(re.match(pattern, element) for pattern in _BOUND_PATTERNS):
-            prev = commands[index - 1]
+        qty = node.get("amount")
+        faces = node.get("sides")
 
-            if re.match(pt_integer, prev) or re.match(pt_operator, prev):
-                return [False, None, f"Sintaxe Error: {element} not preceded"]
+        if qty is None or faces is None:
+            return [False, None, "Invalid dice node"]
+
+        if not isinstance(qty, int) or qty < 1:
+            return [False, None, f"Invalid dice qty: {qty}"]
+
+        if not (isinstance(faces, int) or faces == "f"):
+            return [False, None, f"Invalid dice faces: {faces}"]
+
+        return None
+
+    
+    if node.get("type") == "integer":
+
+        if not isinstance(node.get("value"), int):
+            return [False, None, f"Invalid integer: {node.get('value')}"]
+
+        return None
+
+    
+    if node.get("name") in {"+", "-", "*", "/"}:
+
+        args = node.get("arguments", [])
+
+        if not args:
+            return [False, None, f"Operator {node['name']} missing arguments"]
+
+        for arg in args:
+            err = validate_node(arg)
+            if err:
+                return err
+
+        return None
+
+    
+    name = node.get("name")
+
+    if not name:
+        return [False, None, "Missing function name"]
+
+    args = node.get("arguments", [])
+
+    if not args:
+        return [False, None, f"Function {name} missing argument"]
+
+    
+    for arg in args:
+        err = validate_node(arg)
+        if err:
+            return err
+
+    
+    if name in {"kh", "kl"}:
+
+        if node.get("value") is None:
+            return [False, None, f"{name} missing value"]
+
+        if not isinstance(node["value"], int):
+            return [False, None, f"{name} value must be int"]
+
+    if name == "cn":
+
+        if node.get("condition") is None:
+            return [False, None, "cn missing condition"]
+
+        if node.get("value") is None:
+            return [False, None, "cn missing value"]
 
     return None
 
 
 def execute_command(commands: str) -> list:
 
-    commands = re.sub(' ', '', commands)
-    parameters = re.split(r'(\+|\-|\|)', commands)
+    node = parse_command(commands)
 
-    fixed_param = []
-
-    for index, param in enumerate(parameters):  #ex: 1d4 + 5d6 | kh:3 | cn:>4
-        new = param
-
-        if (re.match(pt_pipe, param)):
-            continue
-
-        if (index < (len(parameters) - 1) and
-            re.match(pt_dice, param) and
-                re.match(pt_function, parameters[index + 2]) and
-                not re.match(pt_cn, parameters[index + 2])):
-
-            new = f"{param}|{parameters[index + 2]}"
-
-        if (index >= 2 and
-            re.match(pt_function, param) and
-                re.match(pt_dice, parameters[index - 2]) and
-                not re.match(pt_cn, param)):
-            continue
-
-        fixed_param.append(new)
-    # print(f"Fixede param: {fixed_param}")
-
-    validation = validate_elements(fixed_param)
+    validation = validate_node(node)
 
     if validation:
         return validation
 
-    result = address_commands(fixed_param)
+    result = address_commands(node)
 
-    return result
+    print("node: ", node)
+    print("result final: ", result)
+
+    return [True, result.get("result"), result.get("log")]

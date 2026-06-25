@@ -50,16 +50,16 @@ class PoliedrosApplication(Adw.Application):
         create_action(self, 'app', "clear_registers",
                       self.by_shortcut, ["e"])
         create_action(self, 'app', "increment",
-                      self.by_shortcut, ["equal", "KP_Add"])
+                      self.by_shortcut, ["<primary>equal", "<primary>KP_Add"])
         create_action(self, 'app', "decrement",
-                      self.by_shortcut, ["minus", "KP_Subtract"])
+                      self.by_shortcut, ["<primary>minus", "<primary>KP_Subtract"])
         
         dice = {"df":0, "d4":1, "d6":2, "d8":3, "d10":4, "d12":5, "d20":6, "d100":7}
 
         for dice, key in dice.items():
 
             create_action(self, 'app', f"{dice}", self.by_shortcut,
-                          [f"{key}", f"KP_{key}"])
+                          [f"<primary>{key}", f"<primary>KP_{key}"])
 
     def do_activate(self):
         """Called when the application is activated.
