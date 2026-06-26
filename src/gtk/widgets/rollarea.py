@@ -78,6 +78,8 @@ class RollArea(Gtk.Box):
         
         self._button_activation(self._display)
 
+        self._display.set_text("5d6|kl:3|cn:>2")
+
     def _reset_error_state(self, *args):
 
         if self._display.has_css_class("error"):

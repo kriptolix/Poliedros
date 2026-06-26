@@ -40,15 +40,15 @@ class PoliedrosApplication(Adw.Application):
                       lambda *_: self.quit(), ['<primary>q'])
         create_action(self, "app", 'about', self.on_about, None, None)
         create_action(self, "app", 'shortcuts', self.on_shortcuts, None, None)
-        create_action(self, 'app', "roll", self.by_shortcut, ["r"])
+        create_action(self, 'app', "roll", self.by_shortcut, ["<primary>r"])
         create_action(self, 'app', "toggle_mode",
-                      self.by_shortcut, ["m"])
+                      self.by_shortcut, ["<primary>m"])
         create_action(self, 'app', "toggle_panel",
-                      self.by_shortcut, ["p"])
+                      self.by_shortcut, ["<primary>p"])
         create_action(self, 'app', "clear_display",
-                      self.by_shortcut, ["c"])
+                      self.by_shortcut, ["<primary>c"])
         create_action(self, 'app', "clear_registers",
-                      self.by_shortcut, ["e"])
+                      self.by_shortcut, ["<primary>e"])
         create_action(self, 'app', "increment",
                       self.by_shortcut, ["<primary>equal", "<primary>KP_Add"])
         create_action(self, 'app', "decrement",

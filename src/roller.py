@@ -46,187 +46,158 @@ def roll_dice(amount: int, sides: int | str) -> dict:
         "result": sum(rolls)
     }
 
-    print("roll dice log: ", log) 
+    # print("roll dice log: ", log) 
     return log
 
 
-def count_in(pool: list, selector: dict) -> dict:
-    """
-    returns the number of elements that meet the criterion        
-    """
-    def _compare(op):
-
-        value = selector["value"]
-        return sum(1 for x in pool if op(x, value))
-    ##
-
-    sorted_pool = sorted(pool, reverse=True)
-
-    rule_type = selector["type"]    
-       
-    if rule_type == "number":
-        value = selector["value"]
-        result = sorted_pool.count(value)        
+def apply_selector(name: str, pool: list[int], selector: dict) -> list[int]:
     
-    if rule_type == "gt":
-        result = _compare(operator.gt)        
+    condition = selector.get("condition")
+    values = selector.get("value", [])
 
-    if rule_type == "lt":
-        result = _compare(operator.lt)
+    if name == "kh":
+        keep = values[0]
 
-    if rule_type == "ge":
-        result = _compare(operator.ge)        
-
-    if rule_type == "le":
-        result = _compare(operator.le)              
+        return pool[:keep]
     
-    if rule_type == "range":
+    if name == "kl":
+        keep = values[0]
 
-        a = selector["from"]
-        b = selector["to"]
-        value = f"{a} to {b}"
+        return pool[-keep:]
 
-        result = sum(1 for x in pool if a <= x <= b)        
+    if condition == "..":
+        a, b = values
+        return [x for x in pool if a <= x <= b]
+
+    if condition == "in":
+        return [x for x in pool if x in values]
+
+    ops = {
+        "=": operator.eq,
+        "!=": operator.ne,
+        ">": operator.gt,
+        ">=": operator.ge,
+        "<": operator.lt,
+        "<=": operator.le,
+    }
+
+    if condition in ops:
+        v = values[0]
+        op = ops[condition]
+        return [x for x in pool if op(x, v)] 
+
+    raise ValueError(f"Unsupported selector condition: {condition}")
+
+def count_in(pool: list[int], selector: dict) -> dict:
+    filtered = apply_selector("cn", pool, selector)
+
+    return {
+        "type": "cn",
+        "name": "Count",
+        "condition": selector["condition"],
+        "value": selector["value"],
+        "input": pool,
+        "result": len(filtered),
+    }
+
+
+def keep_subset(name: str, pool: list[int], selector: dict) -> dict:
     
-    log = {
-            "type": "cn",
-            "condition": "range",
-            "value": value,
-            "input": sorted_pool,
-            "result": result
-        }
+    names = {
+        "kh": "keep hight",
+        "kl": "keep low",
+        "kv": "keep"
+    }
+    
+    filtered = apply_selector(name, pool, selector)
 
-    return log
+    return {
+        "type": name,
+        "name": names[name],
+        "condition": selector["condition"],
+        "value": selector["value"],
+        "input": pool,
+        "result": filtered,
+    }
 
+
+def process_reaction(pool: list[int], selector: dict, dice: dict, mode: str) -> list[int]:
+    
+    condition = selector["condition"]
+    values = selector["value"]
+
+    def check(x: int) -> bool:
+        if condition == "=":
+            return x == values[0]
+        if condition == ">":
+            return x > values[0]
+        if condition == ">=":
+            return x >= values[0]
+        if condition == "<":
+            return x < values[0]
+        if condition == "<=":
+            return x <= values[0]
+        if condition == "..":
+            a, b = values
+            return a <= x <= b
+        if condition == "in":
+            return x in values
+        return False
+
+    result = []
+
+    for x in pool:
+        
+        if mode == "reroll" and not check(x):
+            # substitui dado inválido
+            new_roll = roll_dice(1, dice["sides"])["rolls"][0]
+            result.append(new_roll)
+
+        else:
+            result.append(x)
+
+            if mode == "explode" and check(x):
+                # adiciona novo dado extra
+                new_roll = roll_dice(1, dice["sides"])["rolls"][0]
+                result.append(new_roll)
+
+    return result
+
+
+def explode(pool: list[int], selector: dict, dice: dict) -> dict:
+
+    '''
+    Rerolls dice according to a condition, the result replaces the previous one
+    '''
+    processed = process_reaction(pool, selector, dice, mode="explode")
+
+    return {
+        "type": "explode",        
+        "condition": selector["condition"],
+        "value": selector["value"],
+        "input": pool,
+        "result": processed,
+    }
+
+def reroll(pool: list[int], selector: dict, dice: dict) -> dict:
+    '''
+    Rerolls dice according to a condition, the result is added the previous one
+    '''
+    processed = process_reaction(pool, selector, dice, mode="reroll")
+    return {
+        "type": "reroll",        
+        "condition": selector["condition"],
+        "value": selector["value"],
+        "input": pool,
+        "result": processed,
+    }
     
 
-       
-
-    
-
-
-def keep_subset(command: str, keep: int, pool: list, dice: str | None) -> list:
-
-    dice_log = f"{pool}"
-
-    if dice:
-        dice_log = f"{dice} = {pool}"
-
-    match command:
-        case "highest" | "kh":
-            subroll = pool[:keep]
-            excluded = pool[len(subroll):]
-            excluded.insert(0, subroll)
-            text = "Highest"
-
-        case "lowest" | "kl":
-            subroll = pool[-keep:]
-            excluded = pool[:-len(subroll)]
-            excluded.append(subroll)
-            text = "Lowest"
-
-    total = subroll
-    log = f"{text} {keep} in {dice_log} = {subroll}"
-
-    return [total, log]
-
-
-def explode(pool: list, faces: str, parameters: list, log: str) -> list:
-
-    def _recursive_roll(dice, group):
-
-        nonlocal counter
-        nonlocal log
-
-        if counter >= 50:
-            return
-
-        extended_roll, extended_log = roll_dice(dice)
-
-        pool.append(extended_roll[0])
-        log = f"{log}, extra {extended_log}"
-
-        if extended_roll[0] in group:
-            counter = counter + 1
-            _recursive_roll(dice, group)
-            return
-
-        counter = 0
-    ##
-
-    command = "Explode"
-
-    group, parameter_log = setup_parameters(parameters, pool)
-
-    counter = 0
-
-    dice = f"1d{faces}"
-
-    initial_pool = pool
-
-    for element in initial_pool:
-        if element in group:
-
-            _recursive_roll(dice, group)
-
-    pool.sort(reverse=True)
-
-    total = pool
-    log = f"{command} {parameter_log} in {log} = {pool}"
-
-    return [total, log]
-
-
-def reroll(pool: list, parameters: list, faces: str, log: str) -> list:
-
-    command = "Reroll"
-
-    group, parameter_log = setup_parameters(parameters, pool)
-
-    dice = f"1d{faces}"
-
-    extended_pool = []
-
-    for element in pool:
-        if element in group:
-            extended_roll, extended_log = roll_dice(dice)
-
-            extended_pool.append(extended_roll[0])
-            log = f"{log}, reroll {element} = {extended_roll}"
-            continue
-
-        extended_pool.append(element)
-
-    total = extended_pool
-    log = f"{command} {parameter_log} in {log} = {total}"
-
-    # print("total, log reroll:", total, log)
-
-    return [total, log]
-
-
-def multiroll(expression: str) -> list:
-
-    extended_roll = []
-
-    elements = re.split(r'(:|\||\.\.|<|>)', expression)
-    command = "Multiroll"
-
-    group = int(elements[4])
-
-    # print("elements: ", elements)
-
-    for _ in range(group):
-
-        pool, log = roll_dice(elements[0])
-        extended_roll.append(pool)
-
-    total = extended_roll
-    log = f"{command} {group} x {elements[0]}"
-
-    # print(total, log)
-
-    return [total, log]
+def multiroll(dice:dict, times:int) -> dict:
+    '''
+    rolls the same group of dice multiple times
+    '''
+    pass
 
 
 def extract_dice(node, out=None):
@@ -247,15 +218,6 @@ def extract_dice(node, out=None):
 
     return out
 
-
-FUNCTIONS = {
-    "kh": keep_subset,
-    "kl": keep_subset,
-    "cn": count_in,
-    "ex": explode,
-    "rr": reroll,
-    "mr": multiroll,
-}
 
 def _eval(node: dict) -> dict:
     
@@ -319,26 +281,42 @@ def _eval(node: dict) -> dict:
             "result": result
         }
 
-    arg_result, arg_log = _eval(node["arguments"][0])    
+    arg_log = _eval(node["arguments"][0])
+
+    print("arq_log: ", arg_log)    
 
     if node["name"] == "cn":
 
         log = count_in(
-            arg_result,
-            node["condition"],
-            node["value"]
+            arg_log.get("rolls"),
+            node["selector"]
+        )
+
+    elif node["name"] == "kh":
+
+        log = keep_subset(
+            "kh",
+            arg_log.get("rolls"),
+            node["selector"]
+        )
+
+    elif node["name"] == "kl":
+
+        log = keep_subset(
+            "kl",
+            arg_log.get("rolls"),
+            node["selector"]
         )
 
     else:
         raise ValueError(node)
 
     return {
-        "type": "function",
-        "name": node["name"],
-        "value": node.get("value"),
-        "condition": node.get("condition"),
+        "type":  node["name"],
+        "condition": node["selector"].get("condition"),
+        "value": node["selector"].get("value"),
         "child": arg_log,
-        "result": result,
+        "result": log.get("result"),
         "log": log
     }
 
@@ -361,17 +339,47 @@ def _flatten_log(node: dict) -> str:
 
         return f" {node['op']} ".join(parts)
 
-    if node["type"] == "function":
+    if node["type"] == "cn":
 
-        child = _flatten_log(node["child"])
+        condition = node["condition"]
+        values = node["value"]        
 
-        if node["name"] in {"kh", "kl"}:
-            return f"{node['name']}({child}, {node['value']})"
+        if condition == "..":
+            selector = f"{values[0]}..{values[1]}"
+        elif condition == "in":
+            selector = f"{values} in "
+        else:
+            selector = f"{condition}{values[0]}"
 
-        if node["name"] == "cn":
-            return f"cn({child} {node['condition']} {node['value']})"
+        text = (
+            f"Count {selector} "
+            f"in {node['child']['amount']}d{node['child']['sides']} "
+            f"{node['child']['rolls']} = {node['result']}"
+        )
 
-        return f"{node['name']}({child})"
+    if node["type"] in ("kh", "kl", "kv"):
+
+        condition = node["condition"]
+        values = node["value"]
+
+        match node["type"]:
+            case "kh":
+                begin = f"Keep {values[0]} highest "
+
+            case "kl":
+                begin = f"Keep {values[0]} lowest "
+            
+            case "kkv":
+                begin = f"Keep {condition}{values[0]} "
+
+        text = (
+            f"{begin}"
+            f"in {node['child']['amount']}d{node['child']['sides']} "
+            f"{node['child']['rolls']} = {node['result']}"
+        )       
+        
+        print(text)
+        return text      
 
 
 def address_commands(node: dict) -> dict:
@@ -455,18 +463,20 @@ def validate_node(node: dict) -> list | None:
     
     if name in {"kh", "kl"}:
 
-        if node.get("value") is None:
+        if node["selector"].get("value") is None:
             return [False, None, f"{name} missing value"]
 
-        if not isinstance(node["value"], int):
-            return [False, None, f"{name} value must be int"]
+        # if not isinstance(node["selector"].get("value"), int):
+            # return [False, None, f"{name} value must be int"]
 
     if name == "cn":
 
-        if node.get("condition") is None:
+        print(node)
+
+        if node["selector"].get("condition") is None:
             return [False, None, "cn missing condition"]
 
-        if node.get("value") is None:
+        if node["selector"].get("value") is None:
             return [False, None, "cn missing value"]
 
     return None
@@ -483,7 +493,7 @@ def execute_command(commands: str) -> list:
 
     result = address_commands(node)
 
-    print("node: ", node)
+    # print("node: ", node)
     print("result final: ", result)
 
     return [True, result.get("result"), result.get("log")]

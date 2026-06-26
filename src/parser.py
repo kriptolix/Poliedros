@@ -3,32 +3,46 @@ from pprint import pprint
 
 pt_dice = r'^(?:[1-9][0-9]?)?d(?:f|[1-9][0-9]{0,2})+$'
 
-
 def parse_function(token: str) -> dict:
-
     name, raw_value = token.split(":", 1)
-
     raw_value = raw_value.strip()
-    
-    if ".." in raw_value:
 
+    # Range (3..5)
+    if ".." in raw_value:
         start, end = raw_value.split("..")
 
         return {
             "name": name,
             "selector": {
-                "type": "range",
-                "from": int(start),
-                "to": int(end)
+                "condition": "..",
+                "value": [int(start), int(end)]
+            }
+        }
+    
+    
+    if "," in raw_value:
+        values = [v.strip() for v in raw_value.split(",")]
+
+        parsed = []
+        for v in values:
+            try:
+                parsed.append(int(v))
+            except ValueError:
+                parsed.append(v)
+
+        return {
+            "name": name,
+            "selector": {
+                "condition": "in",
+                "value": parsed
             }
         }
     
     match = re.match(r"(>=|<=|!=|>|<|=)(.+)", raw_value)
 
     if match:
-
         op = match.group(1)
-        value = match.group(2)
+        value = match.group(2).strip()
 
         try:
             value = int(value)
@@ -38,33 +52,30 @@ def parse_function(token: str) -> dict:
         return {
             "name": name,
             "selector": {
-                "type": "compare",
-                "op": op,
-                "value": value
+                "condition": op,
+                "value": [value]
             }
         }
-   
+    
     try:
-        value = int(raw_value)
-
         return {
             "name": name,
             "selector": {
-                "type": "number",
-                "value": value
+                "condition": "=",
+                "value": [int(raw_value)]
             }
         }
 
+    # Valor bruto
     except ValueError:
-
-        # fallback (caso futuro: flags, check, etc)
         return {
             "name": name,
             "selector": {
-                "type": "raw",
+                "condition": "raw",
                 "value": raw_value
             }
         }
+    
 
 def parse_dice(token: str) -> dict:
 
@@ -98,7 +109,7 @@ def parse_command(command: str) -> dict:
 
     command = re.sub(r"\s+", "", command)
 
-    elements = re.split(r"([+\-*/])", command)
+    elements = re.split(r"([+\-*/])", command)    
 
     parsed_elements = []
 
@@ -129,11 +140,10 @@ def parse_command(command: str) -> dict:
 
         parsed_elements.append(current)
 
-    # Sem operadores
+    
     if len(parsed_elements) == 1:
         return parsed_elements[0]
-
-    # Com operadores
+    
     root = {
         "name": parsed_elements[1],
         "arguments": [
@@ -148,14 +158,12 @@ def parse_command(command: str) -> dict:
 
         operator = parsed_elements[index]
         operand = parsed_elements[index + 1]
-
-        # Mesmo operador → agrega argumentos
+        
         if operator == root["name"]:
 
             root["arguments"].append(operand)
 
-        else:
-            # Operador diferente → cria novo nó
+        else:            
             root = {
                 "name": operator,
                 "arguments": [
@@ -166,23 +174,5 @@ def parse_command(command: str) -> dict:
 
         index += 2
 
+    print("root: ", root)
     return root
-
-
-if __name__ == "__main__":
-
-    tests = [
-        "5d6|kh:3",
-        "5d6|kh:3|cn:>4",
-        "1d4 + 5d6|kh:3|cn:>4",
-        "1d4 + 2d6 + 3d8",
-        "1d4 + 5d6|kh:3 + 3d10|kl:2"
-    ]
-
-    for test in tests:
-
-        print("\n" + "=" * 80)
-        print(test)
-        print("=" * 80)
-
-        pprint(parse_command(test), sort_dicts=False)
