@@ -74,7 +74,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         self._sidebar.css_matching(self._split_view, None)
 
-        width_condition = Adw.BreakpointCondition.parse("max-width: 535sp")
+        width_condition = Adw.BreakpointCondition.parse("max-width: 520sp")
 
         width_breakpoint = Adw.Breakpoint.new(width_condition)
         width_breakpoint.connect("apply", self._breakpoint_apply, 0)
@@ -89,35 +89,47 @@ class MainWindow(Adw.ApplicationWindow):
         ratio_breakpoint.connect("unapply", self._breakpoint_unapply, 1)
 
         self.add_breakpoint(ratio_breakpoint)      
-        popover = AppMenu()
-        # popover.set_offset(-30, 0)             
+        
+        popover = AppMenu()        
+        popover.set_offset(-30, 0)             
         self._menu_button.props.popover = popover
+
+        self.selectors = popover.selectors
         
-        
+        self._breakpoints_active = [False, False]
+                
 
     def _breakpoint_apply(self, breakpoint, data):
 
+        self._breakpoints_active[data] = True
+
         if data == 0:
             self._split_view.set_collapsed(True)
+            self._roll_area._mode_button.set_visible(False)
             return
-
-        self._roll_area._adaptable.set_orientation(0)
-        self._roll_area._results.set_halign(1)
-        self._roll_area._stack.set_halign(2)
-        self._roll_area._dice_area.set_halign(2)
-        self._roll_area._adaptable.set_spacing(5)
+          
+        self._roll_area._mode_button.set_visible(False)
+        self._split_view.set_collapsed(True)
+        self._roll_area.set_orientation(0)
+        self._roll_area._clamp.set_halign(2)
+        self._roll_area._clamp.set_margin_end(5)        
+        
 
     def _breakpoint_unapply(self, breakpoint, data):
 
+        self._breakpoints_active[data] = False
+
         if data == 0:
             self._split_view.set_collapsed(False)
+            self._roll_area._mode_button.set_visible(True)
             return
+        
+        if not any(self._breakpoints_active):
 
-        self._roll_area._adaptable.set_orientation(1)
-        self._roll_area._results.set_halign(3)
-        self._roll_area._stack.set_halign(3)
-        self._roll_area._dice_area.set_halign(3)
-        self._roll_area._adaptable.set_spacing(20)
+            self._roll_area.set_orientation(1)
+            self._roll_area._clamp.set_halign(3)
+            self._roll_area._clamp.set_margin_end(0)
+            self._roll_area._mode_button.set_visible(True) 
 
     def on_theme_changed(self, param, value):                
         self._sidebar.css_matching(self._split_view, None)

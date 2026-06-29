@@ -1,87 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
+  <requires lib="gtk" version="4.0" />
   <template class="RollArea" parent="GtkBox">
-    <property name="valign">3</property>
-    <property name="orientation">1</property>
-    <property name="spacing">20</property>
+    <property name="orientation">1</property>    
+    
     <child>
-      <object class="GtkBox" id="_adaptable">
-        <property name="orientation">1</property>        
-        <property name="spacing">20</property>
-        <child>
+      <object class="GtkOverlay" id="_overlay">
+        
+        <property name="vexpand">true</property>
+        <property name="hexpand">true</property>
+             
+
+        <child type="overlay">
           <object class="GtkLabel" id="_results">
-            <property name="label">?</property>            
+            <property name="label">?</property>
             <property name="halign">3</property>
             <property name="valign">3</property>
-            <property name="width-request">150</property>
+            <property name="margin-top">40</property>
             <style>
               <class name="roll_result"/>
             </style>
           </object>
         </child>
-        <child>
-          <object class="GtkStack" id="_stack">
-            <property name="transition-type">1</property>
-            <property name="hexpand">true</property>
-            <property name="halign">3</property>                        
-            <child>
-              <object class="DiceArea" id="_dice_area"></object>
-            </child>
-            <child>
-              <object class="InfoArea" id="_info_area"></object>
-            </child>
-          </object>
-        </child>
       </object>
     </child>
     <child>
-      <object class="GtkBox">
-        <style>
-          <class name="linked"/>
-        </style>
+      <object class="AdwClamp" id="_clamp">
+        <property name="maximum-size">300</property>
+        <property name="tightening-threshold">250</property>
+        <property name="hexpand">false</property>
+        <property name="valign">2</property>       
+        <property name="margin-start">25</property>
+        <property name="margin-end">25</property>
+       
+               
         <child>
-          <object class="GtkEntry" id="_display">
-            <property name="xalign">0.5</property>
-            <property name="hexpand">true</property>
-            <property name="editable">false</property>
-            <property name="can-focus">false</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkToggleButton" id="_mode_button">
-            <property name="has-tooltip">true</property>
-            <property name="tooltip-text" translatable="yes">Switch Mode</property>
-            <property name="icon-name">code-symbolic</property>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox" id="_buttons">
-        <child>
-          <object class="GtkButton" id="_roll_button">
-            <property name="has-tooltip">true</property>
-            <property name="tooltip-text" translatable="yes">Roll</property>
-            <property name="label" translatable="yes">Roll</property>            
-            <property name="hexpand">true</property>
-            <property name="valign">3</property>
-            <style>
-              <class name="circular"/>
-              <class name="suggested-action"/>
-            </style>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="_clear_button">
-            <property name="has-tooltip">true</property>
-            <property name="tooltip-text" translatable="yes">Clear Command</property>
-            <property name="icon-name">edit-clear-symbolic</property>
-            <property name="margin-start">70</property>
-            <style>
-              <class name="circular"/>
-              <class name="destructive-action"/>
-            </style>
+          <object class="GtkBox">
+            <property name="orientation">1</property>
+            <child>
+              <object class="GtkStack" id="_stack">
+                <property name="transition-type">1</property>
+                <property name="hexpand">true</property>
+                <property name="halign">3</property>
+                <child>
+                  <object class="DiceArea" id="_dice_area"></object>
+                </child>
+                <child>
+                  <object class="InfoArea" id="_info_area"></object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <style>
+                  <class name="linked"/>
+                </style>
+                <child>
+                  <object class="GtkEntry" id="_display">
+                    <property name="xalign">0.5</property>
+                    <property name="hexpand">true</property>
+                    <property name="editable">false</property>
+                    <property name="can-focus">false</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkToggleButton" id="_mode_button">
+                    <property name="has-tooltip">true</property>
+                    <property name="tooltip-text" translatable="yes">Switch Mode</property>
+                    <property name="icon-name">code-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="_buttons">
+                <property name="margin-top">20</property>
+                <property name="margin-bottom">30</property>
+                <child>
+                  <object class="GtkButton" id="_roll_button">
+                    <property name="has-tooltip">true</property>
+                    <property name="tooltip-text" translatable="yes">Roll</property>
+                    <property name="label" translatable="yes">Roll</property>
+                    <property name="hexpand">true</property>
+                    <property name="width-request">150</property>
+                    <property name="valign">3</property>
+                    <property name="halign">1</property>
+                    <style>
+                      <class name="circular"/>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="_clear_button">
+                    <property name="has-tooltip">true</property>
+                    <property name="tooltip-text" translatable="yes">Clear Command</property>
+                    <property name="icon-name">edit-clear-symbolic</property>
+                    <property name="halign">2</property>
+                    <property name="valign">3</property>
+                    <style>
+                      <class name="circular"/>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
         </child>
       </object>

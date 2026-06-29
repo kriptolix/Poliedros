@@ -26,7 +26,7 @@ from gettext import gettext as _
 from .gtk.widgets.mainwindow import MainWindow
 from .roller import execute_command
 from .util import create_action
-# from .tests.tests import run_tests
+from .parser import parse_command
 
 
 class PoliedrosApplication(Adw.Application):
@@ -78,14 +78,9 @@ class PoliedrosApplication(Adw.Application):
         self._add_die = self._window._roll_area.add_die
         self._add_modifier = self._window._roll_area.add_modifier
         self._add_register = self._window._sidebar.add_register
+        self._audio = self._window.selectors._audio
+        self._render = self._window.selectors._render 
 
-        '''
-        controller = Gtk.EventControllerKey()
-        controller.connect("key-pressed", self.on_key_pressed)
-        self._window.add_controller(controller)
-        '''
-
-        # run_tests()
 
     def on_about(self, *args):
         """Callback for the app.about action."""
@@ -104,8 +99,7 @@ class PoliedrosApplication(Adw.Application):
             '/io/github/kriptolix/Poliedros/src/gtk/ui/Shortcuts.ui'
         )
 
-        shortcuts = builder.get_object("shortcuts")
-        #shortcuts.set_transient_for(self._window)
+        shortcuts = builder.get_object("shortcuts")        
         shortcuts.present(self._window)
 
     def do_reroll(self, input):
@@ -117,14 +111,18 @@ class PoliedrosApplication(Adw.Application):
 
         input = self._display.get_text()
 
-        result, total, track = execute_command(input)
-
-        if not result:
-            print(total, track)
+        try:
+            node = parse_command(input)
+        except ValueError as e:
+            print(e)
             self._display.add_css_class("error")
-            return
+            return        
 
-        self._add_register(total, track, input)
+        result = execute_command(node)
+        total = result.get("result")
+        log = result.get("log")        
+
+        self._add_register(total, log, input)
         self._update_result(total)
 
     def by_shortcut(self, action: Gio.SimpleAction,
@@ -166,17 +164,7 @@ class PoliedrosApplication(Adw.Application):
                 return
 
         
-        self._add_die(name)
-
-    def on_key_pressed(self, controller, keyval, keycode, state):
-        print(
-            "keyval =", keyval,
-            "name =", Gdk.keyval_name(keyval),
-            "state =", state
-        )
-        return False
-
-    
+        self._add_die(name)    
 
 
 def main(version):

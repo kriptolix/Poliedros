@@ -18,52 +18,46 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import random
-import re
-import operator
+import operator as op_module
 
 from .parser import parse_command
 
-def roll_dice(amount: int, sides: int | str) -> dict:    
 
+def roll_dice(amount: int, sides: int | str) -> dict:
     if sides == "f":
         sides = 3
         scope = [-1, 1]
-    else:        
+    else:
         scope = [1, sides]
 
     rolls = []
-
     for _ in range(amount):
         rolls.append(random.randint(scope[0], scope[1]))
 
     rolls.sort(reverse=True)
 
-    log = {
-        "type": "dice",        
+    return {
+        "type": "dice",
         "amount": amount,
         "sides": sides,
         "rolls": rolls,
         "result": sum(rolls)
     }
 
-    # print("roll dice log: ", log) 
-    return log
 
+# ---------------------------------------------------------------------------
+# Seletores
+# ---------------------------------------------------------------------------
 
 def apply_selector(name: str, pool: list[int], selector: dict) -> list[int]:
-    
     condition = selector.get("condition")
     values = selector.get("value", [])
 
     if name == "kh":
-        keep = values[0]
+        return pool[:values[0]]
 
-        return pool[:keep]
-    
     if name == "kl":
-        keep = values[0]
-
-        return pool[-keep:]
+        return pool[-values[0]:]
 
     if condition == "..":
         a, b = values
@@ -73,427 +67,365 @@ def apply_selector(name: str, pool: list[int], selector: dict) -> list[int]:
         return [x for x in pool if x in values]
 
     ops = {
-        "=": operator.eq,
-        "!=": operator.ne,
-        ">": operator.gt,
-        ">=": operator.ge,
-        "<": operator.lt,
-        "<=": operator.le,
+        "=":  op_module.eq,
+        "!=": op_module.ne,
+        ">":  op_module.gt,
+        ">=": op_module.ge,
+        "<":  op_module.lt,
+        "<=": op_module.le,
     }
 
     if condition in ops:
         v = values[0]
-        op = ops[condition]
-        return [x for x in pool if op(x, v)] 
+        fn = ops[condition]
+        return [x for x in pool if fn(x, v)]
 
     raise ValueError(f"Unsupported selector condition: {condition}")
 
+
+# ---------------------------------------------------------------------------
+# Operações sobre pool
+# ---------------------------------------------------------------------------
+
 def count_in(pool: list[int], selector: dict) -> dict:
     filtered = apply_selector("cn", pool, selector)
-
     return {
         "type": "cn",
-        "name": "Count",
         "condition": selector["condition"],
         "value": selector["value"],
         "input": pool,
+        "kept": filtered,
         "result": len(filtered),
     }
 
 
 def keep_subset(name: str, pool: list[int], selector: dict) -> dict:
-    
-    names = {
-        "kh": "keep hight",
-        "kl": "keep low",
-        "kv": "keep"
-    }
-    
-    filtered = apply_selector(name, pool, selector)
-
+    labels = {"kh": "keep highest", "kl": "keep lowest", "kv": "keep"}
+    kept = apply_selector(name, pool, selector)
     return {
         "type": name,
-        "name": names[name],
+        "label": labels[name],
         "condition": selector["condition"],
         "value": selector["value"],
         "input": pool,
-        "result": filtered,
+        "kept": kept,
+        "result": sum(kept),   # escalar para aritmética
     }
 
 
+def _check_selector(x: int, condition: str, values: list) -> bool:
+    if condition == "=":   return x == values[0]
+    if condition == ">":   return x > values[0]
+    if condition == ">=":  return x >= values[0]
+    if condition == "<":   return x < values[0]
+    if condition == "<=":  return x <= values[0]
+    if condition == "..":
+        a, b = values
+        return a <= x <= b
+    if condition == "in":  return x in values
+    return False
+
+
 def process_reaction(pool: list[int], selector: dict, dice: dict, mode: str) -> list[int]:
-    
     condition = selector["condition"]
     values = selector["value"]
-
-    def check(x: int) -> bool:
-        if condition == "=":
-            return x == values[0]
-        if condition == ">":
-            return x > values[0]
-        if condition == ">=":
-            return x >= values[0]
-        if condition == "<":
-            return x < values[0]
-        if condition == "<=":
-            return x <= values[0]
-        if condition == "..":
-            a, b = values
-            return a <= x <= b
-        if condition == "in":
-            return x in values
-        return False
-
     result = []
 
     for x in pool:
-        
-        if mode == "reroll" and not check(x):
-            # substitui dado inválido
-            new_roll = roll_dice(1, dice["sides"])["rolls"][0]
-            result.append(new_roll)
-
+        if mode == "reroll" and not _check_selector(x, condition, values):
+            result.append(roll_dice(1, dice["sides"])["rolls"][0])
         else:
             result.append(x)
-
-            if mode == "explode" and check(x):
-                # adiciona novo dado extra
-                new_roll = roll_dice(1, dice["sides"])["rolls"][0]
-                result.append(new_roll)
+            if mode == "explode" and _check_selector(x, condition, values):
+                result.append(roll_dice(1, dice["sides"])["rolls"][0])
 
     return result
 
 
-def explode(pool: list[int], selector: dict, dice: dict) -> dict:
-
-    '''
-    Rerolls dice according to a condition, the result replaces the previous one
-    '''
-    processed = process_reaction(pool, selector, dice, mode="explode")
-
+def explode_pool(pool: list[int], selector: dict, dice: dict) -> dict:
+    rolled = process_reaction(pool, selector, dice, mode="explode")
     return {
-        "type": "explode",        
+        "type": "ex",
         "condition": selector["condition"],
         "value": selector["value"],
         "input": pool,
-        "result": processed,
+        "kept": rolled,
+        "result": sum(rolled),   # escalar para aritmética
     }
 
-def reroll(pool: list[int], selector: dict, dice: dict) -> dict:
-    '''
-    Rerolls dice according to a condition, the result is added the previous one
-    '''
-    processed = process_reaction(pool, selector, dice, mode="reroll")
+
+def reroll_pool(pool: list[int], selector: dict, dice: dict) -> dict:
+    rolled = process_reaction(pool, selector, dice, mode="reroll")
     return {
-        "type": "reroll",        
+        "type": "rr",
         "condition": selector["condition"],
         "value": selector["value"],
         "input": pool,
-        "result": processed,
+        "kept": rolled,
+        "result": sum(rolled),   # escalar para aritmética
     }
-    
-
-def multiroll(dice:dict, times:int) -> dict:
-    '''
-    rolls the same group of dice multiple times
-    '''
-    pass
 
 
-def extract_dice(node, out=None):
-    if out is None:
-        out = {}
+def multiroll(node: dict, times: int) -> dict:
+    """Avalia node independentemente `times` vezes e retorna lista de resultados."""
+    runs = []
+    results = []
+    for _ in range(times):
+        run_log = _eval(node)
+        runs.append(run_log)
+        results.append(run_log["result"])
+    return {
+        "type": "mr",
+        "times": times,
+        "runs": runs,
+        "result": results,
+    }
 
-    if isinstance(node, dict):
-        if node.get("type") == "dice":
-            key = f"d{node['sides']}"
-            out.setdefault(key, []).extend(node.get("rolls", []))
 
-        for v in node.values():
-            extract_dice(v, out)
+# ---------------------------------------------------------------------------
+# Helpers internos do _eval
+# ---------------------------------------------------------------------------
 
-    elif isinstance(node, list):
-        for item in node:
-            extract_dice(item, out)
+def _get_pool(log: dict) -> list[int] | None:
+    """Extrai o pool utilizável de qualquer nó de log.
 
-    return out
+    - dice          → log["rolls"]   (lista bruta ordenada)
+    - kh / kl       → log["kept"]    (lista dos dados mantidos)
+    - ex / rr       → log["kept"]    (lista após explosão/reroll)
+    - cn / integer  → None           (produzem escalar, não pool)
+    - operator      → None
+    """
+    t = log.get("type")
+    if t == "dice":
+        return log.get("rolls")
+    if t in ("kh", "kl", "ex", "rr"):
+        return log.get("kept")
+    return None
 
+
+def _get_dice_node(log: dict) -> dict | None:
+    """Sobe a cadeia de logs para encontrar o nó dice original (para ex/rr)."""
+    if log.get("type") == "dice":
+        return log
+    child = log.get("child")
+    if child:
+        return _get_dice_node(child)
+    return None
+
+# ---------------------------------------------------------------------------
+# Avaliação da árvore
+# ---------------------------------------------------------------------------
 
 def _eval(node: dict) -> dict:
-    
+
+    # --- Dado ---
     if node.get("type") == "dice":
+        return roll_dice(node["amount"], node["sides"])
 
-        result = roll_dice(
-            amount=node["amount"],
-            sides=node["sides"]
-        )
-        # print("dice results: ", result )
-        return result        
-
+    # --- Inteiro literal ---
     if node.get("type") == "integer":
+        v = node["value"]
+        return {"type": "integer", "value": v, "result": v}
 
-        return {
-            "type": "integer",
-            "value": node["value"]
-        }
-   
-    if node["name"] in {"+", "-", "*", "/"}:
+    name = node.get("name")
 
-        values = []
-        logs = []
-
+    # --- Operadores aritméticos ---
+    if name in {"+", "-", "*", "/"}:
+        children_logs = []
         for arg in node["arguments"]:
+            if arg is None:
+                children_logs.append({"type": "integer", "value": 0, "result": 0})
+                continue
+            children_logs.append(_eval(arg))
 
-            # print("args", arg)
+        values = [c["result"] for c in children_logs]
 
-            v = _eval(arg)
-            values.append(v["result"])
-            logs.append(v)
-
-        if node["name"] == "+":
-
+        if name == "+":
             result = sum(values)
-
-        elif node["name"] == "-":
-
+        elif name == "-":
             result = values[0]
             for v in values[1:]:
                 result -= v
-
-        '''
-        elif node["name"] == "*":
-
+        elif name == "*":
             result = values[0]
             for v in values[1:]:
                 result *= v
-
-        elif node["name"] == "/":
-
+        elif name == "/":
             result = values[0]
             for v in values[1:]:
                 result /= v
-        '''
 
         return {
             "type": "operator",
-            "op": node["name"],
-            "children": logs,
+            "op": name,
+            "children": children_logs,
             "result": result
         }
 
-    arg_log = _eval(node["arguments"][0])
+    # --- Multiroll ---
+    if name == "mr":
+        times    = node["selector"]["value"][0]
+        arg_node = node["arguments"][0]
+        return multiroll(arg_node, times)
 
-    print("arq_log: ", arg_log)    
+    # --- Funções com pool ---
+    arg_node = node["arguments"][0]
+    arg_log = _eval(arg_node)
 
-    if node["name"] == "cn":
+    pool = _get_pool(arg_log)
+    dice_info = _get_dice_node(arg_log)
 
-        log = count_in(
-            arg_log.get("rolls"),
-            node["selector"]
-        )
+    selector = node["selector"]
 
-    elif node["name"] == "kh":
+    if name == "cn":
+        fn_log = count_in(pool, selector)
 
-        log = keep_subset(
-            "kh",
-            arg_log.get("rolls"),
-            node["selector"]
-        )
+    elif name == "kh":
+        fn_log = keep_subset("kh", pool, selector)
 
-    elif node["name"] == "kl":
+    elif name == "kl":
+        fn_log = keep_subset("kl", pool, selector)
 
-        log = keep_subset(
-            "kl",
-            arg_log.get("rolls"),
-            node["selector"]
-        )
+    elif name == "ex":
+        fn_log = explode_pool(pool, selector, dice_info)
+
+    elif name == "rr":
+        fn_log = reroll_pool(pool, selector, dice_info)
 
     else:
-        raise ValueError(node)
+        raise ValueError(f"Unknown function: {name}")
 
     return {
-        "type":  node["name"],
-        "condition": node["selector"].get("condition"),
-        "value": node["selector"].get("value"),
+        "type": name,
+        "condition": selector.get("condition"),
+        "value": selector.get("value"),
         "child": arg_log,
-        "result": log.get("result"),
-        "log": log
+        "kept": fn_log.get("kept"),     # lista para _get_pool de encadeamentos
+        "result": fn_log["result"],     # sempre escalar
+        "log": fn_log
     }
+
+
+# ---------------------------------------------------------------------------
+# Formatação do log
+# ---------------------------------------------------------------------------
+
+def extract_dice_rolls(log_tree: dict, out: dict | None = None) -> dict:
+    if out is None:
+        out = {}
+    if isinstance(log_tree, dict):
+        if log_tree.get("type") == "dice":
+            key = f"d{log_tree['sides']}"
+            out.setdefault(key, []).extend(log_tree["rolls"])
+        for v in log_tree.values():
+            if isinstance(v, (dict, list)):
+                extract_dice_rolls(v, out)
+    elif isinstance(log_tree, list):
+        for item in log_tree:
+            extract_dice_rolls(item, out)
+    return out
+
+
+def _selector_str(condition: str, values: list) -> str:
+    if condition == "..":
+        return f"{values[0]}..{values[1]}"
+    if condition == "in":
+        return ",".join(str(v) for v in values)
+    return f"{condition}{values[0]}"
+
+
+def _child_summary(child_log: dict) -> str:
+    """Resumo de um nó filho para exibição dentro de funções encadeadas."""
+    t = child_log.get("type")
+    if t == "dice":
+        return f"{child_log['amount']}d{child_log['sides']} {child_log['rolls']}"
+    if t in ("kh", "kl"):
+        label = child_log["log"].get("label", t)
+        return f"[{label} → {child_log['kept']}]"
+    if t in ("ex", "rr"):
+        return f"[{t} → {child_log['kept']}]"
+    if t == "cn":
+        return f"[cn → {child_log['result']}]"
+    return str(child_log.get("result", "?"))
 
 
 def _flatten_log(node: dict) -> str:
 
-    if node["type"] == "dice":
-        
-        return f'{node["amount"]}d{node["sides"]} = {node["rolls"]} = {node["result"]}'
+    t = node["type"]
 
-    if node["type"] == "integer":
-        return str(node["value"])
-
-    if node["type"] == "operator":
-
-        parts = [
-            _flatten_log(child)
-            for child in node["children"]
-        ]
-
-        return f" {node['op']} ".join(parts)
-
-    if node["type"] == "cn":
-
-        condition = node["condition"]
-        values = node["value"]        
-
-        if condition == "..":
-            selector = f"{values[0]}..{values[1]}"
-        elif condition == "in":
-            selector = f"{values} in "
-        else:
-            selector = f"{condition}{values[0]}"
-
-        text = (
-            f"Count {selector} "
-            f"in {node['child']['amount']}d{node['child']['sides']} "
-            f"{node['child']['rolls']} = {node['result']}"
+    if t == "dice":
+        return (
+            f"{node['amount']}d{node['sides']} "
+            f"= {node['rolls']} "
+            f"= {node['result']}"
         )
 
-    if node["type"] in ("kh", "kl", "kv"):
+    if t == "integer":
+        return str(node["value"])
 
-        condition = node["condition"]
-        values = node["value"]
+    if t == "operator":
+        parts = [_flatten_log(child) for child in node["children"]]
+        return f" {node['op']} ".join(parts)
 
-        match node["type"]:
-            case "kh":
-                begin = f"Keep {values[0]} highest "
+    if t == "cn":
+        sel = _selector_str(node["condition"], node["value"])
+        child = node["child"]
+        return (
+            f"Count {sel} "
+            f"in {_child_summary(child)} "
+            f"= {node['result']}"
+        )
 
-            case "kl":
-                begin = f"Keep {values[0]} lowest "
-            
-            case "kkv":
-                begin = f"Keep {condition}{values[0]} "
+    if t in ("kh", "kl"):
+        sel_val = node["value"][0]
+        label = "highest" if t == "kh" else "lowest"
+        child = node["child"]
+        kept = node["kept"]
+        return (
+            f"Keep {sel_val} {label} "
+            f"in {_child_summary(child)} "
+            f"= {kept} = {sum(kept)}"
+        )
 
-        text = (
-            f"{begin}"
-            f"in {node['child']['amount']}d{node['child']['sides']} "
-            f"{node['child']['rolls']} = {node['result']}"
-        )       
-        
-        print(text)
-        return text      
+    if t == "ex":
+        sel = _selector_str(node["condition"], node["value"])
+        child = node["child"]
+        kept = node["kept"]
+        return (
+            f"Explode {sel} "
+            f"in {_child_summary(child)} "
+            f"= {kept} = {sum(kept)}"
+        )
+
+    if t == "rr":
+        sel = _selector_str(node["condition"], node["value"])
+        child = node["child"]
+        kept = node["kept"]
+        return (
+            f"Reroll {sel} "
+            f"in {_child_summary(child)} "
+            f"= {kept} = {sum(kept)}"
+        )
+
+    if t == "mr":
+        times   = node["times"]
+        results = node["result"]
+        runs    = node["runs"]
+        detail  = "\n  ".join(
+            f"[{i+1}] {_flatten_log(r)}" for i, r in enumerate(runs)
+        )
+        return f"{times}x rolls:\n  {detail}\n= {results}"
+
+    return f"[unknown type: {t}]"
 
 
-def address_commands(node: dict) -> dict:
-    log_tree = _eval(node) 
-
-    print("log tree: ", log_tree)   
+def execute_command(node: dict) -> dict:
+    
+    log_tree = _eval(node)
+    rolls = extract_dice_rolls(log_tree)
 
     return {
         "result": log_tree.get("result"),
-        "log": _flatten_log(log_tree)
+        "log": _flatten_log(log_tree),
+        "rolls": rolls
     }
-
-
-def validate_node(node: dict) -> list | None:
-    """
-    Retorna:
-        [False, None, message] se inválido
-        None se válido
-    """
-
-    if not node:
-        return [False, None, "Empty Command"]
-
-    
-    if node.get("type") == "dice":
-
-        qty = node.get("amount")
-        faces = node.get("sides")
-
-        if qty is None or faces is None:
-            return [False, None, "Invalid dice node"]
-
-        if not isinstance(qty, int) or qty < 1:
-            return [False, None, f"Invalid dice qty: {qty}"]
-
-        if not (isinstance(faces, int) or faces == "f"):
-            return [False, None, f"Invalid dice faces: {faces}"]
-
-        return None
-
-    
-    if node.get("type") == "integer":
-
-        if not isinstance(node.get("value"), int):
-            return [False, None, f"Invalid integer: {node.get('value')}"]
-
-        return None
-
-    
-    if node.get("name") in {"+", "-", "*", "/"}:
-
-        args = node.get("arguments", [])
-
-        if not args:
-            return [False, None, f"Operator {node['name']} missing arguments"]
-
-        for arg in args:
-            err = validate_node(arg)
-            if err:
-                return err
-
-        return None
-
-    
-    name = node.get("name")
-
-    if not name:
-        return [False, None, "Missing function name"]
-
-    args = node.get("arguments", [])
-
-    if not args:
-        return [False, None, f"Function {name} missing argument"]
-
-    
-    for arg in args:
-        err = validate_node(arg)
-        if err:
-            return err
-
-    
-    if name in {"kh", "kl"}:
-
-        if node["selector"].get("value") is None:
-            return [False, None, f"{name} missing value"]
-
-        # if not isinstance(node["selector"].get("value"), int):
-            # return [False, None, f"{name} value must be int"]
-
-    if name == "cn":
-
-        print(node)
-
-        if node["selector"].get("condition") is None:
-            return [False, None, "cn missing condition"]
-
-        if node["selector"].get("value") is None:
-            return [False, None, "cn missing value"]
-
-    return None
-
-
-def execute_command(commands: str) -> list:
-
-    node = parse_command(commands)
-
-    validation = validate_node(node)
-
-    if validation:
-        return validation
-
-    result = address_commands(node)
-
-    # print("node: ", node)
-    print("result final: ", result)
-
-    return [True, result.get("result"), result.get("log")]

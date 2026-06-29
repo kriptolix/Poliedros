@@ -25,5 +25,5 @@ class AppMenu(Gtk.PopoverMenu):
 
         super().__init__()
 
-        self._selectors = Selectors()
-        self.add_child(self._selectors, "selectors")
+        self.selectors = Selectors()
+        self.add_child(self.selectors, "selectors")

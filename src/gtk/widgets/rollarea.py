@@ -22,7 +22,8 @@ from gi.repository import Gtk
 
 from .dicearea import DiceArea
 from .infoarea import InfoArea
-from .advancedmode import AdvancedMode
+from .gldicearea import GLDiceArea
+#from .advancedmode import AdvancedMode
 
 @Gtk.Template(resource_path='/io/github/kriptolix/'
               'Poliedros/src/gtk/ui/RollArea.ui')
@@ -37,7 +38,8 @@ class RollArea(Gtk.Box):
     _mode_button = Gtk.Template.Child()
     _roll_button = Gtk.Template.Child()
     _clear_button = Gtk.Template.Child()
-    _adaptable = Gtk.Template.Child()
+    _clamp = Gtk.Template.Child()
+    _overlay = Gtk.Template.Child()
     # _advanced = Gtk.Template.Child()
 
     def __init__(self):
@@ -78,7 +80,9 @@ class RollArea(Gtk.Box):
         
         self._button_activation(self._display)
 
-        self._display.set_text("5d6|kl:3|cn:>2")
+        # self._overlay.set_child(GLDiceArea())
+
+        # self._display.set_text("5d6 +1 |cn:>2")
 
     def _reset_error_state(self, *args):
 
@@ -132,8 +136,7 @@ class RollArea(Gtk.Box):
 
         display_content = " + ".join(parts)
         display_content = display_content + content
-
-        # print(display_content)
+        
         self._display.set_text(display_content)
 
     def add_die(self, button):
