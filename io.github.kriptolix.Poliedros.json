@@ -8,6 +8,7 @@
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
+        "--socket=pulseaudio",
         "--socket=wayland"
     ],
     "cleanup" : [
@@ -26,8 +27,10 @@
         "requirements/pyopengl.json",
         "requirements/pyopengl-accelerate.json",
         "requirements/sounddevice.json",
-        "requirements/numpy.json",
-        "requirements/pybullet.json",                      
+        "requirements/libportaudio.json",                
+        "requirements/pybullet.json",
+        "requirements/numpy.json",        
+        "requirements/pydice3d.json",                      
         {
             "name" : "poliedros",
             "builddir" : true,

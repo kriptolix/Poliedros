@@ -15,8 +15,8 @@
           <object class="GtkLabel" id="_results">
             <property name="label">?</property>
             <property name="halign">3</property>
-            <property name="valign">3</property>
-            <property name="margin-top">40</property>
+            <property name="valign">2</property>
+            
             <style>
               <class name="roll_result"/>
             </style>

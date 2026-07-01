@@ -79,7 +79,8 @@ class PoliedrosApplication(Adw.Application):
         self._add_modifier = self._window._roll_area.add_modifier
         self._add_register = self._window._sidebar.add_register
         self._audio = self._window.selectors._audio
-        self._render = self._window.selectors._render 
+        self._render = self._window.selectors._render
+        self._gl_area = self._window._roll_area._gl_area 
 
 
     def on_about(self, *args):
@@ -120,7 +121,19 @@ class PoliedrosApplication(Adw.Application):
 
         result = execute_command(node)
         total = result.get("result")
-        log = result.get("log")        
+        log = result.get("log")
+        target = result.get("rolls")
+
+        audio = self._window.audio_enabled
+
+        if self._window.render_enabled:            
+        
+            spec = {}
+
+            for key, values in target.items():
+                spec[key] = len(values)
+
+            self._gl_area.start_simulation(audio, spec, target)        
 
         self._add_register(total, log, input)
         self._update_result(total)

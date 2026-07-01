@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 
 from .dicearea import DiceArea
 from .infoarea import InfoArea
@@ -79,10 +79,17 @@ class RollArea(Gtk.Box):
                                  self._button_activation)
         
         self._button_activation(self._display)
+        self._gl_area = GLDiceArea()
 
-        # self._overlay.set_child(GLDiceArea())
+        self._overlay.set_child(self._gl_area)
+
+        self._gl_area.timer_id = GLib.timeout_add(32, self._idle_render)
 
         # self._display.set_text("5d6 +1 |cn:>2")
+
+    def _idle_render(self) -> bool:
+        self._gl_area.queue_render()
+        return True
 
     def _reset_error_state(self, *args):
 
@@ -158,6 +165,7 @@ class RollArea(Gtk.Box):
         application = self.get_root().application
         application.do_roll()
         self._command = {"df":0, "d4":0, "d6":0, "d8":0, "d10":0, "d12":0, "d20":0, "d100":0}
+       
 
     def _button_activation(self, display):
         

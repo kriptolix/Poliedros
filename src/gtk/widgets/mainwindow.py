@@ -133,6 +133,15 @@ class MainWindow(Adw.ApplicationWindow):
 
     def on_theme_changed(self, param, value):                
         self._sidebar.css_matching(self._split_view, None)
+    
+
+    @property
+    def audio_enabled(self) -> bool:
+        return self.selectors._audio.get_active()
+
+    @property
+    def render_enabled(self) -> bool:
+        return self.selectors._render.get_active()  
 
 
 

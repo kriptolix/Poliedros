@@ -1,3 +1,5 @@
+--disable-rofiles-fuse
+
 * replace Gtk.ShortcutsWindow with Adw.ShortcutsDialog
 * normalize the way roll is created to integrate 3d dice roll
 
