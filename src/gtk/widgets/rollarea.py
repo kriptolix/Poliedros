@@ -106,6 +106,8 @@ class RollArea(Gtk.Box):
         self._display.set_text("")
         self._results.set_text("?")
 
+        self._gl_area._sim.reset()
+
     def change_mode(self, button):
 
         placeholder = "Ex.: 2d6, 1d12+3, 2d20|kh:1"
@@ -151,7 +153,10 @@ class RollArea(Gtk.Box):
         die_key = button
 
         if not isinstance(button, str):
-            die_key = button.get_tooltip_text()        
+            die_key = button.get_tooltip_text()
+
+            if die_key == "fudge dice":
+                die_key = "df"
 
         self._command[die_key] += 1
         self._assemble_command()

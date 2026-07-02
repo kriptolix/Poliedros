@@ -126,14 +126,20 @@ class PoliedrosApplication(Adw.Application):
 
         audio = self._window.audio_enabled
 
-        if self._window.render_enabled:            
-        
+        if self._window.render_enabled:
+
             spec = {}
+            valid = True
 
             for key, values in target.items():
                 spec[key] = len(values)
 
-            self._gl_area.start_simulation(audio, spec, target)        
+                if key not in ["df", "d4", "d6", "d8", "d10", "d12", "d20", "d100"]:                    
+                    valid = False
+                    break
+
+            if valid:
+                self._gl_area.start_simulation(audio, spec, target)       
 
         self._add_register(total, log, input)
         self._update_result(total)

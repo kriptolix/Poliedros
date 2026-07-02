@@ -43,14 +43,10 @@ class GLDiceArea(Gtk.GLArea):
         self._vp_w: int = 660
         self._vp_h: int = 460
 
-        self._sim = DiceSimulation(on_result=self._on_roll_complete)
+        self._sim = DiceSimulation()
 
         self._renderer:  Renderer | None = None
         self._atlas_json: dict | None = None
-
-        self.on_roll_complete: object = None   # callable(RollResult) | None
-
-        self.theme = "dark"
 
         self.connect("realize",   self._on_realize)
         self.connect("unrealize", self._on_unrealize)
@@ -132,10 +128,7 @@ class GLDiceArea(Gtk.GLArea):
         if self.get_error():
             return
 
-        self._sim.audio_enabled = audio                
-        
-        # roll() now runs headless + prepares playback internally.
-        # The ``targets`` kwarg triggers glyph remap computation inside record_roll().
+        self._sim.audio_enabled = audio       
         self._sim.roll(spec, theme=self._sim.theme, targets=targets)
 
         if self._renderer is None:
@@ -146,17 +139,11 @@ class GLDiceArea(Gtk.GLArea):
             )
         else:
             self._renderer.reload(self._sim.scene, self._sim.dice_types)
-
-        # ── NEW: write glyph permutations into GPU objects ────────────────
-        # Must happen after Renderer is built/reloaded (dice_gpu must exist).
-        # Safe to call even when targets=None (all remaps are None, no-op).
+        
+        # Must happen after Renderer is built/reloaded (dice_gpu must exist).        
         self._sim.apply_glyph_remaps(self._renderer)
-        # ─────────────────────────────────────────────────────────────────
+        
 
-        self.grab_focus()
+       
 
-    def _on_roll_complete(self, result: "RollResult") -> None:
-
-        print(f"[RESULT] {result.summary()}")
-        if callable(self.on_roll_complete):
-            self.on_roll_complete(result)
+    

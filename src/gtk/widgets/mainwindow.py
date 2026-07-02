@@ -97,6 +97,10 @@ class MainWindow(Adw.ApplicationWindow):
         self.selectors = popover.selectors
         
         self._breakpoints_active = [False, False]
+
+        self._roll_area._gl_area.theme = self.theme
+
+        self.selectors._render.connect("notify::active", self.on_render_changed)
                 
 
     def _breakpoint_apply(self, breakpoint, data):
@@ -133,7 +137,16 @@ class MainWindow(Adw.ApplicationWindow):
 
     def on_theme_changed(self, param, value):                
         self._sidebar.css_matching(self._split_view, None)
-    
+        self._roll_area._gl_area.theme = self.theme
+
+    def on_render_changed(self, button, value):
+        
+        if self.render_enabled:
+             self.selectors._audio.set_sensitive(True)
+             return
+        
+        self.selectors._audio.set_sensitive(False)
+        self._roll_area._gl_area._sim.reset()
 
     @property
     def audio_enabled(self) -> bool:
@@ -141,7 +154,13 @@ class MainWindow(Adw.ApplicationWindow):
 
     @property
     def render_enabled(self) -> bool:
-        return self.selectors._render.get_active()  
+        return self.selectors._render.get_active()
+
+    @property
+    def theme(self) -> str:
+        if self.style_manager.get_dark():
+            return "dark"
+        return "light"  
 
 
 

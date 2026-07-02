@@ -24,8 +24,7 @@ from .parser import parse_command
 
 
 def roll_dice(amount: int, sides: int | str) -> dict:
-    if sides == "f":
-        sides = 3
+    if sides == "f":       
         scope = [-1, 1]
     else:
         scope = [1, sides]
