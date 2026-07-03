@@ -66,6 +66,18 @@
   </requires>
 
   <releases>
+    <release version="2.0.0" date="XXXX-XX-XX">
+      <description translate="no">
+        <p>A lot of work under the hood and new candy.</p>
+        <ul>
+          <li>Brand-new 3D dice rendering with audio!</li>
+          <li>Ability to independently disable 3D rendering and audio.</li>
+          <li>Complete overhaul of roller for a better experience with functions.</li>
+          <li>Some interface adjustments for mobile and tablet modes.</li>
+          <li>Update of the shortcuts screen to AdwShortcutsDialog.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.5.3" date="2026-05-06">
       <description translate="no">
         <p>Just little fixes.</p>

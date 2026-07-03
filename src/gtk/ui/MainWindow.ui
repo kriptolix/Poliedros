@@ -51,15 +51,15 @@
                 </child>
                 <child type="end">
                   <object class="GtkMenuButton" id="_menu_button">
-                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="icon-name">open-menu-symbolic</property>                    
                     <property name="primary">true</property>
+                    <property name="tooltip-text" translatable="yes">Main menu</property>
                   </object>
                 </child>
               </object>
             </child>
             <property name="content">
-              <object class="RollArea" id="_roll_area"></object>
-              
+              <object class="RollArea" id="_roll_area"></object>              
             </property>
           </object>
         </property>

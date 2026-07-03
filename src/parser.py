@@ -201,7 +201,7 @@ def parse_function(token: str) -> dict:
             }
         }
 
-    # Lista (11,12)
+    # List (11,12)
     if "," in raw_value:
         values = [v.strip() for v in raw_value.split(",")]
         parsed = []
@@ -218,7 +218,7 @@ def parse_function(token: str) -> dict:
             }
         }
 
-    # Operador relacional (>=, <=, !=, >, <, =)
+    # Operator (>=, <=, !=, >, <, =)
     match = re.match(r"(>=|<=|!=|>|<|=)(.+)", raw_value)
     if match:
         op = match.group(1)
@@ -235,7 +235,7 @@ def parse_function(token: str) -> dict:
             }
         }
 
-    # Valor simples (inteiro)
+    # int
     try:
         return {
             "name": name,
@@ -245,7 +245,7 @@ def parse_function(token: str) -> dict:
             }
         }
     except ValueError:
-        # Valor bruto (fallback)
+        # raw fallback
         return {
             "name": name,
             "selector": {
@@ -282,8 +282,7 @@ def parse_integer(token: str) -> dict:
 
 
 def attach_function(node: dict, func: dict) -> dict:
-    """Encadeia uma função ao nó atual. node pode ser None quando o
-    inteiro literal precede um pipe — a validação posterior captura isso."""
+    
     func["arguments"] = [node]
     return func
 
@@ -310,7 +309,7 @@ def _elevate_mr(root: dict) -> dict:
     if not isinstance(last, dict) or last.get("name") != "mr":
         return root
 
-    # O token que o mr "capturou" vira o último elemento real do operador
+    # The token that mr "captured" becomes the last real element of the operator
     mr_inner = last["arguments"][0]
     new_root = dict(root)
     new_root["arguments"] = args[:-1] + [mr_inner]
@@ -323,10 +322,8 @@ def _elevate_mr(root: dict) -> dict:
 
 
 def parse_command(command: str) -> dict:
-    # Remove espaços
-    command = re.sub(r"\s+", "", command)
 
-    # Divide pelos operadores aritméticos, preservando-os
+    command = re.sub(r"\s+", "", command)  
     elements = re.split(r"([+\-*/])", command)
 
     parsed_elements = []
@@ -339,8 +336,7 @@ def parse_command(command: str) -> dict:
         if element in "+-*/":
             parsed_elements.append(element)
             continue
-
-        # Divide pelo pipe — cada parte é dado ou função
+        
         parts = element.split("|")
 
         current = None
@@ -357,12 +353,10 @@ def parse_command(command: str) -> dict:
                 current = attach_function(current, func)
 
         parsed_elements.append(current)
-
-    # Apenas um elemento
+    
     if len(parsed_elements) == 1:
         return parsed_elements[0]
-
-    # Monta árvore aritmética (esquerda para direita, sem precedência)
+    
     root = {
         "name": parsed_elements[1],
         "arguments": [

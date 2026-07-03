@@ -20,8 +20,6 @@
 import random
 import operator as op_module
 
-from .parser import parse_command
-
 
 def roll_dice(amount: int, sides: int | str) -> dict:
     if sides == "f":       
@@ -45,7 +43,7 @@ def roll_dice(amount: int, sides: int | str) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Seletores
+# Selectors
 # ---------------------------------------------------------------------------
 
 def apply_selector(name: str, pool: list[int], selector: dict) -> list[int]:
@@ -166,7 +164,7 @@ def reroll_pool(pool: list[int], selector: dict, dice: dict) -> dict:
 
 
 def multiroll(node: dict, times: int) -> dict:
-    """Avalia node independentemente `times` vezes e retorna lista de resultados."""
+    
     runs = []
     results = []
     for _ in range(times):
@@ -182,17 +180,12 @@ def multiroll(node: dict, times: int) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Helpers internos do _eval
+# Helpers
 # ---------------------------------------------------------------------------
 
 def _get_pool(log: dict) -> list[int] | None:
-    """Extrai o pool utilizável de qualquer nó de log.
-
-    - dice          → log["rolls"]   (lista bruta ordenada)
-    - kh / kl       → log["kept"]    (lista dos dados mantidos)
-    - ex / rr       → log["kept"]    (lista após explosão/reroll)
-    - cn / integer  → None           (produzem escalar, não pool)
-    - operator      → None
+    """
+    Extracts the usable pool from any log node.
     """
     t = log.get("type")
     if t == "dice":
@@ -203,7 +196,9 @@ def _get_pool(log: dict) -> list[int] | None:
 
 
 def _get_dice_node(log: dict) -> dict | None:
-    """Sobe a cadeia de logs para encontrar o nó dice original (para ex/rr)."""
+    """
+    Traverses up the log chain to find the original dice node (for ex/rr).
+    """
     if log.get("type") == "dice":
         return log
     child = log.get("child")
@@ -211,24 +206,18 @@ def _get_dice_node(log: dict) -> dict | None:
         return _get_dice_node(child)
     return None
 
-# ---------------------------------------------------------------------------
-# Avaliação da árvore
-# ---------------------------------------------------------------------------
 
 def _eval(node: dict) -> dict:
-
-    # --- Dado ---
+ 
     if node.get("type") == "dice":
         return roll_dice(node["amount"], node["sides"])
-
-    # --- Inteiro literal ---
+  
     if node.get("type") == "integer":
         v = node["value"]
         return {"type": "integer", "value": v, "result": v}
 
     name = node.get("name")
 
-    # --- Operadores aritméticos ---
     if name in {"+", "-", "*", "/"}:
         children_logs = []
         for arg in node["arguments"]:
@@ -261,13 +250,12 @@ def _eval(node: dict) -> dict:
             "result": result
         }
 
-    # --- Multiroll ---
     if name == "mr":
         times    = node["selector"]["value"][0]
         arg_node = node["arguments"][0]
         return multiroll(arg_node, times)
 
-    # --- Funções com pool ---
+    # --- pool functions---
     arg_node = node["arguments"][0]
     arg_log = _eval(arg_node)
 
@@ -299,14 +287,14 @@ def _eval(node: dict) -> dict:
         "condition": selector.get("condition"),
         "value": selector.get("value"),
         "child": arg_log,
-        "kept": fn_log.get("kept"),     # lista para _get_pool de encadeamentos
-        "result": fn_log["result"],     # sempre escalar
+        "kept": fn_log.get("kept"),     # list for thread pool _get_pool
+        "result": fn_log["result"],     
         "log": fn_log
     }
 
 
 # ---------------------------------------------------------------------------
-# Formatação do log
+# Log
 # ---------------------------------------------------------------------------
 
 def extract_dice_rolls(log_tree: dict, out: dict | None = None) -> dict:
@@ -334,7 +322,7 @@ def _selector_str(condition: str, values: list) -> str:
 
 
 def _child_summary(child_log: dict) -> str:
-    """Resumo de um nó filho para exibição dentro de funções encadeadas."""
+    
     t = child_log.get("type")
     if t == "dice":
         return f"{child_log['amount']}d{child_log['sides']} {child_log['rolls']}"
@@ -355,7 +343,7 @@ def _flatten_log(node: dict) -> str:
     if t == "dice":
         return (
             f"{node['amount']}d{node['sides']} "
-            f"= {node['rolls']} "
+            f"→ {node['rolls']} "
             f"= {node['result']}"
         )
 
@@ -369,42 +357,46 @@ def _flatten_log(node: dict) -> str:
     if t == "cn":
         sel = _selector_str(node["condition"], node["value"])
         child = node["child"]
-        return (
-            f"Count {sel} "
-            f"in {_child_summary(child)} "
-            f"= {node['result']}"
-        )
+        return _("Count %(sel)s in %(child)s = %(result)s") % {
+            "sel": sel,
+            "child": _child_summary(child),
+            "result": node["result"],
+        }
 
     if t in ("kh", "kl"):
         sel_val = node["value"][0]
         label = "highest" if t == "kh" else "lowest"
         child = node["child"]
         kept = node["kept"]
-        return (
-            f"Keep {sel_val} {label} "
-            f"in {_child_summary(child)} "
-            f"= {kept} = {sum(kept)}"
-        )
+        return _("Keep %(sel_val)s %(label)s in %(child)s → %(kept)s = %(total)s") % {
+            "sel_val": sel_val,
+            "label": label,
+            "child": _child_summary(child),
+            "kept": kept,
+            "total": sum(kept),
+        }
 
     if t == "ex":
         sel = _selector_str(node["condition"], node["value"])
         child = node["child"]
         kept = node["kept"]
-        return (
-            f"Explode {sel} "
-            f"in {_child_summary(child)} "
-            f"= {kept} = {sum(kept)}"
-        )
+        return _("Explode %(sel)s in %(child)s → %(kept)s = %(total)s") % {
+            "sel": sel,
+            "child": _child_summary(child),
+            "kept": kept,
+            "total": sum(kept),
+        }
 
     if t == "rr":
         sel = _selector_str(node["condition"], node["value"])
         child = node["child"]
         kept = node["kept"]
-        return (
-            f"Reroll {sel} "
-            f"in {_child_summary(child)} "
-            f"= {kept} = {sum(kept)}"
-        )
+        return _("Reroll %(sel)s in %(child)s → %(kept)s = %(total)s") % {
+            "sel": sel,
+            "child": _child_summary(child),
+            "kept": kept,
+            "total": sum(kept),
+        }
 
     if t == "mr":
         times   = node["times"]
@@ -413,9 +405,15 @@ def _flatten_log(node: dict) -> str:
         detail  = "\n  ".join(
             f"[{i+1}] {_flatten_log(r)}" for i, r in enumerate(runs)
         )
-        return f"{times}x rolls:\n  {detail}\n= {results}"
-
-    return f"[unknown type: {t}]"
+        return _("%(times)sx rolls:\n  %(detail)s\n= %(results)s") % {
+            "times": times,
+            "detail": detail,
+            "results": results,
+        }
+    
+    return _("[unknown type: %(type)s]") % {
+        "type": t,
+    }
 
 
 def execute_command(node: dict) -> dict:
