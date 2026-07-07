@@ -10,5 +10,7 @@ xgettext \
 * normalize the way roll is created to integrate 3d dice roll [ok]
 * clear render area with clear button [ok]
 * update translations [ok]
+* change version number across code [ok]
+* update screenshots [ok]
+* merge modules on manifest [ok]
 * insert date on metadata file
-* merge modules on manifest

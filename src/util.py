@@ -47,7 +47,7 @@ def create_action(action_group, prefix, name, callback,
 
 
 def is_cn_over_integer(arg: dict) -> bool:
-    """True quando cn recebe inteiro literal — sinaliza caso A no operador pai."""
+    
     if not isinstance(arg, dict):
         return False
     if arg.get("name") != "cn":

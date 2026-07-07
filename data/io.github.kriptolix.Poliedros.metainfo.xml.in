@@ -39,19 +39,19 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-basic-sidebar.png?raw=true</image>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/screenshots/dark-basic-sidebar.png?raw=true</image>
       <caption>Basic Mode.</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-basic-no-sidebar.png?raw=true</image>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/screenshots/dark-basic-no-sidebar.png?raw=true</image>
       <caption>No sidebar.</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-collapsed-sidebar.png?raw=true</image>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/screenshots/dark-collapsed-sidebar.png?raw=true</image>
       <caption>Collapsed sidebar.</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/kriptolix/Poliedros/blob/master/data/screenshots/dark-command-sidebar.png?raw=true</image>
+      <image>https://github.com/kriptolix/Poliedros/blob/master/screenshots/dark-command-sidebar.png?raw=true</image>
       <caption>Command Mode.</caption>
     </screenshot>
   </screenshots>

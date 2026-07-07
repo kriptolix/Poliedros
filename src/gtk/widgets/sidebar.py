@@ -48,8 +48,8 @@ class SideBar(Gtk.Box):
         super().__init__()
 
         self._sidebar_list.set_selection_mode(Gtk.SelectionMode.NONE)
-
-        self._sidebar_list.set_placeholder(EmptyPage())
+        self._empty_page = EmptyPage()        
+        self._sidebar_list.set_placeholder(self._empty_page)
 
         self._clear_history_button.connect("clicked", self.clear_registers)
 
@@ -95,3 +95,4 @@ class SideBar(Gtk.Box):
 
     def clear_registers(self, button):
         self._sidebar_list.remove_all()
+        self._sidebar_list.set_placeholder(self._empty_page)

@@ -19,6 +19,7 @@
 
 import random
 import operator as op_module
+from gettext import gettext as _
 
 
 def roll_dice(amount: int, sides: int | str) -> dict:

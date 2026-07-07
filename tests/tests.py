@@ -1,32 +1,14 @@
 """
-tests.py — Suite de testes para parser e roller de dados.
-
-Estrutura:
-  PARTE 1 — Parser
-    1a. Strings que devem ser aceitas (parse + validação OK)
-    1b. Strings que devem ser rejeitadas (erro de sintaxe)
-  PARTE 2 — Resolução
-    Usa as mesmas strings da parte 1a com seed fixo e verifica
-    tipo de resultado, shape e propriedades do log.
-
-Os testes chamam execute_command diretamente, que retorna:
-  [True,  result, log_str]  → sucesso
-  [False, None,  msg]       → erro de sintaxe / validação
+tests.py
 """
 
 import random
 import unittest
 
-# Ajuste o import conforme a estrutura do seu projeto
-from ..roller import execute_command
+from src.roller import execute_command
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Helpers
-# ─────────────────────────────────────────────────────────────────────────────
-
-def run(cmd: str):
-    """Executa um comando e retorna (ok, result, log)."""
+def run(cmd: str):  
     return execute_command(cmd)
 
 
@@ -42,13 +24,7 @@ def assertFails(tc: unittest.TestCase, cmd: str):
     return log
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# PARTE 1a — Parser: strings que devem ser aceitas
-# ─────────────────────────────────────────────────────────────────────────────
-
-class TestParserValid(unittest.TestCase):
-
-    # ── Dados básicos ─────────────────────────────────────────────────────────
+class TestParserValid(unittest.TestCase):   
 
     def test_dado_simples_d6(self):
         assertPasses(self, "d6")
@@ -65,7 +41,7 @@ class TestParserValid(unittest.TestCase):
     def test_dois_dados_diferentes(self):
         assertPasses(self, "2d20")
 
-    # ── Aritmética ────────────────────────────────────────────────────────────
+    # ─────────────────────────────────────────────────────────────
 
     def test_dado_mais_inteiro(self):
         assertPasses(self, "4d8 + 1")
@@ -82,7 +58,7 @@ class TestParserValid(unittest.TestCase):
     def test_soma_dois_dados(self):
         assertPasses(self, "2d20 + 3d4")
 
-    # ── kh: variações de keep count ───────────────────────────────────────────
+    # ── kh ───────────────────────────────────────────
 
     def test_kh_keep_1(self):
         assertPasses(self, "4d6 | kh:1")
@@ -93,7 +69,7 @@ class TestParserValid(unittest.TestCase):
     def test_kh_keep_3(self):
         assertPasses(self, "4d6 | kh:3")
 
-    # ── kl: variações de keep count ───────────────────────────────────────────
+    # ── kl ───────────────────────────────────────────
 
     def test_kl_keep_1(self):
         assertPasses(self, "4d6 | kl:1")
@@ -104,7 +80,7 @@ class TestParserValid(unittest.TestCase):
     def test_kl_keep_3(self):
         assertPasses(self, "4d6 | kl:3")
 
-    # ── kh/kl + aritmética ───────────────────────────────────────────────────
+    # ── kh/kl + number ───────────────────────────────────────────────────
 
     def test_kh_mais_inteiro(self):
         assertPasses(self, "4d6 | kh:2 + 4")
@@ -118,7 +94,7 @@ class TestParserValid(unittest.TestCase):
     def test_dado_mais_dado_kl(self):
         assertPasses(self, "5d6 + 1d4 | kl:2")
 
-    # ── ex: todas as condições ────────────────────────────────────────────────
+    # ── ex ────────────────────────────────────────────────
 
     def test_ex_igual_implicito(self):
         assertPasses(self, "3d12 | ex:12")
@@ -147,7 +123,7 @@ class TestParserValid(unittest.TestCase):
     def test_ex_lista(self):
         assertPasses(self, "3d6 | ex:5,6")
 
-    # ── rr: todas as condições ────────────────────────────────────────────────
+    # ── rr ────────────────────────────────────────────────
 
     def test_rr_igual_implicito(self):
         assertPasses(self, "3d12 | rr:1")
@@ -176,7 +152,7 @@ class TestParserValid(unittest.TestCase):
     def test_rr_lista(self):
         assertPasses(self, "3d6 | rr:1,2")
 
-    # ── cn: todas as condições ────────────────────────────────────────────────
+    # ── cn ────────────────────────────────────────────────
 
     def test_cn_igual_implicito(self):
         assertPasses(self, "3d12 | cn:6")
@@ -205,7 +181,7 @@ class TestParserValid(unittest.TestCase):
     def test_cn_lista(self):
         assertPasses(self, "3d6 | cn:5,6")
 
-    # ── cn + aritmética ───────────────────────────────────────────────────────
+    # ── cn + number ───────────────────────────────────────────────────────
 
     def test_cn_mais_inteiro(self):
         assertPasses(self, "3d12 | cn:>6 + 1")
@@ -213,7 +189,7 @@ class TestParserValid(unittest.TestCase):
     def test_cn_menos_inteiro(self):
         assertPasses(self, "2d10 | cn:8..10 - 5")
 
-    # ── ex/rr + aritmética ────────────────────────────────────────────────────
+    # ── ex/rr + number ────────────────────────────────────────────────────
 
     def test_ex_mais_inteiro(self):
         assertPasses(self, "3d6 | ex:6 + 2")
@@ -221,7 +197,7 @@ class TestParserValid(unittest.TestCase):
     def test_rr_menos_inteiro(self):
         assertPasses(self, "3d6 | rr:1 - 1")
 
-    # ── Encadeamentos duplos ──────────────────────────────────────────────────
+    # ── Double chain ──────────────────────────────────────────────────
 
     def test_kh_cn(self):
         assertPasses(self, "4d6 | kh:2 | cn:6")
@@ -265,7 +241,7 @@ class TestParserValid(unittest.TestCase):
     def test_rr_ex(self):
         assertPasses(self, "3d6 | rr:1 | ex:6")
 
-    # ── Encadeamentos triplos ─────────────────────────────────────────────────
+    # ── Triple chain ─────────────────────────────────────────────────
 
     def test_kh_ex_cn(self):
         assertPasses(self, "4d6 | kh:3 | ex:6 | cn:6")
@@ -279,7 +255,7 @@ class TestParserValid(unittest.TestCase):
     def test_rr_kh_cn(self):
         assertPasses(self, "4d6 | rr:1 | kh:3 | cn:>4")
 
-    # ── Operadores com múltiplos dados e funções ──────────────────────────────
+    # ── Multiple dice and functions ──────────────────────────────
 
     def test_kl_mais_kh(self):
         assertPasses(self, "4d6 | kl:2 + 5d10 | kh:4")
@@ -287,7 +263,7 @@ class TestParserValid(unittest.TestCase):
     def test_rr_mais_ex(self):
         assertPasses(self, "3d6 | rr:1 + 1d10 | ex:10")
 
-    # ── mr simples ────────────────────────────────────────────────────────────
+    # ── mr ────────────────────────────────────────────────────────────
 
     def test_mr_dado_simples(self):
         assertPasses(self, "2d6 | mr:3")
@@ -295,7 +271,7 @@ class TestParserValid(unittest.TestCase):
     def test_mr_d20(self):
         assertPasses(self, "d20 | mr:4")
 
-    # ── mr com função ─────────────────────────────────────────────────────────
+    # ── mr + function ─────────────────────────────────────────────────────────
 
     def test_mr_com_kh(self):
         assertPasses(self, "4d6 | kh:3 | mr:6")
@@ -309,7 +285,7 @@ class TestParserValid(unittest.TestCase):
     def test_mr_com_cn(self):
         assertPasses(self, "3d6 | cn:>4 | mr:3")
 
-    # ── mr com aritmética ─────────────────────────────────────────────────────
+    # ── mr + number ─────────────────────────────────────────────────────
 
     def test_mr_soma_inteiro(self):
         assertPasses(self, "5d6 + 1 | mr:2")
@@ -321,9 +297,6 @@ class TestParserValid(unittest.TestCase):
         assertPasses(self, "3d6 - 1 | mr:4")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# PARTE 1b — Parser: strings que devem ser rejeitadas
-# ─────────────────────────────────────────────────────────────────────────────
 
 class TestParserInvalid(unittest.TestCase):
 
