@@ -66,7 +66,7 @@
   </requires>
 
   <releases>
-    <release version="2.0.0" date="XXXX-XX-XX">
+    <release version="2.0.0" date="2026-08-03">
       <description translate="no">
         <p>A lot of work under the hood and new candy.</p>
         <ul>
