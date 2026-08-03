@@ -24,6 +24,7 @@ from gi.repository import GObject
 
 from .rollarea import RollArea
 from .sidebar import SideBar
+from .appmenu import AppMenu
 
 
 @Gtk.Template(resource_path='/io/github/kriptolix/'
@@ -31,7 +32,7 @@ from .sidebar import SideBar
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MainWindow'
 
-    _menu_button = Gtk.Template.Child()
+    _menu_button = Gtk.Template.Child()   
     _split_view = Gtk.Template.Child()
     _toggle_history_button = Gtk.Template.Child()
     _back_button = Gtk.Template.Child()
@@ -73,7 +74,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         self._sidebar.css_matching(self._split_view, None)
 
-        width_condition = Adw.BreakpointCondition.parse("max-width: 535sp")
+        width_condition = Adw.BreakpointCondition.parse("max-width: 520sp")
 
         width_breakpoint = Adw.Breakpoint.new(width_condition)
         width_breakpoint.connect("apply", self._breakpoint_apply, 0)
@@ -88,36 +89,81 @@ class MainWindow(Adw.ApplicationWindow):
         ratio_breakpoint.connect("unapply", self._breakpoint_unapply, 1)
 
         self.add_breakpoint(ratio_breakpoint)      
-        popover = self._menu_button.get_popover()
-        popover.set_offset(-30, 0)
         
+        popover = AppMenu()        
+        popover.set_offset(-30, 0)             
+        self._menu_button.props.popover = popover
+
+        self.selectors = popover.selectors
+        
+        self._breakpoints_active = [False, False]
+
+        self._roll_area._gl_area.theme = self.theme
+
+        self.selectors._render.connect("notify::active", self.on_render_changed)
+                
 
     def _breakpoint_apply(self, breakpoint, data):
 
+        self._breakpoints_active[data] = True
+
         if data == 0:
             self._split_view.set_collapsed(True)
+            self._roll_area._mode_button.set_visible(False)
             return
-
-        self._roll_area._adaptable.set_orientation(0)
-        self._roll_area._results.set_halign(1)
-        self._roll_area._stack.set_halign(2)
-        self._roll_area._dice_area.set_halign(2)
-        self._roll_area._adaptable.set_spacing(5)
+          
+        self._roll_area._mode_button.set_visible(False)
+        self._split_view.set_collapsed(True)
+        self._roll_area.set_orientation(0)
+        self._roll_area._clamp.set_halign(2)
+        self._roll_area._clamp.set_margin_end(5)        
+        
 
     def _breakpoint_unapply(self, breakpoint, data):
 
+        self._breakpoints_active[data] = False
+
         if data == 0:
             self._split_view.set_collapsed(False)
+            self._roll_area._mode_button.set_visible(True)
             return
+        
+        if not any(self._breakpoints_active):
 
-        self._roll_area._adaptable.set_orientation(1)
-        self._roll_area._results.set_halign(3)
-        self._roll_area._stack.set_halign(3)
-        self._roll_area._dice_area.set_halign(3)
-        self._roll_area._adaptable.set_spacing(20)
+            self._roll_area.set_orientation(1)
+            self._roll_area._clamp.set_halign(3)
+            self._roll_area._clamp.set_margin_end(0)
+            self._roll_area._mode_button.set_visible(True) 
 
     def on_theme_changed(self, param, value):                
         self._sidebar.css_matching(self._split_view, None)
+        self._roll_area._gl_area.theme = self.theme
+
+    def on_render_changed(self, button, value):
+        
+        if self.render_enabled:
+             self.selectors._audio.set_sensitive(True)
+             return
+        
+        self.selectors._audio.set_sensitive(False)
+        self._roll_area._gl_area._sim.reset()
+
+    @property
+    def audio_enabled(self) -> bool:
+        return self.selectors._audio.get_active()
+
+    @property
+    def render_enabled(self) -> bool:
+        return self.selectors._render.get_active()
+
+    @property
+    def theme(self) -> str:
+        if self.style_manager.get_dark():
+            return "dark"
+        return "light"  
+
+
+
         
         
 

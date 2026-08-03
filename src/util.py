@@ -44,3 +44,17 @@ def create_action(action_group, prefix, name, callback,
 
     if shortcuts:
         action_group.set_accels_for_action(detailed_name, shortcuts)
+
+
+def is_cn_over_integer(arg: dict) -> bool:
+    
+    if not isinstance(arg, dict):
+        return False
+    if arg.get("name") != "cn":
+        return False
+    inner = (arg.get("arguments") or [None])[0]
+    if inner is None:
+        return True
+    if isinstance(inner, dict) and inner.get("type") == "integer":
+        return True
+    return False

@@ -48,8 +48,8 @@ class SideBar(Gtk.Box):
         super().__init__()
 
         self._sidebar_list.set_selection_mode(Gtk.SelectionMode.NONE)
-
-        self._sidebar_list.set_placeholder(EmptyPage())
+        self._empty_page = EmptyPage()        
+        self._sidebar_list.set_placeholder(self._empty_page)
 
         self._clear_history_button.connect("clicked", self.clear_registers)
 
@@ -67,9 +67,11 @@ class SideBar(Gtk.Box):
             self._sidebar_list.remove_css_class("light_log_expanded")
             
             if is_dark:
+                self._sidebar_list.remove_css_class("light_log_collapsed")
                 self._sidebar_list.add_css_class("dark_log_collapsed")
                 return
             
+            self._sidebar_list.remove_css_class("dark_log_collapsed")
             self._sidebar_list.add_css_class("light_log_collapsed")
             return
             
@@ -77,9 +79,11 @@ class SideBar(Gtk.Box):
         self._sidebar_list.remove_css_class("light_log_collapsed")
             
         if is_dark:
+                self._sidebar_list.remove_css_class("light_log_expanded")
                 self._sidebar_list.add_css_class("dark_log_expanded")
                 return
         
+        self._sidebar_list.remove_css_class("dark_log_expanded")
         self._sidebar_list.add_css_class("light_log_expanded")
 
     def add_register(self, total, track, input):
@@ -91,3 +95,4 @@ class SideBar(Gtk.Box):
 
     def clear_registers(self, button):
         self._sidebar_list.remove_all()
+        self._sidebar_list.set_placeholder(self._empty_page)

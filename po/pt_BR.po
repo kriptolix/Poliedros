@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-23 16:59-0300\n"
-"PO-Revision-Date: 2025-10-29 10:14-0300\n"
+"POT-Creation-Date: 2026-07-03 11:54-0300\n"
+"PO-Revision-Date: 2026-07-03 12:03-0300\n"
 "Last-Translator: Diego C. Sampaio <kriptolix@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/io.github.kriptolix.Poliedros.desktop.in:2
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
@@ -28,8 +28,8 @@ msgid "GTK;Die;Dice;Roll;Random;Number;"
 msgstr "GTK;Dado;Dados;Rolagem;Aleatório;Numero;"
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:8
-msgid "Roll multi-type dice."
-msgstr "Poliedros é um rolador de múltiplos tipos de dados."
+msgid "Roll multi-type dice"
+msgstr "Role múltiplos tipos de dados"
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:10
 msgid ""
@@ -61,15 +61,23 @@ msgstr "Barra leteral colapsada."
 msgid "Command Mode."
 msgstr "Modo Comando."
 
-#: src/application.py:86
+#: src/application.py:94
 msgid "translator_credits"
 msgstr "Diego C. Sampaio"
 
-#: src/gtk/ui/DiceArea.ui:74
+#: src/gtk/ui/AppMenu.ui:14
+msgid "Keyboard Shortcuts"
+msgstr "Atalhos de teclado"
+
+#: src/gtk/ui/AppMenu.ui:18
+msgid "About Poliedros"
+msgstr "Sobre o Poliedros"
+
+#: src/gtk/ui/DiceArea.ui:75
 msgid "Plus Number"
 msgstr "Adicionar Numero"
 
-#: src/gtk/ui/DiceArea.ui:150
+#: src/gtk/ui/DiceArea.ui:151
 msgid "Minus Number"
 msgstr "Subtrair Numero"
 
@@ -93,113 +101,117 @@ msgstr "Instruções de uso do modo comando"
 msgid "Redo this roll"
 msgstr "Refazer essa rolagem"
 
-#: src/gtk/ui/MainWindow.ui:25
+#: src/gtk/ui/MainWindow.ui:24
 msgid "Go Back"
 msgstr "Voltar"
 
-#: src/gtk/ui/MainWindow.ui:50
+#: src/gtk/ui/MainWindow.ui:49
 msgid "Toggle History"
 msgstr "Exibir/Ocultar Histórico"
 
-#: src/gtk/ui/MainWindow.ui:86
-msgid "Keyboard Shortcuts"
-msgstr "Atalhos de teclado"
+#: src/gtk/ui/MainWindow.ui:56
+msgid "Main menu"
+msgstr "Menu Principal"
 
-#: src/gtk/ui/MainWindow.ui:90
-msgid "About Poliedros"
-msgstr "Sobre o Poliedros"
-
-#: src/gtk/ui/RollArea.ui:54
+#: src/gtk/ui/RollArea.ui:69
 msgid "Switch Mode"
 msgstr "Alternar Modo"
 
-#: src/gtk/ui/RollArea.ui:65 src/gtk/ui/RollArea.ui:66
+#: src/gtk/ui/RollArea.ui:82 src/gtk/ui/RollArea.ui:83
 msgid "Roll"
 msgstr "Rolar"
 
-#: src/gtk/ui/RollArea.ui:78
+#: src/gtk/ui/RollArea.ui:97
 msgid "Clear Command"
 msgstr "Limpar Comando"
 
-#: src/gtk/ui/SideBar.ui:31
-msgid "Clear results"
-msgstr "Limpar Resultados"
+#: src/gtk/ui/Selectors.ui:20
+msgid "Enable/disable 3d dice"
+msgstr "Ativar/Desativar dados em 3d"
 
-#: src/gtk/ui/Shortcuts.ui:11
+#: src/gtk/ui/Selectors.ui:32
+msgid "Enable/disable dice sound"
+msgstr "Ativar/Desativar som dos dados"
+
+#: src/gtk/ui/Shortcuts.ui:6
 msgid "General"
 msgstr "Geral"
 
-#: src/gtk/ui/Shortcuts.ui:15
+#: src/gtk/ui/Shortcuts.ui:9
 msgid "Quit"
 msgstr "Fechar"
 
-#: src/gtk/ui/Shortcuts.ui:21
+#: src/gtk/ui/Shortcuts.ui:16
 msgid "Clear the dice display"
 msgstr "Limpar Comando"
 
-#: src/gtk/ui/Shortcuts.ui:27
+#: src/gtk/ui/Shortcuts.ui:22
 msgid "Clear the roll logs"
 msgstr "Limpar Resultados"
 
-#: src/gtk/ui/Shortcuts.ui:33
+#: src/gtk/ui/Shortcuts.ui:28
 msgid "Toggle panel visibility"
 msgstr "Ativar/Desativar visibilidade do painel"
 
-#: src/gtk/ui/Shortcuts.ui:39
+#: src/gtk/ui/Shortcuts.ui:34
 msgid "Toggle command mode"
 msgstr "Ativar/Desativar Modo Comando"
 
-#: src/gtk/ui/Shortcuts.ui:45
+#: src/gtk/ui/Shortcuts.ui:40
 msgid "Perform dice roll"
 msgstr "Executar uma rolagem"
 
-#: src/gtk/ui/Shortcuts.ui:52
+#: src/gtk/ui/Shortcuts.ui:47
 msgid "Additions and subtractions"
 msgstr "Adições e subtrações"
 
-#: src/gtk/ui/Shortcuts.ui:56
+#: src/gtk/ui/Shortcuts.ui:51
 msgid "Add increment (+1)"
 msgstr "Adicionar incremento (+1)"
 
-#: src/gtk/ui/Shortcuts.ui:62
+#: src/gtk/ui/Shortcuts.ui:57
 msgid "Add decrement (-1)"
 msgstr "Adicionar decremento (-1)"
 
-#: src/gtk/ui/Shortcuts.ui:69
+#: src/gtk/ui/Shortcuts.ui:64
 msgid "Dice"
 msgstr "Dados"
 
-#: src/gtk/ui/Shortcuts.ui:73
+#: src/gtk/ui/Shortcuts.ui:68
 msgid "Add a Fudge Die"
 msgstr "Adicionar um dado Fudge"
 
-#: src/gtk/ui/Shortcuts.ui:79
+#: src/gtk/ui/Shortcuts.ui:74
 msgid "Add a d4"
 msgstr "Adicionar um d4"
 
-#: src/gtk/ui/Shortcuts.ui:85
+#: src/gtk/ui/Shortcuts.ui:80
 msgid "Add a d6"
 msgstr "Adicionar um d6"
 
-#: src/gtk/ui/Shortcuts.ui:91
+#: src/gtk/ui/Shortcuts.ui:86
 msgid "Add a d8"
 msgstr "Adicionar um d8"
 
-#: src/gtk/ui/Shortcuts.ui:97
+#: src/gtk/ui/Shortcuts.ui:92
 msgid "Add a d10"
 msgstr "Adicionar um d10"
 
-#: src/gtk/ui/Shortcuts.ui:103
+#: src/gtk/ui/Shortcuts.ui:98
 msgid "Add a d12"
 msgstr "Adicionar um d12"
 
-#: src/gtk/ui/Shortcuts.ui:109
+#: src/gtk/ui/Shortcuts.ui:104
 msgid "Add a d20"
 msgstr "Adicionar um d20"
 
-#: src/gtk/ui/Shortcuts.ui:115
+#: src/gtk/ui/Shortcuts.ui:110
 msgid "Add a d100"
 msgstr "Adicionar um d100"
+
+#: src/gtk/ui/SideBar.ui:28
+msgid "Clear results"
+msgstr "Limpar Resultados"
 
 #: src/gtk/ui/UsageInfo.ui:21
 msgid "Command usage instructions"
@@ -372,6 +384,42 @@ msgstr ""
 "<b>Ex.:</b> 5d10|kh:1|cn:>8, rola 5 dados de 10 faces e mantenha o maior, "
 "então, verifica se o resultado é maior que 8.                   \n"
 "                    "
+
+#: src/roller.py:360
+#, python-format
+msgid "Count %(sel)s in %(child)s = %(result)s"
+msgstr "Conte %(sel)s em %(child)s = %(result)s"
+
+#: src/roller.py:371
+#, python-format
+msgid "Keep %(sel_val)s %(label)s in %(child)s → %(kept)s = %(total)s"
+msgstr "Matenha %(sel_val)s %(label)s em %(child)s → %(kept)s = %(total)s"
+
+#: src/roller.py:383
+#, python-format
+msgid "Explode %(sel)s in %(child)s → %(kept)s = %(total)s"
+msgstr "Exploda %(sel)s em %(child)s → %(kept)s = %(total)s"
+
+#: src/roller.py:394
+#, python-format
+msgid "Reroll %(sel)s in %(child)s → %(kept)s = %(total)s"
+msgstr "Rerole %(sel)s em %(child)s → %(kept)s = %(total)s"
+
+#: src/roller.py:408
+#, python-format
+msgid ""
+"%(times)sx rolls:\n"
+"  %(detail)s\n"
+"= %(results)s"
+msgstr ""
+"%(times)sx rolagens:\r\n"
+"  %(detail)s\r\n"
+"= %(results)s"
+
+#: src/roller.py:414
+#, python-format
+msgid "[unknown type: %(type)s]"
+msgstr "[tipo desconhecido]: %(type)s]"
 
 #~ msgid "GTK;"
 #~ msgstr "GTK;"

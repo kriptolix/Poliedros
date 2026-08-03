@@ -13,7 +13,9 @@
     <file preprocess="xml-stripblanks">src/gtk/ui/AdvancedMode.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/FunctionBody.ui</file>
     <file preprocess="xml-stripblanks">src/gtk/ui/DicePool.ui</file>
-    <file preprocess="xml-stripblanks">src/gtk/ui/Shortcuts.ui</file>    
+    <file preprocess="xml-stripblanks">src/gtk/ui/Shortcuts.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/Selectors.ui</file>
+    <file preprocess="xml-stripblanks">src/gtk/ui/AppMenu.ui</file>     
     <file preprocess="xml-stripblanks">data/io.github.kriptolix.Poliedros.metainfo.xml.in</file>       
         
   </gresource>
@@ -30,6 +32,8 @@
     <file alias="go-previous-symbolic.svg">data/icons/go-previous-symbolic.svg</file>
     <file alias="code-symbolic.svg">data/icons/code-symbolic.svg</file>
     <file alias="dice2-symbolic.svg">data/icons/dice2-symbolic.svg</file>
+    <file alias="dice3-symbolic.svg">data/icons/dice3-symbolic.svg</file>
+    <file alias="sound-symbolic.svg">data/icons/sound-symbolic.svg</file>
     <file alias="help-about-symbolic.svg">data/icons/help-about-symbolic.svg</file>
     <file alias="arrow-circular-top-right-symbolic.svg">data/icons/arrow-circular-top-right-symbolic.svg</file> 
   </gresource>  

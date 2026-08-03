@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="Selectors" parent="GtkBox">
+    <property name="orientation">1</property>
+    <property name="valign">3</property>
+    <property name="spacing">5</property>
+    <property name="margin-top">10</property>
+    <property name="margin-start">10</property>
+    <property name="margin-end">10</property>
+    <child>
+      <object class="GtkBox">
+        <style>
+          <class name="linked"/>
+        </style>
+        <child>
+          <object class="GtkToggleButton" id="_render">
+            <property name="hexpand">true</property>
+            <property name="active">true</property>
+            <property name="tooltip-text" translatable="yes">Enable/disable 3d dice</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">dice2-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="_audio">
+            <property name="hexpand">true</property>
+            <property name="active">true</property>
+            <property name="tooltip-text" translatable="yes">Enable/disable dice sound</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">sound-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparator">
+        <property name="valign">3</property>
+      </object>
+    </child>
+  </template>
+</interface>

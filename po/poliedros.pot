@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-23 16:59-0300\n"
+"POT-Creation-Date: 2026-07-03 11:54-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/io.github.kriptolix.Poliedros.desktop.in:2
@@ -27,7 +27,7 @@ msgid "GTK;Die;Dice;Roll;Random;Number;"
 msgstr ""
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:8
-msgid "Roll multi-type dice."
+msgid "Roll multi-type dice"
 msgstr ""
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:10
@@ -57,15 +57,23 @@ msgstr ""
 msgid "Command Mode."
 msgstr ""
 
-#: src/application.py:86
+#: src/application.py:94
 msgid "translator_credits"
 msgstr ""
 
-#: src/gtk/ui/DiceArea.ui:74
+#: src/gtk/ui/AppMenu.ui:14
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: src/gtk/ui/AppMenu.ui:18
+msgid "About Poliedros"
+msgstr ""
+
+#: src/gtk/ui/DiceArea.ui:75
 msgid "Plus Number"
 msgstr ""
 
-#: src/gtk/ui/DiceArea.ui:150
+#: src/gtk/ui/DiceArea.ui:151
 msgid "Minus Number"
 msgstr ""
 
@@ -89,112 +97,116 @@ msgstr ""
 msgid "Redo this roll"
 msgstr ""
 
-#: src/gtk/ui/MainWindow.ui:25
+#: src/gtk/ui/MainWindow.ui:24
 msgid "Go Back"
 msgstr ""
 
-#: src/gtk/ui/MainWindow.ui:50
+#: src/gtk/ui/MainWindow.ui:49
 msgid "Toggle History"
 msgstr ""
 
-#: src/gtk/ui/MainWindow.ui:86
-msgid "Keyboard Shortcuts"
+#: src/gtk/ui/MainWindow.ui:56
+msgid "Main menu"
 msgstr ""
 
-#: src/gtk/ui/MainWindow.ui:90
-msgid "About Poliedros"
-msgstr ""
-
-#: src/gtk/ui/RollArea.ui:54
+#: src/gtk/ui/RollArea.ui:69
 msgid "Switch Mode"
 msgstr ""
 
-#: src/gtk/ui/RollArea.ui:65 src/gtk/ui/RollArea.ui:66
+#: src/gtk/ui/RollArea.ui:82 src/gtk/ui/RollArea.ui:83
 msgid "Roll"
 msgstr ""
 
-#: src/gtk/ui/RollArea.ui:78
+#: src/gtk/ui/RollArea.ui:97
 msgid "Clear Command"
 msgstr ""
 
-#: src/gtk/ui/SideBar.ui:31
-msgid "Clear results"
+#: src/gtk/ui/Selectors.ui:20
+msgid "Enable/disable 3d dice"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:11
+#: src/gtk/ui/Selectors.ui:32
+msgid "Enable/disable dice sound"
+msgstr ""
+
+#: src/gtk/ui/Shortcuts.ui:6
 msgid "General"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:15
+#: src/gtk/ui/Shortcuts.ui:9
 msgid "Quit"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:21
+#: src/gtk/ui/Shortcuts.ui:16
 msgid "Clear the dice display"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:27
+#: src/gtk/ui/Shortcuts.ui:22
 msgid "Clear the roll logs"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:33
+#: src/gtk/ui/Shortcuts.ui:28
 msgid "Toggle panel visibility"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:39
+#: src/gtk/ui/Shortcuts.ui:34
 msgid "Toggle command mode"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:45
+#: src/gtk/ui/Shortcuts.ui:40
 msgid "Perform dice roll"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:52
+#: src/gtk/ui/Shortcuts.ui:47
 msgid "Additions and subtractions"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:56
+#: src/gtk/ui/Shortcuts.ui:51
 msgid "Add increment (+1)"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:62
+#: src/gtk/ui/Shortcuts.ui:57
 msgid "Add decrement (-1)"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:69
+#: src/gtk/ui/Shortcuts.ui:64
 msgid "Dice"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:73
+#: src/gtk/ui/Shortcuts.ui:68
 msgid "Add a Fudge Die"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:79
+#: src/gtk/ui/Shortcuts.ui:74
 msgid "Add a d4"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:85
+#: src/gtk/ui/Shortcuts.ui:80
 msgid "Add a d6"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:91
+#: src/gtk/ui/Shortcuts.ui:86
 msgid "Add a d8"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:97
+#: src/gtk/ui/Shortcuts.ui:92
 msgid "Add a d10"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:103
+#: src/gtk/ui/Shortcuts.ui:98
 msgid "Add a d12"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:109
+#: src/gtk/ui/Shortcuts.ui:104
 msgid "Add a d20"
 msgstr ""
 
-#: src/gtk/ui/Shortcuts.ui:115
+#: src/gtk/ui/Shortcuts.ui:110
 msgid "Add a d100"
+msgstr ""
+
+#: src/gtk/ui/SideBar.ui:28
+msgid "Clear results"
 msgstr ""
 
 #: src/gtk/ui/UsageInfo.ui:21
@@ -301,4 +313,37 @@ msgid ""
 "<b>Ex.:</b> 5d10|kh:1|cn:>8, roll 5 10-sided dice and keep the highest, "
 "then, check if the result is greater than 8.                    \n"
 "                    "
+msgstr ""
+
+#: src/roller.py:360
+#, python-format
+msgid "Count %(sel)s in %(child)s = %(result)s"
+msgstr ""
+
+#: src/roller.py:371
+#, python-format
+msgid "Keep %(sel_val)s %(label)s in %(child)s → %(kept)s = %(total)s"
+msgstr ""
+
+#: src/roller.py:383
+#, python-format
+msgid "Explode %(sel)s in %(child)s → %(kept)s = %(total)s"
+msgstr ""
+
+#: src/roller.py:394
+#, python-format
+msgid "Reroll %(sel)s in %(child)s → %(kept)s = %(total)s"
+msgstr ""
+
+#: src/roller.py:408
+#, python-format
+msgid ""
+"%(times)sx rolls:\n"
+"  %(detail)s\n"
+"= %(results)s"
+msgstr ""
+
+#: src/roller.py:414
+#, python-format
+msgid "[unknown type: %(type)s]"
 msgstr ""
