@@ -1,22 +1,22 @@
 # German translation for Poliedros.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Philipp Kiemle <l10n.daphipz@fastmail.de>, 2025.
+# Philipp Kiemle <l10n.daphipz@fastmail.de>, 2025-2026.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-23 16:59-0300\n"
-"PO-Revision-Date: 2025-10-30 18:16+0100\n"
+"POT-Creation-Date: 2026-07-03 11:54-0300\n"
+"PO-Revision-Date: 2026-09-12 11:25+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Lokalize 26.08.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/io.github.kriptolix.Poliedros.desktop.in:2
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:7
@@ -28,8 +28,8 @@ msgid "GTK;Die;Dice;Roll;Random;Number;"
 msgstr "GTK;Die;Dice;Roll;Random;Number;Würfel;würfeln;Wurf;Zufall;zufällig;Zahl;"
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:8
-msgid "Roll multi-type dice."
-msgstr "Würfeln Sie verschiedene Würfel."
+msgid "Roll multi-type dice"
+msgstr "Verschiedene Würfel würfeln"
 
 #: data/io.github.kriptolix.Poliedros.metainfo.xml.in:10
 msgid "Poliedros is a multi-type dice roller. Basic mode allows you to make quick rolls using just the mouse, while Command mode allows for more complex rolls and combinations."
@@ -55,15 +55,23 @@ msgstr "Eingeklappte Seitenleiste."
 msgid "Command Mode."
 msgstr "Befehlsmodus."
 
-#: src/application.py:86
+#: src/application.py:94
 msgid "translator_credits"
 msgstr "Philipp Kiemle <l10n.daphipz@fastmail.de>"
 
-#: src/gtk/ui/DiceArea.ui:74
+#: src/gtk/ui/AppMenu.ui:14
+msgid "Keyboard Shortcuts"
+msgstr "Tastenkürzel"
+
+#: src/gtk/ui/AppMenu.ui:18
+msgid "About Poliedros"
+msgstr "Info zu Poliedros"
+
+#: src/gtk/ui/DiceArea.ui:75
 msgid "Plus Number"
 msgstr "Plus Zahl"
 
-#: src/gtk/ui/DiceArea.ui:150
+#: src/gtk/ui/DiceArea.ui:151
 msgid "Minus Number"
 msgstr "Minus Zahl"
 
@@ -87,113 +95,117 @@ msgstr "Verwendung des Befehlsmodus"
 msgid "Redo this roll"
 msgstr "Diesen Wurf wiederholen"
 
-#: src/gtk/ui/MainWindow.ui:25
+#: src/gtk/ui/MainWindow.ui:24
 msgid "Go Back"
 msgstr "Zurückgehen"
 
-#: src/gtk/ui/MainWindow.ui:50
+#: src/gtk/ui/MainWindow.ui:49
 msgid "Toggle History"
-msgstr "Chronik umschalten"
+msgstr "Verlauf umschalten"
 
-#: src/gtk/ui/MainWindow.ui:86
-msgid "Keyboard Shortcuts"
-msgstr "Tastenkürzel"
+#: src/gtk/ui/MainWindow.ui:56
+msgid "Main menu"
+msgstr "Hauptmenü"
 
-#: src/gtk/ui/MainWindow.ui:90
-msgid "About Poliedros"
-msgstr "Info zu Poliedros"
-
-#: src/gtk/ui/RollArea.ui:54
+#: src/gtk/ui/RollArea.ui:69
 msgid "Switch Mode"
 msgstr "Modus wechseln"
 
-#: src/gtk/ui/RollArea.ui:65 src/gtk/ui/RollArea.ui:66
+#: src/gtk/ui/RollArea.ui:82 src/gtk/ui/RollArea.ui:83
 msgid "Roll"
 msgstr "Würfeln"
 
-#: src/gtk/ui/RollArea.ui:78
+#: src/gtk/ui/RollArea.ui:97
 msgid "Clear Command"
 msgstr "Befehl leeren"
 
-#: src/gtk/ui/SideBar.ui:31
-msgid "Clear results"
-msgstr "Ergebnisse leeren"
+#: src/gtk/ui/Selectors.ui:20
+msgid "Enable/disable 3d dice"
+msgstr "3D-Würfel umschalten"
 
-#: src/gtk/ui/Shortcuts.ui:11
+#: src/gtk/ui/Selectors.ui:32
+msgid "Enable/disable dice sound"
+msgstr "Würfelklang umschalten"
+
+#: src/gtk/ui/Shortcuts.ui:6
 msgid "General"
 msgstr "Allgemein"
 
-#: src/gtk/ui/Shortcuts.ui:15
+#: src/gtk/ui/Shortcuts.ui:9
 msgid "Quit"
 msgstr "Beenden"
 
-#: src/gtk/ui/Shortcuts.ui:21
+#: src/gtk/ui/Shortcuts.ui:16
 msgid "Clear the dice display"
 msgstr "Die Würfelanzeige leeren"
 
-#: src/gtk/ui/Shortcuts.ui:27
+#: src/gtk/ui/Shortcuts.ui:22
 msgid "Clear the roll logs"
 msgstr "Den Wurfverlauf leeren"
 
-#: src/gtk/ui/Shortcuts.ui:33
+#: src/gtk/ui/Shortcuts.ui:28
 msgid "Toggle panel visibility"
 msgstr "Sichtbarkeit der Seitenleiste umschalten"
 
-#: src/gtk/ui/Shortcuts.ui:39
+#: src/gtk/ui/Shortcuts.ui:34
 msgid "Toggle command mode"
 msgstr "Befehlsmodus umschalten"
 
-#: src/gtk/ui/Shortcuts.ui:45
+#: src/gtk/ui/Shortcuts.ui:40
 msgid "Perform dice roll"
 msgstr "Würfel werfen"
 
-#: src/gtk/ui/Shortcuts.ui:52
+#: src/gtk/ui/Shortcuts.ui:47
 msgid "Additions and subtractions"
 msgstr "Additionen und Subtraktionen"
 
-#: src/gtk/ui/Shortcuts.ui:56
+#: src/gtk/ui/Shortcuts.ui:51
 msgid "Add increment (+1)"
 msgstr "Inkrement hinzufügen (+1)"
 
-#: src/gtk/ui/Shortcuts.ui:62
+#: src/gtk/ui/Shortcuts.ui:57
 msgid "Add decrement (-1)"
 msgstr "Dekrement hinzufügen (-1)"
 
-#: src/gtk/ui/Shortcuts.ui:69
+#: src/gtk/ui/Shortcuts.ui:64
 msgid "Dice"
 msgstr "Würfel"
 
-#: src/gtk/ui/Shortcuts.ui:73
+#: src/gtk/ui/Shortcuts.ui:68
 msgid "Add a Fudge Die"
 msgstr "Einen Fudge-Würfel hinzufügen"
 
-#: src/gtk/ui/Shortcuts.ui:79
+#: src/gtk/ui/Shortcuts.ui:74
 msgid "Add a d4"
 msgstr "Einen d4 hinzufügen"
 
-#: src/gtk/ui/Shortcuts.ui:85
+#: src/gtk/ui/Shortcuts.ui:80
 msgid "Add a d6"
 msgstr "Einen d6 hinzufügen"
 
-#: src/gtk/ui/Shortcuts.ui:91
+#: src/gtk/ui/Shortcuts.ui:86
 msgid "Add a d8"
 msgstr "Einen d8 hinzufügen"
 
-#: src/gtk/ui/Shortcuts.ui:97
+#: src/gtk/ui/Shortcuts.ui:92
 msgid "Add a d10"
 msgstr "Einen d10 hinzufügen"
 
-#: src/gtk/ui/Shortcuts.ui:103
+#: src/gtk/ui/Shortcuts.ui:98
 msgid "Add a d12"
 msgstr "Einen d12 hinzufügen"
 
-#: src/gtk/ui/Shortcuts.ui:109
+#: src/gtk/ui/Shortcuts.ui:104
 msgid "Add a d20"
 msgstr "Einen d20 hinzufügen"
 
-#: src/gtk/ui/Shortcuts.ui:115
+#: src/gtk/ui/Shortcuts.ui:110
 msgid "Add a d100"
 msgstr "Einen d100 hinzufügen"
+
+#: src/gtk/ui/SideBar.ui:28
+msgid "Clear results"
+msgstr "Ergebnisse leeren"
 
 #: src/gtk/ui/UsageInfo.ui:21
 msgid "Command usage instructions"
@@ -335,6 +347,42 @@ msgstr ""
 "<b>Beispiel:</b> 6d6|ex:6|cn:6, würfelt 6 6-seitige Würfel und jeden Würfel, der eine 6 zeigt, erneut - so lange, bis keine 6 mehr gewürfelt wird. Dann wird die Anzahl 6er gezählt.\n"
 "<b>Beispiel:</b> 5d10|kh:1|cn:>8, würfelt 5 10-seitige Würfel und behält den höchsten. Dann wird überprüft, ob dieser Wurf höher als 8 ist.                    \n"
 "                    "
+
+#: src/roller.py:360
+#, fuzzy, python-format
+msgid "Count %(sel)s in %(child)s = %(result)s"
+msgstr "Count %(sel)s in %(child)s = %(result)s"
+
+#: src/roller.py:371
+#, fuzzy, python-format
+msgid "Keep %(sel_val)s %(label)s in %(child)s → %(kept)s = %(total)s"
+msgstr "Keep %(sel_val)s %(label)s in %(child)s → %(kept)s = %(total)s"
+
+#: src/roller.py:383
+#, fuzzy, python-format
+msgid "Explode %(sel)s in %(child)s → %(kept)s = %(total)s"
+msgstr "Explode %(sel)s in %(child)s → %(kept)s = %(total)s"
+
+#: src/roller.py:394
+#, fuzzy, python-format
+msgid "Reroll %(sel)s in %(child)s → %(kept)s = %(total)s"
+msgstr "Reroll %(sel)s in %(child)s → %(kept)s = %(total)s"
+
+#: src/roller.py:408
+#, fuzzy, python-format
+msgid ""
+"%(times)sx rolls:\n"
+"  %(detail)s\n"
+"= %(results)s"
+msgstr ""
+"%(times)sx rolls:\n"
+"  %(detail)s\n"
+"= %(results)s"
+
+#: src/roller.py:414
+#, fuzzy, python-format
+msgid "[unknown type: %(type)s]"
+msgstr "[unbekannter Typ: %(type)s]"
 
 #~ msgid "Little corrections"
 #~ msgstr "Kleine Korrekturen"
