@@ -358,6 +358,7 @@ def _flatten_log(node: dict) -> str:
     if t == "cn":
         sel = _selector_str(node["condition"], node["value"])
         child = node["child"]
+        # Translators: "Count" and "in" are the only words to translate.
         return _("Count %(sel)s in %(child)s = %(result)s") % {
             "sel": sel,
             "child": _child_summary(child),
@@ -369,6 +370,7 @@ def _flatten_log(node: dict) -> str:
         label = "highest" if t == "kh" else "lowest"
         child = node["child"]
         kept = node["kept"]
+        # Translators: "Keep" and "in" are the only words to translate.
         return _("Keep %(sel_val)s %(label)s in %(child)s → %(kept)s = %(total)s") % {
             "sel_val": sel_val,
             "label": label,
@@ -381,6 +383,7 @@ def _flatten_log(node: dict) -> str:
         sel = _selector_str(node["condition"], node["value"])
         child = node["child"]
         kept = node["kept"]
+        # Translators: "Explode" and "in" are the only words to translate.
         return _("Explode %(sel)s in %(child)s → %(kept)s = %(total)s") % {
             "sel": sel,
             "child": _child_summary(child),
@@ -392,6 +395,7 @@ def _flatten_log(node: dict) -> str:
         sel = _selector_str(node["condition"], node["value"])
         child = node["child"]
         kept = node["kept"]
+        # Translators: "Explode" and "in" are the only words to translate.       
         return _("Reroll %(sel)s in %(child)s → %(kept)s = %(total)s") % {
             "sel": sel,
             "child": _child_summary(child),
@@ -406,6 +410,7 @@ def _flatten_log(node: dict) -> str:
         detail  = "\n  ".join(
             f"[{i+1}] {_flatten_log(r)}" for i, r in enumerate(runs)
         )
+        # Translators: "Rolls" is the only words to translate.
         return _("%(times)sx rolls:\n  %(detail)s\n= %(results)s") % {
             "times": times,
             "detail": detail,

@@ -57,7 +57,7 @@
         <child>
           <object class="GtkButton" id="_df_button">
             <property name="has-tooltip">true</property>
-            <property name="tooltip-text">fudge dice</property>
+            <property name="tooltip-text" translatable="yes">fudge die</property>
             <style>
               <class name="flat"/>
             </style>
